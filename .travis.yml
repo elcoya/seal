@@ -3,5 +3,16 @@ python:
   - "2.7"
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 # install: python setup.py install
+
+before_script:
+  - mysql -e 'create database test_seal;'
+    
+test:
+    adapter: mysql
+    database: test_seal
+    username: seal
+    password: $3alSEAL
+    encoding: utf8
+
 # command to run tests, e.g. python setup.py test
 script:  python manage.py test
