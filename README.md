@@ -1,4 +1,4 @@
-seal
+SEAL - Sistema de Entregas Automatizadas Libre
 ====
 
 Sistema de Entregas Automatizado Libre
