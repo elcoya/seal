@@ -12,7 +12,7 @@ install:
 
 
 before_script:
-  - mysql -e 'create database test_seal;'
+  - mysql -e 'create database seal;'
     
 test:
     adapter: mysql2
