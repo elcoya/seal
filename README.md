@@ -18,6 +18,9 @@ https://docs.google.com/document/d/114qFB8RCLp3xxWhmyH4Bkxmoa0BG-oYIqVzsXdWgUGw/
 ###Documento de Instalacion de Behave
 https://docs.google.com/document/d/1bQeja4CuiCoNcPzU6BpyxvOvcqFIc7Vl0KqjqHXjBgI/edit
 
+###URL de Travis. Servidor de Integración Continua
+https://travis-ci.org/#!/elcoyaman/seal
+
 ###URL ambiente de testing
 
 
