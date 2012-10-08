@@ -18,3 +18,13 @@ class CourseTest(TestCase):
         aCourse = Course()
         aCourse.name = aName
         self.assertEqual(aCourse.name, aName)
+
+#    def testCourseCreation2(self):
+#        """
+#        We creates a Course with a name and checks it's value.
+#        """
+#        aName = '2012-2C'
+#        aCourse = Course()
+#        aCourse.name = aName
+#        self.assertEqual(aCourse.name, aName)
+#        # 412
