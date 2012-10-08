@@ -15,7 +15,7 @@ before_script:
   - mysql -e 'create database test_seal;'
     
 test:
-    adapter: mysql
+    adapter: mysql2
     database: test_seal
     username: seal
     password: $3alSEAL
