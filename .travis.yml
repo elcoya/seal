@@ -14,7 +14,7 @@ install:
 before_script:
   - mysql -e 'create database seal;'
   - mysql -u root < ci_scripts/ci_dbuser.sql
-  - python seal/manage.py syncdb < ci_scripts/admin-root-user-data.txt
+#  - python seal/manage.py syncdb < ci_scripts/admin-root-user-data.txt
     
 test:
     adapter: mysql2
@@ -31,5 +31,3 @@ notifications:
     recipients:
       tanomarti05@gmail.com
       aniballovaglio@yahoo.com.ar
-    on_success: change
-    on_failure: always
