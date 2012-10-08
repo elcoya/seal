@@ -29,5 +29,5 @@ notifications:
     recipients:
       tanomarti05@gmail.com
       aniballovaglio@yahoo.com.ar
-    on_success: always
+    on_success: change
     on_failure: always
