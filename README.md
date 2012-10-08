@@ -12,10 +12,10 @@ https://github.com/elcoyaman/seal.git
 ###Gestor de Proyecto Asana
 https://app.asana.com/0/1575553467008/2088778110352
 
-###Documento de Instalacion de Ambiente de Proyecto
+###Documento de Instalacion de Ambiente de Desarrollo
 https://docs.google.com/document/d/114qFB8RCLp3xxWhmyH4Bkxmoa0BG-oYIqVzsXdWgUGw/edit#
 
-###Documento de Instalacion de Gherkin
+###Documento de Instalacion de Behave
 https://docs.google.com/document/d/1bQeja4CuiCoNcPzU6BpyxvOvcqFIc7Vl0KqjqHXjBgI/edit
 
 ###URL ambiente de testing
