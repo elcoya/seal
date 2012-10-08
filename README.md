@@ -4,7 +4,7 @@ seal
 Sistema de Entregas Automatizado Libre
 
 Índice de Proyecto
-====== == ========
+====
 
 Repositorio Git-Hub
 https://github.com/elcoyaman/seal.git
