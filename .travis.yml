@@ -21,4 +21,4 @@ test:
     encoding: utf8
 
 # command to run tests, e.g. python setup.py test
-script:  python manage.py test
+script:  python seal/manage.py test
