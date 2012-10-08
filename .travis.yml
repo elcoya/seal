@@ -23,3 +23,11 @@ test:
 
 # command to run tests, e.g. python setup.py test
 script:  python seal/manage.py test
+
+notifications:
+  email:
+    recipients:
+      tanomarti05@gmail.com
+      aniballovaglio@yahoo.com.ar
+    on_success: change
+    on_failure: always
