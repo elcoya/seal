@@ -22,7 +22,7 @@ https://docs.google.com/document/d/1bQeja4CuiCoNcPzU6BpyxvOvcqFIc7Vl0KqjqHXjBgI/
 https://travis-ci.org/#!/elcoyaman/seal
 
 ###URL ambiente de testing
-
+http://ixion-tech.com.ar:8000/admin/
 
 ###Documento formal para presentacion en la facultad
 https://docs.google.com/document/d/1dBCXFkzwcSSTNkbK1ESLRpfidv5y6DR4kxhkDBYF3S0/edit
