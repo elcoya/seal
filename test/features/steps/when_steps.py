@@ -1,11 +1,6 @@
 from behave import *
 from selenium import webdriver 
 
-@given('we have opened the browser for "{url}"')
-def step(context, url):
-    context.browser = webdriver.Firefox()
-    context.browser.get(url)
-
 @when('we log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
     form = context.browser.find_element_by_tag_name('form')
@@ -25,24 +20,4 @@ def step(context, loginData):
 def step(context):
     a = context.browser.find_element_by_link_text('Courses')
     a.click()
-
-
-@then('we should see "{text}"')
-def step(context,text):
-    page_source = context.browser.page_source
-    assert text in page_source
-
-@then('we enter in the page with this title "{text}"')
-def step(context, text):
-    titlebrowser = context.browser.title 
-    assert titlebrowser == text
- 
-@then('we logout')
-def step(context):
-    a = context.browser.find_element_by_link_text('Log out')
-    a.click()
-
-@then('we close de browser')
-def step(context):
-    context.browser.close()
 
