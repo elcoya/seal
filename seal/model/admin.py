@@ -7,5 +7,8 @@ from seal.model.models import Course
 from seal.model.models import Student
 from django.contrib import admin
 
-admin.site.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    ordering = ['-name',]
+    
+admin.site.register(Course, CourseAdmin)
 admin.site.register(Student)

@@ -5,4 +5,3 @@ from selenium import webdriver
 def step(context, url):
     context.browser = webdriver.Firefox()
     context.browser.get(url)
-

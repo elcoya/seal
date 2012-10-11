@@ -21,3 +21,7 @@ def step(context):
     a = context.browser.find_element_by_link_text('Courses')
     a.click()
 
+@when('course "{course}" exists')
+def step(context,course):
+    print(course)
+    c = context.browser.find_element_by_link_text(course)
