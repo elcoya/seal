@@ -1,5 +1,7 @@
 from behave import *
 from selenium import webdriver
+from seal.model.models import Course
+from seal import model
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
@@ -15,12 +17,17 @@ def step(context, usr, passwd):
 
 @given('I am in the course list page')
 def step(context):
-    print('need some help here...')
     print(context)
     context.browser.get('http://localhost:8000/admin/model/course/')
 
 @given('there are no courses')
 def step(context):
-    courses = Courses.objects.all()
-    for course in courses:
-        course.delete()
+    from seal.model.models import Course
+    print('delete all courses...')
+    
+            
+@given('course "{course}" exists')
+def step(context,course):
+    from seal.model.models import Course
+    c = Course(name=course)
+    #c.save()
