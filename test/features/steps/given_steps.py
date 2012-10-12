@@ -1,13 +1,12 @@
 from behave import *
 from selenium import webdriver
 
-
-@given('we have opened the browser for "{url}"')
+@given('I have opened the browser for "{url}"')
 def step(context, url):
     context.browser = webdriver.Firefox()
     context.browser.get(url)
 
-@given('we log in as "{usr}" "{passwd}"')
+@given('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('username').send_keys(usr)
