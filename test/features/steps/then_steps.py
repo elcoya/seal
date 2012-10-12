@@ -1,7 +1,7 @@
 from behave import *
 from selenium import webdriver 
 
-@then('we should see "{text}"')
+@then('I should see "{text}"')
 def step(context,text):
     body = context.browser.find_element_by_tag_name('body')
     assert text in body.text
