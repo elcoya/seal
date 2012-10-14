@@ -1,7 +1,13 @@
 from behave import *
 from selenium import webdriver
+
+
+import sys
+sys.path.append("/home/anibal/workspace/python-aptana-wkspace/seal/")
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
+
 from seal.model.models import Course
-from seal import model
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
