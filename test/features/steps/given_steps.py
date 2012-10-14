@@ -1,9 +1,9 @@
 from behave import *
 from selenium import webdriver
-
+from django.core.exceptions import ObjectDoesNotExist
 
 import sys
-sys.path.append("/home/anibal/workspace/python-aptana-wkspace/seal/")
+sys.path.append("/home/martin/workspace/seal/seal")
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
@@ -28,12 +28,12 @@ def step(context):
 
 @given('there are no courses')
 def step(context):
-    from seal.model.models import Course
-    print('delete all courses...')
-    
+    nCourses = Course.objects.count()
+    assert nCourses == 0
             
 @given('course "{course}" exists')
 def step(context,course):
-    from seal.model.models import Course
-    c = Course(name=course)
-    #c.save()
+    try:
+        c = Course.objects.get(name=course)
+    except ObjectDoesNotExist:
+        assert False 
