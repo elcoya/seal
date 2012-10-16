@@ -5,6 +5,7 @@ Created on 07/10/2012
 '''
 from seal.model.course import Course
 from seal.model.student import Student
+from seal.model.practice import Practice
 from django.contrib import admin
 
 class CourseAdmin(admin.ModelAdmin):
@@ -12,3 +13,4 @@ class CourseAdmin(admin.ModelAdmin):
     
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Student)
+admin.site.register(Practice)
