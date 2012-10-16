@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from seal.model.models import Course
+from seal.model.course import Course
 
 
 class CourseTest(TestCase):
