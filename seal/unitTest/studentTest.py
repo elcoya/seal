@@ -6,14 +6,10 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from seal.model.course import Course
 
 class CourseTest(TestCase):
-    def testCourseCreation(self):
+    def test_basic_addition(self):
         """
-        We creates a Course with a name and checks it's value.
+        Tests that 1 + 1 always equals 2.
         """
-        aName = '2012-2C'
-        aCourse = Course()
-        aCourse.name = aName
-        self.assertEqual(aCourse.name, aName)
+        self.assertEqual(1 + 1, 2)
