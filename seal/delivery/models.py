@@ -1,5 +1,5 @@
 from django.db import models
-from seal.model.student import Student
+from seal.model import Student
 # Create your models here.
 
 class Delivery(models.Model):
