@@ -8,23 +8,7 @@ env:
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install mysql-python --use-mirrors
-  # - pip install -q -e . --use-mirrors
-
-
-before_script:
-  - mysql -e 'create database seal;'
-  - mysql -u root < ci_scripts/ci_dbuser.sql
-#  - python seal/manage.py syncdb < ci_scripts/admin-root-user-data.txt
+  - pip install fabric
     
-test:
-    adapter: mysql2
-    database: seal
-    username: seal
-    password: $3alSEAL
-    encoding: utf8
-
 # command to run tests, e.g. python setup.py test
-script:  python seal/manage.py test
-
-after_script:
-  - wget http://ixion-tech.com.ar/seal/requestUpdate.php
+script: fab run
