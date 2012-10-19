@@ -10,7 +10,7 @@ def prepare_db():
     local("mysql -u root < ci_scripts/ci_dbuser.sql")
 
 def run_tests():
-    local("seal/manage.py run_tests")
+    local("python seal/manage.py run_tests")
 
 def prepare_deploy():
     prepare_db()
