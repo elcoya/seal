@@ -1,14 +1,15 @@
 from behave import *
 from parse import *
-from selenium import webdriver 
+from selenium import webdriver
 from django.core.exceptions import ObjectDoesNotExist
+
 
 import sys
 sys.path.append("/home/martin/workspace/seal/")
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
-from seal.model.models import Course
+from seal.model.course import Course
 
 def before_feature(context, feature):
     if ('see the course list' in feature.name):

@@ -7,7 +7,7 @@ sys.path.append("/home/martin/workspace/seal/seal")
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
-from seal.model.models import Course
+from seal.model.course import Course
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
