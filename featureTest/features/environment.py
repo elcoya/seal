@@ -3,12 +3,16 @@ from parse import *
 from selenium import webdriver
 from django.core.exceptions import ObjectDoesNotExist
 
-
+# The next few steps are required to load the configuration and include the application model for the behavioural tests.
+import ConfigParser, os
+config = ConfigParser.ConfigParser()
+config.readfp(open('../conf/local.cfg'))
 import sys
-sys.path.append("/home/martin/workspace/seal/")
-import os
+sys.path.append(config.get("Path", "path.project"))		 # Required to use the app model
+sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
+# Now we can load our model
 from seal.model.course import Course
 
 def before_feature(context, feature):

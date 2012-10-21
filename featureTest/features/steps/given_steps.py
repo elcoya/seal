@@ -1,12 +1,6 @@
 from behave import *
 from selenium import webdriver
 from django.core.exceptions import ObjectDoesNotExist
-
-import sys
-sys.path.append("/home/martin/workspace/seal/seal")
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
-
 from seal.model.course import Course
 
 @given('I have opened the browser for "{url}"')
