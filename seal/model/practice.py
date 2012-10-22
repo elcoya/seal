@@ -7,4 +7,4 @@ class Practice(models.Model):
     statement = models.CharField(max_length = 200)
     deadline = models.DateField()
     def __str__(self):
-        return self.uid
+        return (str(self.uid)+"/"+self.course.name)
