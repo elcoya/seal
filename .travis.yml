@@ -6,11 +6,11 @@ python:
 env:
   - DJANGO=1.4.1
 install:
-  - pip install Django==$DJANGO --use-mirrors
-  - pip install mysql-python --use-mirrors
-  - pip install fabric
-  - pip install behave
-  - pip install selenium
+  - pip install -q Django==$DJANGO --use-mirrors
+  - pip install -q mysql-python --use-mirrors
+  - pip install -q fabric
+  - pip install -q behave
+  - pip install -q selenium
     
 # command to run tests, e.g. python setup.py test
 script: fab run
