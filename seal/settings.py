@@ -109,10 +109,15 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'seal.urls'
 
+import ConfigParser
+config = ConfigParser.ConfigParser()
+config.readfp(open('seal/conf/local.cfg'))
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    config.get("Path", "path.template")
 )
 
 INSTALLED_APPS = (
