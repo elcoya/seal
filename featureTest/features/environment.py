@@ -12,6 +12,9 @@ sys.path.append(config.get("Path", "path.project"))		 # Required to use the app 
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
+for path in sys.path:
+    print path
+
 # Now we can load our model
 from seal.model.course import Course
 
