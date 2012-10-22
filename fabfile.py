@@ -17,8 +17,14 @@ def prepare_db():
     passwd = config.get("Database", "pass")
     if(config.get("Enviroment", "location") == "travis"):
         print("Travis location detected. Seting up database layout...")
-        local("mysql -e 'create database seal;' -u " + user + " -p" + passwd)
-        local("mysql -u " + user + " -p" + passwd + " < ci_scripts/ci_dbuser.sql")
+        cmd = "mysql -e 'create database seal;' -u " + user
+        if(passwd != ""):
+            cmd += " -p" + passwd
+        local(cmd)
+        cmd = "mysql -u " + user
+        if(passwd != ""):
+            cmd += " -p" + passwd
+        local(cmd + " < ci_scripts/ci_dbuser.sql")
         print("Layout set.")
     else:
         print("Environment detected. No need to create either database user nor schema.")
