@@ -29,7 +29,7 @@ def kill_server(context):
 def get_mysql_bash():
     user = config.get("Database", "user")
     passwd = config.get("Database", "pass")
-    local_cmd = "mysql -u " + user + " -D seal '"
+    local_cmd = "mysql -u " + user
     if (passwd != ""):
         local_cmd += " -p'" + passwd + "'"
     return local_cmd
