@@ -34,10 +34,12 @@ def get_mysql_bash():
         local_cmd += " -p'" + passwd + "'"
     return local_cmd
 
-def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;"):
+def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
     user = config.get("Database", "user")
     passwd = config.get("Database", "pass")
-    local_cmd = "mysql -e '" + sql_sentence + "' -u " + user + " -D seal "
+    local_cmd = "mysql -e '" + sql_sentence + "' -u " + user
+    if (database is not None and database != ""):
+        local_cmd += " -D " + database + " "
     if (passwd != ""):
         local_cmd += " -p'" + passwd + "' "
     return local_cmd
@@ -46,7 +48,7 @@ def prepare_db(context = None):
     print("fabric: preparing database.")
     if(config.get("Enviroment", "location") == "travis"):
         print("Travis location detected. Seting up database layout...")
-        cmd = get_mysql_bash_cmd("create database seal;")
+        cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;")
         local(cmd)
         cmd = get_mysql_bash()
         local(cmd + " < ci_scripts/ci_dbuser.sql")
@@ -54,12 +56,12 @@ def prepare_db(context = None):
     else:
         print("Environment detected. No need to create either database user nor schema.")
     print("Sincronizing DB...")
-    cmd = get_mysql_bash_cmd("SHOW TABLES;")
+    cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
     output = local(cmd + " -r -N | sed s/[^a-z_]\+// | grep -v auth | grep -v django", capture=True)
     mysql_cmd = "SET foreign_key_checks = 0; "
     mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
     mysql_cmd += "SET foreign_key_checks = 1;"
-    cmd = get_mysql_bash_cmd(mysql_cmd)
+    cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
     local(cmd)
     local("python seal/manage.py syncdb")
     print("syncdb complete")
