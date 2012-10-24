@@ -20,8 +20,6 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 print "path"
 for path in sys.path:
     print path
-print "ls"
-local("ls " + config.get("Path", "path.behave.model"))
 
 
 class FabricContext:
