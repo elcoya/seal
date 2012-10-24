@@ -7,4 +7,4 @@ class Student(models.Model):
     uid = models.IntegerField(unique=True)
     email = models.CharField(max_length = 90)
     def __str__(self):
-        return self.name    
+        return self.name
