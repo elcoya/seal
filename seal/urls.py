@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('view.practice',
-    url(r'^practice/', 'newpractice'),
+    url(r'^practice/newpractice', 'newpractice'),
 )
 
 urlpatterns += patterns('',

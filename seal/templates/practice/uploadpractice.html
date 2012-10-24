@@ -5,11 +5,14 @@
 {% block bodyclass %}dashboard{% endblock %}
 {% block content %}
 
-<form id='formuploadpractice' action='' method='post'>{% csrf_token %}
-	UPLOAD NEW PRACTICE<br><br>
-	{{ form.as_p }}
-	Statement: <input type="file" name="UPLOAD" size="23"><br> 
+<form id='formuploadpractice' action='' method='post' enctype='multipart/form-data'>
+	{% csrf_token %}
+	<table>
+		UPLOAD NEW PRACTICE<br><br>
+		{{ form.as_table }}
+	</table>
 	<input type='submit' value='Save' />
+	<input type='reset' value='Reset' /> 
 </form>
 
 {% endblock %}

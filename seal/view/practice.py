@@ -15,9 +15,11 @@ def index(request):
 
 def newpractice(request):
     if request.method=='POST':
-        form = PracticeForm(request.POST)
-        if (form.is_valid()):
-            #form.save()
+        form = PracticeForm(request.POST, request.FILES)
+        for filename, file in request.FILES.iteritems():
+            ext = request.FILES[filename].content_type
+        if (form.is_valid() and ext == "application/pdf"):
+            form.save()
             return HttpResponseRedirect('/admin/model/practice/')
     else:
         form = PracticeForm()

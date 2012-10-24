@@ -3,7 +3,6 @@ from seal.model.course import Course
 
 import os
 (PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
-print(PRACTICE_FILE_PATH)
 
 class Practice(models.Model):
     uid = models.IntegerField(unique=True)
