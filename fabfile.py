@@ -64,7 +64,8 @@ def prepare_db(context = None):
             mysql_cmd += "SET foreign_key_checks = 1;"
             cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
             local(cmd)
-    local("python seal/manage.py syncdb")
+    local("python seal/manage.py syncdb -noinput loaddata " +
+          "'/home/travis/builds/elcoyaman/seal/ci_script/admin-root-user-data.json'")
     print("syncdb complete")
 
 def run_tests(context = None):
