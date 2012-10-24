@@ -1,5 +1,13 @@
-yes
-seal
-aniballovaglio@yahoo.com.ar
-seal
-seal
+[
+  {
+    "auth": "user",
+    "pk": 1,
+    "fields": {
+      "username"  : "seal",
+      "first_name": "Seal",
+      "last_name" : "Administrator"
+      "password"  : "pbkdf2_sha256$10000$d5h1vjJSpIyc$UUU3ndEik9LqUP0GnJWhD4G0yc9eYK9de9GDDlCVolg=",
+      "email"     : "seal@gmail.com"
+    }
+  }
+]
