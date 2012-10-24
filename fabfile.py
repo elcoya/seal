@@ -20,14 +20,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 print "path"
 for path in sys.path:
     print path
-
-print "locate home"
-with lcd("/home/travis/virtualenv"):
-    local("locate /model.py")
-print "locate usr"
-with lcd("/usr/lib/python2.7"):
-    local("locate /model.py")
-print "located"
+print "ls"
+local("ls " + config.get("Path", "path.behave.model"))
 
 
 class FabricContext:
