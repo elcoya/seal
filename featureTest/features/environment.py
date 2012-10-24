@@ -15,6 +15,26 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 # Now we can load our model
 from seal.model.course import Course
 
+
+def create_super_user():
+    # create a super user
+    from django.contrib.auth.models import User
+    u = User.objects.create(
+        username='seal',
+        first_name='Seal',
+        last_name='Administrator',
+        email='seal@gmail.com',
+        is_superuser=True,
+        is_staff=True,
+        is_active=True
+    )
+    u.set_password('seal')
+    u.save()
+    print "User account created"
+    
+def before_all(context):
+    create_super_user()
+
 def before_feature(context, feature):
     if ('see the course list' in feature.name):
         context.browser = webdriver.Firefox()
