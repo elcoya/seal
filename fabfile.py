@@ -12,9 +12,12 @@ import ConfigParser, os
 import sys
 config = ConfigParser.ConfigParser()
 config.readfp(open('conf/local.cfg'))
-#sys.path.append(config.get("Path", "path.project"))      # Required to use the app model
-#sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
-#os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
+sys.path.append(config.get("Path", "path.project"))      # Required to use the app model
+sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
+
+for path in sys.path:
+    print path
 
 class FabricContext:
     server_process = None
@@ -47,6 +50,21 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
         local_cmd += " -p'" + passwd + "' "
     return local_cmd
 
+def create_super_user():
+    # create a super user
+    from django.contrib.auth.models import User
+    u = User.objects.create(
+        username='seal',
+        first_name='Seal',
+        last_name='Administrator',
+        email='seal@gmail.com',
+        is_superuser=True,
+        is_staff=True,
+        is_active=True
+    )
+    u.set_password('seal')
+    u.save()
+    print "User account created"
 
 def prepare_db(context = None):
     print("fabric: preparing database.")
@@ -68,10 +86,8 @@ def prepare_db(context = None):
             mysql_cmd += "SET foreign_key_checks = 1;"
             cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
             local(cmd)
-    #local("python seal/manage.py syncdb --noinput loaddata " +
-    #      "'" + config.get("Path", "path.project") + "ci_script/admin-root-user-data.json'")
     local("python seal/manage.py syncdb --noinput")
-    #create_super_user()
+    create_super_user()
     print("syncdb complete")
 
 def run_tests(context = None):
