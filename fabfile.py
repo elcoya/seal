@@ -46,6 +46,7 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
 
 def create_super_user():
     # create a super user
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
     from django.contrib.auth.models import User
     u = User.objects.create(
         username='seal',
