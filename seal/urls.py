@@ -4,14 +4,10 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'seal.views.home', name='home'),
-    # url(r'^seal/', include('seal.foo.urls')),
+urlpatterns = patterns('view.practice',
+    url(r'^practice/', 'newpractice'),
+)
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
