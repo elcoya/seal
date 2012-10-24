@@ -16,8 +16,19 @@ sys.path.append(config.get("Path", "path.project"))      # Required to use the a
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
+
+print "path"
 for path in sys.path:
     print path
+
+print "locate home"
+with lcd("/home/"):
+    local("locate model.py")
+print "locate usr"
+with lcd("/usr/"):
+    local("locate model.py")
+print "located"
+
 
 class FabricContext:
     server_process = None
