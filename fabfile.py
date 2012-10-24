@@ -22,10 +22,10 @@ for path in sys.path:
     print path
 
 print "locate home"
-with lcd("/home/"):
+with lcd("/home"):
     local("locate model.py")
 print "locate usr"
-with lcd("/usr/"):
+with lcd("/usr"):
     local("locate model.py")
 print "located"
 
