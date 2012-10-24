@@ -55,15 +55,15 @@ def prepare_db(context = None):
         print("Layout set.")
     else:
         print("Environment detected. No need to create either database user nor schema.")
-    print("Sincronizing DB...")
-    cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
-    output = local(cmd + " -r -N | sed s/[^a-z_]\+// | grep -v auth | grep -v django", capture=True)
-    if (output != ""):
-        mysql_cmd = "SET foreign_key_checks = 0; "
-        mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
-        mysql_cmd += "SET foreign_key_checks = 1;"
-        cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
-        local(cmd)
+        print("Sincronizing DB...")
+        cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
+        output = local(cmd + " -N | sed s/[^a-z_]\+// | grep -v auth | grep -v django", capture=True)
+        if (output != ""):
+            mysql_cmd = "SET foreign_key_checks = 0; "
+            mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
+            mysql_cmd += "SET foreign_key_checks = 1;"
+            cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
+            local(cmd)
     local("python seal/manage.py syncdb")
     print("syncdb complete")
 
