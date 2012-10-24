@@ -71,7 +71,7 @@ def prepare_db(context = None):
     #local("python seal/manage.py syncdb --noinput loaddata " +
     #      "'" + config.get("Path", "path.project") + "ci_script/admin-root-user-data.json'")
     local("python seal/manage.py syncdb --noinput")
-    create_super_user()
+    #create_super_user()
     print("syncdb complete")
 
 def run_tests(context = None):
