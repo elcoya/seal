@@ -12,6 +12,9 @@ import ConfigParser, os
 import sys
 config = ConfigParser.ConfigParser()
 config.readfp(open('conf/local.cfg'))
+sys.path.append(config.get("Path", "path.project"))      # Required to use the app model
+sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
 class FabricContext:
     server_process = None
@@ -46,9 +49,6 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
 
 def create_super_user():
     # create a super user
-    sys.path.append(config.get("Path", "path.project"))         # Required to use the app model
-    sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
     from django.contrib.auth.models import User
     u = User.objects.create(
         username='seal',
