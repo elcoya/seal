@@ -6,7 +6,7 @@ Sistema de Entregas Automatizado Libre
 Índice de Proyecto
 ------------------
 
-###Docuemento de estructura del Proyecto
+###Documento de estructura del Proyecto
 
 ###Repositorio Git-Hub
 https://github.com/elcoyaman/seal.git

@@ -16,8 +16,11 @@ sys.path.append(config.get("Path", "path.project"))      # Required to use the a
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
+
+print "path"
 for path in sys.path:
     print path
+
 
 class FabricContext:
     server_process = None
@@ -104,7 +107,7 @@ def run_features_tests(context = None):
 def prepare_deploy(context = None):
     prepare_db(context)
     run_tests(context)
-    run_features_tests(context)
+    #run_features_tests(context)
 
 def invoke_test_deploy(context = None):
     if(config.get("Enviroment", "location") == "travis"):
