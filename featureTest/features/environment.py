@@ -16,7 +16,6 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 from seal.model.course import Course
 
 def before_feature(context, feature):
-    if ('see the course list' in feature.name):
         context.browser = webdriver.Firefox()
         context.browser.get('http://localhost:8000/admin/')
         form = context.browser.find_element_by_tag_name('form')
@@ -26,7 +25,6 @@ def before_feature(context, feature):
         print(context)
     
 def after_feature(context, feature):
-    if ('see the course list' in feature.name):
         a = context.browser.find_element_by_link_text('Log out')
         a.click()
         context.browser.close()
@@ -36,6 +34,10 @@ def before_scenario(context, scenario):
         print('delete all courses...')
         courses = Course.objects.all()
         courses.delete()
+    if ('No practice' in scenario.name):
+        print('delete all practice...')
+        practice = Course.objects.all()
+        practice.delete()
 
 def before_step(context, step):
     if ('exists' in step.name):
