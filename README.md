@@ -6,7 +6,14 @@ Sistema de Entregas Automatizado Libre
 Índice de Proyecto
 ------------------
 
-###Documento de estructura del Proyecto
+###Storie Maping
+Story Mapping alumno --> https://seal.toolsforagile.com/workspace/accounts/login/?next=/workspace/
+Username: martin
+Password: seal
+
+Stoty Mapping docente --> https://sealdocente.toolsforagile.com/workspace/accounts/login/
+Username: anibal
+Password: seal
 
 ###Repositorio Git-Hub
 https://github.com/elcoyaman/seal.git
