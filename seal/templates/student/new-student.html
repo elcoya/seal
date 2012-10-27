@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>new-student</title>
+		<meta name="author" content="anibal" />
+		<!-- Date: 2012-10-25 -->
+	</head>
+	<body>
+		<form id='form-new-student' action='' method='post' >
+			{% csrf_token %}
+			<table>
+				<thead>
+					<th><td colspan="5">New student</td></th>
+				</thead>
+				{{ form.as_table }}
+			</table>
+			<input type='submit' value='Save' />
+			<input type='reset' value='Reset' /> 
+		</form>
+		<div><a href="/" >home</a> | <a href="/students">back</a></div>
+	</body>
+</html>
+
