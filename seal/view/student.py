@@ -4,7 +4,7 @@ Created on 25/10/2012
 @author: anibal
 '''
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from seal.forms.student import StudentForm
 
@@ -14,8 +14,9 @@ def index(request):
 def newstudent(request):
     if (request.method == 'POST'):
         form = StudentForm(request.POST)
-        form.save()
-        render_to_response('student/student-save-success.html')
+        if (form.is_valid()):
+            form.save()
+            return HttpResponseRedirect('/students')
     else:
         form = StudentForm()
-    return render_to_response('student/new-student.html', {'form': form,})
+    return render(request, 'student/new-student.html', {'form': form,})

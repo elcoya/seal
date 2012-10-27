@@ -10,6 +10,7 @@ urlpatterns = patterns('django.views.generic.simple',
 )
 
 urlpatterns += patterns('view.practice',
+    url(r'^practice/?$', 'index'),
     url(r'^practice/newpractice', 'newpractice'),
 )
 

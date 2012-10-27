@@ -1,5 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+{% block content %}
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
@@ -24,3 +28,4 @@
 	</body>
 </html>
 
+{% endblock %}
