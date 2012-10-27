@@ -6,6 +6,9 @@ Sistema de Entregas Automatizado Libre
 Índice de Proyecto
 ------------------
 
+###Documento de Estructra del Proyecto
+https://docs.google.com/document/d/1YY_Jznp5lDFYk9idGgZTCeMfGzFR_y2-8w3MYBWQefo/edit
+
 ###Storie Maping
 Story Mapping alumno --> https://seal.toolsforagile.com/workspace/accounts/login/?next=/workspace/
 Username: martin
