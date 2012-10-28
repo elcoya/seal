@@ -2,6 +2,7 @@ from behave import *
 from selenium import webdriver
 from django.core.exceptions import ObjectDoesNotExist
 from seal.model import Course, Practice
+from seal.model.student import Student
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
@@ -25,19 +26,28 @@ def step(context):
     print(context)
     context.browser.get('http://localhost:8000/admin/model/practice/')
 
+@given('I am at the new student form')
+def step(context):
+    context.browser.get('http://localhost:8000/students/newstudent')
+
 @given('there are no courses')
 def step(context):
     nCourses = Course.objects.count()
     assert nCourses == 0
 
-@given('there are no practice')
+@given('there are no practices')
 def step(context):
     nPractice = Practice.objects.count()
     assert nPractice == 0
-            
+
+@given('there are no students')
+def step(context):
+    Student.objects.all().delete()
+
 @given('course "{course}" exists')
 def step(context,course):
     try:
         c = Course.objects.get(name=course)
     except ObjectDoesNotExist:
         assert False 
+

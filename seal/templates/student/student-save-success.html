@@ -1,14 +1,15 @@
-<html>
-	<head>
-		<title>Students - Home</title>
-	</head>
-	<body>
-		<div>
-			<div>Student Saved</div>
-			<div>
-				New student saved successfully
-			</div>
-			<div><a href="/" >home</a> | <a href="/students">back</a></div>
-		</div>
-	</body>
-</html>
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+{% block content %}
+<div>
+	<div>Student Saved</div>
+	{% csrf_token %}
+	<div>
+		New student saved successfully
+	</div>
+	<footer><a href="/" >home</a> | <a href="/students">back</a></footer>
+</div>
+{% endblock %}

@@ -20,3 +20,15 @@ def step(context, loginData):
 def step(context):
     a = context.browser.find_element_by_link_text('Courses')
     a.click()
+
+@when('I fill the newstudent form with default data')
+def step(context):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('name').send_keys('Dummy Student')
+    form.find_element_by_name('uid').send_keys('00000')
+    form.find_element_by_name('email').send_keys('dummy@foo.foo')
+
+@when('I submit the form')
+def step(context):
+    form = context.browser.find_element_by_tag_name('form')
+    form.submit()

@@ -10,30 +10,25 @@ from subprocess import Popen
 
 import ConfigParser, os
 import sys
+import django
 config = ConfigParser.ConfigParser()
 config.readfp(open('conf/local.cfg'))
 sys.path.append(config.get("Path", "path.project"))      # Required to use the app model
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
-
-print "path"
-for path in sys.path:
-    print path
-
-
 class FabricContext:
     server_process = None
 
 def launch_server(context):
-    print("fabric: launching server instance for feature tests.")
+    print("[fabric] launching server instance for feature tests.")
     context.server_process = Popen(["python", "seal/manage.py", "runserver", "--noreload"])
-    print("fabric: server online... pid: " + str(context.server_process.pid))
+    print("[fabric] server online... pid: " + str(context.server_process.pid))
 
 def kill_server(context):
-    print("fabric: killing server...")
+    print("[fabric] killing server...")
     context.server_process.terminate()
-    print("fabric: server killed...")
+    print("[fabric] server killed...")
 
 def get_mysql_bash():
     user = config.get("Database", "user")
@@ -56,21 +51,25 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
 def create_super_user():
     # create a super user
     from django.contrib.auth.models import User
-    u = User.objects.create(
-        username='seal',
-        first_name='Seal',
-        last_name='Administrator',
-        email='seal@gmail.com',
-        is_superuser=True,
-        is_staff=True,
-        is_active=True
-    )
-    u.set_password('seal')
-    u.save()
-    print "User account created"
+    try:
+        admin_user = User.objects.get_by_natural_key('seal')
+        print "Super user already exists: " + str(admin_user)
+    except:
+        u = User.objects.create(
+            username='seal',
+            first_name='Seal',
+            last_name='Administrator',
+            email='seal@gmail.com',
+            is_superuser=True,
+            is_staff=True,
+            is_active=True
+        )
+        u.set_password('seal')
+        u.save()
+        print "User account created"
 
 def prepare_db(context = None):
-    print("fabric: preparing database.")
+    print("[fabric] preparing database.")
     if(config.get("Enviroment", "location") == "travis"):
         print("Travis location detected. Seting up database layout...")
         cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;")
@@ -82,7 +81,7 @@ def prepare_db(context = None):
         print("Environment detected. No need to create either database user nor schema.")
         print("Sincronizing DB...")
         cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
-        output = local(cmd + " -N | sed s/[^a-z_]\+// | grep -v auth | grep -v django", capture=True)
+        output = local(cmd + " -N ", capture=True)
         if (output != ""):
             mysql_cmd = "SET foreign_key_checks = 0; "
             mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
@@ -94,12 +93,12 @@ def prepare_db(context = None):
     print("syncdb complete")
 
 def run_tests(context = None):
-    print("fabric: invoking tests.")
+    print("[fabric] invoking tests.")
     local("python seal/manage.py test")
 
 def run_features_tests(context = None):
     launch_server(context)
-    print("fabric: invoking feature testing.")
+    print("[fabric] invoking feature testing.")
     with lcd("featureTest"):
         local("behave")
     kill_server(context)
@@ -111,7 +110,7 @@ def prepare_deploy(context = None):
 
 def invoke_test_deploy(context = None):
     if(config.get("Enviroment", "location") == "travis"):
-        print("fabric: tests run successfully... deploying to test instance.")
+        print("[fabric] tests run successfully... deploying to test instance.")
         local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
 
 def run():
