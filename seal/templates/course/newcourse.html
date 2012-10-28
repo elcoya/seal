@@ -5,19 +5,15 @@
 {% block bodyclass %}dashboard{% endblock %}
 {% block content %}
 
-<html>
-	<head>
-		<title>Students - Home</title>
-	</head>
-	<body>
-		<div>
-			<div>Student error</div>
-			<div>
-				{{message}}
-			</div>
-			<div><a href="/" >home</a> | <a href="/students">back</a></div>
-		</div>
-	</body>
-</html>
+<form id='formnewcoruse' action='' method='post'>
+	{% csrf_token %}
+	<table>
+		NEW COURSE<br><br>
+		{{ form.as_table }}
+	</table>
+	<input type='submit' value='Save' />
+	<input type='reset' value='Reset' /> 
+	<div><a href="/" >home</a> | <a href="/course">back</a></div>
+</form>
 
 {% endblock %}
