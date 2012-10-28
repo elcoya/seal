@@ -106,7 +106,7 @@ def run_features_tests(context = None):
 def prepare_deploy(context = None):
     prepare_db(context)
     run_tests(context)
-    #run_features_tests(context)
+    run_features_tests(context)
 
 def invoke_test_deploy(context = None):
     if(config.get("Enviroment", "location") == "travis"):

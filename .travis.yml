@@ -11,6 +11,12 @@ install:
   - pip install -q fabric
   - pip install behave
   - pip install -q selenium
+
+before_script:
+  - sh -e /etc/init.d/xvfb start
     
 # command to run tests, e.g. python setup.py test
 script: fab run
+
+after_script:
+  - sh -e /etc/init.d/xvfb stop
