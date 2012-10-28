@@ -20,6 +20,11 @@ urlpatterns += patterns('view.student',
     url(r'^students/newstudent/?$', 'newstudent'),
 )
 
+urlpatterns += patterns('view.course',
+    url(r'^course/', 'index'),
+    url(r'^course/newcourse/?$', 'newcourse'),
+)
+
 urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
