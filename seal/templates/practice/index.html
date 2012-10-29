@@ -1,25 +1,38 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_static %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
-
-{% block bodyclass %}dashboard{% endblock %}
 {% block content %}
 
-<html>
-	<head>
-		<title>Practice - Home</title>
-	</head>
-	<body>
-		<div>
-			<div>Practice Home</div>
-			<div>
-				<ul>
-					<li><a href="/practice/newpractice" >New Practice</a></li>
-				</ul>
-			</div>
-			<div><a href="/" >home</a></div>
-		</div>
-	</body>
-</html>
+<body>
+{% if practices|length == 0 %}
+    0 practice<br /><br />
+{% endif %}
 
+{% for practice in practices %}
+    {{ practice.uid }}<br />
+{% endfor %}
+
+<div id="newpractice">
+	<ul>
+		<li><a href="/practices/newpractice" >New Practice</a></li>
+	</ul>	
+</div>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if practices.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ practices.number }} of {{ practices.paginator.num_pages }}.
+        </span>
+
+        {% if practices.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+<footer><a href="/" >home</a> </footer>
+</body>
 {% endblock %}

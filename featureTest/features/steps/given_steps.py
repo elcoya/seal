@@ -24,7 +24,7 @@ def step(context):
 @given('I am in the practice list page')
 def step(context):
     print(context)
-    context.browser.get('http://localhost:8000/admin/model/practice/')
+    context.browser.get('http://localhost:8000/practices/')
 
 @given('I am at the new student form')
 def step(context):
@@ -32,13 +32,11 @@ def step(context):
 
 @given('there are no courses')
 def step(context):
-    nCourses = Course.objects.count()
-    assert nCourses == 0
+    Course.objects.all().delete()
 
 @given('there are no practices')
 def step(context):
-    nPractice = Practice.objects.count()
-    assert nPractice == 0
+    Practice.objects.all().delete()
 
 @given('there are no students')
 def step(context):

@@ -10,8 +10,8 @@ urlpatterns = patterns('django.views.generic.simple',
 )
 
 urlpatterns += patterns('view.practice',
-    url(r'^practice/?$', 'index'),
-    url(r'^practice/newpractice/?$', 'newpractice'),
+    url(r'^practices/?$', 'index'),
+    url(r'^practices/newpractice/?$', 'newpractice'),
 )
 
 #Student views: list, create, delete, etc

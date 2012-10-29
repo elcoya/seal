@@ -29,16 +29,6 @@ def after_feature(context, feature):
         a.click()
         context.browser.close()
 
-def before_scenario(context, scenario):
-    if ('No courses' in scenario.name):
-        print('delete all courses...')
-        courses = Course.objects.all()
-        courses.delete()
-    if ('No practice' in scenario.name):
-        print('delete all practice...')
-        practice = Course.objects.all()
-        practice.delete()
-
 def before_step(context, step):
     if ('exists' in step.name):
         p = parse('course "{course}" exists', step.name)
