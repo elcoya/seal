@@ -22,7 +22,7 @@ def index(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         practices = paginator.page(paginator.num_pages)
-    return render_to_response('practice/index.html', {"practices": practices}, context_instance=RequestContext(request))
+    return render_to_response('practice/index.html', {"practices": practices})
 
 def newpractice(request):
     if (request.method=='POST'):

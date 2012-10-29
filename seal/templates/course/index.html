@@ -1,47 +1,41 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_static %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
-
-{% block bodyclass %}dashboard{% endblock %}
 {% block content %}
-
-<html>
-	<head>
-		<title>Course - Home</title>
-	</head>
-	<body>
+<body>
+	<div style="width: 800px; text-align: left; margin: auto;">
+		<div>Course Home</div>
 		<div>
-			<div>Course Home</div>
-			<div>
-				<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
-					<div style="clear: none; width: 50%; float: left;">Current Courses</div><div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/course/newcourse">New Course</a></div>
-				</div>
-				{% if has_courses %}
-					<ul>
-					{% for course in courses %}
-					    <li>{{ course.name }}</li>
-					{% endfor %}
-					</ul>
-					<div class="pagination">
-					    <span class="step-links">
-					        {% if courses.has_previous %}
-					            <a href="?page={{ courses.previous_page_number }}">previous</a>
-					        {% endif %}
-					        <span class="current">
-					            Page {{ courses.number }} of {{ courses.paginator.num_pages }}.
-					        </span>
-					        {% if courses.has_next %}
-					            <a href="?page={{ courses.next_page_number }}">next</a>
-					        {% endif %}
-					    </span>
-					</div>
-				{% else %}
-					<span>0 courses</span>
-				{% endif %}
+			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
+				<div style="clear: none; width: 50%; float: left;">Current Courses</div>
+				<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/course/newcourse">New Course</a></div>
 			</div>
-			<div><a href="/" >home</a></div>
+				<table style="width: 100%;">
+					<tbody>
+					{% for course in courses %}
+					    <tr><td>{{ course.name }}</td></tr>
+					{% empty %}
+					    <tr><td>0 courses</td></tr>
+					{% endfor %}
+					</tbody>
+					{% if courses|length > 0 %}
+						<tfoot style="text-align: center;"><tr>
+						    <td class="step-links">
+						    		<a href="?page=1">first</a>
+						        {% if courses.has_previous %}
+						            <a href="?page={{ courses.previous_page_number }}">previous</a>
+						        {% endif %}
+						        <span class="current">
+						            Page {{ courses.number }} of {{ courses.paginator.num_pages }}.
+						        </span>
+						        {% if courses.has_next %}
+						            <a href="?page={{ courses.next_page_number }}">next</a>
+						        {% endif %}
+						        	<a href="?page={{ courses.paginator.num_pages }}">last</a>
+						    </td>
+						</tr></tfoot>
+					{% endif %}
+				</table>
 		</div>
-	</body>
-</html>
-
+		<footer><a href="/" >home</a> </footer>
+	</div>
+</body>
 {% endblock %}

@@ -12,9 +12,6 @@ from django.template.context import RequestContext
 
 def index(request):
     courses_list = Course.objects.all().order_by('-name')
-    for course in courses_list:
-        print course.name
-    has_courses = Course.objects.exists()
     paginator = Paginator(courses_list, 25) # Show 25 courses per page
     page = request.GET.get('page')
     try:
@@ -25,7 +22,7 @@ def index(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         courses = paginator.page(paginator.num_pages)
-    return render_to_response('course/index.html', [{'courses', courses}, {'has_courses', has_courses}])
+    return render_to_response('course/index.html', {"courses": courses})
 
 def newcourse(request):
     if (request.method=='POST'):
