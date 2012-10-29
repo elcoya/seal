@@ -19,7 +19,7 @@ def step(context, usr, passwd):
 @given('I am in the course list page')
 def step(context):
     print(context)
-    context.browser.get('http://localhost:8000/admin/model/course/')
+    context.browser.get('http://localhost:8000/course/')
 
 @given('I am in the practice list page')
 def step(context):

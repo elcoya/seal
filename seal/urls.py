@@ -21,7 +21,7 @@ urlpatterns += patterns('view.student',
 )
 
 urlpatterns += patterns('view.course',
-    url(r'^course/', 'index'),
+    url(r'^course/?$', 'index'),
     url(r'^course/newcourse/?$', 'newcourse'),
 )
 

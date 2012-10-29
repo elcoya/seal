@@ -13,9 +13,31 @@
 		<div>
 			<div>Course Home</div>
 			<div>
-				<ul>
-					<li><a href="/course/newcourse">New Course</a></li>
-				</ul>
+				<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
+					<div style="clear: none; width: 50%; float: left;">Current Courses</div><div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/course/newcourse">New Course</a></div>
+				</div>
+				{% if has_courses %}
+					<ul>
+					{% for course in courses %}
+					    <li>{{ course.name }}</li>
+					{% endfor %}
+					</ul>
+					<div class="pagination">
+					    <span class="step-links">
+					        {% if courses.has_previous %}
+					            <a href="?page={{ courses.previous_page_number }}">previous</a>
+					        {% endif %}
+					        <span class="current">
+					            Page {{ courses.number }} of {{ courses.paginator.num_pages }}.
+					        </span>
+					        {% if courses.has_next %}
+					            <a href="?page={{ courses.next_page_number }}">next</a>
+					        {% endif %}
+					    </span>
+					</div>
+				{% else %}
+					<span>0 courses</span>
+				{% endif %}
 			</div>
 			<div><a href="/" >home</a></div>
 		</div>
