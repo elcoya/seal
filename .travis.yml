@@ -3,6 +3,13 @@ python:
   - "2.7"
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 # install: python setup.py install
+env:
+  - DJANGO=1.4.1
+
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -q mysql-python --use-mirrors
@@ -10,11 +17,5 @@ install:
   - pip install behave
   - pip install -q selenium
 
-before_script:
-  - sh -e /etc/init.d/xvfb start
-env:
-  - DJANGO=1.4.1
-  - DISPLAY=':99.0'
-    
 # command to run tests, e.g. python setup.py test
 script: fab run
