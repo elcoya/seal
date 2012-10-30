@@ -5,8 +5,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 # Index page. DO NOT TOUCH
-urlpatterns = patterns('django.views.generic.simple',
-    (r'^$', 'direct_to_template', {'template': 'index.html'}),
+urlpatterns = patterns('view.home',
+    #(r'^$', 'direct_to_template', {'template': 'index.html'}),
+    url(r'^/?$', 'index'),
 )
 
 urlpatterns += patterns('view.practice',

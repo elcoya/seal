@@ -7,11 +7,8 @@
 {% block bodyclass %}dashboard{% endblock %}
 {% block content %}
 <div>
-	<header>
-		<h1>SEAL</h1>
-	</header>
 	{% csrf_token %}
-	<nav>
+	<nav>	
 		<p>
 			<a href="/">Home</a>
 			<a href="/students">Students</a>
@@ -20,7 +17,26 @@
 			<a href="/admin">Administration</a>
 		</p>
 	</nav>
+	<div style="width: 800px; margin: auto; padding: 15px 0; clear: both;" >
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >Courses</td><td>Students</td></tr>
+			</thead>
+			<tbody>
+			{% for dict in table_contents %}
+				{% for key, value in dict.items %}
+			    <tr>
+			    	<td style="width: 70%; text-indent: 15px; " >{{ key }}</td>
+			    	<td style="width: 30%; text-align: center; ">{{ value }}</td>
+			    </tr>
+			    {% endfor %}
+			{% empty %}
+			    <tr><td colspan="2" style="text-align: center; ">There are yet no courses</td></tr>
+			{% endfor %}
+			</tbody>
+		</table>
 
+	</div>
 	<footer>
 		<p>
 			&copy; Copyright by the world

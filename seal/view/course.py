@@ -22,7 +22,7 @@ def index(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         courses = paginator.page(paginator.num_pages)
-    return render_to_response('course/index.html', {"courses": courses})
+    return render_to_response('course/index.html', {"courses": courses}, context_instance=RequestContext(request))
 
 def newcourse(request):
     if (request.method=='POST'):
