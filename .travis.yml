@@ -5,7 +5,6 @@ python:
 # install: python setup.py install
 env:
   - DJANGO=1.4.1
-  - DISPLAY=':99.0'
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -q mysql-python --use-mirrors
@@ -15,6 +14,8 @@ install:
 
 before_script:
   - sh -e /etc/init.d/xvfb start
+env:
+  - DISPLAY=':99.0'
     
 # command to run tests, e.g. python setup.py test
 script: fab run
