@@ -5,7 +5,7 @@ import os
 (PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
 
 class Practice(models.Model):
-    uid = models.IntegerField(unique=True)
+    uid = models.CharField(max_length=32, unique=True)
     course = models.ForeignKey(Course)
     file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/Practice_Files/")
     deadline = models.DateField()

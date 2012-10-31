@@ -38,3 +38,10 @@ def step(context, text):
     a = context.browser.find_element_by_link_text(text)
     a.click()
 
+@when(u'I fill the practice form with uid "{practice_uid}" and default data for course "{course_name}"')
+def step(context, practice_uid, course_name):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('uid').send_keys(practice_uid)
+    form.find_element_by_name('course').send_keys(course_name)
+    form.find_element_by_name('file').send_keys('/tmp/selenium_test.pdf')
+    form.find_element_by_name('deadline').send_keys('2012-11-25')

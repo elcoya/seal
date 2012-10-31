@@ -3,6 +3,7 @@ from selenium import webdriver
 from django.core.exceptions import ObjectDoesNotExist
 from seal.model import Course, Practice
 from seal.model.student import Student
+from django.template.defaulttags import now
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
@@ -48,3 +49,24 @@ def step(context,course):
         c = Course.objects.get_or_create(name=course)
     except ObjectDoesNotExist:
         assert False 
+
+@given('practice "{practice_uid}" exists for course "{course_name}"')
+def step(context, practice_uid, course_name):
+    exists = Practice.objects.get(uid=practice_uid).exists()
+    course = Course.objects.get_or_create(name=course_name)
+    if(not exists):
+        practice = Practice()
+        practice.uid = practice_uid
+        practice.deadline = now
+        practice.file = '/tmp/selenium_test_file.pdf'
+        practice.course = course
+        practice.save()
+    else:
+        practice = Practice.objects.get(uid=practice_uid)
+        if(practice.course is not course):
+            practice.course = course
+            practice.save()
+
+@given(u'I am at the new practice form')
+def step(context):
+    context.browser.get('http://localhost:8000/practices/newpractice')
