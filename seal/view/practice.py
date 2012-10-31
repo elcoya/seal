@@ -35,3 +35,18 @@ def newpractice(request):
     else:
         form = PracticeForm()
     return render(request,'practice/uploadpractice.html',{'form': form,})
+
+
+def editpractice(request, idpractice):
+    practice=Practice.objects.get(pk=idpractice)     
+    if (request.method=='POST'):
+        form = PracticeForm(request.POST, request.FILES, instance = practice)
+        for filename in request.FILES.iteritems():
+            ext = request.FILES[filename].content_type
+        if (form.is_valid() and ext == "application/pdf"):
+            formEdit = form.save(commit=False)
+            formEdit.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = PracticeForm( instance = practice)
+    return render(request,'practice/editpractice.html',{'form': form,}, context_instance=RequestContext(request))

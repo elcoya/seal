@@ -1,0 +1,43 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+{% block content %}
+<body>
+<form id='formeditcoruse' action='' method='post'>
+	{% csrf_token %}
+	<table>
+		Course edit<br><br>
+		{{ form.as_table }}
+	</table>	
+	<div style="width: 800px; margin: auto; padding: 15px 0; clear: both;" >
+		<table style="width: 100%;">
+			Practices<br><br>
+			<thead style="text-align: center; ">
+				<tr><td>Uid</td>
+					<td>Dead Line</td>
+					<td># Deliveries</td>
+				</tr>
+			</thead>
+			<tbody>
+			{% for dict in table_contents %}
+			    <tr>
+			    	<td style="width: 33%; text-align: center; " >{{ dict.uid }}</td>
+			    	<td style="width: 33%; text-align: center; ">{{ dict.deadline }}</td>
+			    	<td style="width: 33%; text-align: center; ">nose</td>
+			    	<td><a href=/practices/editpractice/{{dict.pk}}>Edit</a></td>
+			    </tr>
+			{% empty %}
+			    <tr><td colspan="2" style="text-align: center; ">There are yet no Practices</td></tr>
+			{% endfor %}
+			</tbody>
+		</table>
+		<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/practices/newpractice" >New Practice</a></div>
+	</div>
+	<input type='submit' value='Save' />
+	<div><a href="/" >home</a></div>
+</form>
+</body>
+
+{% endblock %}

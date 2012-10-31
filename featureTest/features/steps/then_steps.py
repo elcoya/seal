@@ -26,3 +26,13 @@ def step(context):
 @then('I close de browser')
 def step(context):
     context.browser.close()
+    
+@then('I should see link to "{text}" in the list')
+def step(context, text):
+    a = context.browser.find_element_by_link_text(text)
+    assert True
+    
+@then('I should have the edit form for courses with "{text}" course data in it')
+def step(context, text):
+    element = context.browser.find_elements(By.ID, "id_name")
+    assert element[0].text == text
