@@ -44,9 +44,12 @@ def editcourse(request,idcourse):
             return HttpResponseRedirect('/')
     else:
         form = CourseForm( instance = course)
-        practices = Practice.objects.filter(course_id=idcourse)
+        practices = course.practice_set.all().order_by('deadline')
         table_contents = []
         for practice in practices:
-            table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline }) 
-    #aqui hay que obtener los estudiantes y realizar otra tabla de contenidos...
-    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents}, context_instance=RequestContext(request))
+            table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline })         
+        students = course.student_set.all().order_by('name')
+        table_students = []
+        for student in students:
+            table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
+    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents, 'table_students': table_students, 'coursename': course.name }, context_instance=RequestContext(request))

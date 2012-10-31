@@ -9,7 +9,7 @@ Sistema de Entregas Automatizado Libre
 ###Documento de Estructra del Proyecto
 https://docs.google.com/document/d/1YY_Jznp5lDFYk9idGgZTCeMfGzFR_y2-8w3MYBWQefo/edit
 
-###Storie Maping
+###Storie Mapping
 Story Mapping alumno --> https://seal.toolsforagile.com/workspace/accounts/login/?next=/workspace/
 Username: martin
 Password: seal
@@ -34,7 +34,7 @@ https://docs.google.com/document/d/1bQeja4CuiCoNcPzU6BpyxvOvcqFIc7Vl0KqjqHXjBgI/
 https://travis-ci.org/#!/elcoyaman/seal
 
 ###URL ambiente de testing
-http://ixion-tech.com.ar:8000/admin/
+http://ixion-tech.com.ar:8000/
 
 ###Documento formal para presentacion en la facultad
 https://docs.google.com/document/d/1dBCXFkzwcSSTNkbK1ESLRpfidv5y6DR4kxhkDBYF3S0/edit

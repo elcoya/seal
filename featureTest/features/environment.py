@@ -1,7 +1,6 @@
 from behave import *
 from parse import *
 from selenium import webdriver
-from django.core.exceptions import ObjectDoesNotExist
 
 # The next few steps are required to load the configuration and include the application model for the behavioural tests.
 import ConfigParser, os
@@ -13,7 +12,7 @@ sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module name
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
 # Now we can load our model
-from seal.model.course import Course
+from seal.model import Course, Student, Practice
 
 def before_feature(context, feature):
         context.browser = webdriver.Firefox()
@@ -28,12 +27,3 @@ def after_feature(context, feature):
         #a = context.browser.find_element_by_link_text('Log out')
         #a.click()
         context.browser.close()
-
-def before_step(context, step):
-    if ('exists' in step.name):
-        p = parse('course "{course}" exists', step.name)
-        try:
-            c = Course.objects.get(name=p['course'])
-        except ObjectDoesNotExist:
-            c = Course(name=p['course'])
-            c.save()  

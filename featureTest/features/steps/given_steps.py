@@ -1,6 +1,5 @@
 from behave import *
 from selenium import webdriver
-from django.core.exceptions import ObjectDoesNotExist
 from seal.model import Course, Practice
 from seal.model.student import Student
 from django.template.defaulttags import now
@@ -45,11 +44,22 @@ def step(context):
 
 @given('course "{course}" exists')
 def step(context,course):
-    try:
-        c = Course.objects.get_or_create(name=course)
-    except ObjectDoesNotExist:
-        assert False 
+    c = Course.objects.get_or_create(name=course)
 
+@given('there are no student in "{course}"')
+def step(context, course):
+    c = Course.objects.get(name=course)
+    studnets = c.student_set.all()
+    for student in studnets:
+        student.delete()
+
+@given('there are no practices in course "{course}"')
+def step(context, course):
+    c = Course.objects.get(name=course)
+    practices = c.practice_set.all()
+    for practice in practices:
+        practice.delete()
+        
 @given('practice "{practice_uid}" exists for course "{course_name}"')
 def step(context, practice_uid, course_name):
     exists = Practice.objects.get(uid=practice_uid).exists()
@@ -67,6 +77,6 @@ def step(context, practice_uid, course_name):
             practice.course = course
             practice.save()
 
-@given(u'I am at the new practice form')
+@given('I am at the new practice form')
 def step(context):
     context.browser.get('http://localhost:8000/practices/newpractice')

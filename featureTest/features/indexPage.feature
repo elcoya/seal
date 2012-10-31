@@ -20,5 +20,5 @@ Feature: As a user I want to see the course list on the home page
         Given course "2012-1" exists
           And I am in the index page
          When I click in the "2012-1" link
-         Then I should see "Course edit"
-          And I should have the edit form for courses with "2012-1" course data in it
+         Then I should see "Course 2012-1 edit"
+          And I should have the edit form for courses with "2012-1" course data in it	

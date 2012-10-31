@@ -11,7 +11,7 @@ from django.template.context import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
-    practice_list = Practice.objects.all()
+    practice_list = Practice.objects.all().order_by('-deadline')
     paginator = Paginator(practice_list, 10) # Show 10 practice per page
     page = request.GET.get('page')
     try:

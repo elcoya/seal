@@ -1,6 +1,11 @@
 from behave import *
 from selenium import webdriver 
 
+import ConfigParser
+config = ConfigParser.ConfigParser()
+config.readfp(open('../conf/local.cfg'))
+pathproject = config.get("Path", "path.project")
+
 @when('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
     form = context.browser.find_element_by_tag_name('form')
@@ -37,11 +42,17 @@ def step(context):
 def step(context, text):
     a = context.browser.find_element_by_link_text(text)
     a.click()
+    
+@when(u'I am at the new practice form')
+def step(context):
+    context.browser.get('http://localhost:8000/practices/newpractice')
 
 @when(u'I fill the practice form with uid "{practice_uid}" and default data for course "{course_name}"')
 def step(context, practice_uid, course_name):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('uid').send_keys(practice_uid)
     form.find_element_by_name('course').send_keys(course_name)
-    form.find_element_by_name('file').send_keys('/tmp/selenium_test.pdf')
+    filePath = pathproject + "featureTest/data/pdftest.pdf"
+    print(filePath)
+    form.find_element_by_name('file').send_keys(filePath)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
