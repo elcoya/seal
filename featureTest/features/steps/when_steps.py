@@ -54,7 +54,6 @@ def step(context, practice_uid, course_name):
     form.find_element_by_name('uid').send_keys(practice_uid)
     form.find_element_by_name('course').send_keys(course_name)
     filePath = pathproject + "featureTest/data/pdftest.pdf"
-    print(filePath)
     form.find_element_by_name('file').send_keys(filePath)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
 

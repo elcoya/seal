@@ -3,6 +3,7 @@ from selenium import webdriver
 from seal.model import Course, Practice
 from seal.model.student import Student
 from django.template.defaulttags import now
+import dateutil.parser
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
@@ -66,23 +67,12 @@ def step(context, course):
     for practice in practices:
         practice.delete()
         
-@given('practice "{practice_uid}" exists for course "{course_name}"')
-def step(context, practice_uid, course_name):
-    exists = Practice.objects.get(uid=practice_uid).exists()
-    course = Course.objects.get_or_create(name=course_name)
-    if(not exists):
-        practice = Practice()
-        practice.uid = practice_uid
-        practice.deadline = now
-        practice.file = '/tmp/selenium_test_file.pdf'
-        practice.course = course
-        practice.save()
-    else:
-        practice = Practice.objects.get(uid=practice_uid)
-        if(practice.course is not course):
-            practice.course = course
-            practice.save()
-
+@given('practice "{practice_uid}" exists in course "{course_name}" with deadline "{dead_line}"')
+def step (context, practice_uid, course_name, dead_line):
+    c = Course.objects.get(name=course_name)
+    deadline = dateutil.parser.parse(dead_line)
+    practice = Practice.objects.get_or_create(uid=practice_uid, deadline = deadline, file='test_file.pdf',course=c)
+                
 @given('I am at the new practice form')
 def step(context):
     context.browser.get('http://localhost:8000/practices/newpractice')
