@@ -1,5 +1,6 @@
 from behave import *
 from selenium import webdriver 
+from seal.model.course import Course
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
@@ -62,3 +63,9 @@ def step(context, course1, course2):
     form = context.browser.find_element_by_tag_name('form')
     context.browser.find_element_by_id('id_name').clear()
     form.find_element_by_id('id_name').send_keys(course2)
+    
+@when('I am in the modifier page of course "{course}"')
+def step(context,course):
+    c = Course.objects.get(name=course)
+    addres = 'http://localhost:8000/course/editcourse/'+str(c.pk)
+    context.browser.get(addres)

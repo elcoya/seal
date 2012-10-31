@@ -46,6 +46,12 @@ def step(context):
 def step(context,course):
     c = Course.objects.get_or_create(name=course)
 
+@given('student "{name}" exists in course "{course}"')
+def step(context,name, course):
+    course = Course.objects.get(name=course)
+    student = Student.objects.get_or_create(name=name, uid=name , email='false@gmail')
+    student[0].courses.add(course)
+
 @given('there are no student in "{course}"')
 def step(context, course):
     c = Course.objects.get(name=course)
