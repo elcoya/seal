@@ -45,7 +45,7 @@ def step(context):
 @given('course "{course}" exists')
 def step(context,course):
     try:
-        c = Course.objects.get(name=course)
+        c = Course.objects.get_or_create(name=course)
     except ObjectDoesNotExist:
         assert False 
 
