@@ -6,7 +6,7 @@ Created on 28/10/2012
 from django.http import HttpResponseRedirect
 from seal.forms.course import CourseForm
 from django.shortcuts import render_to_response, render
-from seal.model.course import Course
+from seal.model import Course, Practice
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 
@@ -29,7 +29,24 @@ def newcourse(request):
         form = CourseForm(request.POST)
         if (form.is_valid()):
             form.save()
-            return HttpResponseRedirect('/course')
+            return HttpResponseRedirect('/')
     else:
         form = CourseForm()
     return render(request,'course/newcourse.html',{'form': form,})
+
+def editcourse(request,idcourse):
+    course=Course.objects.get(pk=idcourse)     
+    if (request.method=='POST'):
+        form = CourseForm(request.POST, instance = course)
+        if (form.is_valid()):
+            formEdit = form.save(commit=False)
+            formEdit.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = CourseForm( instance = course)
+        practices = Practice.objects.filter(course_id=idcourse)
+        table_contents = []
+        for practice in practices:
+            table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline }) 
+    #aqui hay que obtener los estudiantes y realizar otra tabla de contenidos...
+    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents}, context_instance=RequestContext(request))

@@ -32,3 +32,9 @@ def step(context):
 def step(context):
     form = context.browser.find_element_by_tag_name('form')
     form.submit()
+    
+@when('I click in the "{text}" link')
+def step(context, text):
+    a = context.browser.find_element_by_link_text(text)
+    a.click()
+

@@ -16,10 +16,10 @@ def step(context, usr, passwd):
     form.find_element_by_name('password').send_keys(passwd)
     form.submit()
 
-@given('I am in the course list page')
+@given('I am in the index page')
 def step(context):
     print(context)
-    context.browser.get('http://localhost:8000/course/')
+    context.browser.get('http://localhost:8000/')
 
 @given('I am in the practice list page')
 def step(context):
@@ -48,4 +48,3 @@ def step(context,course):
         c = Course.objects.get(name=course)
     except ObjectDoesNotExist:
         assert False 
-

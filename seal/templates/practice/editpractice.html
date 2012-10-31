@@ -1,0 +1,14 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+
+<form id='formeditpractice' action='' method='post' enctype="multipart/form-data">
+	{% csrf_token %}
+	<table>
+		EDIT Practice<br><br>
+		{{ form.as_table }}
+	</table>
+	<input type='submit' value='Save' />
+	<div><a href="/" >home</a></div>
+</form>	
+
+{% endblock %}
