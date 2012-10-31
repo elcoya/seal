@@ -56,3 +56,9 @@ def step(context, practice_uid, course_name):
     print(filePath)
     form.find_element_by_name('file').send_keys(filePath)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
+
+@when('I change "{course1}" for "{course2}"')
+def step(context, course1, course2):
+    form = context.browser.find_element_by_tag_name('form')
+    context.browser.find_element_by_id('id_name').clear()
+    form.find_element_by_id('id_name').send_keys(course2)
