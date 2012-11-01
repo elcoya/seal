@@ -3,7 +3,6 @@ from selenium import webdriver
 from seal.model import Course, Practice
 from seal.model.student import Student
 from django.template.defaulttags import now
-import dateutil.parser
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
@@ -70,8 +69,8 @@ def step(context, course):
 @given('practice "{practice_uid}" exists in course "{course_name}" with deadline "{dead_line}"')
 def step (context, practice_uid, course_name, dead_line):
     c = Course.objects.get(name=course_name)
-    deadline = dateutil.parser.parse(dead_line)
-    practice = Practice.objects.get_or_create(uid=practice_uid, deadline = deadline, file='test_file.pdf',course=c)
+    #deadline = dateutil.parser.parse(dead_line)
+    practice = Practice.objects.get_or_create(uid=practice_uid, deadline = dead_line, file='test_file.pdf',course=c)
                 
 @given('I am at the new practice form')
 def step(context):
