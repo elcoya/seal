@@ -51,7 +51,7 @@
 		<tbody>
 		{% for student in table_students %}
 		    <tr>
-		    	<td style="width: 33%; text-align: center; " ><a href=/students/editstudent/{{dict.pk}}>{{ student.uid }}</a></td>
+		    	<td style="width: 33%; text-align: center; " ><a href=/students/editstudent/{{student.pk}}>{{ student.uid }}</a></td>
 		    	<td style="width: 33%; text-align: center; ">{{ student.name }}</td>
 		    	<td style="width: 33%; text-align: center; ">{{ student.email }}</td>
 		    </tr>

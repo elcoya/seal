@@ -20,6 +20,7 @@ urlpatterns += patterns('view.practice',
 urlpatterns += patterns('view.student',
     url(r'^students/?$', 'index'),
     url(r'^students/newstudent/?$', 'newstudent'),
+    url(r'^students/editstudent/(?P<idstudent>\d+)$', 'editstudent'),
 )
 
 urlpatterns += patterns('view.course',

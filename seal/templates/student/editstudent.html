@@ -1,0 +1,14 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+
+<form id='formeditstudent' action='' method='post'>
+	{% csrf_token %}
+	<table>
+		EDIT Student<br><br>
+		{{ form.as_table }}
+	</table>
+	<input type='submit' value='Save' />
+	<div><a href="/" >home</a></div>
+</form>	
+
+{% endblock %}

@@ -27,3 +27,8 @@ def after_feature(context, feature):
         #a = context.browser.find_element_by_link_text('Log out')
         #a.click()
         context.browser.close()
+        
+def after_all(context):
+        Practice.objects.all().delete()
+        Student.objects.all().delete()
+        Course.objects.all().delete()

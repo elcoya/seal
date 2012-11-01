@@ -1,15 +1,15 @@
 Feature: As a user I want to see the course list on the home page
 
+    Scenario: Index page shows course list empty
+        Given there are no courses
+          And I am in the index page
+         Then I should see "There are yet no courses"
+    
     Scenario: Index page shows course list ordered
        Given course "2012-1" exists
          And course "2011-1" exists
          And I am in the index page
         Then I should see "2012-1" before "2011-1" 
-    
-    Scenario: Index page shows course list empty
-        Given there are no courses
-          And I am in the index page
-         Then I should see "There are yet no courses"
     
     Scenario: Index page course list links to edit courses
         Given course "2012-1" exists
