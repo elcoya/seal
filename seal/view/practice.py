@@ -51,4 +51,4 @@ def editpractice(request, idcourse ,idpractice):
             return HttpResponseRedirect(pathok)
     else:
         form = PracticeForm( instance = practice)
-    return render(request,'practice/editpractice.html',{'form': form,}, context_instance=RequestContext(request))
+    return render(request,'practice/editpractice.html',{'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))

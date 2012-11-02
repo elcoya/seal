@@ -33,4 +33,4 @@ def editstudent(request, idcourse ,idstudent):
             return HttpResponseRedirect(pathok)
     else:
         form = StudentForm( instance = student)
-    return render(request,'student/editstudent.html',{'form': form,}, context_instance=RequestContext(request))
+    return render(request,'student/editstudent.html',{'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
