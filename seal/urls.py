@@ -12,15 +12,15 @@ urlpatterns = patterns('view.home',
 
 urlpatterns += patterns('view.practice',
     url(r'^practices/?$', 'index'),
-    url(r'^practices/newpractice/?$', 'newpractice'),
-    url(r'^practices/editpractice/(?P<idpractice>\d+)$', 'editpractice'),
+    url(r'^practices/newpractice/(?P<idcourse>\d+)$', 'newpractice'),
+    url(r'^practices/editpractice/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'editpractice'),
 )
 
 #Student views: list, create, delete, etc
 urlpatterns += patterns('view.student',
     url(r'^students/?$', 'index'),
-    url(r'^students/newstudent/?$', 'newstudent'),
-    url(r'^students/editstudent/(?P<idstudent>\d+)$', 'editstudent'),
+    url(r'^students/newstudent/(?P<idcourse>\d+)$', 'newstudent'),
+    url(r'^students/editstudent/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
 )
 
 urlpatterns += patterns('view.course',

@@ -9,5 +9,4 @@ Feature: As a teacher I want to modifier a student
           And I click in the "Martin" link 
           And I change "Martin" for "Martin Mauro" in element whith id "id_name"
           And I submit the form
-          And I click in the "2012-1" link
          Then I should see "Martin Mauro"

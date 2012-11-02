@@ -12,23 +12,25 @@ from seal.forms.student import StudentForm, Student
 def index(request):
     return render_to_response('student/index.html', context_instance=RequestContext(request))
 
-def newstudent(request):
+def newstudent(request, idcourse):
     if (request.method == 'POST'):
         form = StudentForm(request.POST)
         if (form.is_valid()):
             form.save()
-            return render_to_response('student/student-save-success.html', context_instance=RequestContext(request))
+            pathok="/course/editcourse/"+str(idcourse)
+            return HttpResponseRedirect(pathok)
     else:
         form = StudentForm()
-    return render(request, 'student/new-student.html', {'form': form,}, context_instance=RequestContext(request))
+    return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
-def editstudent(request, idstudent):
+def editstudent(request, idcourse ,idstudent):
     student=Student.objects.get(pk=idstudent)     
     if (request.method=='POST'):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
             form.save()
-            return HttpResponseRedirect('/')
+            pathok="/course/editcourse/"+str(idcourse)
+            return HttpResponseRedirect(pathok)
     else:
         form = StudentForm( instance = student)
     return render(request,'student/editstudent.html',{'form': form,}, context_instance=RequestContext(request))

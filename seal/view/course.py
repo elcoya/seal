@@ -52,4 +52,4 @@ def editcourse(request,idcourse):
         table_students = []
         for student in students:
             table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
-    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents, 'table_students': table_students, 'coursename': course.name }, context_instance=RequestContext(request))
+    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents, 'table_students': table_students, 'coursename': course.name, 'idcourse': course.pk }, context_instance=RequestContext(request))

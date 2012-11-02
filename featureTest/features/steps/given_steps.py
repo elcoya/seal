@@ -72,6 +72,8 @@ def step (context, practice_uid, course_name, dead_line):
     #deadline = dateutil.parser.parse(dead_line)
     practice = Practice.objects.get_or_create(uid=practice_uid, deadline = dead_line, file='test_file.pdf',course=c)
                 
-@given('I am at the new practice form')
-def step(context):
-    context.browser.get('http://localhost:8000/practices/newpractice')
+@given('I am at the new practice form for course "{namecourse}"')
+def step(context,namecourse):
+    c = Course.objects.get(name=namecourse)
+    path = "http://localhost:8000/practices/newpractice/"+str(c.pk)
+    context.browser.get(path)

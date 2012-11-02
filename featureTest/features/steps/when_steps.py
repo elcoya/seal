@@ -6,6 +6,7 @@ import ConfigParser
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))
 pathproject = config.get("Path", "path.project")
+filePath = pathproject + "featureTest/data/pdftest.pdf"
 
 @when('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
@@ -33,7 +34,8 @@ def step(context):
     form.find_element_by_name('name').send_keys('Dummy Student')
     form.find_element_by_name('uid').send_keys('00000')
     form.find_element_by_name('email').send_keys('dummy@foo.foo')
-
+    form.find_element_by_name('courses').send_keys('2012-1')
+    
 @when('I submit the form')
 def step(context):
     form = context.browser.find_element_by_tag_name('form')
@@ -53,7 +55,6 @@ def step(context, practice_uid, course_name):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('uid').send_keys(practice_uid)
     form.find_element_by_name('course').send_keys(course_name)
-    filePath = pathproject + "featureTest/data/pdftest.pdf"
     form.find_element_by_name('file').send_keys(filePath)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
 

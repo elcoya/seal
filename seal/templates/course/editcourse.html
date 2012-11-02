@@ -15,7 +15,7 @@
 </form>
 <div style="width: 800px; margin: auto; padding: 15px 0; clear: both;" >
 	<div style="clear: none; width: 50%; float: left;">Practices</div>
-	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/practices/newpractice" >New Practice</a></div>
+	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/practices/newpractice/{{ idcourse }}" >New Practice</a></div>
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
 			<tr>
@@ -27,7 +27,7 @@
 		<tbody>
 		{% for dict in table_contents %}
 		    <tr>
-		    	<td style="width: 33%; text-align: center; " ><a href=/practices/editpractice/{{dict.pk}}>{{ dict.uid }}</a></td>
+		    	<td style="width: 33%; text-align: center; " ><a href="/practices/editpractice/{{ idcourse }}/{{dict.pk}}">{{ dict.uid }}</a></td>
 		    	<td style="width: 33%; text-align: center; ">{{ dict.deadline }}</td>
 		    	<td style="width: 33%; text-align: center; ">nose</td>
 		    </tr>
@@ -38,7 +38,7 @@
 	</table>
 	<br><br>
 	<div style="clear: none; width: 50%; float: left;">Students</div>
-	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/students/newstudent" >New Student</a></div>
+	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/students/newstudent/{{ idcourse }}" >New Student</a></div>
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
 			<tr>
@@ -51,7 +51,7 @@
 		<tbody>
 		{% for student in table_students %}
 		    <tr>
-		    	<td style="width: 33%; text-align: center; " ><a href=/students/editstudent/{{student.pk}}>{{ student.uid }}</a></td>
+		    	<td style="width: 33%; text-align: center; " ><a href="/students/editstudent/{{ idcourse }}/{{student.pk}}">{{ student.uid }}</a></td>
 		    	<td style="width: 33%; text-align: center; ">{{ student.name }}</td>
 		    	<td style="width: 33%; text-align: center; ">{{ student.email }}</td>
 		    </tr>
