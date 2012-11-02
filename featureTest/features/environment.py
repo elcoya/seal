@@ -34,6 +34,3 @@ def after_feature(context, feature):
         Student.objects.all().delete()
         Course.objects.all().delete()
         context.browser.close()
-
-def after_all(context): 
-        #se podrían eliminar los archivos subidos de tp y en un futuor de las entregas     
