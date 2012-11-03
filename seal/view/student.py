@@ -20,7 +20,7 @@ def newstudent(request, idcourse):
             pathok="/course/editcourse/"+str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
-        form = StudentForm()
+        form = StudentForm(initial={'courses': [idcourse]})
     return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
 def editstudent(request, idcourse ,idstudent):
