@@ -34,7 +34,7 @@ def newpractice(request, idcourse):
             pathok="/course/editcourse/"+str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
-        form = PracticeForm()
+        form = PracticeForm(initial={'course': idcourse})
     return render(request,'practice/uploadpractice.html',{'form': form, 'idcourse':idcourse})
 
 
@@ -42,7 +42,7 @@ def editpractice(request, idcourse ,idpractice):
     practice=Practice.objects.get(pk=idpractice)     
     if (request.method=='POST'):
         form = PracticeForm(request.POST, request.FILES, instance = practice)
-        for filename in request.FILES.iteritems():
+        for filename, file in request.FILES.iteritems():
             ext = request.FILES[filename].content_type
         if (form.is_valid() and ext == "application/pdf"):
             formEdit = form.save(commit=False)
