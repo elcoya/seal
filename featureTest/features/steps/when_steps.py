@@ -1,6 +1,6 @@
 from behave import *
 from selenium import webdriver 
-from seal.model.course import Course
+from seal.model import Course, Student
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
@@ -27,6 +27,12 @@ def step(context, loginData):
 def step(context):
     a = context.browser.find_element_by_link_text('Courses')
     a.click()
+
+@when('I enter in the "{idstudent}" home page')
+def step(context, idstudent):
+    student = Student.objects.get(uid=idstudent)
+    url="http://localhost:8000/students/home/"+str(student.pk)
+    context.browser.get(url)
 
 @when('I fill the newstudent form with default data')
 def step(context):

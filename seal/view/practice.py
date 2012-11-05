@@ -3,7 +3,7 @@ Created on 23/10/2012
 
 @author: martin
 '''
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from seal.forms.practice import PracticeForm
 from django.shortcuts import render, render_to_response
 from seal.model.practice import Practice
@@ -25,30 +25,37 @@ def index(request):
     return render_to_response('practice/index.html', {"practices": practices}, context_instance=RequestContext(request))
 
 def newpractice(request, idcourse):
-    if (request.method=='POST'):
+    if (request.method == 'POST'):
         form = PracticeForm(request.POST, request.FILES)
         for filename, file in request.FILES.iteritems():
             ext = request.FILES[filename].content_type
         if (form.is_valid() and ext == "application/pdf"):
             form.save()
-            pathok="/course/editcourse/"+str(idcourse)
+            pathok = "/course/editcourse/" + str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
         form = PracticeForm(initial={'course': idcourse})
-    return render(request,'practice/uploadpractice.html',{'form': form, 'idcourse':idcourse})
+    return render(request, 'practice/uploadpractice.html', {'form': form, 'idcourse':idcourse})
 
 
-def editpractice(request, idcourse ,idpractice):
-    practice=Practice.objects.get(pk=idpractice)     
-    if (request.method=='POST'):
-        form = PracticeForm(request.POST, request.FILES, instance = practice)
+def editpractice(request, idcourse , idpractice):
+    practice = Practice.objects.get(pk=idpractice)     
+    if (request.method == 'POST'):
+        form = PracticeForm(request.POST, request.FILES, instance=practice)
         for filename, file in request.FILES.iteritems():
             ext = request.FILES[filename].content_type
         if (form.is_valid() and ext == "application/pdf"):
             formEdit = form.save(commit=False)
             formEdit.save()
-            pathok="/course/editcourse/"+str(idcourse)
+            pathok = "/course/editcourse/" + str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
-        form = PracticeForm( instance = practice)
-    return render(request,'practice/editpractice.html',{'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
+        form = PracticeForm(instance=practice)
+    return render(request, 'practice/editpractice.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
+
+def download(request, idpractice):
+    practice = Practice.objects.get(pk=idpractice)
+    filename = practice.file.name.split('/')[-1]
+    response = HttpResponse(practice.file, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
