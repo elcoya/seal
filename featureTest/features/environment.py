@@ -16,7 +16,7 @@ pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
 
 # Now we can load our model
-from seal.model import Course, Student, Practice
+from seal.model import Course, Student, Practice, Delivery
 
 def before_feature(context, feature):
         context.browser = webdriver.Firefox()
@@ -30,6 +30,7 @@ def before_feature(context, feature):
 def after_feature(context, feature):
         #a = context.browser.find_element_by_link_text('Log out')
         #a.click()
+        Delivery.objects.all().delete()
         Practice.objects.all().delete()
         Student.objects.all().delete()
         Course.objects.all().delete()

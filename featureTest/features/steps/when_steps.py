@@ -1,12 +1,13 @@
 from behave import *
 from selenium import webdriver 
-from seal.model import Course, Student
+from seal.model import Course, Student, Practice
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))
 pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
+deliveryPath = pathproject + "featureTest/data/delivery.zip"
 
 @when('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
@@ -64,6 +65,18 @@ def step(context, practice_uid, course_name):
     form.find_element_by_name('file').send_keys(filePath)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
 
+@when('I fill the delivery form with default data')
+def step(context):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('file').send_keys(deliveryPath)
+
+@when('I am in the upload page of student "{student}" and practice "{practice}"')
+def step(context,student,practice):
+    p = Practice.objects.get(uid=practice)
+    s = Student.objects.get(name=student)
+    addres = 'http://localhost:8000/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
+    context.browser.get(addres)
+      
 @when('I change "{course1}" for "{course2}" in element whith id "{idelement}"')
 def step(context, course1, course2, idelement):
     form = context.browser.find_element_by_tag_name('form')
@@ -74,4 +87,11 @@ def step(context, course1, course2, idelement):
 def step(context,course):
     c = Course.objects.get(name=course)
     addres = 'http://localhost:8000/course/editcourse/'+str(c.pk)
+    context.browser.get(addres)
+    
+@when('I am in the delivery page of student "{student}" and practice "{practice}"')
+def step(context,student,practice):
+    s = Student.objects.get(uid=student)
+    p = Practice.objects.get(uid=practice)
+    addres = 'http://localhost:8000/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
     context.browser.get(addres)

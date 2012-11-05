@@ -1,6 +1,6 @@
 from behave import *
 from selenium import webdriver
-from seal.model import Course, Practice
+from seal.model import Course, Practice, Delivery
 from seal.model.student import Student
 from django.template.defaulttags import now
 
@@ -89,3 +89,9 @@ def step(context,namecourse):
     c = Course.objects.get(name=namecourse)
     path = "http://localhost:8000/practices/newpractice/"+str(c.pk)
     context.browser.get(path)
+
+@given('exist delivery of "{practice}" from student "{student}" whit dalivery date "{deliveryDate}"')
+def step(context,practice,student,deliveryDate):
+    s = Student.objects.get(name=student)
+    p = Practice.objects.get(uid=practice)
+    Delivery.objects.get_or_create(file="archivo.zip",student_id=s.pk,practice_id=p.pk, deliverDate=deliveryDate)

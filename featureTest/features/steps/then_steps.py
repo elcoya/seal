@@ -1,16 +1,17 @@
 from behave import *
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
+from seal.model import Student, Practice, Delivery
 
-@then('I should see "{course1}" before "{course2}"')
-def step(context, course1, course2):
+@then('I should see "{text1}" before "{text2}"')
+def step(context, text1, text2):
     trs = context.browser.find_elements(By.TAG_NAME, "tr")
     match_course_1 = False
     match_course_2 = False
     for tr in trs:
-        if(course1 in tr.text):
+        if(text1 in tr.text):
             match_course_1 = not match_course_2 # if 2 has already match, then is wrong
-        elif(course2 in tr.text):
+        elif(text2 in tr.text):
             match_course_2 = match_course_1 # if 1 hasn't match yet, then is wrong
     assert match_course_1 and match_course_2
 
@@ -44,3 +45,8 @@ def step(context, text):
     print element
     print element.get_attribute('value')
     assert element.get_attribute('value') == text
+
+@then('I should see the delivery in the list')
+def step(context):
+    body = context.browser.find_element_by_tag_name('body')
+    assert "More Info" in body.text

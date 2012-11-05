@@ -9,6 +9,10 @@ urlpatterns = patterns('view.home',
     url(r'^/?$', 'index'),
 )
 
+urlpatterns += patterns('view.delivery',
+    url(r'^delivery/newdelivery/(?P<idpractice>\d+)/(?P<idstudent>\d+)?/$', 'newdelivery'),
+)
+
 urlpatterns += patterns('view.practice',
     url(r'^practices/?$', 'index'),
     url(r'^practices/newpractice/(?P<idcourse>\d+)$', 'newpractice'),
