@@ -1,7 +1,7 @@
 Feature: As a teacher I want to modifier a student
 
  	Scenario: Index page follow link to edit course, edit student and modifier the name of the student
- 		Given there are no students      
+	  	Given user "Martin" is registered
           And course "2012-1" exists
           And student "Martin" exists in course "2012-1"
           And I am in the index page

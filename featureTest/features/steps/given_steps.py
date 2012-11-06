@@ -3,6 +3,9 @@ from selenium import webdriver
 from seal.model import Course, Practice
 from seal.model.student import Student
 from django.template.defaulttags import now
+from django.contrib.auth.models import User
+
+
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
@@ -49,8 +52,14 @@ def step(context,course):
 @given('student "{name}" exists in course "{course}"')
 def step(context,name, course):
     course = Course.objects.get(name=course)
-    student = Student.objects.get_or_create(name=name, uid=name , email='false@gmail.com')
-    student[0].courses.add(course)
+    student = Student.objects.get(name=name)
+    student.courses.add(course)
+
+@given('student "{name}" does not exist in course "{course}"')
+def step(context,name, course):
+    course = Course.objects.get(name=course)
+    if(course.student_set.filter(uid=name).exists()):
+        course.student_set.remove(uid=name)
 
 @given('there are no student in "{course}"')
 def step(context, course):
@@ -77,3 +86,31 @@ def step(context,namecourse):
     c = Course.objects.get(name=namecourse)
     path = "http://localhost:8000/practices/newpractice/"+str(c.pk)
     context.browser.get(path)
+
+@given('I am not logged in')
+def step(context):
+    assert True
+
+@given('user "{uid}" is not registered')
+def step(context, uid):
+    if(Student.objects.filter(uid=uid).exists()):
+        student = Student.objects.get(uid=uid)
+        student.user.delete()
+        student.delete()
+
+@given('user "{uid}" is registered')
+def step(context, uid):
+    if(not(Student.objects.filter(uid=uid).exists())):
+        if(User.objects.filter(username=uid).exists()):
+            User.objects.get(username=uid).delete()
+        user = User()
+        user.username = uid
+        user.set_password("seal")
+        user.email = "foo@foo.foo"
+        user.save()
+        student = Student()
+        student.user = user
+        student.name = uid
+        student.uid = uid
+        student.email = "foo@foo.foo"
+        student.save()

@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('view.home',
     #(r'^$', 'direct_to_template', {'template': 'index.html'}),
     url(r'^/?$', 'index'),
+    url(r'^registration/?$', 'register')
 )
 
 urlpatterns += patterns('view.practice',
@@ -21,6 +22,11 @@ urlpatterns += patterns('view.student',
     url(r'^students/?$', 'index'),
     url(r'^students/newstudent/(?P<idcourse>\d+)$', 'newstudent'),
     url(r'^students/editstudent/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
+)
+
+#Student site: home, list assignments, deliver assignment, etc
+urlpatterns += patterns('view.user.student',
+    url(r'^student/?$', 'index'),
 )
 
 urlpatterns += patterns('view.course',

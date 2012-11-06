@@ -69,3 +69,12 @@ def step(context,course):
     c = Course.objects.get(name=course)
     addres = 'http://localhost:8000/course/editcourse/'+str(c.pk)
     context.browser.get(addres)
+
+@when('I fill in the registration form with user "{uid}"')
+def step(context, uid):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('name').send_keys(uid)
+    form.find_element_by_name('uid').send_keys(uid)
+    form.find_element_by_name('passwd').send_keys('seal')
+    form.find_element_by_name('email').send_keys('foo@foo.foo')
+

@@ -19,6 +19,11 @@ def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
     assert text in body.text
 
+@then('I should not see "{text}"')
+def step(context, text):
+    body = context.browser.find_element_by_tag_name('body')
+    assert text not in body.text
+
 @then('I enter in the page with this title "{text}"')
 def step(context, text):
     titlebrowser = context.browser.title 
