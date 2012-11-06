@@ -13,6 +13,7 @@ urlpatterns = patterns('view.home',
 urlpatterns += patterns('view.delivery',
     url(r'^delivery/newdelivery/(?P<idpractice>\d+)/(?P<idstudent>\d+)?/$', 'newdelivery'),
     url(r'^delivery/listdelivery/(?P<idpractice>\d+)/$', 'listdelivery'),
+    url(r'^delivery/download/(?P<iddelivery>\d+)/$', 'download'),
 )
 
 urlpatterns += patterns('view.practice',
