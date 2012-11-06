@@ -2,7 +2,7 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
 
  	Scenario: No Course Enrolled
  		Given course "2012-1" exists
- 		  And exist student "Martin" without course
+ 		  And student "Martin" exists without course
  		 When I enter in the "Martin" home page
  		 Then I should see "Courses where are you enrolled"
  
