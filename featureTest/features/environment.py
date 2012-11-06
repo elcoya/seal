@@ -16,7 +16,7 @@ pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
 
 # Now we can load our model
-from seal.model import Course, Student, Practice
+from seal.model import Course, Student, Practice, Delivery
 from django.contrib.auth.models import User
 
 def before_feature(context, feature):

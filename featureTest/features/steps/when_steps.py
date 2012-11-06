@@ -103,3 +103,9 @@ def step(context,student,practice):
     p = Practice.objects.get(uid=practice)
     addres = 'http://localhost:8000/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
     context.browser.get(addres)
+
+@when('I am in the list page of delivery from "{practice}"')
+def step(context,practice):
+    p = Practice.objects.get(uid=practice)
+    addres = 'http://localhost:8000/delivery/listdelivery/'+str(p.pk)
+    context.browser.get(addres)

@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<body>
+	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
+		<div style="clear: none; width: 50%; float: left;">
+			Deliveries of practice {{ practicename }} <br><br>
+		</div>
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr>
+					<td>Uid</td>
+					<td>Student Uid</td>
+					<td>Student Name</td>
+					<td>Deliver Date</td>
+					<td></td>				
+				</tr>
+			</thead>
+			<tbody>
+				{% for delivery in deliveries %}
+				<tr>
+					<td style="width: 20%; text-align: center; " >{{ delivery.pk }}</td>
+					<td style="width: 20%; text-align: center; ">{{ delivery.student.uid }}</td>
+					<td style="width: 20%; text-align: center; ">{{ delivery.student.name }}</td>					
+					<td style="width: 20%; text-align: center; ">{{ delivery.deliverDate }}</td>
+					<td style="width: 20%; text-align: center; "><a href="/delivery/download/{{ delivery.pk}}">Download</a></td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="4" style="text-align: center; ">There are yet no Delivery</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+<footer><a href="/" >home</a> | <a href="/course/editcourse/{{ idcourse }}">back</a></footer>
+</body>
+{% endblock %}

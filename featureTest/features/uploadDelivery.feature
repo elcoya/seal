@@ -2,6 +2,7 @@ Feature: As a student I want to upload a delivery
 
 	 Scenario: Upload Delivery
 	 	Given course "2012-1" exists 
+	 	  And user "Martin" is registered
 	 	  And student "Martin" exists in course "2012-1"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
          When I am in the upload page of student "Martin" and practice "TP Intro"

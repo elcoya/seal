@@ -17,6 +17,7 @@ Feature: As a user I want to see the practice list
     Scenario: List Delivery of Practices from home student
     	Given course "2012-1" exists
     	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
+    	  And user "Martin" is registered
     	  And student "Martin" exists in course "2012-1"
     	 when I am in the delivery page of student "Martin" and practice "TP INTRO"
     	 Then I should see "There are yet no Delivery from this practice"

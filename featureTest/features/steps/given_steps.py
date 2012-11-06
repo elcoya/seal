@@ -45,6 +45,10 @@ def step(context):
 def step(context):
     Student.objects.all().delete()
 
+@given('there are no deliveries')
+def step(context):
+    Delivery.objects.all().delete()
+
 @given('course "{course}" exists')
 def step(context,course):
     c = Course.objects.get_or_create(name=course)
@@ -53,9 +57,9 @@ def step(context,course):
 def step(context,name, course1, course2):
     course1 = Course.objects.get(name=course1)
     course2 = Course.objects.get(name=course2)
-    student = Student.objects.get_or_create(name=name, uid=name , email='false@gmail.com')
-    student[0].courses.add(course1)
-    student[0].courses.add(course2)
+    student = Student.objects.get(name=name)
+    student.courses.add(course1)
+    student.courses.add(course2)
 
 @given('student "{name}" exists in course "{course}"')
 def step(context,name, course):
@@ -90,7 +94,6 @@ def step(context, course):
 @given('practice "{practice_uid}" exists in course "{course_name}" with deadline "{dead_line}"')
 def step (context, practice_uid, course_name, dead_line):
     c = Course.objects.get(name=course_name)
-    #deadline = dateutil.parser.parse(dead_line)
     practice = Practice.objects.get_or_create(uid=practice_uid, deadline = dead_line, file='test_file.pdf',course=c)
                 
 @given('I am at the new practice form for course "{namecourse}"')

@@ -29,7 +29,7 @@
 		    <tr>
 		    	<td style="width: 33%; text-align: center; " ><a href="/practices/editpractice/{{ idcourse }}/{{dict.pk}}">{{ dict.uid }}</a></td>
 		    	<td style="width: 33%; text-align: center; ">{{ dict.deadline }}</td>
-		    	<td style="width: 33%; text-align: center; ">{{ dict.ndeliveries }}</td>
+		    	<td style="width: 33%; text-align: center; "><a href="/delivery/listdelivery/{{dict.pk}}">{{ dict.ndeliveries }}</a></td>
 		    </tr>
 		{% empty %}
 		    <tr><td colspan="4" style="text-align: center; ">There are yet no Practices</td></tr>

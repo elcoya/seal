@@ -20,3 +20,8 @@ def newdelivery(request, idpractice, idstudent):
     else:
         form = DeliveryForm()
     return render(request, 'delivery/uploaddelivery.html', {'form': form, 'idstudent' : idstudent, 'idcourse' : practice.course_id, 'namepractice':practice.uid, 'deliveries': deliveries })
+
+def listdelivery(request, idpractice):
+    practice = Practice.objects.get(pk=idpractice)
+    deliveries = Delivery.objects.filter(practice=practice).order_by('deliverDate')
+    return render(request, 'delivery/listdelivery.html', {'deliveries': deliveries , 'practicename': practice.uid, 'idcourse': practice.course_id })
