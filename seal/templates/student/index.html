@@ -1,17 +1,40 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_static %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
-
-{% block bodyclass %}dashboard{% endblock %}
 {% block content %}
-<div>
-	<div>Students Home</div>
-	{% csrf_token %}
-	<div>
-		<ul>
-			<li><a href="/students/newstudent" >New Student</a></li>
-		</ul>
+<body>
+	<div style="width: 800px; text-align: left; margin: auto;">
+		<div>Studnet List</div>
+		<div>
+			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
+				<div style="clear: none; width: 50%; float: left;">Current Students</div>
+			</div>
+				<table style="width: 100%;">
+					<tbody>
+					{% for student in students %}
+					    <tr><td><a href="/students/home/{{student.pk}}">{{ student.name }}</a></td></tr>
+					{% empty %}
+					    <tr><td>0 student</td></tr>
+					{% endfor %}
+					</tbody>
+					{% if students|length > 0 %}
+						<tfoot style="text-align: center;"><tr>
+						    <td class="pagination">
+						    		<a href="?page=1">first</a>
+						        {% if students.has_previous %}
+							            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+						        {% endif %}
+						        <span class="current">
+						            Page {{ students.number }} of {{ students.paginator.num_pages }}.
+						        </span>
+						        {% if students.has_next %}
+							            <a href="?page={{ contacts.next_page_number }}">next</a>
+						        {% endif %}
+						        	<a href="?page={{ courses.paginator.num_pages }}">last</a>
+						    </td>
+						</tr></tfoot>
+					{% endif %}
+				</table>
+		</div>
+		<footer><a href="/" >home</a> </footer>
 	</div>
-	<footer><a href="/" >home</a></footer>
-</div>
+</body>
 {% endblock %}

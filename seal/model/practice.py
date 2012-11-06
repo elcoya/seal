@@ -10,4 +10,4 @@ class Practice(models.Model):
     file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/Practice_Files/")
     deadline = models.DateField()
     def __str__(self):
-        return (str(self.uid)+"/"+self.course.name)
+        return (str(self.uid))

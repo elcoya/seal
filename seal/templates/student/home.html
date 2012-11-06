@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<body>
+	<div style="width: 800px; text-align: left; margin: auto;">
+		<div>
+			Student Home - Welcome {{ studentname }}<br><br>
+		</div>
+		<div>
+			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
+				<div style="clear: none; width: 50%; float: left;">
+					Courses where are you enrolled
+				</div>
+			</div>
+			<table style="width: 100%;">
+				{% for course in courses %}
+				<tr>
+					<td style="width: 33%; text-align: center;"><a href="/students/practicelist/{{course.pk}}/{{idstudent}}">{{ course.name }}</a></td>	
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="4" style="text-align: center; ">There are yet no courses where are you enrolled</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</body>
+{% endblock %}

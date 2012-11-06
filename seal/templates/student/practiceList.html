@@ -1,0 +1,40 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<body>
+	<div style="width: 100%; text-align: left; margin: auto;">
+		<div>
+			Practices - Course {{ coursename }}
+		</div>
+	</div>
+	<table style="width: 100%">
+		<thead style="text-align: center; ">
+			<tr>
+				<td>Uid</td>
+				<td>Dead Line</td>
+				<td></td>
+				<td></td>
+				<td>State</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for practice in practices %}
+			<tr>
+				<td style="width: 20%; text-align: center; " >{{ practice.uid }}</td>
+				<td style="width: 20%; text-align: center; ">{{ practice.deadline }}</td>
+				<td style="width: 20%; text-align: center; "><a href="/practices/download/{{ practice.pk}}">Download</a></td>
+				<td style="width: 20%; text-align: center; "><a href="/delivery/newdelivery/{{ practice.pk}}/{{idstudent}}">Delivery</a></td>
+				
+				<td style="width: 20%; text-align: center; "><a href="#">Info Correccion</a></td>
+			</tr>
+			{% empty %}
+			<tr>
+				<td colspan="4" style="text-align: center; ">There are yet no Practices</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<footer>
+		<a href="/students/home/{{ idstudent }}" >Home</a>
+	</footer>
+</body>
+{% endblock %}

@@ -6,7 +6,7 @@ Created on 28/10/2012
 from django.http import HttpResponseRedirect
 from seal.forms.course import CourseForm
 from django.shortcuts import render_to_response, render
-from seal.model import Course, Practice
+from seal.model import Course, Delivery
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 
@@ -47,7 +47,8 @@ def editcourse(request,idcourse):
         practices = course.practice_set.all().order_by('deadline')
         table_contents = []
         for practice in practices:
-            table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline })         
+            ndeliveries = Delivery.objects.filter(practice=practice.pk).count()
+            table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 'ndeliveries':  ndeliveries})         
         students = course.student_set.all().order_by('name')
         table_students = []
         for student in students:

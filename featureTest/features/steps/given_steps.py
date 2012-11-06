@@ -1,6 +1,6 @@
 from behave import *
 from selenium import webdriver
-from seal.model import Course, Practice
+from seal.model import Course, Practice, Delivery
 from seal.model.student import Student
 from django.template.defaulttags import now
 from django.contrib.auth.models import User
@@ -49,6 +49,14 @@ def step(context):
 def step(context,course):
     c = Course.objects.get_or_create(name=course)
 
+@given('student "{name}" exists in course "{course1}" and in course "{course2}"')
+def step(context,name, course1, course2):
+    course1 = Course.objects.get(name=course1)
+    course2 = Course.objects.get(name=course2)
+    student = Student.objects.get_or_create(name=name, uid=name , email='false@gmail.com')
+    student[0].courses.add(course1)
+    student[0].courses.add(course2)
+
 @given('student "{name}" exists in course "{course}"')
 def step(context,name, course):
     course = Course.objects.get(name=course)
@@ -60,6 +68,10 @@ def step(context,name, course):
     course = Course.objects.get(name=course)
     if(course.student_set.filter(uid=name).exists()):
         course.student_set.remove(uid=name)
+
+@given('exist student "{name}" without course')
+def step(context,name):
+    student = Student.objects.get_or_create(name=name, uid=name , email='false@gmail.com')
 
 @given('there are no student in "{course}"')
 def step(context, course):
@@ -114,3 +126,9 @@ def step(context, uid):
         student.uid = uid
         student.email = "foo@foo.foo"
         student.save()
+
+@given('exist delivery of "{practice}" from student "{student}" whit dalivery date "{deliveryDate}"')
+def step(context,practice,student,deliveryDate):
+    s = Student.objects.get(name=student)
+    p = Practice.objects.get(uid=practice)
+    Delivery.objects.get_or_create(file="archivo.zip",student_id=s.pk,practice_id=p.pk, deliverDate=deliveryDate)
