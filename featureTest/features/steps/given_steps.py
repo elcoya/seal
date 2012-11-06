@@ -73,9 +73,22 @@ def step(context,name, course):
     if(course.student_set.filter(uid=name).exists()):
         course.student_set.remove(uid=name)
 
-@given('exist student "{name}" without course')
+@given('student "{name}" exists without course')
 def step(context,name):
-    student = Student.objects.get_or_create(name=name, uid=name , email='false@gmail.com')
+    if(Student.objects.filter(uid=name).exists()):
+        student = Student.objects.get(uid=name)
+    else:
+        user = User()
+        user.username = name
+        user.set_password("seal")
+        user.email = "foo@foo.foo"
+        user.save()
+        student = Student()
+        student.user = user
+        student.name = name
+        student.uid = name
+        student.email = name + "@foo.foo"
+        student.save()
 
 @given('there are no student in "{course}"')
 def step(context, course):
