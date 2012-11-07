@@ -124,3 +124,11 @@ def step(context, coment1, coment2, note):
     form.find_element_by_id('id_publicComent').send_keys(coment1)
     form.find_element_by_id('id_privateComent').send_keys(coment2)
     form.find_element_by_name('note').send_keys(note)
+
+@when('I am in the correction consult page of delivery from student "{student}" and practice "{practice}"')
+def step(context,student,practice):
+    s = Student.objects.get(uid=student)
+    p = Practice.objects.get(uid=practice)
+    d = Delivery.objects.get(student=s, practice=p)
+    addres = 'http://localhost:8000/correction/consult/'+str(d.pk)
+    context.browser.get(addres)

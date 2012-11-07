@@ -15,16 +15,17 @@ def step(context, text1, text2):
             match_course_2 = match_course_1 # if 1 hasn't match yet, then is wrong
     assert match_course_1 and match_course_2
 
+@then('I should see "{text1}" and "{text2}"')
+def step(context, text1, text2):
+    body = context.browser.find_element_by_tag_name('body')
+    assert text1 in body.text
+    assert text2 in body.text
+
 @then('I should see "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
     assert text in body.text
-
-@then('I should not see "{text}"')
-def step(context, text):
-    body = context.browser.find_element_by_tag_name('body')
-    assert text not in body.text
-
+    
 @then('I enter in the page with this title "{text}"')
 def step(context, text):
     titlebrowser = context.browser.title 
@@ -54,7 +55,7 @@ def step(context, text):
 @then('I should see the delivery in the list')
 def step(context):
     body = context.browser.find_element_by_tag_name('body')
-    assert "More Info" in body.text
+    assert "Correction" in body.text
 
 @then('I should have the edit form for correction with "{coment1}" "{coment2}" "{note}" data in it')
 def step(context, coment1, coment2, note):

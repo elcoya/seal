@@ -39,6 +39,8 @@ urlpatterns += patterns('view.user.student',
 urlpatterns += patterns('view.correction',
     url(r'^correction/(?P<iddelivery>\d+)/$', 'index'),
     url(r'^correction/edit/(?P<idcorrection>\d+)/$', 'editcorrection'),
+    url(r'^correction/consult/(?P<iddelivery>\d+)/$', 'consultcorrection'),
+
 )
 
 urlpatterns += patterns('view.course',

@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<body>
+	<form id='formcorrect' action='' method='post'>
+		{% csrf_token %}
+		<div style="width: 100%; text-align: left; margin: auto;">
+			CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}} - STUDENT {{delivery.student.name}} ({{delivery.student.uid}})
+			<br>
+			<br>
+		</div>
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr>
+					<td>Coment</td>
+					<td>Note</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for correc in correction %}
+				<tr>
+					<td style="text-align: center; ">{{ correc.publicComent }}</td>
+					<td style="text-align: center; ">{{ correc.note }}</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="4" style="text-align: center; ">There is yet no Correction</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<footer>
+		<a href="/students/home/{{delivery.student.pk}}" >home</a> | <a href="/delivery/newdelivery/{{delivery.practice.pk}}/{{delivery.student.pk}}">back</a>
+	</footer>
+
+</body>
+{% endblock %}

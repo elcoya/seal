@@ -35,3 +35,8 @@ def editcorrection(request, idcorrection):
     else:    
         form = CorrectionForm(instance=correction)
     return render(request, 'correction/index.html', {'form': form, 'delivery': correction.delivery}, context_instance=RequestContext(request))
+
+def consultcorrection(request, iddelivery):
+    delivery = Delivery.objects.get(pk=iddelivery)
+    correction = Correction.objects.filter(delivery=delivery)
+    return render(request, 'correction/consult.html', {'correction': correction, 'delivery': delivery})
