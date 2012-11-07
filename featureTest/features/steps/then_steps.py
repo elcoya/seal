@@ -55,3 +55,12 @@ def step(context, text):
 def step(context):
     body = context.browser.find_element_by_tag_name('body')
     assert "More Info" in body.text
+
+@then('I should have the edit form for correction with "{coment1}" "{coment2}" "{note}" data in it')
+def step(context, coment1, coment2, note):
+    com1 = context.browser.find_element_by_id('id_publicComent')
+    com2 = context.browser.find_element_by_id('id_privateComent')
+    n = context.browser.find_element_by_name('note')
+    assert com1.get_attribute('value') == coment1
+    assert com2.get_attribute('value') == coment2
+    assert n.get_attribute('value') == note

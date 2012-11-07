@@ -16,7 +16,7 @@ pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
 
 # Now we can load our model
-from seal.model import Course, Student, Practice, Delivery
+from seal.model import Course, Student, Practice, Delivery, Correction
 from django.contrib.auth.models import User
 
 def before_feature(context, feature):
@@ -36,6 +36,7 @@ def before_feature(context, feature):
 def after_feature(context, feature):
         #a = context.browser.find_element_by_link_text('Log out')
         #a.click()
+        Correction.objects.all().delete()
         Delivery.objects.all().delete()
         Practice.objects.all().delete()
         Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users

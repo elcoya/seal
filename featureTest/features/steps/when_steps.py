@@ -1,6 +1,6 @@
 from behave import *
 from selenium import webdriver 
-from seal.model import Course, Student, Practice
+from seal.model import Course, Student, Practice, Delivery
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
@@ -109,3 +109,18 @@ def step(context,practice):
     p = Practice.objects.get(uid=practice)
     addres = 'http://localhost:8000/delivery/listdelivery/'+str(p.pk)
     context.browser.get(addres)
+
+@when('I am in the correction delivery page of student "{student}" and practice "{practice}"')
+def step(context,student,practice):
+    s = Student.objects.get(uid=student)
+    p = Practice.objects.get(uid=practice)
+    d = Delivery.objects.get(student=s, practice=p)
+    addres = 'http://localhost:8000/correction/'+str(d.pk)
+    context.browser.get(addres)
+
+@when('I fill the form with "{coment1}" "{coment2}" "{note}"')
+def step(context, coment1, coment2, note):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_id('id_publicComent').send_keys(coment1)
+    form.find_element_by_id('id_privateComent').send_keys(coment2)
+    form.find_element_by_name('note').send_keys(note)

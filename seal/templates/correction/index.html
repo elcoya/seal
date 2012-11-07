@@ -1,0 +1,21 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<body>
+	<form id='formcorrect' action='' method='post'>
+		{% csrf_token %}
+		<table>
+			<div style="width: 100%; text-align: left; margin: auto;">
+				CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}} - STUDENT {{delivery.student.name}} ({{delivery.student.uid}})
+				<br>
+				<br>
+			</div>
+		{{ form.as_table }}
+		</table>
+		<input type='submit' value='Submit' />
+	</form>
+	<footer>
+		<a href="/">home</a> | <a href="/delivery/listdelivery/{{delivery.practice.pk}}">back</a>
+	</footer>
+
+</body>
+{% endblock %}
