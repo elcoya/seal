@@ -9,6 +9,8 @@ pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
 deliveryPath = pathproject + "featureTest/data/delivery.zip"
 
+base_url = 'http://localhost:8000/'
+
 @when('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
     form = context.browser.find_element_by_tag_name('form')
@@ -32,7 +34,7 @@ def step(context):
 @when('I enter in the "{idstudent}" home page')
 def step(context, idstudent):
     student = Student.objects.get(uid=idstudent)
-    url="http://localhost:8000/students/home/"+str(student.pk)
+    url= base_url + 'teacher/students/home/'+str(student.pk)
     context.browser.get(url)
 
 @when('I fill the newstudent form with default data')
@@ -42,6 +44,8 @@ def step(context):
     form.find_element_by_name('uid').send_keys('00000')
     form.find_element_by_name('email').send_keys('dummy@foo.foo')
     form.find_element_by_name('courses').send_keys('2012-1')
+    form.find_element_by_name('passwd').send_keys('2012-1')
+    form.find_element_by_name('passwd_again').send_keys('2012-1')
     
 @when('I submit the form')
 def step(context):
@@ -55,7 +59,7 @@ def step(context, text):
     
 @when(u'I am at the new practice form')
 def step(context):
-    context.browser.get('http://localhost:8000/practices/newpractice')
+    context.browser.get(base_url + 'teacher/practices/newpractice')
 
 @when(u'I fill the practice form with uid "{practice_uid}" and default data for course "{course_name}"')
 def step(context, practice_uid, course_name):
@@ -74,7 +78,7 @@ def step(context):
 def step(context,student,practice):
     p = Practice.objects.get(uid=practice)
     s = Student.objects.get(name=student)
-    addres = 'http://localhost:8000/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
+    addres = base_url + 'teacher/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
     context.browser.get(addres)
       
 @when('I change "{course1}" for "{course2}" in element whith id "{idelement}"')
@@ -86,7 +90,7 @@ def step(context, course1, course2, idelement):
 @when('I am in the modifier page of course "{course}"')
 def step(context,course):
     c = Course.objects.get(name=course)
-    addres = 'http://localhost:8000/course/editcourse/'+str(c.pk)
+    addres = base_url + 'teacher/course/editcourse/'+str(c.pk)
     context.browser.get(addres)
 
 @when('I fill in the registration form with user "{uid}"')
@@ -95,17 +99,18 @@ def step(context, uid):
     form.find_element_by_name('name').send_keys(uid)
     form.find_element_by_name('uid').send_keys(uid)
     form.find_element_by_name('passwd').send_keys('seal')
+    form.find_element_by_name('passwd_again').send_keys('seal')
     form.find_element_by_name('email').send_keys('foo@foo.foo')
 
 @when('I am in the delivery page of student "{student}" and practice "{practice}"')
 def step(context,student,practice):
     s = Student.objects.get(uid=student)
     p = Practice.objects.get(uid=practice)
-    addres = 'http://localhost:8000/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
+    addres = base_url + 'undergraduate/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
     context.browser.get(addres)
 
 @when('I am in the list page of delivery from "{practice}"')
 def step(context,practice):
     p = Practice.objects.get(uid=practice)
-    addres = 'http://localhost:8000/delivery/listdelivery/'+str(p.pk)
+    addres = base_url + 'teacher/delivery/listdelivery/'+str(p.pk)
     context.browser.get(addres)

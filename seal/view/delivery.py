@@ -15,7 +15,7 @@ def newdelivery(request, idpractice, idstudent):
             ext = request.FILES[filename].content_type
         if (form.is_valid() and ext == "application/zip"):
             form.save()
-            pathok = "/students/practicelist/"+str(practice.course_id)+"/"+str(idstudent)
+            pathok = "/undergraduate/students/practicelist/"+str(practice.course_id)+"/"+str(idstudent)
             return HttpResponseRedirect(pathok)
     else:
         form = DeliveryForm()

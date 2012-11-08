@@ -10,15 +10,35 @@ from seal.forms.registration import RegistrationForm
 from seal.model.student import Student
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from seal.forms.login import LoginForm
+from django.contrib.auth.decorators import login_required
+from seal.model.teacher import Teacher
 
+@login_required
 def index(request):
-    courses = Course.objects.all()
-    table_contents = []
-    for course in courses:
-        table_contents.append({'pk': course.pk, 'name': course.name, 'count':course.student_set.count()})
-    return render_to_response('index.html', {'table_contents': table_contents}, context_instance=RequestContext(request))
+    print "index: redirecting..."
+    user = request.user
+    print str(user.id)
+    if(user.is_superuser):
+        return HttpResponseRedirect('/admin')
+    elif(Teacher.objects.filter(user_id=user.id)):
+        return HttpResponseRedirect('/teacher')
+    elif(Student.objects.filter(user_id=user.id).exists()):
+        return HttpResponseRedirect('/undergraduate')
+    else:
+        return render_to_response('index.html')
+
+@login_required
+def redirect(request):
+    print "redirect: redirecting..."
+    user = request.user
+    if(user.is_superuser):
+        return HttpResponseRedirect('/admin')
+    elif(Teacher.objects.filter(user_id=user.id).exists()):
+        return HttpResponseRedirect('/teacher')
+    else:
+        return HttpResponseRedirect('/undergraduate')
 
 def register(request):
     if (request.method == 'POST'):
@@ -26,6 +46,7 @@ def register(request):
         if (form.is_valid()):
             user = User()
             user.username = form.data['uid']
+            user.last_name = form.data['name']
             user.set_password(form.data['passwd'])
             user.email = form.data['email']
             user.save()
@@ -55,3 +76,11 @@ def login(request):
                 form.non_field_errors.add('This user is no longer active')
         else:
             form.non_field_errors.add('Invalid login')
+
+def logout_page(request):
+    """
+    Log users out and re-direct them to the main page.
+    """
+    logout(request)
+    return HttpResponseRedirect('/')
+

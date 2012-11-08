@@ -4,16 +4,64 @@ from seal.model import Course, Practice, Delivery
 from seal.model.student import Student
 from django.template.defaulttags import now
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from seal.model.teacher import Teacher
+from string import capitalize
+from seal.forms import student
 
-
+base_url = 'http://localhost:8000/'
 
 @given('I have opened the browser for "{url}"')
 def step(context, url):
     context.browser = webdriver.Firefox()
     context.browser.get(url)
 
+@given('Teacher "{username}" exists with password "{password}"')
+def step(context, username, password):
+    if(Teacher.objects.filter(uid=username).exists()):
+        teacher = Teacher.objects.get(uid=username)
+        teacher.user.set_password(password)
+        teacher.user.save()
+        teacher.save()
+    else:
+        teacher = Teacher()
+        teacher.name = capitalize(username)
+        teacher.uid = username
+        user = User()
+        user.username = username
+        user.set_password(password)
+        user.save()
+        teacher.user = user
+        teacher.save()
+
+@given('Student "{username}" exists with password "{password}"')
+def step(context, username, password):
+    if(Student.objects.filter(uid=username).exists()):
+        student = Student.objects.get(uid=username)
+        student.user.set_password(password)
+        student.user.save()
+        student.save()
+    else:
+        student = Student()
+        student.name = capitalize(username)
+        student.uid = username
+        user = User()
+        user.username = username
+        user.set_password(password)
+        user.save()
+        student.user = user
+        student.save()
+
 @given('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
+    if(context.browser.find_elements_by_link_text('logout')):
+        a = context.browser.find_element_by_link_text('logout')
+        a.click()
+    elif(context.browser.find_elements_by_link_text('Log out')):
+        a = context.browser.find_element_by_link_text('Log out')
+        a.click()
+    else:
+        context.browser.get(base_url)
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('username').send_keys(usr)
     form.find_element_by_name('password').send_keys(passwd)
@@ -22,16 +70,16 @@ def step(context, usr, passwd):
 @given('I am in the index page')
 def step(context):
     print(context)
-    context.browser.get('http://localhost:8000/')
+    context.browser.get(base_url)
 
 @given('I am in the practice list page')
 def step(context):
     print(context)
-    context.browser.get('http://localhost:8000/practices/')
+    context.browser.get(base_url + 'teacher/practices/')
 
 @given('I am at the new student form')
 def step(context):
-    context.browser.get('http://localhost:8000/students/newstudent')
+    context.browser.get(base_url + 'teacher/students/newstudent')
 
 @given('there are no courses')
 def step(context):
@@ -107,12 +155,19 @@ def step(context, course):
 @given('practice "{practice_uid}" exists in course "{course_name}" with deadline "{dead_line}"')
 def step (context, practice_uid, course_name, dead_line):
     c = Course.objects.get(name=course_name)
-    practice = Practice.objects.get_or_create(uid=practice_uid, deadline = dead_line, file='test_file.pdf',course=c)
-                
+    if(Practice.objects.filter(uid=practice_uid).exists()):
+        Practice.objects.get(uid=practice_uid).delete()
+    practice = Practice()
+    practice.uid = practice_uid
+    practice.deadline = dead_line
+    practice.file = 'test_file.pdf'
+    practice.course = c
+    practice.save()
+
 @given('I am at the new practice form for course "{namecourse}"')
 def step(context,namecourse):
     c = Course.objects.get(name=namecourse)
-    path = "http://localhost:8000/practices/newpractice/"+str(c.pk)
+    path = base_url + "teacher/practices/newpractice/" + str(c.pk)
     context.browser.get(path)
 
 @given('I am not logged in')
@@ -128,7 +183,7 @@ def step(context, uid):
 
 @given('user "{uid}" is registered')
 def step(context, uid):
-    if(not(Student.objects.filter(uid=uid).exists())):
+    if((Student.objects.filter(uid=uid).exists()) is False):
         if(User.objects.filter(username=uid).exists()):
             User.objects.get(username=uid).delete()
         user = User()
@@ -148,3 +203,4 @@ def step(context,practice,student,deliveryDate):
     s = Student.objects.get(name=student)
     p = Practice.objects.get(uid=practice)
     Delivery.objects.get_or_create(file="archivo.zip",student_id=s.pk,practice_id=p.pk, deliverDate=deliveryDate)
+

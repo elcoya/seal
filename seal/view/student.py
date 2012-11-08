@@ -39,7 +39,7 @@ def newstudent(request, idcourse):
         form = StudentForm(request.POST)
         if (form.is_valid()):
             form.save()
-            pathok="/course/editcourse/"+str(idcourse)
+            pathok="/teacher/course/editcourse/"+str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
         form = StudentForm(initial={'courses': [idcourse]})
@@ -51,7 +51,7 @@ def editstudent(request, idcourse ,idstudent):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
             form.save()
-            pathok="/course/editcourse/"+str(idcourse)
+            pathok="/teacher/course/editcourse/"+str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
         form = StudentForm( instance = student)

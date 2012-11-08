@@ -1,0 +1,33 @@
+{% extends "undergraduate/undergraduate.html" %}
+{% comment %}
+
+Main page of the teacher's portal.
+
+{% endcomment %}
+
+{% block title %}
+Teacher
+{% endblock %}
+
+{% block content %}
+	<div class="main-content" >
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >Courses</td>
+					<td>Students</td>
+				</tr>
+			</thead>
+			<tbody>
+			{% for dict in table_contents %}
+			    <tr>
+			    	<td style="width: 70%; text-indent: 15px; " ><a href="/undergraduate/course/editcourse/{{dict.pk}}">{{ dict.name }}</a></td>
+			    	<td style="width: 30%; text-align: center; ">{{ dict.count }}</td>
+			    </tr>
+			{% empty %}
+			    <tr><td colspan="2" style="text-align: center; ">There are yet no courses</td></tr>
+			{% endfor %}
+			</tbody>
+		</table>
+<!-- 	<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/course/newcourse" >New Course</a></div> -->
+	</div>
+{% endblock %}

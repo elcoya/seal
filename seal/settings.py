@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('seal', 'seventeam77@hotmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -19,12 +19,6 @@ DATABASES = {
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
         
     },
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-#        'NAME': 'seal',                      # Or path to database file if using sqlite3.
-#        'USER': 'root',                      # Not used with sqlite3.
-#        'PASSWORD': '',                  # Not used with sqlite3.
-#    }
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -34,7 +28,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Argentina'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -74,11 +68,14 @@ STATIC_URL = '/static/'
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+import os
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    PROJECT_PATH + '/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -88,6 +85,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+# URL of the login page.
+LOGIN_URL = '/login/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')q&!5_ig&s8h3w#l@2i#yn*=@6lhct+za(zpcb+%6p&@&^q-lv'
@@ -129,7 +129,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    
     'model'
 )
 

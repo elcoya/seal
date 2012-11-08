@@ -31,7 +31,7 @@ def newpractice(request, idcourse):
             ext = request.FILES[filename].content_type
         if (form.is_valid() and ext == "application/pdf"):
             form.save()
-            pathok = "/course/editcourse/" + str(idcourse)
+            pathok = "/teacher/course/editcourse/" + str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
         form = PracticeForm(initial={'course': idcourse})

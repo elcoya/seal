@@ -1,0 +1,32 @@
+div.content {
+	border: groove black;
+	font-size: 92%;
+	margin: 15px auto;
+	text-align: left;
+	text-indent: 10px;
+	width: 300px;
+}
+
+p {
+	margin: 5px 30px;
+}
+
+p.error {
+	background: #F5F5F5;
+	color: #DD2525;
+	text-align: center;
+	text-indent: 0;
+}
+
+p.registrate {
+	width: 300px;
+	margin: auto;
+	text-align: center;
+	font-size: 85%;
+}
+
+h3 {
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+}

@@ -7,7 +7,8 @@ class Student(models.Model):
     uid = models.CharField(unique=True, max_length = 32)
     email = models.CharField(max_length = 90)
     courses = models.ManyToManyField(Course, blank=True)
-    user = models.OneToOneField(User, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     
     def __str__(self):
         return self.name
+
