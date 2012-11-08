@@ -27,6 +27,7 @@ def step(context, username, password):
         teacher = Teacher()
         teacher.name = capitalize(username)
         teacher.uid = username
+        teacher.email = username + "@foo.foo"
         user = User()
         user.username = username
         user.set_password(password)
@@ -45,6 +46,7 @@ def step(context, username, password):
         student = Student()
         student.name = capitalize(username)
         student.uid = username
+        student.email = username + "@foo.foo"
         user = User()
         user.username = username
         user.set_password(password)
@@ -127,20 +129,8 @@ def step(context,name, course):
 
 @given('student "{name}" exists without course')
 def step(context,name):
-    if(Student.objects.filter(uid=name).exists()):
-        student = Student.objects.get(uid=name)
-    else:
-        user = User()
-        user.username = name
-        user.set_password("seal")
-        user.email = "foo@foo.foo"
-        user.save()
-        student = Student()
-        student.user = user
-        student.name = name
-        student.uid = name
-        student.email = name + "@foo.foo"
-        student.save()
+    student = Student.objects.get(name=name)
+    student.courses.clear()
 
 @given('there are no student in "{course}"')
 def step(context, course):

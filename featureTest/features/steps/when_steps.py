@@ -31,21 +31,15 @@ def step(context):
     a = context.browser.find_element_by_link_text('Courses')
     a.click()
 
-@when('I enter in the "{idstudent}" home page')
-def step(context, idstudent):
-    student = Student.objects.get(uid=idstudent)
-    url= base_url + 'teacher/students/home/'+str(student.pk)
-    context.browser.get(url)
-
-@when('I fill the newstudent form with default data')
-def step(context):
+@when('I fill the newstudent form with default data for course "{coursename}"')
+def step(context, coursename):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('name').send_keys('Dummy Student')
-    form.find_element_by_name('uid').send_keys('00000')
+    form.find_element_by_name('uid').send_keys('dummy')
     form.find_element_by_name('email').send_keys('dummy@foo.foo')
-    form.find_element_by_name('courses').send_keys('2012-1')
-    form.find_element_by_name('passwd').send_keys('2012-1')
-    form.find_element_by_name('passwd_again').send_keys('2012-1')
+    form.find_element_by_name('courses').send_keys(coursename)
+    form.find_element_by_name('passwd').send_keys('dummy')
+    form.find_element_by_name('passwd_again').send_keys('dummy')
     
 @when('I submit the form')
 def step(context):
@@ -74,11 +68,10 @@ def step(context):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('file').send_keys(deliveryPath)
 
-@when('I am in the upload page of student "{student}" and practice "{practice}"')
-def step(context,student,practice):
+@when('I am in the upload page of practice "{practice}"')
+def step(context,practice):
     p = Practice.objects.get(uid=practice)
-    s = Student.objects.get(name=student)
-    addres = base_url + 'teacher/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
+    addres = base_url + 'undergraduate/delivery/upload/'+str(p.pk)
     context.browser.get(addres)
       
 @when('I change "{course1}" for "{course2}" in element whith id "{idelement}"')
@@ -102,17 +95,16 @@ def step(context, uid):
     form.find_element_by_name('passwd_again').send_keys('seal')
     form.find_element_by_name('email').send_keys('foo@foo.foo')
 
-@when('I am in the delivery page of student "{student}" and practice "{practice}"')
-def step(context,student,practice):
-    s = Student.objects.get(uid=student)
+@when('I am in the delivery page of practice "{practice}"')
+def step(context,practice):
     p = Practice.objects.get(uid=practice)
-    addres = base_url + 'undergraduate/delivery/newdelivery/'+str(p.pk)+'/'+str(s.pk)
+    addres = base_url + 'undergraduate/delivery/upload/'+str(p.pk)
     context.browser.get(addres)
 
 @when('I am in the list page of delivery from "{practice}"')
 def step(context,practice):
     p = Practice.objects.get(uid=practice)
-    addres = base_url + 'teacher/delivery/listdelivery/'+str(p.pk)
+    addres = base_url + 'teacher/delivery/list/'+str(p.pk)
     context.browser.get(addres)
 
 @when('I am in the correction delivery page of student "{student}" and practice "{practice}"')
@@ -120,7 +112,7 @@ def step(context,student,practice):
     s = Student.objects.get(uid=student)
     p = Practice.objects.get(uid=practice)
     d = Delivery.objects.get(student=s, practice=p)
-    addres = 'http://localhost:8000/correction/'+str(d.pk)
+    addres = base_url + 'teacher/correction/'+str(d.pk)
     context.browser.get(addres)
 
 @when('I fill the form with "{coment1}" "{coment2}" "{note}"')
@@ -135,5 +127,5 @@ def step(context,student,practice):
     s = Student.objects.get(uid=student)
     p = Practice.objects.get(uid=practice)
     d = Delivery.objects.get(student=s, practice=p)
-    addres = 'http://localhost:8000/correction/consult/'+str(d.pk)
+    addres = base_url + 'undergraduate/correction/consult/'+str(d.pk)
     context.browser.get(addres)

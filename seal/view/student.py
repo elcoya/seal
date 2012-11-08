@@ -24,16 +24,6 @@ def index(request):
         students = paginator.page(paginator.num_pages)
     return render_to_response('student/index.html', {"students": students}, context_instance=RequestContext(request))
 
-def home(request, idstudent):
-    student = Student.objects.get(pk=idstudent)
-    courses = Course.objects.filter(student__pk=idstudent)
-    return render(request, 'student/home.html', {'courses': courses, 'idstudent': idstudent, 'studentname':student.name}, context_instance=RequestContext(request))
-
-def practicelist(request, idcourse, idstudent):
-    course = Course.objects.get(pk=idcourse)
-    practices = course.practice_set.all().order_by('deadline')
-    return render(request, 'student/practiceList.html', {'practices': practices, 'coursename': course.name, 'idstudent':idstudent}, context_instance=RequestContext(request))
-
 def newstudent(request, idcourse):
     if (request.method == 'POST'):
         form = StudentForm(request.POST)

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class StudentForm(ModelForm):
     class Meta:
         model = Student
+        exclude = ('user',)
     
     email = forms.EmailField()
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False)
@@ -14,11 +15,11 @@ class StudentForm(ModelForm):
     def clean_passwd(self):
         uid = self.cleaned_data['uid']
         passwd = self.cleaned_data['passwd']
-        if(not User.objects.filter(username=uid).exists() and (not passwd=='')):
+        if((not (User.objects.filter(username=uid).exists())) and (passwd=='')):
             raise forms.ValidationError("A password must be supplied")
 
     def clean_passwd_again(self):
-        passwd = self.cleaned_data['passwd']
+        passwd = self.data['passwd']
         passwd_again = self.cleaned_data['passwd_again']
         if((passwd or passwd_again) and (not (passwd == passwd_again)) ):
             raise forms.ValidationError("Passwords does not match")
@@ -34,3 +35,4 @@ class StudentForm(ModelForm):
             user.set_password(passwd)
             user.save()
         self.instance.user = user
+    

@@ -21,6 +21,11 @@ def step(context, text1, text2):
     assert text1 in body.text
     assert text2 in body.text
 
+@then(u'I should not see "{text}"')
+def impl(context, text):
+    body = context.browser.find_element_by_tag_name('body')
+    assert text not in body.text
+
 @then('I should see "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')

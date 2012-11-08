@@ -58,9 +58,10 @@ def after_feature(context, feature):
     Correction.objects.all().delete()
     Delivery.objects.all().delete()
     Practice.objects.all().delete()
-    Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
-    User.objects.exclude(username='seal').delete()
     Course.objects.all().delete()
+    Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
+    Teacher.objects.all().delete()
+    User.objects.exclude(username='seal').delete()
     context.browser.close()
 
 def before_scenario(context, scenario):

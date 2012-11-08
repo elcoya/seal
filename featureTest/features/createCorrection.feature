@@ -1,11 +1,14 @@
 Feature: As a teacher I want to make a correction of a delivery
 
 	 Scenario: Corretion of a delivery fist time
-	 	Given course "2012-1" exists 
-	 	  And user "Martin" is registered
+    	Given Student "martin" exists with password "martin"
+    	  And Teacher "teacher" exists with password "teacher"
+    	  And I log in as "teacher" "teacher"
+    	  And course "2012-1" exists
 	 	  And student "Martin" exists in course "2012-1"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And exist delivery of "TP Intro" from student "Martin" whit dalivery date "2012-11-01"
+	 	  And there are no corrections
 	 	 when I am in the correction delivery page of student "Martin" and practice "TP Intro"
 	 	  And I fill the form with "Coment1" "Coment2" "4.0"
 	 	  And I submit the form
@@ -13,9 +16,11 @@ Feature: As a teacher I want to make a correction of a delivery
 		 Then I should have the edit form for correction with "Coment1" "Coment2" "4.0" data in it	
 		 
 		 
-      Scenario: Modifier corretion of a delivery
-		Given course "2012-1" exists 
-	 	  And user "Martin" is registered
+      Scenario: Modify corretion of a delivery
+		Given Student "martin" exists with password "martin"
+    	  And Teacher "teacher" exists with password "teacher"
+    	  And I log in as "teacher" "teacher"
+    	  And course "2012-1" exists
 	 	  And student "Martin" exists in course "2012-1"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And exist delivery of "TP Intro" from student "Martin" whit dalivery date "2012-11-01"

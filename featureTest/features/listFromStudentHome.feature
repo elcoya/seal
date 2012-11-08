@@ -2,20 +2,18 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
 
  	Scenario: No Course Enrolled
  		Given Student "martin" exists with password "martin"
-          And I log in as "martin" "martin"
     	  And course "2012-1" exists
  		  And student "Martin" exists without course
- 		 When I enter in the "Martin" home page
- 		 Then I should see "Courses where are you enrolled"
+          And I log in as "martin" "martin"
+ 		 Then I should see "There are yet no courses in which you are enrolled"
  
 	Scenario: Enrolled in two courses, order by newest course
 		Given Student "martin" exists with password "martin"
-          And I log in as "martin" "martin"
     	  And course "2012-1" exists
 		  And course "2011-2" exists
 		  And user "martin" is registered
 		  And student "Martin" exists in course "2012-1" and in course "2011-2"
-		 When I enter in the "Martin" home page
+          And I log in as "martin" "martin"
 		 Then I should see "2012-1" before "2011-2" 
  		  
 	Scenario: List practices of enrroles course without practice

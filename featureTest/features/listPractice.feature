@@ -23,5 +23,5 @@ Feature: As a user I want to see the practice list
     	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
           And I log in as "martin" "martin"
     	  And student "Martin" exists in course "2012-1"
-    	 when I am in the delivery page of student "Martin" and practice "TP INTRO"
+    	 when I am in the delivery page of practice "TP INTRO"
     	 Then I should see "There are yet no Delivery from this practice"

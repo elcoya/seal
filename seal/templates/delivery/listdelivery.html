@@ -23,8 +23,8 @@
 					<td style="text-align: center; ">{{ delivery.student.uid }}</td>
 					<td style="text-align: center; ">{{ delivery.student.name }}</td>					
 					<td style="text-align: center; ">{{ delivery.deliverDate }}</td>
-					<td style="text-align: center; "><a href="/delivery/download/{{ delivery.pk}}">Download</a></td>
-					<td style="text-align: center; "><a href="/correction/{{ delivery.pk}}">Correction</a></td>
+					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">Download</a></td>
+					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}">Correction</a></td>
 				</tr>
 				{% empty %}
 				<tr>
@@ -34,6 +34,5 @@
 			</tbody>
 		</table>
 	</div>
-<footer><a href="/" >home</a> | <a href="/course/editcourse/{{ idcourse }}">back</a></footer>
 </body>
 {% endblock %}

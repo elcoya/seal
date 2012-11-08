@@ -17,10 +17,8 @@ urlpatterns += patterns('view.practice',
 
 urlpatterns += patterns('view.student',
     url(r'^students/?$', 'index'),
-    url(r'^students/home/(?P<idstudent>\d+)$', 'home'),
     url(r'^students/newstudent/(?P<idcourse>\d+)$', 'newstudent'),
     url(r'^students/editstudent/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
-    url(r'^students/practicelist/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'practicelist'),
 )
 
 urlpatterns += patterns('view.course',
@@ -28,3 +26,14 @@ urlpatterns += patterns('view.course',
     url(r'^course/newcourse/?$', 'newcourse'),
     url(r'^course/editcourse/(?P<idcourse>\d+)$', 'editcourse'),
 )
+
+urlpatterns += patterns('view.teacher.delivery',
+    url(r'^delivery/list/(?P<idpractice>\d+)/$', 'listdelivery'),
+    url(r'^delivery/download/(?P<iddelivery>\d+)/$', 'download'),
+)
+
+urlpatterns += patterns('view.teacher.correction',
+    url(r'^correction/(?P<iddelivery>\d+)/$', 'index'),
+    url(r'^correction/edit/(?P<idcorrection>\d+)/$', 'editcorrection'),
+)
+

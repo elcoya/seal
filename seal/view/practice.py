@@ -53,9 +53,3 @@ def editpractice(request, idcourse , idpractice):
         form = PracticeForm(instance=practice)
     return render(request, 'practice/editpractice.html', {'form': form, 'idcourse': idcourse,}, context_instance=RequestContext(request))
 
-def download(request, idpractice):
-    practice = Practice.objects.get(pk=idpractice)
-    filename = practice.file.name.split('/')[-1]
-    response = HttpResponse(practice.file, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=%s' % filename
-    return response

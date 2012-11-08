@@ -13,7 +13,7 @@ def index(request):
     courses = request.user.student_set.get(uid=request.user.username).courses.all()
     table_contents = []
     for course in courses:
-        table_contents.append({'pk': course.pk, 'name': course.name, 'count':course.student_set.count()})
+        table_contents.append({'pk': course.pk, 'name': course.name})
     return render_to_response('undergraduate/index.html', {'table_contents': table_contents}, context_instance=RequestContext(request))
 
 

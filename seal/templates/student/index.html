@@ -10,7 +10,7 @@
 				<table style="width: 100%;">
 					<tbody>
 					{% for student in students %}
-					    <tr><td><a href="/students/home/{{student.pk}}">{{ student.name }}</a></td></tr>
+					    <tr><td><a href="/teacher/students/home/{{student.pk}}">{{ student.name }}</a></td></tr>
 					{% empty %}
 					    <tr><td>0 student</td></tr>
 					{% endfor %}

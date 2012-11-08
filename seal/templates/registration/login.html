@@ -30,11 +30,7 @@ Main page to authenticate users.
                 <label for="id_password">Password:</label>
                 {{ form.password }}
             </p>
-            {% if next %}
-                <input type="hidden" name="next" value="{{ next }}" />
-            {% else %}
-                <input type="hidden" name="next" value="/redirect" />
-            {% endif %}
+            <input type="hidden" name="next" value="{{ next }}" />
             <input type="submit" value="login" style="margin: 5px 0 5px 205px; width: 60px; " />
         </form>
     </div>

@@ -17,10 +17,10 @@ Feature: As a student I can register myself into seal
 	 @dev	 
 	 Scenario: User already registered
 	  	Given I am not logged in
-	 	  And user "test" is registered
+	 	  And Student "martin" exists with password "martin"
 	 	  And I am in the index page
 		 When I click in the "Registrate" link
-		  And I fill in the registration form with user "test"
+		  And I fill in the registration form with user "martin"
 		  And I submit the form
-		 Then I should see "User 'test' is not available"
+		 Then I should see "User 'martin' is not available"
 	 

@@ -3,17 +3,17 @@ Created on 26/10/2012
 
 @author: anibal
 '''
-from django.shortcuts import render_to_response, render
 from seal.model.course import Course
-from django.template.context import RequestContext
-from seal.forms.registration import RegistrationForm
 from seal.model.student import Student
+from seal.model.teacher import Teacher
+from seal.forms.login import LoginForm
+from seal.forms.registration import RegistrationForm
 from django.contrib.auth.models import User
+from django.template.context import RequestContext
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, logout
-from seal.forms.login import LoginForm
 from django.contrib.auth.decorators import login_required
-from seal.model.teacher import Teacher
 
 @login_required
 def index(request):
