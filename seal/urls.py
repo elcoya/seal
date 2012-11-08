@@ -55,6 +55,16 @@ urlpatterns += patterns('',
 #Student site: home, list assignments, deliver assignment, etc
 urlpatterns += patterns('',
     url(r'^undergraduate/?', include('view.undergraduate.urls')),
+
+urlpatterns += patterns('view.user.student',
+    url(r'^student/?$', 'index'),
+)
+
+urlpatterns += patterns('view.correction',
+    url(r'^correction/(?P<iddelivery>\d+)/$', 'index'),
+    url(r'^correction/edit/(?P<idcorrection>\d+)/$', 'editcorrection'),
+    url(r'^correction/consult/(?P<iddelivery>\d+)/$', 'consultcorrection'),
+
 )
 
 urlpatterns += patterns('',

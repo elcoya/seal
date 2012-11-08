@@ -1,6 +1,6 @@
 from behave import *
 from selenium import webdriver
-from seal.model import Course, Practice, Delivery
+from seal.model import Course, Practice, Delivery, Correction
 from seal.model.student import Student
 from django.template.defaulttags import now
 from django.contrib.auth.models import User
@@ -96,6 +96,10 @@ def step(context):
 @given('there are no deliveries')
 def step(context):
     Delivery.objects.all().delete()
+
+@given('there are no corrections')
+def step(context):
+    Correction.objects.all().delete()
 
 @given('course "{course}" exists')
 def step(context,course):
@@ -204,3 +208,9 @@ def step(context,practice,student,deliveryDate):
     p = Practice.objects.get(uid=practice)
     Delivery.objects.get_or_create(file="archivo.zip",student_id=s.pk,practice_id=p.pk, deliverDate=deliveryDate)
 
+@given('exist correction of delivery of "{student}" for "{practice}" with "{coment1}" "{coment2}" "{note}"')
+def step(context,practice,student,coment1,coment2,note):
+    s = Student.objects.get(name=student)
+    p = Practice.objects.get(uid=practice)
+    d = Delivery.objects.get(student=s, practice=p)
+    Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,note=note,delivery_id=d.pk)

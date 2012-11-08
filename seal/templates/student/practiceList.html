@@ -13,18 +13,15 @@
 				<td>Dead Line</td>
 				<td></td>
 				<td></td>
-				<td>State</td>
 			</tr>
 		</thead>
 		<tbody>
 			{% for practice in practices %}
 			<tr>
-				<td style="width: 20%; text-align: center; " >{{ practice.uid }}</td>
-				<td style="width: 20%; text-align: center; ">{{ practice.deadline }}</td>
-				<td style="width: 20%; text-align: center; "><a href="/practices/download/{{ practice.pk}}">Download</a></td>
-				<td style="width: 20%; text-align: center; "><a href="/delivery/newdelivery/{{ practice.pk}}/{{idstudent}}">Delivery</a></td>
-				
-				<td style="width: 20%; text-align: center; "><a href="#">Info Correccion</a></td>
+				<td style="text-align: center; " >{{ practice.uid }}</td>
+				<td style="text-align: center; ">{{ practice.deadline }}</td>
+				<td style="text-align: center; "><a href="/practices/download/{{ practice.pk}}">Download</a></td>
+				<td style="text-align: center; "><a href="/delivery/newdelivery/{{ practice.pk}}/{{idstudent}}">Delivery</a></td>
 			</tr>
 			{% empty %}
 			<tr>
