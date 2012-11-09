@@ -6,6 +6,7 @@ Sistema de Entregas Automatizado Libre
 Índice de Proyecto
 ------------------
 
+
 ###Documento de Estructra del Proyecto
 https://docs.google.com/document/d/1YY_Jznp5lDFYk9idGgZTCeMfGzFR_y2-8w3MYBWQefo/edit
 
