@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 def listdelivery(request, idpractice):
     practice = Practice.objects.get(pk=idpractice)
     deliveries = Delivery.objects.filter(practice=practice).order_by('deliverDate')
-    return render(request, 'teacher/listdelivery.html', {'deliveries': deliveries , 'practicename': practice.uid, 'idcourse': practice.course_id })
+    return render(request, 'teacher/listdelivery.html', {'deliveries': deliveries , 'practice': practice,})
 
 @login_required
 def download(request, iddelivery):
