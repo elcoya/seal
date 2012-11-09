@@ -7,7 +7,7 @@ Feature: As a student I want to see my deliveries
     	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
     	  And student "martin" exists in course "2012-1"
     	 when I am in the delivery page of practice "TP INTRO"
-    	 Then I should see "There are yet no Delivery from this practice"
+    	 Then I should see "There are yet no deliveries from this practice"
     	 
   	Scenario: List Delivery of Practices order by delivery date
   		Given Student "martin" exists with password "martin"
