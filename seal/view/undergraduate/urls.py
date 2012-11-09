@@ -17,3 +17,9 @@ urlpatterns += patterns('view.undergraduate.delivery',
 urlpatterns += patterns('view.undergraduate.correction',
     url(r'^correction/consult/(?P<iddelivery>\d+)/$', 'consultcorrection'),
 )
+
+urlpatterns += patterns('view.undergraduate.suscription',
+    url(r'^suscription/$', 'index'),
+    url(r'^suscription/suscribe/(?P<idcourse>\d+)/$', 'newsuscription'),   
+)
+

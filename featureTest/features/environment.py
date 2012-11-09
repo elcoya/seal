@@ -17,7 +17,7 @@ pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
 
 # Now we can load our model
-from seal.model import Course, Student, Practice, Delivery, Teacher, Correction
+from seal.model import Course, Student, Practice, Delivery, Teacher, Correction, Suscription
 from django.contrib.auth.models import User
 
 def before_all(context):
@@ -41,6 +41,8 @@ def before_all(context):
 #    teacher.save()
 
 def after_all(context):
+    Suscription.objects.all().delete()
+    Correction.objects.all().delete()
     Delivery.objects.all().delete()
     Practice.objects.all().delete()
     Course.objects.all().delete()
@@ -55,6 +57,7 @@ def before_feature(context, feature):
 def after_feature(context, feature):
     #a = context.browser.find_element_by_link_text('Log out')
     #a.click()
+    Suscription.objects.all().delete()
     Correction.objects.all().delete()
     Delivery.objects.all().delete()
     Practice.objects.all().delete()
