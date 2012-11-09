@@ -14,9 +14,7 @@ def newdelivery(request, idpractice):
     if (request.method == 'POST'):
         delivery = Delivery(student=student,practice=practice,deliverDate=date.today())
         form = DeliveryForm(request.POST, request.FILES, instance=delivery)
-        for filename, file in request.FILES.iteritems():
-            ext = request.FILES[filename].content_type
-        if (form.is_valid() and ext == "application/zip"):
+        if (form.is_valid()):
             form.save()
             pathok = "/undergraduate/practice/list/"+str(practice.course_id)
             return HttpResponseRedirect(pathok)
