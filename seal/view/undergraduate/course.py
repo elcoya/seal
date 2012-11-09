@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 
+@login_required
 def newcourse(request):
     if (request.method=='POST'):
         form = CourseForm(request.POST)

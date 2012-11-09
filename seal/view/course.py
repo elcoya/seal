@@ -9,7 +9,9 @@ from django.shortcuts import render_to_response, render
 from seal.model import Course, Delivery
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     courses_list = Course.objects.all().order_by('-name')
     paginator = Paginator(courses_list, 25) # Show 25 courses per page
@@ -24,6 +26,7 @@ def index(request):
         courses = paginator.page(paginator.num_pages)
     return render_to_response('course/index.html', {"courses": courses}, context_instance=RequestContext(request))
 
+@login_required
 def newcourse(request):
     if (request.method=='POST'):
         form = CourseForm(request.POST)
@@ -34,6 +37,7 @@ def newcourse(request):
         form = CourseForm()
     return render(request,'course/newcourse.html',{'form': form,})
 
+@login_required
 def editcourse(request,idcourse):
     course=Course.objects.get(pk=idcourse)     
     if (request.method=='POST'):

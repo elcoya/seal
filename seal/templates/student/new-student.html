@@ -1,10 +1,5 @@
-{% extends "admin/base_site.html" %}
-{% load i18n admin_static %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
-
-{% block bodyclass %}dashboard{% endblock %}
+{% extends "teacher/teacher.html" %}
 {% block content %}
-
 <form id='form-new-student' action='' method='post' >
 	{% csrf_token %}
 	<table>
@@ -17,5 +12,4 @@
 	<input type='reset' value='Reset' /> 
 </form>
 <footer><a href="/" >home</a> | <a href="/teacher/course/editcourse/{{ idcourse }}">back</a></footer>
-
 {% endblock %}

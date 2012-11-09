@@ -16,6 +16,7 @@ def practicelist(request, idcourse):
     practices = course.practice_set.all().order_by('deadline')
     return render(request, 'undergraduate/practiceList.html', {'practices': practices, 'coursename': course.name,}, context_instance=RequestContext(request))
 
+@login_required
 def download(request, idpractice):
     practice = Practice.objects.get(pk=idpractice)
     filename = practice.file.name.split('/')[-1]

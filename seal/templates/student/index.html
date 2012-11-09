@@ -1,8 +1,8 @@
-{% extends "admin/base_site.html" %}
+{% extends "teacher/teacher.html" %}
 {% block content %}
 <body>
 	<div style="width: 800px; text-align: left; margin: auto;">
-		<div>Studnet List</div>
+		<div>Student List</div>
 		<div>
 			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
 				<div style="clear: none; width: 50%; float: left;">Current Students</div>
@@ -10,7 +10,7 @@
 				<table style="width: 100%;">
 					<tbody>
 					{% for student in students %}
-					    <tr><td><a href="/teacher/students/home/{{student.pk}}">{{ student.name }}</a></td></tr>
+					    <tr><td><a href="/teacher/students/editstudent/{{student.pk}}">{{ student.name }}</a></td></tr>
 					{% empty %}
 					    <tr><td>0 student</td></tr>
 					{% endfor %}

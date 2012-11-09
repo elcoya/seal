@@ -1,9 +1,5 @@
 from django.conf.urls.defaults import patterns, url
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
-
 urlpatterns = patterns('view.teacher.home',
     (r'^$', 'index'),
 )
@@ -19,6 +15,7 @@ urlpatterns += patterns('view.student',
     url(r'^students/?$', 'index'),
     url(r'^students/newstudent/(?P<idcourse>\d+)$', 'newstudent'),
     url(r'^students/editstudent/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
+    url(r'^students/editstudent/(?P<idstudent>\d+)/$', 'edit_unenrolled_student'),
 )
 
 urlpatterns += patterns('view.course',

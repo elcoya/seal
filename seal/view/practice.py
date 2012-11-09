@@ -9,7 +9,9 @@ from django.shortcuts import render, render_to_response
 from seal.model.practice import Practice
 from django.template.context import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     practice_list = Practice.objects.all().order_by('-deadline')
     paginator = Paginator(practice_list, 10) # Show 10 practice per page
@@ -24,6 +26,7 @@ def index(request):
         practices = paginator.page(paginator.num_pages)
     return render_to_response('practice/index.html', {"practices": practices}, context_instance=RequestContext(request))
 
+@login_required
 def newpractice(request, idcourse):
     if (request.method == 'POST'):
         form = PracticeForm(request.POST, request.FILES)
@@ -37,7 +40,7 @@ def newpractice(request, idcourse):
         form = PracticeForm(initial={'course': idcourse})
     return render(request, 'practice/uploadpractice.html', {'form': form, 'idcourse':idcourse})
 
-
+@login_required
 def editpractice(request, idcourse , idpractice):
     practice = Practice.objects.get(pk=idpractice)     
     if (request.method == 'POST'):
