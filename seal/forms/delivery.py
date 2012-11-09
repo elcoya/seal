@@ -11,5 +11,6 @@ class DeliveryForm(ModelForm):
         data = self.cleaned_data['file']
         ext = data.content_type
         if (ext != "application/zip"):
-            raise forms.ValidationError("Only zip is permited to upload!")
+            error = "Only zip is permited to upload! Type file: "+ext
+            raise forms.ValidationError(error)
         return data
