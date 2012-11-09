@@ -1,5 +1,6 @@
 {% extends "undergraduate/undergraduate.html" %}
 {% block content %}
+<body>
 	<form id='formcorrect' action='' method='post'>
 		{% csrf_token %}
 		<div style="width: 100%; text-align: left; margin: auto;">
@@ -31,4 +32,5 @@
 	<footer>
 		<a href="/undergraduate/delivery/upload/{{delivery.practice.pk}}">back</a>
 	</footer>
+</body>
 {% endblock %}
