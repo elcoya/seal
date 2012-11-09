@@ -26,19 +26,19 @@ def before_all(context):
     Course.objects.all().delete()
     Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
     Teacher.objects.all().delete()
-    User.objects.exclude(username='seal').delete()
-    uid = 'teacher'
-    user = User()
-    user.username = uid
-    user.set_password(uid)
-    user.email = uid + "@foo.foo"
-    user.save()
-    teacher = Teacher()
-    teacher.user = user
-    teacher.name = uid
-    teacher.uid = uid
-    teacher.email = uid + "@foo.foo"
-    teacher.save()
+#    User.objects.exclude(username='seal').delete()
+#    uid = 'teacher'
+#    user = User()
+#    user.username = uid
+#    user.set_password(uid)
+#    user.email = uid + "@foo.foo"
+#    user.save()
+#    teacher = Teacher()
+#    teacher.user = user
+#    teacher.name = uid
+#    teacher.uid = uid
+#    teacher.email = uid + "@foo.foo"
+#    teacher.save()
 
 def after_all(context):
     Delivery.objects.all().delete()

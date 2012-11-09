@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% extends "undergraduate/undergraduate.html" %}
 {% block content %}
 <body>
 	<form id='formuploaddelivery' action='' method='post' enctype='multipart/form-data'>
@@ -39,7 +39,7 @@
 				</tr>
 				{% empty %}
 				<tr>
-					<td colspan="4" style="text-align: center; ">There are yet no Delivery from this practice</td>
+					<td colspan="4" style="text-align: center; ">There are yet no deliveries from this practice</td>
 				</tr>
 				{% endfor %}
 			</tbody>

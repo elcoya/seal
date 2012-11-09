@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% extends "teacher/teacher.html" %}
 {% block content %}
 
 <form id='formeditstudent' action='' method='post'>
@@ -8,7 +8,7 @@
 		{{ form.as_table }}
 	</table>
 	<input type='submit' value='Save' />
-	<div><a href="/" >home</a> | <a href="/course/editcourse/{{ idcourse }}">back</a></div>
+	<div><a href="/" >home</a> | <a href="/teacher/course/editcourse/{{ idcourse }}">back</a></div>
 </form>	
 
 {% endblock %}

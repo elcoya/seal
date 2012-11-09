@@ -61,7 +61,6 @@ div.main-content {
 }
 
 div.main-content a {
-	background: #F0F0F0;
 	font-size: 90%;
 	padding: 3px;
 	text-decoration: none;
@@ -72,11 +71,11 @@ div.main-content a:hover {
 }
 
 table {
-	background: #F8F8F8;
+	background: #F4F4F4;
 }
 
 thead {
-	background: #F4F4F4;
+	background: #F0F0F0;
 }
 
 tr {

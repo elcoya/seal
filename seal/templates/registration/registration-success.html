@@ -1,11 +1,11 @@
-{% extends "admin/base_site.html" %}
+{% extends "base.html" %}
 {% load i18n admin_static %}
 {% block extrastyle %}
 {{ block.super }}
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
 {% endblock %}
 {% block bodyclass %}dashboard{% endblock %}
-{% block content %}
+{% block body %}
 <div>
 	{% csrf_token %}
 	<nav>	
@@ -13,7 +13,7 @@
 			<a href="/">Home</a>
 		</p>
 	</nav>
-	<div>Registration completed successfully! <a href="login">Log me in</a></div>
+	<div>Registration completed successfully! <a href="/">Log me in</a></div>
 	<footer>
 	</footer>
 </div>

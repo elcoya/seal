@@ -4,7 +4,9 @@ from seal.model import Delivery
 from django.template.context import RequestContext
 from seal.forms.correction import CorrectionForm
 from seal.model import Correction
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request, iddelivery):  
     delivery = Delivery.objects.get(pk=iddelivery)
     correction = Correction.objects.filter(delivery=delivery)
@@ -23,6 +25,7 @@ def index(request, iddelivery):
             form = CorrectionForm()
         return render(request, 'correction/index.html', {'form': form, 'delivery': delivery}, context_instance=RequestContext(request))
 
+@login_required
 def editcorrection(request, idcorrection):
     correction = Correction.objects.get(pk=idcorrection)
     if (request.method == 'POST'):

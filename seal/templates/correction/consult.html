@@ -1,10 +1,9 @@
-{% extends "admin/base_site.html" %}
+{% extends "undergraduate/undergraduate.html" %}
 {% block content %}
-<body>
 	<form id='formcorrect' action='' method='post'>
 		{% csrf_token %}
 		<div style="width: 100%; text-align: left; margin: auto;">
-			CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}} - STUDENT {{delivery.student.name}} ({{delivery.student.uid}})
+			CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}}
 			<br>
 			<br>
 		</div>
@@ -32,6 +31,4 @@
 	<footer>
 		<a href="/students/home/{{delivery.student.pk}}" >home</a> | <a href="/delivery/newdelivery/{{delivery.practice.pk}}/{{delivery.student.pk}}">back</a>
 	</footer>
-
-</body>
 {% endblock %}

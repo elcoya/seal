@@ -35,7 +35,7 @@ def newstudent(request, idcourse):
         form = StudentForm(initial={'courses': [idcourse]})
     return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
-def editstudent(request, idcourse ,idstudent):
+def editstudent(request, idcourse, idstudent):
     student=Student.objects.get(pk=idstudent)     
     if (request.method=='POST'):
         form = StudentForm(request.POST, instance = student)
@@ -46,3 +46,15 @@ def editstudent(request, idcourse ,idstudent):
     else:
         form = StudentForm( instance = student)
     return render(request,'student/editstudent.html',{'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
+
+def edit_unenrolled_student(request, idstudent):
+    student=Student.objects.get(pk=idstudent)     
+    if (request.method=='POST'):
+        form = StudentForm(request.POST, instance = student)
+        if (form.is_valid()):
+            form.save()
+            pathok="/teacher/students/"
+            return HttpResponseRedirect(pathok)
+    else:
+        form = StudentForm( instance = student)
+    return render(request,'student/editstudent.html',{'form': form}, context_instance=RequestContext(request))
