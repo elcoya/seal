@@ -33,6 +33,7 @@
 			<tr>
 				<td>Course</td>
 				<td>Date of Suscription</td>	
+				<td>Date of Resolve</td>	
 				<td>Estate</td>
 			</tr>
 		</thead>
@@ -41,6 +42,7 @@
 			<tr>
 				<td style="text-align: center; " >{{ suscription.course.name }}</td>
 				<td style="text-align: center; ">{{ suscription.suscriptionDate}}</td>
+				<td style="text-align: center; ">{{ suscription.resolveDate}}</td>
 				<td style="text-align: center; ">{{ suscription.state }}</td>
 			</tr>
 			{% empty %}

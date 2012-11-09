@@ -6,5 +6,6 @@ class Suscription(models.Model):
     student = models.ForeignKey(Student)
     state = models.CharField(max_length = 32)
     suscriptionDate = models.DateField()
+    resolveDate = models.DateField(null=True)
     def __str__(self):
         return (str(self.pk))

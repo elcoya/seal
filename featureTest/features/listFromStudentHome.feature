@@ -11,7 +11,6 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
 		Given Student "martin" exists with password "martin"
     	  And course "2012-1" exists
 		  And course "2011-2" exists
-		  And user "martin" is registered
 		  And student "Martin" exists in course "2012-1" and in course "2011-2"
           And I log in as "martin" "martin"
 		 Then I should see "2012-1" before "2011-2" 

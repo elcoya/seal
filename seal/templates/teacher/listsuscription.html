@@ -1,0 +1,72 @@
+{% extends "teacher/teacher.html" %}
+{% block content %}
+<body>
+	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
+		<div style="clear: none; width: 50%; float: left;">
+			Pending Suscription of course {{ course.name }} <br><br>
+		</div>
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr>
+					<td>Uid</td>
+					<td>Student Uid</td>
+					<td>Student Name</td>
+					<td>Suscirption Date</td>
+					<td></td>
+					<td></td>				
+				</tr>
+			</thead>
+			<tbody>
+				{% for suscription in suscriptions %}
+				<tr>
+					<td style="text-align: center; " >{{ suscription.pk }}</td>
+					<td style="text-align: center; ">{{ suscription.student.uid }}</td>
+					<td style="text-align: center; ">{{ suscription.student.name }}</td>					
+					<td style="text-align: center; ">{{ suscription.suscriptionDate }}</td>
+					<td style="text-align: center; "><a href="/teacher/suscription/accept/{{ suscription.pk }}">Accept</a></td>
+					<td style="text-align: center; "><a href="/teacher/suscription/reject/{{ suscription.pk }}">Reject</a></td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="4" style="text-align: center; ">There are yet no suscriptions for this course</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br><br>
+		<div style="clear: none; width: 50%; float: left;">
+			Suscription solver of course {{ course.name }} <br><br>
+		</div>
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr>
+					<td>Uid</td>
+					<td>Student Uid</td>
+					<td>Student Name</td>
+					<td>Suscirption Date</td>
+					<td>Resolve Date</td>	
+					<td>State</td>				
+				</tr>
+			</thead>
+			<tbody>
+				{% for suscription in suscriptionsSolve %}
+				<tr>
+					<td style="text-align: center; " >{{ suscription.pk }}</td>
+					<td style="text-align: center; ">{{ suscription.student.uid }}</td>
+					<td style="text-align: center; ">{{ suscription.student.name }}</td>					
+					<td style="text-align: center; ">{{ suscription.suscriptionDate }}</td>
+					<td style="text-align: center; ">{{ suscription.resolveDate }}</td>
+					<td style="text-align: center; ">{{ suscription.state }}</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="6" style="text-align: center; ">There are yet no suscriptions solve for this course</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+	<a href="/teacher/course/editcourse/{{course.pk}}">back</a>
+</body>
+{% endblock %}

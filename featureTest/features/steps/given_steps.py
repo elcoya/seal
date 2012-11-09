@@ -210,8 +210,8 @@ def step(context,practice,student,coment1,coment2,note):
     d = Delivery.objects.get(student=s, practice=p)
     Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,note=note,delivery_id=d.pk)
 
-@given('existe suscrition of student "{student}" for course "{course}" with suscription date "{suscriptionDate}"')
-def step(context,student,course,suscriptionDate):
+@given('existe suscrition of student "{student}" for course "{course}" with suscription date "{suscriptionDate}" and state "{state}"')
+def step(context,student,course,suscriptionDate,state):
     s = Student.objects.get(name=student)
     c = Course.objects.get(name=course)
-    Suscription.objects.get_or_create(student_id=s.pk, course_id=c.pk, state="Pending", suscriptionDate=suscriptionDate)
+    Suscription.objects.get_or_create(student_id=s.pk, course_id=c.pk, state=state, suscriptionDate=suscriptionDate)

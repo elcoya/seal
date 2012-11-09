@@ -86,6 +86,12 @@ def step(context,course):
     addres = base_url + 'teacher/course/editcourse/'+str(c.pk)
     context.browser.get(addres)
 
+@when('I am in the suscription list page of course "{course}"')
+def step(context,course):
+    c = Course.objects.get(name=course)
+    addres = base_url + 'teacher/suscription/list/'+str(c.pk)
+    context.browser.get(addres)
+
 @when('I fill in the registration form with user "{uid}"')
 def step(context, uid):
     form = context.browser.find_element_by_tag_name('form')

@@ -34,3 +34,8 @@ urlpatterns += patterns('view.teacher.correction',
     url(r'^correction/edit/(?P<idcorrection>\d+)/$', 'editcorrection'),
 )
 
+urlpatterns += patterns('view.teacher.suscription',
+    url(r'^suscription/list/(?P<idcourse>\d+)/$', 'listsuscription'),
+    url(r'^suscription/accept/(?P<idsuscription>\d+)/$', 'accept'),
+    url(r'^suscription/reject/(?P<idsuscription>\d+)/$', 'reject'),
+)
