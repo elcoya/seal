@@ -14,7 +14,7 @@ def listsuscription(request, idcourse):
 def accept(request, idsuscription):
     suscription = Suscription.objects.get(pk=idsuscription)
     suscription.state="Accept"
-    suscription.resolvDate = date.today()
+    suscription.resolveDate = date.today()
     suscription.save()
     
     student = Student.objects.get(pk=suscription.student.pk)
@@ -29,7 +29,7 @@ def accept(request, idsuscription):
 def reject(request, idsuscription):
     suscription = Suscription.objects.get(pk=idsuscription)
     suscription.state="Reject"
-    suscription.resolvDate = date.today()
+    suscription.resolveDate = date.today()
     suscription.save()
     
     course = Course.objects.get(pk=suscription.course.pk)
