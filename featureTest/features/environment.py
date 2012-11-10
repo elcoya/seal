@@ -2,7 +2,7 @@ from behave import *
 from parse import *
 from selenium import webdriver
 from django.core.files import File
-
+import shutil
 # The next few steps are required to load the configuration and include the application model for the behavioural tests.
 import ConfigParser, os
 from django.contrib.auth import login
@@ -14,18 +14,23 @@ sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module name
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
 pathproject = config.get("Path", "path.project")
-filePath = pathproject + "featureTest/data/pdftest.pdf"
+filePath = pathproject + "seal/Delivery_Files"
+deliveryPath = pathproject + "/seal/Practice_Files"
+
 
 # Now we can load our model
 from seal.model import Course, Student, Practice, Delivery, Teacher, Correction, Suscription
 from django.contrib.auth.models import User
 
 def before_all(context):
-    User.objects.exclude(username='seal').delete()
+    Suscription.objects.all().delete()
+    Correction.objects.all().delete()
+    Delivery.objects.all().delete()
     Practice.objects.all().delete()
     Course.objects.all().delete()
     Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
     Teacher.objects.all().delete()
+    User.objects.exclude(username='seal').delete()
 #    User.objects.exclude(username='seal').delete()
 #    uid = 'teacher'
 #    user = User()
@@ -49,7 +54,11 @@ def after_all(context):
     Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
     Teacher.objects.all().delete()
     User.objects.exclude(username='seal').delete()
-
+    if os.path.isdir(filePath):
+        shutil.rmtree(filePath)
+    if os.path.isdir(deliveryPath):
+        shutil.rmtree(deliveryPath)
+    
 def before_feature(context, feature):
     context.browser = webdriver.Firefox()
     context.browser.get('http://localhost:8000/')
