@@ -35,7 +35,8 @@ Feature: As a teacher I want to administrate de suscription
 		 And there are no suscription
 		 And existe suscrition of student "martin" for course "2012-1" with suscription date "2012-11-01" and state "Pending"
 		When I am in the suscription list page of course "2012-1"
-		 And I click in the "Accept" link
+		 And I check the suscription of student "martin" for course "2012-1"
+		 And I click the button "Accept"
         Then I should see "Accept"     
         
     Scenario: Reject suscription  
@@ -46,7 +47,8 @@ Feature: As a teacher I want to administrate de suscription
 		 And there are no suscription
 		 And existe suscrition of student "martin" for course "2012-1" with suscription date "2012-11-01" and state "Pending"
 		When I am in the suscription list page of course "2012-1"
-		 And I click in the "Reject" link
+ 		 And I check the suscription of student "martin" for course "2012-1"
+		 And I click the button "Reject"
         Then I should see "Reject"     
 
 	Scenario: Accept Suscription and see a course in de home page of student
@@ -57,7 +59,8 @@ Feature: As a teacher I want to administrate de suscription
 		 And there are no suscription
 		 And existe suscrition of student "martin" for course "2012-1" with suscription date "2012-11-01" and state "Pending"
 		When I am in the suscription list page of course "2012-1"
-		 And I click in the "Accept" link
+		 And I check the suscription of student "martin" for course "2012-1"
+		 And I click the button "Accept"
 		 And I click in the "logout" link
          And I log in as "martin" "martin"
         Then I should see link to "2012-1" in the list 

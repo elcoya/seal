@@ -38,4 +38,6 @@ urlpatterns += patterns('view.teacher.suscription',
     url(r'^suscription/list/(?P<idcourse>\d+)/$', 'listsuscription'),
     url(r'^suscription/accept/(?P<idsuscription>\d+)/$', 'accept'),
     url(r'^suscription/reject/(?P<idsuscription>\d+)/$', 'reject'),
+    url(r'^suscription/acceptGroup/(?P<idcourse>\d+)/', 'acceptGroup'),
+    url(r'^suscription/rejectGroup/(?P<idcourse>\d+)/', 'rejectGroup'),
 )
