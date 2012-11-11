@@ -30,9 +30,7 @@ def index(request):
 def newpractice(request, idcourse):
     if (request.method == 'POST'):
         form = PracticeForm(request.POST, request.FILES)
-        for filename, file in request.FILES.iteritems():
-            ext = request.FILES[filename].content_type
-        if (form.is_valid() and ext == "application/pdf"):
+        if (form.is_valid()):
             form.save()
             pathok = "/teacher/course/editcourse/" + str(idcourse)
             return HttpResponseRedirect(pathok)
@@ -45,9 +43,7 @@ def editpractice(request, idcourse , idpractice):
     practice = Practice.objects.get(pk=idpractice)     
     if (request.method == 'POST'):
         form = PracticeForm(request.POST, request.FILES, instance=practice)
-        for filename, file in request.FILES.iteritems():
-            ext = request.FILES[filename].content_type
-        if (form.is_valid() and ext == "application/pdf"):
+        if (form.is_valid()):
             formEdit = form.save(commit=False)
             formEdit.save()
             pathok = "/course/editcourse/" + str(idcourse)

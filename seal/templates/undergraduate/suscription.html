@@ -1,0 +1,56 @@
+{% extends "undergraduate/index.html" %}
+{% block content %}
+<body>
+	<div style="width: 100%; text-align: left; margin: auto;">
+		Suscription
+	</div>
+	<table style="width: 100%">
+		<thead style="text-align: center; ">
+			<tr>
+				<td>Course</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for course in courses %}
+			<tr>
+				<td style="text-align: center; " >{{ course.name }}</td>
+				<td style="text-align: center; "><a href="/undergraduate/suscription/suscribe/{{ course.pk}}">Suscribe</a></td>
+			</tr>
+			{% empty %}
+			<tr>
+				<td colspan="4" style="text-align: center; ">There are yet no Course to suscribe</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br><br>
+	<div style="width: 100%; text-align: left; margin: auto;">
+		List of old Suscription
+	</div>
+	<table style="width: 100%">
+		<thead style="text-align: center; ">
+			<tr>
+				<td>Course</td>
+				<td>Date of Suscription</td>	
+				<td>Date of Resolve</td>	
+				<td>Estate</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for suscription in suscriptions %}
+			<tr>
+				<td style="text-align: center; " >{{ suscription.course.name }}</td>
+				<td style="text-align: center; ">{{ suscription.suscriptionDate}}</td>
+				<td style="text-align: center; ">{{ suscription.resolveDate}}</td>
+				<td style="text-align: center; ">{{ suscription.state }}</td>
+			</tr>
+			{% empty %}
+			<tr>
+				<td colspan="4" style="text-align: center; ">There are no old suscription</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+{% endblock %}

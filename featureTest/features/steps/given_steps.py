@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from seal.model.teacher import Teacher
 from string import capitalize
 from seal.forms import student
+from seal.model.suscription import Suscription
 
 base_url = 'http://localhost:8000/'
 
@@ -102,6 +103,10 @@ def step(context):
 @given('there are no corrections')
 def step(context):
     Correction.objects.all().delete()
+
+@given('there are no suscription')
+def step(context):
+    Suscription.objects.all().delete()
 
 @given('course "{course}" exists')
 def step(context,course):
@@ -204,3 +209,9 @@ def step(context,practice,student,coment1,coment2,note):
     p = Practice.objects.get(uid=practice)
     d = Delivery.objects.get(student=s, practice=p)
     Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,note=note,delivery_id=d.pk)
+
+@given('existe suscrition of student "{student}" for course "{course}" with suscription date "{suscriptionDate}" and state "{state}"')
+def step(context,student,course,suscriptionDate,state):
+    s = Student.objects.get(name=student)
+    c = Course.objects.get(name=course)
+    Suscription.objects.get_or_create(student_id=s.pk, course_id=c.pk, state=state, suscriptionDate=suscriptionDate)

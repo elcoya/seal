@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django.forms import forms
 from seal.model import Delivery
+import os
 
 class DeliveryForm(ModelForm):
     class Meta:
@@ -9,7 +10,14 @@ class DeliveryForm(ModelForm):
         
     def clean_file(self):
         data = self.cleaned_data['file']
-        ext = data.content_type
-        if (ext != "application/zip"):
-            raise forms.ValidationError("Only zip is permited to upload!")
-        return data
+        tipe = data.content_type
+        filename = data.name
+        ext = os.path.splitext(filename)[1]
+        ext = ext.lower()
+        print(ext)
+        if ((tipe == "application/zip") or (tipe == "application/octet-stream" and ext == ".zip")):
+            return data
+        else:
+            error = "Only zip is permited to upload!"
+            raise forms.ValidationError(error)
+        

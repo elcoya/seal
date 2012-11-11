@@ -1,6 +1,7 @@
 from behave import *
-from selenium import webdriver 
-from seal.model import Course, Student, Practice, Delivery
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from seal.model import Course, Student, Practice, Delivery, Suscription
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
@@ -86,6 +87,12 @@ def step(context,course):
     addres = base_url + 'teacher/course/editcourse/'+str(c.pk)
     context.browser.get(addres)
 
+@when('I am in the suscription list page of course "{course}"')
+def step(context,course):
+    c = Course.objects.get(name=course)
+    addres = base_url + 'teacher/suscription/list/'+str(c.pk)
+    context.browser.get(addres)
+
 @when('I fill in the registration form with user "{uid}"')
 def step(context, uid):
     form = context.browser.find_element_by_tag_name('form')
@@ -129,3 +136,21 @@ def step(context,student,practice):
     d = Delivery.objects.get(student=s, practice=p)
     addres = base_url + 'undergraduate/correction/consult/'+str(d.pk)
     context.browser.get(addres)
+
+@when('I check the suscription of student "{student}" for course "{course}"')
+def step(context,student,course):
+    s = Student.objects.get(uid=student)
+    c = Course.objects.get(name=course)
+    s = Suscription.objects.get(student=s, course=c)
+    checkbox = context.browser.find_elements(By.ID, s.pk)
+    checkbox[0].click()
+    
+@when('I click the button "{name}"')
+def step(context,name):
+    button = context.browser.find_elements(By.NAME, name)
+    button[0].click()
+    
+@when('I click in the checkAll')
+def step(context):
+    checkbox = context.browser.find_elements(By.NAME, 'checkAll')
+    checkbox[0].click()
