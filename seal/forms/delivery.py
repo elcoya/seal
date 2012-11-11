@@ -18,6 +18,6 @@ class DeliveryForm(ModelForm):
         if ((tipe == "application/zip") or (tipe == "application/octet-stream" and ext == ".zip")):
             return data
         else:
-            error = "Only zip is permited to upload!"
+            error = "Only zip is permited to upload! Type detected: " + str(tipe)
             raise forms.ValidationError(error)
         
