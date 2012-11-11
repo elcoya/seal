@@ -14,10 +14,10 @@ class DeliveryForm(ModelForm):
         filename = data.name
         ext = os.path.splitext(filename)[1]
         ext = ext.lower()
-        print(ext)
-        if ((tipe == "application/zip") or (tipe == "application/octet-stream" and ext == ".zip")):
+        if ((tipe in ("application/zip", "application/x-zip-compressed")) or 
+            (tipe == "application/octet-stream" and ext == ".zip")):
             return data
         else:
-            error = "Only zip is permited to upload!"
+            error = "Only zip is permited to upload! Type detected: " + str(tipe)
             raise forms.ValidationError(error)
         
