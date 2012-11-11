@@ -8,7 +8,8 @@ from django.template.context import RequestContext
 def listsuscription(request, idcourse):
     course = Course.objects.get(pk=idcourse)
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
-    suscriptionsSolve = Suscription.objects.filter(course=course, state="Accept" or "Reject").order_by('suscriptionDate')
+    suscriptionsSolve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
+    suscriptionsSolve = suscriptionsSolve.exclude(state="Pending")
     return render(request, 'teacher/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
 
 @login_required
