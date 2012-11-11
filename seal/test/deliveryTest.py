@@ -30,7 +30,7 @@ class DeliveryTest(TestCase):
         practice.save()
         
         
-    def testPracticeCreation(self):
+    def testDeliveryCreation(self):
         student = Student.objects.get(uid="85000")
         practice = Practice.objects.get(uid="Tp inicial")
         
@@ -41,11 +41,11 @@ class DeliveryTest(TestCase):
         pDelivery.deliverDate = '2012-11-30'
         pDelivery.save()
         
-        cDelivery = pDelivery.objects.get(uid=1)
+        cDelivery = Delivery.objects.get(student=student, practice=practice)
         self.assertEqual(pDelivery.pk, cDelivery.pk)
     
     def tearDown(self):
-        delivery = Delivery.objects.get(uid=1)
+        delivery = Delivery.objects.get(id=1)
         delivery.delete()
         student = Student.objects.get(uid="85000")
         student.delete()
