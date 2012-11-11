@@ -13,10 +13,10 @@ class StudentTest(TestCase):
     def testStudentCreation(self):
         pStudent = Student()
         pStudent.name = "Nombre y Apellido"
-        pStudent.uid = 85000
+        pStudent.uid = '85000'
         pStudent.email = "email@pagnia.com.ar"
         pStudent.save()
-        cStudent = Student.objects.get(uid=85000)
+        cStudent = Student.objects.get(uid='85000')
         self.assertEqual(pStudent.uid, cStudent.uid)
         
     def testStudenteEqualUid(self):

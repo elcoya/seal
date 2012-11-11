@@ -2,6 +2,7 @@ from django.test import TestCase
 from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
+from django.db.utils import IntegrityError
 
 class CourseTest(TestCase):
     def testCourseCreation(self):
@@ -21,8 +22,7 @@ class CourseTest(TestCase):
         aName = '2012-2C'
         aCourse = Course.objects.get_or_create(name=aName)
         anotherCourse = Course(name=aName)
-        #self.assertRaises(SomeCoolException, anotherCourse.save())
-        anotherCourse.save()
+        self.assertRaises(IntegrityError, anotherCourse.save())
         self.fail('should have rise duplication exception')
     
     def testCourseAddStudent(self):
@@ -39,7 +39,7 @@ class CourseTest(TestCase):
     
     def testCourseDeleteStudent(self):
         """
-        I Will delete a Student from a Course and verify it does not contains it
+        I Will add a Student from a Course and verify it contains the student
         """
         aCourse = Course.objects.get_or_create(name='2012-1C')
         aStudent = Student.objects.get_or_create(name="Juan Perez", uid='1234', email = "email@pagnia.com.ar")

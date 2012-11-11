@@ -7,6 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from seal.model import Course, Delivery, Student, Practice
+from django.db.models.sql.datastructures import Date
 
 class DeliveryTest(TestCase):
     def setUp(self):
@@ -37,6 +38,7 @@ class DeliveryTest(TestCase):
         pDelivery.file = "pathFile"
         pDelivery.student = student
         pDelivery.practice = practice
+        pDelivery.deliverDate = '2012-11-30'
         pDelivery.save()
         
         cDelivery = pDelivery.objects.get(uid=1)
