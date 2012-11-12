@@ -1,11 +1,11 @@
 {% extends "teacher/teacher.html" %}
 {% block content %}
 
-<script>
+<script type="text/javascript">
 	function checkAll(source) {
 		checkboxes = document.getElementsByName('suscription');
 		for (var i in checkboxes)
-		checkboxes[i].checked = source.checked;
+			checkboxes[i].checked = source.checked;
 	}
 </script>
 
@@ -26,7 +26,7 @@
 						<td>Student Name</td>
 						<td>Suscirption Date</td>
 						<td>
-							<input name="checkAll" type="checkbox" onClick="checkAll(this)"/>
+							<input name="checkall" type="checkbox" onclick="checkAll(this)"/>
 						</td>
 					</tr>
 				</thead>
