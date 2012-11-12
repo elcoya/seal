@@ -8,7 +8,6 @@ urlpatterns += patterns('view.teacher.practice',
     url(r'^practices/?$', 'index'),
     url(r'^practices/newpractice/(?P<idcourse>\d+)$', 'newpractice'),
     url(r'^practices/editpractice/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'editpractice'),
-    url(r'^practices/download/(?P<idpractice>\d+)/$', 'download')
 )
 
 urlpatterns += patterns('view.teacher.student',
