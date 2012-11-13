@@ -6,6 +6,9 @@ from django.db.utils import IntegrityError
 
 class CourseTest(TestCase):
     def testCourseModelDescription(self):
+        """
+        Tests __str__
+        """
         name = "2012-2C"
         course = Course()
         course.name = name

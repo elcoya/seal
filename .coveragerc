@@ -1,0 +1,6 @@
+# Coverage configuration file
+[run]
+include=seal/model/*,seal/view/*
+
+[html]
+directory=coverage_report

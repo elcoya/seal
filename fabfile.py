@@ -113,7 +113,12 @@ def invoke_test_deploy(context = None):
         print("[fabric] tests run successfully... deploying to test instance.")
         local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
 
+def run_coverage_analysis(context = None):
+    local("coverage run seal/manage.py test model")
+    local("coverage report")
+
 def run():
     ctxt = FabricContext()
     prepare_deploy(ctxt)
     invoke_test_deploy(ctxt)
+    run_coverage_analysis()

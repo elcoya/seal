@@ -14,8 +14,9 @@ install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -q mysql-python --use-mirrors
   - pip install -q fabric
-  - pip install behave
+  - pip install -q behave
   - pip install -q selenium
+  - pip install -q coverage
 
 # command to run tests, e.g. python setup.py test
 script: fab run
