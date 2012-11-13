@@ -22,11 +22,6 @@ urlpatterns += patterns('',
     url(r'^teacher/?', include('view.teacher.urls')),
 )
 
-#Student site: home, list assignments, deliver assignment, etc
 urlpatterns += patterns('',
     url(r'^undergraduate/?', include('view.undergraduate.urls')),
-)
-
-urlpatterns += patterns('view.user.student',
-    url(r'^student/?$', 'index'),
 )

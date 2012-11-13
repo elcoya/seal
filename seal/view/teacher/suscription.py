@@ -10,7 +10,7 @@ def listsuscription(request, idcourse):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptionsSolve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptionsSolve = suscriptionsSolve.exclude(state="Pending")
-    return render(request, 'teacher/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
 
 @login_required
 def accept(request, idsuscription):
@@ -26,7 +26,7 @@ def accept(request, idsuscription):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptionsSolve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptionsSolve = suscriptionsSolve.exclude(state="Pending")
-    return render(request, 'teacher/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
 
 @login_required
 def reject(request, idsuscription):
@@ -40,7 +40,7 @@ def reject(request, idsuscription):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptionsSolve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptionsSolve = suscriptionsSolve.exclude(state="Pending")
-    return render(request, 'teacher/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
 
 @login_required
 def acceptGroup(request, idcourse):
@@ -56,7 +56,7 @@ def acceptGroup(request, idcourse):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptionsSolve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptionsSolve = suscriptionsSolve.exclude(state="Pending")
-    return render(request, 'teacher/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
 
 @login_required
 def rejectGroup(request, idcourse):
@@ -70,4 +70,4 @@ def rejectGroup(request, idcourse):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptionsSolve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptionsSolve = suscriptionsSolve.exclude(state="Pending")
-    return render(request, 'teacher/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions,'suscriptionsSolve': suscriptionsSolve,'course': course}, context_instance=RequestContext(request))
