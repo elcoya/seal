@@ -5,6 +5,13 @@ from seal.model.practice import Practice
 from django.db.utils import IntegrityError
 
 class CourseTest(TestCase):
+    def testCourseModelDescription(self):
+        name = "2012-2C"
+        course = Course()
+        course.name = name
+        assert_name = str(course)
+        self.assertEqual(assert_name, name, "Course to string expected to be " + name + " but was " + assert_name)
+    
     def testCourseCreation(self):
         """
         We create a Course with a name and checks it's value.

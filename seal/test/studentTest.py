@@ -9,7 +9,12 @@ from django.test import TestCase
 from seal.model import Student,Course
 
 class StudentTest(TestCase):
-
+    
+    def testStudentModelDescription(self):
+        student = Student()
+        student.name = "Nombre"
+        self.assertEqual(str(student), "Nombre")
+    
     def testStudentCreation(self):
         pStudent = Student()
         pStudent.name = "Nombre y Apellido"
@@ -24,13 +29,13 @@ class StudentTest(TestCase):
         p1Student = Student()
         
         pStudent.name = "Nombre y Apellido"
-        pStudent.uid = 50000
+        pStudent.uid = "50000"
         pStudent.email = "email@pagnia.com.ar"
         #save de first estudent...
         pStudent.save()
         
         p1Student.name = "Nombre y Apellido"
-        p1Student.uid = 50000
+        p1Student.uid = "50000"
         p1Student.email = "email@pagnia.com.ar"
         try:
             #try save second student withd equal uid 

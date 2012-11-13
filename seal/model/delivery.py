@@ -10,6 +10,6 @@ class Delivery(models.Model):
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()
     def __str__(self):
-        return (str(self.pk))
+        return (str(self.practice) + " - " + str(self.student) + " - " + str(self.deliverDate))
     
     
