@@ -115,7 +115,10 @@ def invoke_test_deploy(context = None):
 
 def run_coverage_analysis(context = None):
     local("coverage run seal/manage.py test model")
-    local("coverage report")
+    if(config.get("Enviroment", "location") == "travis"):
+        local("coverage report")
+    else:
+        local("coverage html")
 
 def run():
     ctxt = FabricContext()
