@@ -39,5 +39,8 @@ http://ixion-tech.com.ar:8000/
 ###URL Ultimo analisis de cobertura
 http://ixion-tech.com.ar/seal/coverage/
 
+###URL Ultimo analisis lint
+http://ixion-tech.com.ar/seal/pylint/pylint.html
+
 ###Documento formal para presentacion en la facultad
 https://docs.google.com/document/d/1dBCXFkzwcSSTNkbK1ESLRpfidv5y6DR4kxhkDBYF3S0/edit
