@@ -7,7 +7,6 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from seal.model import Course, Delivery, Student, Practice
-from django.db.models.sql.datastructures import Date
 
 class DeliveryTest(TestCase):
     def setUp(self):
@@ -51,7 +50,7 @@ class DeliveryTest(TestCase):
         self.assertEqual(pDelivery.pk, cDelivery.pk)
     
     def tearDown(self):
-        delivery = Delivery.objects.filter(file="pathFile", deliverDate="2012-11-30").delete()
+        Delivery.objects.filter(file="pathFile", deliverDate="2012-11-30").delete()
         student = Student.objects.get(uid="85000")
         student.delete()
         practice = Practice.objects.get(uid="Tp inicial")

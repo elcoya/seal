@@ -2,7 +2,6 @@ from django.test import TestCase
 from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
-from django.db.utils import IntegrityError
 
 class CourseTest(TestCase):
     def testCourseModelDescription(self):
