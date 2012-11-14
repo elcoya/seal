@@ -112,6 +112,7 @@ def invoke_test_deploy(context = None):
     if(config.get("Enviroment", "location") == "travis"):
         print("[fabric] tests run successfully... deploying to test instance.")
         local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
+        local("cat requestUpdate.php")
 
 def run_coverage_analysis(context = None):
     local("coverage run seal/manage.py test model")

@@ -5,3 +5,5 @@
 seal/Practice_Files
 seal/Delivery_Files
 .coverage
+coverage_report
+pylint_report
