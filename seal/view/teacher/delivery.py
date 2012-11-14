@@ -1,8 +1,6 @@
-from django.http import HttpResponseRedirect, HttpResponse
-from seal.forms.delivery import DeliveryForm
+from django.http import HttpResponse
 from django.shortcuts import render
-from seal.model import Practice, Delivery, Student
-from datetime import date
+from seal.model import Practice, Delivery
 from django.contrib.auth.decorators import login_required
 
 @login_required

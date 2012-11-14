@@ -3,7 +3,6 @@ Created on 26/10/2012
 
 @author: anibal
 '''
-from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.teacher import Teacher
 from seal.forms.login import LoginForm

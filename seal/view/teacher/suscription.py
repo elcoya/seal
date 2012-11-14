@@ -46,8 +46,8 @@ def reject(request, idsuscription):
 def acceptGroup(request, idcourse):
     suscriptionList = request.POST.getlist('suscription')
     course = Course.objects.get(pk=idcourse)
-    for id in suscriptionList:
-        suscription = Suscription.objects.get(pk=id)
+    for suscripId in suscriptionList:
+        suscription = Suscription.objects.get(pk=suscripId)
         suscription.state="Accept"
         suscription.resolveDate = date.today()
         suscription.save()
@@ -62,8 +62,8 @@ def acceptGroup(request, idcourse):
 def rejectGroup(request, idcourse):
     suscriptionList = request.POST.getlist('suscription')
     course = Course.objects.get(pk=idcourse)   
-    for id in suscriptionList:
-        suscription = Suscription.objects.get(pk=id)
+    for suscripId in suscriptionList:
+        suscription = Suscription.objects.get(pk=suscripId)
         suscription.state="Reject"
         suscription.resolveDate = date.today()
         suscription.save()

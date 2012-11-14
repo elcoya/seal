@@ -3,7 +3,7 @@ Created on 23/10/2012
 
 @author: martin
 '''
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from seal.forms.practice import PracticeForm
 from django.shortcuts import render, render_to_response
 from seal.model.practice import Practice
