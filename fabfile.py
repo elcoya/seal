@@ -4,7 +4,7 @@ Created on 19/10/2012
 @author: anibal
 '''
 from __future__ import with_statement
-from fabric.api import local
+from fabric.api import local, settings
 from fabric.context_managers import lcd
 from subprocess import Popen
 
@@ -120,6 +120,13 @@ def run_coverage_analysis(context = None):
         local("coverage report")
     else:
         local("coverage html")
+
+def pylint():
+    print "launching pylint static analysis..."
+    with settings(warn_only=True):
+        result = local("pylint seal --rcfile=pylintrc > pylint_report/pylint.html")
+    print "pylint static analysis complete... exit status: " + str(result.return_code)
+    print "you can access the report result pylint_report/pylint.html"
 
 def run():
     ctxt = FabricContext()
