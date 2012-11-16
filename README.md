@@ -47,4 +47,5 @@ https://docs.google.com/document/d/1dBCXFkzwcSSTNkbK1ESLRpfidv5y6DR4kxhkDBYF3S0/
 
 ###Links de referencia
 ##Docstring conventions
+http://www.python.org/dev/peps/pep-0008/
 http://www.python.org/dev/peps/pep-0257/
