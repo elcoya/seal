@@ -11,6 +11,13 @@ from django.contrib import admin
 from seal.model.teacher import Teacher
 
 class CourseAdmin(admin.ModelAdmin):
+    """Utility for Django Admin tools.
+    
+    Util class that indicates the django admin how to order the courses when 
+    listed.
+    
+    """
+    
     ordering = ['-name',]
     
 admin.site.register(Course, CourseAdmin)

@@ -1,8 +1,11 @@
-'''
+"""
 Created on 19/10/2012
 
 @author: anibal
-'''
+
+Fabric file. This file imports the necessary modules and sets up the enviroment
+to be able to perform all the tasks intended for fabric.
+"""
 from __future__ import with_statement
 from fabric.api import local, settings
 from fabric.context_managers import lcd
@@ -18,19 +21,36 @@ sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module name
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
 class FabricContext:
+    """
+    Context class to transfer information from one call to another.
+    """
     server_process = None
 
 def launch_server(context):
+    """
+    Launches the test instance of the application server in a separate process
+    to run the feature tests.
+    """
     print("[fabric] launching server instance for feature tests.")
     context.server_process = Popen(["python", "seal/manage.py", "runserver", "--noreload"])
     print("[fabric] server online... pid: " + str(context.server_process.pid))
 
 def kill_server(context):
+    """
+    Terminates the tests instance of the application server. It is supposed to
+    be called after running the feature tests.
+    """
     print("[fabric] killing server...")
     context.server_process.terminate()
     print("[fabric] server killed...")
 
 def get_mysql_bash():
+    """
+    Builds the string that should be used to call a command over the database.
+    It is used to include the username and password to access the service. This
+    command would allow you to connect to de database, if you want to invoke a
+    given sql command, use get_mysql_bash_cmd.
+    """
     user = config.get("Database", "user")
     passwd = config.get("Database", "pass")
     local_cmd = "mysql -u " + user
@@ -39,6 +59,11 @@ def get_mysql_bash():
     return local_cmd
 
 def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
+    """
+    Builds the string that should be used to call a command over the database
+    with a given sql command. It uses the configuration given in the local.conf
+    file.
+    """
     user = config.get("Database", "user")
     passwd = config.get("Database", "pass")
     local_cmd = "mysql -e '" + sql_sentence + "' -u " + user
@@ -49,7 +74,11 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
     return local_cmd
 
 def create_super_user():
-    # create a super user
+    """
+    After the database is flushed and syncronized, it is necessary to create a
+    user to access the admin site. Teachers can be created from the admin site
+    and Students register themselves.
+    """
     from django.contrib.auth.models import User
     try:
         admin_user = User.objects.get_by_natural_key('seal')
@@ -69,6 +98,9 @@ def create_super_user():
         print "User account created"
 
 def prepare_db(context = None):
+    """
+    Resets the database applying the latests changes made in the app model.
+    """
     print("[fabric] preparing database.")
     if(config.get("Enviroment", "location") == "travis"):
         print("Travis location detected. Seting up database layout...")
@@ -93,10 +125,15 @@ def prepare_db(context = None):
     print("syncdb complete")
 
 def run_tests(context = None):
+    """Runs the application tests for the Django app"""
     print("[fabric] invoking tests.")
     local("python seal/manage.py test")
 
 def run_features_tests(context = None):
+    """
+    Runs the feature tests. Launches the server before running the tests, and
+    kills it after
+    """
     launch_server(context)
     print("[fabric] invoking feature testing.")
     with lcd("featureTest"):
@@ -104,17 +141,20 @@ def run_features_tests(context = None):
     kill_server(context)
 
 def prepare_deploy(context = None):
+    """Syncronizes the database and runs all the tests"""
     prepare_db(context)
     run_tests(context)
     run_features_tests(context)
 
 def invoke_test_deploy(context = None):
+    """Calls a url in the test server to update the test instance"""
     if(config.get("Enviroment", "location") == "travis"):
         print("[fabric] tests run successfully... deploying to test instance.")
         local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
         local("cat requestUpdate.php")
 
 def run_coverage_analysis(context = None):
+    """Invokes the test coverage analysis and generates the reports"""
     local("coverage run seal/manage.py test model")
     if(config.get("Enviroment", "location") == "travis"):
         local("coverage report")
@@ -122,6 +162,7 @@ def run_coverage_analysis(context = None):
         local("coverage html")
 
 def pylint():
+    """Runs the pylint analysis and saves the report to be available"""
     print "launching pylint static analysis..."
     with settings(warn_only=True):
         result = local("pylint seal --rcfile=pylintrc > pylint_report/pylint.html")
@@ -129,6 +170,7 @@ def pylint():
     print "you can access the report result pylint_report/pylint.html"
 
 def run():
+    """Main command for the fabric run"""
     ctxt = FabricContext()
     prepare_deploy(ctxt)
     invoke_test_deploy(ctxt)
