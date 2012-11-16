@@ -15,6 +15,6 @@ class Enrolled(models.Model):
     course = models.ForeignKey(Course)
     
     def __str__(self):
-        """Stringify the Enrollement""
+        """Stringify the Enrollement"""
         return self.course.__str__() + " - " + self.student.__str__()
 

@@ -5,7 +5,6 @@ Created on 05/11/2012
 '''
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from seal.model.course import Course
 from django.contrib.auth.decorators import login_required
 
 @login_required

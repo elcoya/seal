@@ -16,8 +16,11 @@ def index(request):
     suscriptions = Suscription.objects.filter(student = student).order_by('suscriptionDate')
     #TODO: deberia ser courses = all -(student.course.all() + suscription.course) no todos.
     courses = Course.objects.all()
-    return render(request, 'suscription/suscription.html', {'courses': courses,'suscriptions':suscriptions}, context_instance=RequestContext(request))
+    return render(request, 'suscription/suscription.html', 
+                  {'courses': courses, 'suscriptions':suscriptions}, 
+                  context_instance=RequestContext(request))
 
+@login_required
 def newsuscription(request, idcourse):
     student = request.user.student_set.get(uid=request.user.username)
     course = Course.objects.get(pk=idcourse)

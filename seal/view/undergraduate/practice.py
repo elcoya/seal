@@ -14,7 +14,9 @@ from django.http import HttpResponse
 def practicelist(request, idcourse):
     course = Course.objects.get(pk=idcourse)
     practices = course.practice_set.all().order_by('deadline')
-    return render(request, 'undergraduate/practiceList.html', {'practices': practices, 'coursename': course.name,}, context_instance=RequestContext(request))
+    return render(request, 'undergraduate/practiceList.html', 
+                  {'practices': practices, 'coursename': course.name, }, 
+                  context_instance=RequestContext(request))
 
 @login_required
 def download(request, idpractice):
