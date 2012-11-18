@@ -19,7 +19,7 @@ class CorrectionTest(TestCase):
     delivery_date = "2012-11-30"
     correction_public_comment = "Public Comment for test"
     correction_private_comment = "Private Comment for test"
-    correction_note = 4.0
+    correction_grade = 4.0
     
     def create_a_course(self):
         course = Course()
@@ -76,7 +76,7 @@ class CorrectionTest(TestCase):
         correction = Correction()
         correction.publicComent = self.correction_public_comment
         correction.privateComent = self.correction_private_comment
-        correction.note = self.correction_note
+        correction.grade = self.correction_grade
         delivery = Delivery.objects.get(file=self.delivery_filepath)
         correction.delivery = delivery
         correction.save()
@@ -87,12 +87,12 @@ class CorrectionTest(TestCase):
         saved_correction = corrections[0]
         self.assertEqual(saved_correction.publicComent, self.correction_public_comment)
         self.assertEqual(saved_correction.privateComent, self.correction_private_comment)
-        self.assertEqual(saved_correction.note, self.correction_note)
+        self.assertEqual(saved_correction.grade, self.correction_grade)
     
     def testCorrectionStringify(self):
         correction = Correction()
         correction.publicComent = self.correction_public_comment
         correction.privateComent = self.correction_private_comment
-        correction.note = self.correction_note
-        self.assertEqual(str(correction), str(self.correction_note) + " - " + self.correction_public_comment)
+        correction.grade = self.correction_grade
+        self.assertEqual(str(correction), str(self.correction_grade) + " - " + self.correction_public_comment)
     

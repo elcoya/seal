@@ -12,14 +12,14 @@
 			<thead style="text-align: center; ">
 				<tr>
 					<td>Coment</td>
-					<td>Note</td>
+					<td>Grade</td>
 				</tr>
 			</thead>
 			<tbody>
 				{% for correc in correction %}
 				<tr>
 					<td style="width: 90%;">{{ correc.publicComent }}</td>
-					<td style="text-align: center; ">{{ correc.note }}</td>
+					<td style="text-align: center; ">{{ correc.grade }}</td>
 				</tr>
 				{% empty %}
 				<tr>

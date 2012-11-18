@@ -13,7 +13,7 @@ Feature: As a student I want to see my corrections
 	 	 Then I should see "There is yet no Correction"
 	 	 
 
-	Scenario: Student only see a public coment and note of correction
+	Scenario: Student only see a public coment and grade of correction
 		Given course "2012-1" exists 
 	 	  And Student "martin" exists with password "martin"
 	 	  And student "Martin" exists in course "2012-1"

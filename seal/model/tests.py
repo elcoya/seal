@@ -1,8 +1,9 @@
-'''
-Created on 11/11/2012
+"""
 
-@author: anibal
-'''
+This file exists for the only purpouse of having Django acknowledging the tests
+
+"""
+
 from seal.test.courseTest import CourseTest
 from seal.test.studentTest import StudentTest
 from seal.test.practiceTest import PracticeTest

@@ -122,12 +122,12 @@ def step(context,student,practice):
     addres = base_url + 'teacher/correction/'+str(d.pk)
     context.browser.get(addres)
 
-@when('I fill the form with "{coment1}" "{coment2}" "{note}"')
-def step(context, coment1, coment2, note):
+@when('I fill the form with "{coment1}" "{coment2}" "{grade}"')
+def step(context, coment1, coment2, grade):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_id('id_publicComent').send_keys(coment1)
     form.find_element_by_id('id_privateComent').send_keys(coment2)
-    form.find_element_by_name('note').send_keys(note)
+    form.find_element_by_name('grade').send_keys(grade)
 
 @when('I am in the correction consult page of delivery from student "{student}" and practice "{practice}"')
 def step(context,student,practice):

@@ -203,12 +203,12 @@ def step(context,practice,student,deliveryDate):
     p = Practice.objects.get(uid=practice)
     Delivery.objects.get_or_create(file="archivo.zip",student_id=s.pk,practice_id=p.pk, deliverDate=deliveryDate)
 
-@given('exist correction of delivery of "{student}" for "{practice}" with "{coment1}" "{coment2}" "{note}"')
-def step(context,practice,student,coment1,coment2,note):
+@given('exist correction of delivery of "{student}" for "{practice}" with "{coment1}" "{coment2}" "{grade}"')
+def step(context,practice,student,coment1,coment2,grade):
     s = Student.objects.get(name=student)
     p = Practice.objects.get(uid=practice)
     d = Delivery.objects.get(student=s, practice=p)
-    Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,note=note,delivery_id=d.pk)
+    Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,grade=grade,delivery_id=d.pk)
 
 @given('existe suscrition of student "{student}" for course "{course}" with suscription date "{suscriptionDate}" and state "{state}"')
 def step(context,student,course,suscriptionDate,state):

@@ -12,9 +12,9 @@ class Correction(models.Model):
     
     publicComent = models.TextField(max_length=2000)
     privateComent = models.TextField(max_length=2000)
-    note = models.FloatField()
+    grade = models.FloatField()
     delivery = models.ForeignKey(Delivery)
     
     def __str__(self):
         """Stringify the Correction"""
-        return (str(self.note) + " - " + self.publicComent)
+        return (str(self.grade) + " - " + self.publicComent)
