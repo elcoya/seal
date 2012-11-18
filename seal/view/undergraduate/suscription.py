@@ -14,10 +14,18 @@ from django.template.context import RequestContext
 def index(request):
     student = request.user.student_set.get(uid=request.user.username)
     suscriptions = Suscription.objects.filter(student = student).order_by('suscriptionDate')
-    #TODO: deberia ser courses = all -(student.course.all() + suscription.course) no todos.
+    
     courses = Course.objects.all()
+    student_courses = student.courses.all()
+    courses_student_pending = []
+    suscript_pending = suscriptions.filter(state = "Pending")
+    for sp in suscript_pending:
+        courses_student_pending.append(sp.course)
+            
+    course_to_suscript = list(set(courses) - set(student_courses) - set(courses_student_pending))    
+    
     return render(request, 'suscription/suscription.html', 
-                  {'courses': courses, 'suscriptions':suscriptions}, 
+                  {'courses': course_to_suscript , 'suscriptions':suscriptions}, 
                   context_instance=RequestContext(request))
 
 @login_required
