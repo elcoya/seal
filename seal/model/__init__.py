@@ -5,4 +5,4 @@ from seal.model.practice import Practice
 from seal.model.delivery import Delivery
 from seal.model.correction import Correction
 from seal.model.suscription import Suscription
-
+from seal.model.autocheck import Autocheck

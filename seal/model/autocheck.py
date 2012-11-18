@@ -12,9 +12,9 @@ class Autocheck(models.Model):
     STATUS_STRINGS = {-1:"failed", 0:"pending", 1:"successfull"}
     
     delivery = models.ForeignKey(Delivery)
-    captured_stdout = models.CharField(max_length=10240)
-    exit_value = models.IntegerField()
-    status = models.IntegerField()
+    captured_stdout = models.CharField(max_length=10240, blank=True)
+    exit_value = models.IntegerField(default=0)
+    status = models.IntegerField(default=-1)
     
     def __str__(self):
         """Stringify the Autocheck"""
@@ -23,3 +23,4 @@ class Autocheck(models.Model):
     def get_status(self):
         """Returns a status raw value as a human readable value"""
         return Autocheck.STATUS_STRINGS[self.status]
+    

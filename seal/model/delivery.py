@@ -1,6 +1,5 @@
 from django.db import models
 from seal.model import Student, Practice
-
 import os
 (PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
 
@@ -17,8 +16,7 @@ class Delivery(models.Model):
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()
+    
     def __str__(self):
         """Stringify the Delivery"""
         return (str(self.practice) + " - " + str(self.student) + " - " + str(self.deliverDate))
-    
-    

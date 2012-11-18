@@ -1,9 +1,6 @@
 from django.test import TestCase
-from seal.model.student import Student
 from seal.model.autocheck import Autocheck
-from seal.model.correction import Correction
 from seal.model.delivery import Delivery
-from seal.test import utils
 from seal.test.utils import clean_up_database_tables, create_a_student,\
     create_a_course, create_a_practice, create_a_delivery, create_an_autocheck
 

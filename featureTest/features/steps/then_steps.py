@@ -60,7 +60,7 @@ def step(context, text):
 @then('I should see the delivery in the list')
 def step(context):
     body = context.browser.find_element_by_tag_name('body')
-    assert "Correction" in body.text
+    assert "corrected" in body.text or "uncorrected" in body.text
 
 @then('I should have the edit form for correction with "{coment1}" "{coment2}" "{grade}" data in it')
 def step(context, coment1, coment2, grade):
