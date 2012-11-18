@@ -11,6 +11,23 @@
 			<tr><td colspan="2">Registration</td></tr>
 		</thead>
 		{{ form.as_table }}
+		 <tr>  
+        <th>Are you human?</th>  
+        <td>  
+            <span class="validation_error">{{ captcha_response }}</span>  
+            <script type="text/javascript" src="http://api.recaptcha.net/challenge?k={{captcha_publick}}">  
+            </script>  
+            <noscript>  
+            <iframe src="http://api.recaptcha.net/noscript?k={{captcha_publick}}" height="300" width="500" frameborder="0">	
+            </iframe><br>  
+            <textarea name="recaptcha_challenge_field" rows="3" cols="40">  
+            </textarea>  
+            <input type="hidden" name="recaptcha_response_field"   
+            value="manual_challenge">  
+            </noscript>  
+        <td>  
+    </tr>  
+    <tr>  
 	</table>
 	<input type='submit' value='Save' />
 	<input type='reset' value='Reset' /> 
