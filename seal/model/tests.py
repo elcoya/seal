@@ -11,3 +11,4 @@ from seal.test.deliveryTest import DeliveryTest
 from seal.test.correctionTest import CorrectionTest
 from seal.test.teacherTest import TeacherTest
 from seal.test.suscriptionTest import SuscriptionTest
+from seal.test.autocheckTest import AutocheckTest
