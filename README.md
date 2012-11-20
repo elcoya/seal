@@ -19,8 +19,8 @@ Username: anibal
 Password: seal
 
 ###Correos de prueba
-####Teachaer --> Username: sealteacher - Password: sealtpprof
-####Student  --> Username: sealstudent - Password: sealtpprof
+Teachaer --> Username: sealteacher - Password: sealtpprof
+Student  --> Username: sealstudent - Password: sealtpprof
 
 ###Repositorio Git-Hub
 https://github.com/elcoyaman/seal.git
