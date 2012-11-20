@@ -23,7 +23,7 @@ Username: anibal
 Password: seal
 
 ###Correos de prueba
-Teachaer --> Username: sealteacher - Password: sealtpprof
+Teacher --> Username: sealteacher - Password: sealtpprof
 
 Student  --> Username: sealstudent - Password: sealtpprof
 
