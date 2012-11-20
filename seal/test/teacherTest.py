@@ -38,7 +38,7 @@ class TeacherTest(TestCase):
         self.assertEqual(c_teacher.name, name)
         
     def testCreationWithoutUser(self):
-        msg='Teacher cannot be saved without an authentication register. Please, give the teacher an associated user so he can login.'
+        msg = 'Teacher cannot be saved without an authentication register. Please, give the teacher an associated user so he can login.'
         name = "teacher"
         teacher = Teacher()
         teacher.name = name

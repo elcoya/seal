@@ -23,7 +23,7 @@ class CorrectionTest(TestCase):
     
     def create_a_course(self):
         course = Course()
-        course.name=self.course_name
+        course.name = self.course_name
         course.save()
     
     def create_a_practice(self):

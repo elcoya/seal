@@ -25,7 +25,7 @@ def clean_up_database_tables():
 
 def create_a_course(course_name):
     course = Course()
-    course.name=course_name
+    course.name = course_name
     course.save()
 
 def create_a_practice(course_name, practice_deadline, practice_filepath, practice_uid):

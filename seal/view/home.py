@@ -62,10 +62,10 @@ def register(request):
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
         else:  
             captcha_response = 'You Must Be a Rorbot'  
-        return render_to_response('registration/register.html', {'form': form,'captcha_publick': settings.RECAPTCHA_PUB_KEY,'captcha_response': captcha_response}, context_instance=RequestContext(request))  
+        return render_to_response('registration/register.html', {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY, 'captcha_response': captcha_response}, context_instance=RequestContext(request))  
     else:
         form = RegistrationForm()
-    return render(request, 'registration/register.html', {'form': form,'captcha_publick': settings.RECAPTCHA_PUB_KEY}, context_instance=RequestContext(request))
+    return render(request, 'registration/register.html', {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY}, context_instance=RequestContext(request))
 
 
 def login(request):

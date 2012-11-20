@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from seal.forms.student import StudentForm, Student
-from seal.model import Course
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
@@ -29,32 +28,32 @@ def newstudent(request, idcourse):
         form = StudentForm(request.POST)
         if (form.is_valid()):
             form.save()
-            pathok="/teacher/course/editcourse/"+str(idcourse)
+            pathok = "/teacher/course/editcourse/"+str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
         form = StudentForm(initial={'courses': [idcourse]})
     return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
 def editstudent(request, idcourse, idstudent):
-    student=Student.objects.get(pk=idstudent)     
-    if (request.method=='POST'):
+    student = Student.objects.get(pk=idstudent)     
+    if (request.method == 'POST'):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
             form.save()
-            pathok="/teacher/course/editcourse/"+str(idcourse)
+            pathok = "/teacher/course/editcourse/"+str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
         form = StudentForm( instance = student)
-    return render(request,'student/editstudent.html',{'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
+    return render(request, 'student/editstudent.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
 def edit_unenrolled_student(request, idstudent):
-    student=Student.objects.get(pk=idstudent)     
-    if (request.method=='POST'):
+    student = Student.objects.get(pk=idstudent)     
+    if (request.method == 'POST'):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
             form.save()
-            pathok="/teacher/students/"
+            pathok = "/teacher/students/"
             return HttpResponseRedirect(pathok)
     else:
         form = StudentForm( instance = student)
-    return render(request,'student/editstudent.html',{'form': form}, context_instance=RequestContext(request))
+    return render(request, 'student/editstudent.html', {'form': form}, context_instance=RequestContext(request))

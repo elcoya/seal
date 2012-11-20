@@ -31,8 +31,8 @@ def editcorrection(request, idcorrection):
     if (request.method == 'POST'):
         form = CorrectionForm(request.POST, instance=correction)
         if (form.is_valid()):
-            formEdit = form.save(commit=False)
-            formEdit.save()
+            form_edit = form.save(commit=False)
+            form_edit.save()
             pathok = "/teacher/delivery/list/" + str(correction.delivery.practice.pk)
             return HttpResponseRedirect(pathok)
     else:    

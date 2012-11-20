@@ -35,16 +35,16 @@ def newcourse(request):
             return HttpResponseRedirect('/')
     else:
         form = CourseForm()
-    return render(request,'course/newcourse.html',{'form': form,})
+    return render(request, 'course/newcourse.html', {'form': form,})
 
 @login_required
-def editcourse(request,idcourse):
-    course=Course.objects.get(pk=idcourse)     
-    if (request.method=='POST'):
+def editcourse(request, idcourse):
+    course = Course.objects.get(pk=idcourse)     
+    if (request.method == 'POST'):
         form = CourseForm(request.POST, instance = course)
         if (form.is_valid()):
-            formEdit = form.save(commit=False)
-            formEdit.save()
+            form_edit = form.save(commit=False)
+            form_edit.save()
             return HttpResponseRedirect('/')
     else:
         form = CourseForm( instance = course)
@@ -57,4 +57,4 @@ def editcourse(request,idcourse):
         table_students = []
         for student in students:
             table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
-    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents, 'table_students': table_students, 'coursename': course.name, 'idcourse': course.pk }, context_instance=RequestContext(request))
+    return render(request, 'course/editcourse.html', {'form': form, 'table_contents': table_contents, 'table_students': table_students, 'coursename': course.name, 'idcourse': course.pk }, context_instance=RequestContext(request))
