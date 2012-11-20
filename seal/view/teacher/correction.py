@@ -40,7 +40,9 @@ def editcorrection(request, idcorrection):
             return HttpResponseRedirect(pathok)
     else:    
         form = CorrectionForm(instance=correction)
-    return render(request, 'correction/index.html', {'form': form, 'delivery': correction.delivery}, context_instance=RequestContext(request))
+    return render(request, 'correction/index.html', 
+                  {'form': form, 'delivery': correction.delivery}, 
+                  context_instance=RequestContext(request))
 
 def sendmail(delivery):
     managemail = Managemail()

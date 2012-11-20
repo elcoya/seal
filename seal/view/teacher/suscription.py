@@ -10,7 +10,9 @@ def listsuscription(request, idcourse):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptions_solve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptions_solve = suscriptions_solve.exclude(state="Pending")
-    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', 
+                  {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'course': course}, 
+                  context_instance=RequestContext(request))
 
 @login_required
 def acceptgroup(request, idcourse):
@@ -26,7 +28,9 @@ def acceptgroup(request, idcourse):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptions_solve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptions_solve = suscriptions_solve.exclude(state="Pending")
-    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', 
+                  {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'course': course}, 
+                  context_instance=RequestContext(request))
 
 @login_required
 def rejectgroup(request, idcourse):
@@ -40,4 +44,6 @@ def rejectgroup(request, idcourse):
     suscriptions = Suscription.objects.filter(course=course, state="Pending").order_by('suscriptionDate')
     suscriptions_solve = Suscription.objects.filter(course=course).order_by('suscriptionDate')
     suscriptions_solve = suscriptions_solve.exclude(state="Pending")
-    return render(request, 'suscription/listsuscription.html', {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'course': course}, context_instance=RequestContext(request))
+    return render(request, 'suscription/listsuscription.html', 
+                  {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'course': course}, 
+                  context_instance=RequestContext(request))
