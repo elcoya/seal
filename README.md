@@ -19,7 +19,7 @@ Username: anibal
 Password: seal
 
 ###Correos de prueba
-Teachaer --> Username: sealteacher - Password: sealtpprof 
+Teachaer --> Username: sealteacher - Password: sealtpprof"\n"
 Student  --> Username: sealstudent - Password: sealtpprof
 
 ###Repositorio Git-Hub
