@@ -5,6 +5,7 @@ from django.template.context import RequestContext
 from seal.forms.correction import CorrectionForm
 from seal.model import Correction
 from django.contrib.auth.decorators import login_required
+from seal.utils.managemail import Managemail
 
 @login_required
 def index(request, iddelivery):  
@@ -19,6 +20,7 @@ def index(request, iddelivery):
             form = CorrectionForm(request.POST, instance=correction)
             if (form.is_valid()):
                 form.save()
+                sendmail(delivery)
                 pathok = "/teacher/delivery/list/" + str(delivery.practice.pk)
                 return HttpResponseRedirect(pathok)
         else:
@@ -33,9 +35,16 @@ def editcorrection(request, idcorrection):
         if (form.is_valid()):
             form_edit = form.save(commit=False)
             form_edit.save()
+            sendmail(correction.delivery)
             pathok = "/teacher/delivery/list/" + str(correction.delivery.practice.pk)
             return HttpResponseRedirect(pathok)
     else:    
         form = CorrectionForm(instance=correction)
     return render(request, 'correction/index.html', {'form': form, 'delivery': correction.delivery}, context_instance=RequestContext(request))
 
+def sendmail(delivery):
+    managemail = Managemail()
+    subject = "You have a correction to see on SEAL"
+    body = "You have a correction to see in delivery: " + str(delivery.pk) + " from practice: "+ delivery.practice.uid
+    print(delivery.student.email)
+    managemail.sendmail(subject, body, delivery.student.email) 
