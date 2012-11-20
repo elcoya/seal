@@ -68,7 +68,7 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY}, context_instance=RequestContext(request))
 
 
-def login(request):
+def login(request, user):
     if (request.method == 'POST'):
         form = LoginForm(request.POST)
         username = form.data.username
