@@ -11,15 +11,20 @@ https://docs.google.com/document/d/1YY_Jznp5lDFYk9idGgZTCeMfGzFR_y2-8w3MYBWQefo/
 
 ###Story Mapping
 Story Mapping alumno --> https://seal.toolsforagile.com/workspace/accounts/login/?next=/workspace/
+
 Username: martin
+
 Password: seal
 
 Stoty Mapping docente --> https://sealdocente.toolsforagile.com/workspace/accounts/login/
+
 Username: anibal
+
 Password: seal
 
 ###Correos de prueba
 Teachaer --> Username: sealteacher - Password: sealtpprof
+
 Student  --> Username: sealstudent - Password: sealtpprof
 
 ###Repositorio Git-Hub
