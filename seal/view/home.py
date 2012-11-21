@@ -15,6 +15,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from seal.utils.managemail import Managemail
 
 @login_required
 def index(request):
@@ -59,16 +60,27 @@ def register(request):
                 student.uid = form.data['uid']
                 student.email = form.data['email']
                 student.save()
+                sendmail(student, form.data['passwd'])
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
         else:  
             captcha_response = 'You Must Be a Rorbot'  
-        return render_to_response('registration/register.html', {'form': form,'captcha_publick': settings.RECAPTCHA_PUB_KEY,'captcha_response': captcha_response}, context_instance=RequestContext(request))  
+            return render_to_response('registration/register.html', 
+                                      {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY, 
+                                       'captcha_response': captcha_response}, 
+                                      context_instance=RequestContext(request))  
     else:
         form = RegistrationForm()
-    return render(request, 'registration/register.html', {'form': form,'captcha_publick': settings.RECAPTCHA_PUB_KEY}, context_instance=RequestContext(request))
+    return render(request, 'registration/register.html', 
+                  {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY}, 
+                  context_instance=RequestContext(request))
 
-
-def login(request):
+def sendmail(student, passw):
+    managemail = Managemail()
+    subject = "Registration SEAL Successful"
+    body = "You have been registered in SEAL with username: " + student.uid + " and password: " + passw
+    managemail.sendmail(subject, body, student.email)
+                
+def login(request, user):
     if (request.method == 'POST'):
         form = LoginForm(request.POST)
         username = form.data.username

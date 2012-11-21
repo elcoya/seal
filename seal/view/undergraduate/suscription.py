@@ -19,8 +19,8 @@ def index(request):
     student_courses = student.courses.all()
     courses_student_pending = []
     suscript_pending = suscriptions.filter(state = "Pending")
-    for sp in suscript_pending:
-        courses_student_pending.append(sp.course)
+    for sus_pen in suscript_pending:
+        courses_student_pending.append(sus_pen.course)
             
     course_to_suscript = list(set(courses) - set(student_courses) - set(courses_student_pending))    
     

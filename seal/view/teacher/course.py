@@ -37,16 +37,16 @@ def newcourse(request):
             return HttpResponseRedirect('/')
     else:
         form = CourseForm()
-    return render(request,'course/newcourse.html',{'form': form,})
+    return render(request, 'course/newcourse.html', {'form': form,})
 
 @login_required
-def editcourse(request,idcourse):
-    course=Course.objects.get(pk=idcourse)     
-    if (request.method=='POST'):
+def editcourse(request, idcourse):
+    course = Course.objects.get(pk=idcourse)     
+    if (request.method == 'POST'):
         form = CourseForm(request.POST, instance = course)
         if (form.is_valid()):
-            formEdit = form.save(commit=False)
-            formEdit.save()
+            form_edit = form.save(commit=False)
+            form_edit.save()
             return HttpResponseRedirect('/')
     else:
         form = CourseForm( instance = course)
@@ -56,8 +56,11 @@ def editcourse(request,idcourse):
             ndeliveries = Delivery.objects.filter(practice=practice.pk).count()
             if (practice.script_set.all()):
                 script = practice.script_set.all()[0]
-                table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
-                                       'ndeliveries':  ndeliveries, 'script': os.path.basename(script.file.name)})
+                table_contents.append({'pk': practice.pk, 
+                                       'uid': practice.uid, 
+                                       'deadline': practice.deadline, 
+                                       'ndeliveries':  ndeliveries, 
+                                       'script': os.path.basename(script.file.name)})
             else:
                 table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
                                        'ndeliveries':  ndeliveries})
@@ -66,6 +69,6 @@ def editcourse(request,idcourse):
         for student in students:
             table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
     return render(request,'course/editcourse.html',
-                  {'form': form, 'table_contents': table_contents, 'table_students': 
-                   table_students, 'course': course, 'idcourse': course.pk }, 
+                  {'form': form, 'table_contents': table_contents, 'table_students': table_students, 
+                   'course': course, 'idcourse': course.pk }, 
                   context_instance=RequestContext(request))

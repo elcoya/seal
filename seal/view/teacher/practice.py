@@ -46,8 +46,8 @@ def editpractice(request, idcourse , idpractice):
     if (request.method == 'POST'):
         form = PracticeForm(request.POST, request.FILES, instance=practice)
         if (form.is_valid()):
-            formEdit = form.save(commit=False)
-            formEdit.save()
+            form_edit = form.save(commit=False)
+            form_edit.save()
             pathok = "/course/editcourse/" + str(idcourse)
             return HttpResponseRedirect(pathok)
     else:
