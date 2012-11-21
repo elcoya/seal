@@ -11,10 +11,10 @@ class Autocheck(models.Model):
     
     STATUS_STRINGS = {-1:"failed", 0:"pending", 1:"successfull"}
     
-    delivery = models.ForeignKey(Delivery)
+    delivery = models.ForeignKey(Delivery, unique=True)
     captured_stdout = models.CharField(max_length=10240, blank=True)
     exit_value = models.IntegerField(default=0)
-    status = models.IntegerField(default=-1)
+    status = models.IntegerField(default=0)
     
     def __str__(self):
         """Stringify the Autocheck"""

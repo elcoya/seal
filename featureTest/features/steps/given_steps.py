@@ -215,3 +215,11 @@ def step(context,student,course,suscriptionDate,state):
     s = Student.objects.get(name=student)
     c = Course.objects.get(name=course)
     Suscription.objects.get_or_create(student_id=s.pk, course_id=c.pk, state=state, suscriptionDate=suscriptionDate)
+
+@given('I am at the upload script form for practice "{practice_uid}" and course "{course_name}"')
+def step(context, practice_uid, course_name):
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid=practice_uid, course=course)
+    path = base_url + "teacher/practices/script/" + str(course.pk) + "/" + str(practice.pk)
+    context.browser.get(path)
+    

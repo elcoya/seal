@@ -6,3 +6,4 @@ from seal.model.delivery import Delivery
 from seal.model.correction import Correction
 from seal.model.suscription import Suscription
 from seal.model.autocheck import Autocheck
+from seal.model.script import Script

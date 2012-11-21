@@ -2,7 +2,7 @@
 {% block content %}
 <form id='formeditcoruse' action='' method='post'>
 	{% csrf_token %}
-	<div>Course {{coursename}} edit</div>
+	<div>Course {{course.name}} edit</div>
 	<table style="margin: 20px 0;">
 		{{ form.as_table }}
 		<tr><td colspan="2" style="text-align: right; "><input type='submit' value='Save' /></td></tr>
@@ -17,14 +17,24 @@
 				<td>Uid</td>
 				<td>Dead Line</td>
 				<td># Deliveries</td>
+				<td>Script</td>
 			</tr>
 		</thead>
 		<tbody>
 		{% for dict in table_contents %}
 		    <tr>
-		    	<td style="width: 33%; text-align: center; " ><a href="/teacher/practices/editpractice/{{ idcourse }}/{{dict.pk}}">{{ dict.uid }}</a></td>
-		    	<td style="width: 33%; text-align: center; ">{{ dict.deadline }}</td>
-		    	<td style="width: 33%; text-align: center; "><a href="/teacher/delivery/list/{{dict.pk}}">{{ dict.ndeliveries }}</a></td>
+		    	<td style="text-align: center; " ><a href="/teacher/practices/editpractice/{{ course.pk }}/{{ dict.pk }}">{{ dict.uid }}</a></td>
+		    	<td style="text-align: center; ">{{ dict.deadline }}</td>
+		    	<td style="text-align: center; "><a href="/teacher/delivery/list/{{dict.pk}}">{{ dict.ndeliveries }}</a></td>
+		    	<td style="text-align: center; ">
+		    		<a href="/teacher/practices/script/{{ course.pk }}/{{ dict.pk }}">
+			    		{% if dict.script %}
+			    			{{ dict.script }}
+			    		{% else %}
+			    			no script
+			    		{% endif %}
+		    		</a>
+		    	</td>
 		    </tr>
 		{% empty %}
 		    <tr><td colspan="4" style="text-align: center; ">There are yet no Practices</td></tr>
@@ -57,4 +67,5 @@
 		</tbody>
 	</table>
 </div>
+<footer><a href="/teacher">back</a></footer>
 {% endblock %}

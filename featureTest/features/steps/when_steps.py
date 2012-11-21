@@ -9,6 +9,7 @@ config.readfp(open('../conf/local.cfg'))
 pathproject = config.get("Path", "path.project")
 filePath = pathproject + "featureTest/data/pdftest.pdf"
 deliveryPath = pathproject + "featureTest/data/delivery.zip"
+scriptPath = pathproject + "featureTest/data/"
 
 base_url = 'http://localhost:8000/'
 
@@ -146,7 +147,7 @@ def step(context,student,course):
     checkbox[0].click()
     
 @when('I click the button "{name}"')
-def step(context,name):
+def step(context, name):
     button = context.browser.find_elements(By.NAME, name)
     button[0].click()
     
@@ -154,3 +155,9 @@ def step(context,name):
 def step(context):
     checkbox = context.browser.find_elements(By.NAME, 'checkAll')
     checkbox[0].click()
+
+@when('I fill in the upload script form with the file "{script_name}"')
+def step(context, script_name):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('file').send_keys(scriptPath + script_name)
+

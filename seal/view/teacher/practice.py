@@ -10,6 +10,8 @@ from seal.model.practice import Practice
 from django.template.context import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from seal.forms.script import PracticeScriptForm
+from seal.model.script import Script
 
 @login_required
 def index(request):
@@ -52,3 +54,29 @@ def editpractice(request, idcourse , idpractice):
         form = PracticeForm(instance=practice)
     return render(request, 'practice/editpractice.html', {'form': form, 'idcourse': idcourse,}, context_instance=RequestContext(request))
 
+@login_required
+def script(request, idcourse , idpractice):
+    practice = Practice.objects.get(pk=idpractice)
+    script_text = ''
+    if (request.method == 'POST'):
+        if (Script.objects.filter(practice=practice).exists()):
+            script = Script.objects.get(practice=practice)
+        else:
+            script = Script(practice=practice)
+        form = PracticeScriptForm(request.POST, request.FILES, instance=script)
+        if (form.is_valid()):
+            formEdit = form.save(commit=False)
+            formEdit.save()
+            pathok = "/teacher/course/editcourse/" + str(idcourse)
+            return HttpResponseRedirect(pathok)
+    else:
+        if(practice.script_set.all()):
+            form = PracticeScriptForm(instance=practice.script_set.all()[0])
+            script_file = open(practice.script_set.all()[0].file.name, "r")
+            script_text = script_file.read();
+            script_file.close()
+        else:
+            form = PracticeScriptForm()
+    return render(request, 'practice/script.html', 
+                  {'form': form, 'practice': practice, 'idcourse': idcourse, 'script_text': script_text}, 
+                  context_instance=RequestContext(request))

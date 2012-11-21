@@ -2,6 +2,7 @@ from behave import *
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from seal.model import Student, Practice, Delivery
+import re
 
 @then('I should see "{text1}" before "{text2}"')
 def step(context, text1, text2):
@@ -26,11 +27,16 @@ def impl(context, text):
     body = context.browser.find_element_by_tag_name('body')
     assert text not in body.text
 
+@then('I should see pattern "{text}"')
+def step(context, text):
+    body = context.browser.find_element_by_tag_name('body')
+    assert re.search(text, body.text)
+    
 @then('I should see "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
     assert text in body.text
-    
+
 @then('I enter in the page with this title "{text}"')
 def step(context, text):
     titlebrowser = context.browser.title 

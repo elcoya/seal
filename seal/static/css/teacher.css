@@ -4,3 +4,10 @@ div.main-content {
 	padding: 15px 0; 
 	width: 800px; 
 }
+
+div.script-container {
+	background: #E0E0E0;
+	margin: auto;
+	padding: 5px;
+	width: 700px;
+}

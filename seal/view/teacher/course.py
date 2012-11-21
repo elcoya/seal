@@ -10,6 +10,8 @@ from seal.model import Course, Delivery
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
+import os
+import sys
 
 @login_required
 def index(request):
@@ -52,9 +54,18 @@ def editcourse(request,idcourse):
         table_contents = []
         for practice in practices:
             ndeliveries = Delivery.objects.filter(practice=practice.pk).count()
-            table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 'ndeliveries':  ndeliveries})         
+            if (practice.script_set.all()):
+                script = practice.script_set.all()[0]
+                table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
+                                       'ndeliveries':  ndeliveries, 'script': os.path.basename(script.file.name)})
+            else:
+                table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
+                                       'ndeliveries':  ndeliveries})
         students = course.student_set.all().order_by('name')
         table_students = []
         for student in students:
             table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
-    return render(request,'course/editcourse.html',{'form': form, 'table_contents': table_contents, 'table_students': table_students, 'coursename': course.name, 'idcourse': course.pk }, context_instance=RequestContext(request))
+    return render(request,'course/editcourse.html',
+                  {'form': form, 'table_contents': table_contents, 'table_students': 
+                   table_students, 'course': course, 'idcourse': course.pk }, 
+                  context_instance=RequestContext(request))

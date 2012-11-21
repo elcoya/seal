@@ -8,6 +8,7 @@ urlpatterns += patterns('view.teacher.practice',
     url(r'^practices/?$', 'index'),
     url(r'^practices/newpractice/(?P<idcourse>\d+)$', 'newpractice'),
     url(r'^practices/editpractice/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'editpractice'),
+    url(r'^practices/script/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'script'),
 )
 
 urlpatterns += patterns('view.teacher.student',
@@ -39,4 +40,8 @@ urlpatterns += patterns('view.teacher.suscription',
     url(r'^suscription/reject/(?P<idsuscription>\d+)/$', 'reject'),
     url(r'^suscription/acceptGroup/(?P<idcourse>\d+)/', 'acceptGroup'),
     url(r'^suscription/rejectGroup/(?P<idcourse>\d+)/', 'rejectGroup'),
+)
+
+urlpatterns += patterns('view.teacher.autocheck',
+    url(r'^autocheck', 'run_autocheck_subprocess'),
 )
