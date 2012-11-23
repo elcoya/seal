@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from seal.model import Student, Practice, Delivery
 import re
+from seal.model.course import Course
 
 @then('I should see "{text1}" before "{text2}"')
 def step(context, text1, text2):
@@ -76,3 +77,12 @@ def step(context, coment1, coment2, grade):
     assert com1.get_attribute('value') == coment1
     assert com2.get_attribute('value') == coment2
     assert n.get_attribute('value') == grade
+
+@then(u'delivery for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}" should have status "{status}"')
+def step(context, practice_uid, course_name, student_uid, status):
+    student = Student.objects.get(uid=student_uid)
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid= practice_uid, course=course)
+    delivery = Delivery.objects.get(student=student, practice=practice)
+    autocheck = delivery.autocheck_set.all()[0]
+    assert status == autocheck.get_status()

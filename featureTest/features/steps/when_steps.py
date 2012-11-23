@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from seal.model import Course, Student, Practice, Delivery, Suscription
 
 import ConfigParser
+from seal.daemon.autocheck_runner import AutocheckRunner
+from seal.model.autocheck import Autocheck
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))
 pathproject = config.get("Path", "path.project")
@@ -160,4 +162,24 @@ def step(context):
 def step(context, script_name):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('file').send_keys(scriptPath + script_name)
+
+@when(u'I create a new delivery for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}"')
+def step(context, practice_uid, course_name, student_uid):
+    student = Student.objects.get(uid=student_uid)
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid=practice_uid, course=course)
+    delivery = Delivery()
+    delivery.file = "data/delivery.zip"
+    delivery.student = student
+    delivery.practice = practice
+    delivery.deliverDate = '2012-11-22'
+    delivery.save()
+    autocheck = Autocheck()
+    autocheck.delivery = delivery
+    autocheck.save()
+
+@when(u'I run the Autocheck process')
+def step(context):
+    runner = AutocheckRunner()
+    runner.run()
 

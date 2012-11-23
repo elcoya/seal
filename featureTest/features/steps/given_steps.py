@@ -9,6 +9,9 @@ from seal.model.teacher import Teacher
 from string import capitalize
 from seal.forms import student
 from seal.model.suscription import Suscription
+from seal.model.script import Script
+from seal.model.autocheck import Autocheck
+from seal.daemon.autocheck_runner import AutocheckRunner
 
 base_url = 'http://localhost:8000/'
 
@@ -223,3 +226,31 @@ def step(context, practice_uid, course_name):
     path = base_url + "teacher/practices/script/" + str(course.pk) + "/" + str(practice.pk)
     context.browser.get(path)
     
+@given(u'script "{script_name}" is set for practice "{practice_uid}" for course "{course_name}"')
+def impl(context, script_name, practice_uid, course_name):
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid=practice_uid, course=course)
+    practice.script_set.all().delete()
+    script = Script()
+    script.file="data/"+script_name
+    script.practice = practice
+    script.save()
+    
+@given(u'a delivery exists for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}"')
+def step(context, practice_uid, course_name, student_uid):
+    student = Student.objects.get(uid=student_uid)
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid=practice_uid, course=course)
+    delivery = Delivery()
+    delivery.file = "data/delivery.zip"
+    delivery.student = student
+    delivery.practice = practice
+    delivery.deliverDate = '2012-11-22'
+    delivery.save()
+    autocheck = Autocheck()
+    autocheck.delivery = delivery
+    autocheck.save()
+
+@given(u'autocheck process is run')
+def step(context):
+    AutocheckRunner().run()

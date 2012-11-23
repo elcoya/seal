@@ -13,7 +13,6 @@ from subprocess import Popen
 
 import ConfigParser, os
 import sys
-import django
 config = ConfigParser.ConfigParser()
 config.readfp(open('conf/local.cfg'))
 sys.path.append(config.get("Path", "path.project"))      # Required to use the app model
