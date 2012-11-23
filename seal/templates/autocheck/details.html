@@ -23,12 +23,11 @@
 			<pre>{{ autocheck.captured_stdout }}</pre>
 		</div>
 	</div>
-	<div><a href="/teacher/delivery/list/{{ practice.pk }}">back</a></div>
 </div>
 {% else %}
 	<div>
 		<p>This automatic check is still pending.</p>
 	</div>
 {% endif %}
-
+<div><a href="/teacher/delivery/list/{{ practice.pk }}">back</a></div>
 {% endblock %}
