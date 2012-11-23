@@ -1,0 +1,34 @@
+{% extends "undergraduate/index.html" %}
+{% block content %}
+
+{% if autocheck.status %}
+
+<div>
+	<div>
+		<div>
+			<p>Automatic check result: 
+				<span style="font-weight: bold; color: 
+				{% if autocheck.status > 0 %}
+					green
+				{% else %}
+					red
+				{% endif %}
+				;">
+					{{ autocheck.get_status }}
+				</span>
+			</p>
+		</div>
+		<div style="padding: 20px 0 5px;">Autorun output</div>
+		<div class="output-container" >
+			<pre>{{ autocheck.captured_stdout }}</pre>
+		</div>
+	</div>
+	<div><a href="/undergraduate/delivery/upload/{{ practice.pk }}">back</a></div>
+</div>
+{% else %}
+	<div>
+		<p>This automatic check is still pending.</p>
+	</div>
+{% endif %}
+
+{% endblock %}

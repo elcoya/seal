@@ -14,7 +14,7 @@ from django.http import HttpResponse
 def practicelist(request, idcourse):
     course = Course.objects.get(pk=idcourse)
     practices = course.practice_set.all().order_by('deadline')
-    return render(request, 'undergraduate/practiceList.html', 
+    return render(request, 'practice/practiceList.html', 
                   {'practices': practices, 'coursename': course.name, }, 
                   context_instance=RequestContext(request))
 
