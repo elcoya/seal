@@ -7,3 +7,4 @@ seal/Delivery_Files
 .coverage
 coverage_report
 pylint_report
+seal/autocheck_scripts
