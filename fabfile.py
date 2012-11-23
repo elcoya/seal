@@ -143,7 +143,8 @@ def prepare_deploy(context = None):
     """Syncronizes the database and runs all the tests"""
     prepare_db(context)
     run_tests(context)
-    run_features_tests(context)
+    if (config.get("Enviroment", "location") == "dev"):
+        run_features_tests(context)
 
 def invoke_test_deploy(context = None):
     """Calls a url in the test server to update the test instance"""
