@@ -109,7 +109,7 @@ def prepare_db(context = None):
         cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;")
         local(cmd)
         cmd = get_mysql_bash()
-        local(cmd + " < ci_scripts/ci_dbuser.sql")
+        local(cmd + " < build_files/ci_dbuser.sql")
         print("Layout set.")
     else:
         print("Environment detected. No need to create either database user nor schema.")
