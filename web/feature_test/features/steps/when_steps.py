@@ -6,12 +6,13 @@ from seal.model import Course, Student, Practice, Delivery, Suscription
 import ConfigParser
 from daemon.autocheck_runner import AutocheckRunner
 from seal.model.autocheck import Autocheck
+import time
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))
 pathproject = config.get("Path", "path.project.web")
-filePath = pathproject + "featureTest/data/pdftest.pdf"
-deliveryPath = pathproject + "featureTest/data/delivery.zip"
-scriptPath = pathproject + "featureTest/data/"
+filePath = pathproject + "feature_test/data/pdftest.pdf"
+deliveryPath = pathproject + "feature_test/data/delivery.zip"
+scriptPath = pathproject + "feature_test/data/"
 
 base_url = 'http://localhost:8000/'
 
@@ -49,7 +50,7 @@ def step(context, coursename):
 def step(context):
     form = context.browser.find_element_by_tag_name('form')
     form.submit()
-    
+
 @when('I click in the "{text}" link')
 def step(context, text):
     a = context.browser.find_element_by_link_text(text)

@@ -162,10 +162,10 @@ def run_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
     with lcd("web"):
         local("coverage run seal/manage.py test model")
-    if(config.get("Enviroment", "location") == "travis"):
-        local("coverage report")
-    else:
-        local("coverage html")
+        if(config.get("Enviroment", "location") == "travis"):
+            local("coverage report")
+        else:
+            local("coverage html")
 
 def pylint():
     """Runs the pylint analysis and saves the report to be available"""
