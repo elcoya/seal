@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from seal.daemon.autocheck_runner import AutocheckRunner
+from daemon.autocheck_runner import AutocheckRunner
 from django.template.context import RequestContext
 from seal.model.delivery import Delivery
 

@@ -12,7 +12,7 @@ class Delivery(models.Model):
      
     """
     
-    file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/Delivery_Files/")
+    file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/delivery_files/")
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()

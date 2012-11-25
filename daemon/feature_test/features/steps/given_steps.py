@@ -11,7 +11,7 @@ from seal.forms import student
 from seal.model.suscription import Suscription
 from seal.model.script import Script
 from seal.model.autocheck import Autocheck
-from seal.daemon.autocheck_runner import AutocheckRunner
+from daemon.autocheck_runner import AutocheckRunner
 
 base_url = 'http://localhost:8000/'
 

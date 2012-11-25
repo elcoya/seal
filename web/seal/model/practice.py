@@ -14,7 +14,7 @@ class Practice(models.Model):
     
     uid = models.CharField(max_length=32)
     course = models.ForeignKey(Course)
-    file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/Practice_Files/")
+    file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/practice_files/")
     deadline = models.DateField()
     
     class Meta:
