@@ -10,12 +10,15 @@ from __future__ import with_statement
 from fabric.api import local, settings
 from fabric.context_managers import lcd
 from subprocess import Popen
+import time
+
 
 import ConfigParser, os
 import sys
 config = ConfigParser.ConfigParser()
-config.readfp(open('conf/local.cfg'))
-sys.path.append(config.get("Path", "path.project"))      # Required to use the app model
+config.readfp(open('web/conf/local.cfg'))
+sys.path.append(config.get("Path", "path.project.web"))      # Required to use the app model
+sys.path.append(config.get("Path", "path.project.daemon"))
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
@@ -31,7 +34,7 @@ def launch_server(context):
     to run the feature tests.
     """
     print("[fabric] launching server instance for feature tests.")
-    context.server_process = Popen(["python", "seal/manage.py", "runserver", "--noreload"])
+    context.server_process = Popen(["python", "web/seal/manage.py", "runserver", "--noreload"])
     print("[fabric] server online... pid: " + str(context.server_process.pid))
 
 def kill_server(context):
@@ -119,14 +122,16 @@ def prepare_db(context = None):
             mysql_cmd += "SET foreign_key_checks = 1;"
             cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
             local(cmd)
-    local("python seal/manage.py syncdb --noinput")
+    with lcd("web"):
+        local("python seal/manage.py syncdb --noinput")
     create_super_user()
     print("syncdb complete")
 
 def run_tests(context = None):
     """Runs the application tests for the Django app"""
     print("[fabric] invoking tests.")
-    local("python seal/manage.py test")
+    with lcd("web"):
+        local("python seal/manage.py test")
 
 def run_features_tests(context = None):
     """
@@ -135,7 +140,7 @@ def run_features_tests(context = None):
     """
     launch_server(context)
     print("[fabric] invoking feature testing.")
-    with lcd("featureTest"):
+    with lcd("web/feature_test"):
         local("behave")
     kill_server(context)
 
@@ -155,7 +160,8 @@ def invoke_test_deploy(context = None):
 
 def run_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
-    local("coverage run seal/manage.py test model")
+    with lcd("web"):
+        local("coverage run seal/manage.py test model")
     if(config.get("Enviroment", "location") == "travis"):
         local("coverage report")
     else:
