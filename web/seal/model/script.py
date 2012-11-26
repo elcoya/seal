@@ -4,7 +4,7 @@ from seal.model.practice import Practice
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
-config.readfp(open('../../conf/local.cfg'))
+config.readfp(open('seal/web/conf/local.cfg'))
 BASE_PATH = config.get("Path", "path.workspace")
 
 class Script(models.Model):

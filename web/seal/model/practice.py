@@ -5,7 +5,7 @@ import os
 (PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
 import ConfigParser
 config = ConfigParser.ConfigParser()
-config.readfp(open('../../conf/local.cfg'))
+config.readfp(open('seal/web/conf/local.cfg'))
 BASE_PATH = config.get("Path", "path.workspace")
 
 class Practice(models.Model):
