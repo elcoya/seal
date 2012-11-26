@@ -5,7 +5,6 @@
 .coverage
 coverage_report
 pylint_report
-seal/autocheck_scripts
 workspace/delivery_files
 workspace/practice_files
 workspace/autocheck_scripts
