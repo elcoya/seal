@@ -2,6 +2,11 @@ from django.db import models
 from seal.model import Student, Practice
 import os
 (PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
+import ConfigParser
+config = ConfigParser.ConfigParser()
+config.readfp(open('../../conf/local.cfg'))
+BASE_PATH = config.get("Path", "path.workspace")
+
 
 class Delivery(models.Model):
     """Delivery class.
@@ -12,7 +17,7 @@ class Delivery(models.Model):
      
     """
     
-    file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/delivery_files/")
+    file = models.FileField(upload_to=BASE_PATH + "delivery_files/")
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()

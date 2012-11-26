@@ -3,6 +3,10 @@ from seal.model.course import Course
 
 import os
 (PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
+import ConfigParser
+config = ConfigParser.ConfigParser()
+config.readfp(open('../../conf/local.cfg'))
+BASE_PATH = config.get("Path", "path.workspace")
 
 class Practice(models.Model):
     """Assignment.
@@ -14,7 +18,7 @@ class Practice(models.Model):
     
     uid = models.CharField(max_length=32)
     course = models.ForeignKey(Course)
-    file = models.FileField(upload_to=PRACTICE_FILE_PATH+"/practice_files/")
+    file = models.FileField(upload_to=BASE_PATH + "practice_files/")
     deadline = models.DateField()
     
     class Meta:
