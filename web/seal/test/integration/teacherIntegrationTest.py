@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from seal.model import Teacher
 
-class TeacherTest(TestCase):
+class TeacherIntegrationTest(TestCase):
     def setUp(self):
         user = User()
         name = "test"

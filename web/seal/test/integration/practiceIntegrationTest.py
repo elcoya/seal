@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from seal.model import Practice, Course
 
-class PracticeTest(TestCase):
+class PracticeIntegrationTest(TestCase):
     
     def setUp(self):
         nameCourse = '2012-2'

@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from seal.model import Student
 
-class StudentTest(TestCase):
+class StudentIntegrationTest(TestCase):
 
     def testStudentCreation(self):
         pStudent = Student()

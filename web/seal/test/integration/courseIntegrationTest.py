@@ -3,7 +3,7 @@ from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
 
-class CourseTest(TestCase):
+class CourseIntegrationTest(TestCase):
     def testCourseUniqueName(self):
         """
         I will try to create a Course with the same name as another and expect a failure

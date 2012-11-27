@@ -4,7 +4,7 @@ from seal.model.delivery import Delivery
 from seal.test.utils import clean_up_database_tables, create_a_student, \
     create_a_course, create_a_practice, create_a_delivery, create_an_autocheck
 
-class AutocheckTest(TestCase):
+class AutocheckIntegrationTest(TestCase):
     
     course_name = "2012-2"
     student_name = "student"

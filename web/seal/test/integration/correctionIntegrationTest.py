@@ -7,7 +7,7 @@ from seal.model.student import Student
 from seal.model.suscription import Suscription
 from django.contrib.auth.models import User
 
-class CorrectionTest(TestCase):
+class CorrectionIntegrationTest(TestCase):
     
     course_name = "course_name"
     student_name = "student"
