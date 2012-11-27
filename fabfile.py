@@ -15,12 +15,16 @@ import time
 
 import ConfigParser, os
 import sys
+from fileinput import close
 config = ConfigParser.ConfigParser()
 config.readfp(open('web/conf/local.cfg'))
 sys.path.append(config.get("Path", "path.project.web"))      # Required to use the app model
 sys.path.append(config.get("Path", "path.project.daemon"))
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
+
+project_base_path = os.path.realpath(os.path.dirname(__file__))
+os.environ['PROJECT_PATH'] = project_base_path + "/"
 
 class FabricContext:
     """
@@ -181,3 +185,29 @@ def run():
     prepare_deploy(ctxt)
     invoke_test_deploy(ctxt)
     run_coverage_analysis()
+
+def start():
+    print("[fabric] launching server instance.")
+    
+    for path in sys.path:
+        print path
+    
+    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open(os.devnull, 'w+', 0))
+    local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
+    print("[fabric] server online... pid: " + str(server_process.pid))
+
+
+def stop():
+    file = open("/tmp/seal_server.pid")
+    line = file.readline()
+    local("kill -2 " + line)
+    close(file)
+    os.remove("/tmp/seal_server.pid")
+
+def behave():
+    with lcd("web/feature_test"):
+        local("behave")
+
+def test():
+    with lcd("web/seal"):
+        local("python manage.py test")

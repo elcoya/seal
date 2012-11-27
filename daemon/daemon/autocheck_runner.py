@@ -14,7 +14,15 @@ class AutocheckRunner():
     not yet been checked, and for the Practices which has a script.
     
     """
-
+    
+    def get_pending_autochecks(self):
+        pending_autochecks = Autocheck.objects.filter(status=0)
+        return self.filter_autochecks(pending_autochecks)
+    
+    def filter_autochecks(self, autochecks):
+        
+        return autochecks
+    
     def run(self):
         """
         

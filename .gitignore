@@ -2,9 +2,9 @@
 *.pyc
 *.pyo
 .settings
-seal/Practice_Files
-seal/Delivery_Files
 .coverage
 coverage_report
 pylint_report
+seal/Practice_Files
+seal/Delivery_Files
 seal/autocheck_scripts
