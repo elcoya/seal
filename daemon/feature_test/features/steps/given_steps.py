@@ -75,12 +75,10 @@ def step(context, usr, passwd):
 
 @given('I am in the index page')
 def step(context):
-    print(context)
     context.browser.get(base_url)
 
 @given('I am in the practice list page')
 def step(context):
-    print(context)
     context.browser.get(base_url + 'teacher/practices/')
 
 @given('I am at the new student form')

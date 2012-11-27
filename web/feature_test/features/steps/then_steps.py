@@ -60,8 +60,6 @@ def step(context, text):
 @then('I should have the edit form for courses with "{text}" course data in it')
 def step(context, text):
     element = context.browser.find_element_by_id('id_name')
-    print element
-    print element.get_attribute('value')
     assert element.get_attribute('value') == text
 
 @then('I should see the delivery in the list')

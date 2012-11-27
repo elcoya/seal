@@ -48,5 +48,4 @@ def sendmail(delivery):
     managemail = Managemail()
     subject = "You have a correction to see on SEAL"
     body = "You have a correction to see in delivery: " + str(delivery.pk) + " from practice: "+ delivery.practice.uid
-    print(delivery.student.email)
     managemail.sendmail(subject, body, delivery.student.email) 
