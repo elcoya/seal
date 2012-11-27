@@ -4,26 +4,6 @@ from seal.model.student import Student
 from seal.model.practice import Practice
 
 class CourseTest(TestCase):
-    def testCourseModelDescription(self):
-        """
-        Tests __str__
-        """
-        name = "2012-2C"
-        course = Course()
-        course.name = name
-        assert_name = str(course)
-        self.assertEqual(assert_name, name, "Course to string expected to be " + name + " but was " + assert_name)
-    
-    def testCourseCreation(self):
-        """
-        We create a Course with a name and checks it's value.
-        """
-        aName = '2012-2C'
-        aCourse = Course()
-        aCourse.name = aName
-        self.assertEqual(aCourse.name, aName)
-    
-    
     def testCourseUniqueName(self):
         """
         I will try to create a Course with the same name as another and expect a failure

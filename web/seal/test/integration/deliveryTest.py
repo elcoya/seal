@@ -27,14 +27,7 @@ class DeliveryTest(TestCase):
         practice.file = "pathFile"
         practice.deadline = "2012-12-01" 
         practice.save()
-    
-    def testDeliveryModelDescription(self):
-        delivery = Delivery()
-        delivery.student = Student.objects.get(uid='85000')
-        delivery.practice = Practice.objects.get(uid="Tp inicial")
-        delivery.deliverDate = '2012-11-25'
-        self.assertEqual(str(delivery), "Tp inicial - Nombre y Apellido - 2012-11-25")
-    
+     
     def testDeliveryCreation(self):
         student = Student.objects.get(uid="85000")
         practice = Practice.objects.get(uid="Tp inicial")

@@ -16,16 +16,6 @@ class TeacherTest(TestCase):
         user.is_superuser = 0
         user.save()
         
-    def testTeacherModelDescription(self):
-        """
-        Tests __str__
-        """
-        name = "teacher"
-        teacher = Teacher()
-        teacher.name = name
-        assert_name = str(teacher)
-        self.assertEqual(assert_name, name, "Teacher to string expected to be " + name + " but was " + assert_name)
-
     def testCreationTeacher(self):
         name = "teacher"
         teacher = Teacher()
