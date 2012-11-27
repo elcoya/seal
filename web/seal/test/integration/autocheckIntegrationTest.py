@@ -1,8 +1,8 @@
 from django.test import TestCase
 from seal.model.autocheck import Autocheck
 from seal.model.delivery import Delivery
-from seal.test.utils import clean_up_database_tables, create_a_student, \
-    create_a_course, create_a_practice, create_a_delivery, create_an_autocheck
+from seal.test.integration.utils import clean_up_database_tables, create_a_student, \
+create_a_course, create_a_practice, create_a_delivery, create_an_autocheck
 
 class AutocheckIntegrationTest(TestCase):
     
