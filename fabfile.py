@@ -194,7 +194,6 @@ def start():
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
 
-
 def stop():
     file = open("/tmp/seal_server.pid")
     line = file.readline()
@@ -202,14 +201,14 @@ def stop():
     file.close()
     os.remove("/tmp/seal_server.pid")
 
-
 def behave():
     with lcd("web/feature_test"):
         local("behave")
-
 
 def test():
     with lcd("web/seal"):
         local("python manage.py test")
 
-
+def behave_i(arg):
+    with lcd("web/feature_test"):
+        local("behave -i " + arg)
