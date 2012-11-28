@@ -38,6 +38,7 @@ def launch_server(context):
     to run the feature tests.
     """
     print("[fabric] launching server instance for feature tests.")
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     context.server_process = Popen(["python", "web/seal/manage.py", "runserver", "--noreload"])
     print("[fabric] server online... pid: " + str(context.server_process.pid))
 
@@ -188,11 +189,8 @@ def run():
 
 def start():
     print("[fabric] launching server instance.")
-    
-    for path in sys.path:
-        print path
-    
-    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open(os.devnull, 'w+', 0))
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
 
@@ -201,13 +199,17 @@ def stop():
     file = open("/tmp/seal_server.pid")
     line = file.readline()
     local("kill -2 " + line)
-    close(file)
+    file.close()
     os.remove("/tmp/seal_server.pid")
+
 
 def behave():
     with lcd("web/feature_test"):
         local("behave")
 
+
 def test():
     with lcd("web/seal"):
         local("python manage.py test")
+
+
