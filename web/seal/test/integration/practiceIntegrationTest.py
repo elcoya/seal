@@ -16,7 +16,7 @@ class PracticeIntegrationTest(TestCase):
         course.name = nameCourse
         course.save()
       
-    def testPracticeCreation(self):
+    def testPracticeCreationCompareName(self):
         pCourse = Course.objects.get(name='2012-2')
         pPractice = Practice()
         pPractice.uid = "1"

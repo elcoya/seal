@@ -11,6 +11,7 @@ from seal.test.integration.practiceIntegrationTest import PracticeIntegrationTes
 from seal.test.integration.studentIntegrationTest import StudentIntegrationTest
 from seal.test.integration.teacherIntegrationTest import TeacherIntegrationTest
 from seal.test.unit.deliveryTest import DeliveryTest
+from seal.test.unit.correctionTest import CorrectionTest
 from seal.test.unit.courseTest import CourseTest
 from seal.test.unit.practiceTest import PracticeTest
 from seal.test.unit.studentTest import StudentTest

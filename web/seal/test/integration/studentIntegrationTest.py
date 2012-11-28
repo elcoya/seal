@@ -10,7 +10,7 @@ from seal.model import Student
 
 class StudentIntegrationTest(TestCase):
 
-    def testStudentCreation(self):
+    def testStudentCreationCompareUid(self):
         pStudent = Student()
         pStudent.name = "Nombre y Apellido"
         pStudent.uid = '85000'
@@ -19,7 +19,7 @@ class StudentIntegrationTest(TestCase):
         cStudent = Student.objects.get(uid='85000')
         self.assertEqual(pStudent.uid, cStudent.uid)
         
-    def testStudenteEqualUid(self):
+    def testStudenteEqualUid5000CatchBaseException(self):
         pStudent = Student()
         p1Student = Student()
         
