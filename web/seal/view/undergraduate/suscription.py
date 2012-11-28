@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect
 from datetime import date
 from django.template.context import RequestContext
 
+REDIRECTOKNEWSUSCRIPTION = "/undergraduate/suscription"
+
 @login_required
 def index(request):
     student = request.user.student_set.get(uid=request.user.username)
@@ -34,4 +36,4 @@ def newsuscription(request, idcourse):
     course = Course.objects.get(pk=idcourse)
     suscription = Suscription(student = student, course = course, state = "Pending", suscriptionDate=date.today())
     suscription.save()
-    return HttpResponseRedirect("/undergraduate/suscription")
+    return HttpResponseRedirect(REDIRECTOKNEWSUSCRIPTION)

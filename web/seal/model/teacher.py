@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+MSGEXEPTION = 'Teacher cannot be saved without an authentication register.\
+                Please, give the teacher an associated user so he can login.'
+
 class Teacher(models.Model):
     """
     
@@ -26,7 +29,5 @@ class Teacher(models.Model):
     def save(self, force_insert=False, force_update=False, using=None):
         """Extends parent. Checks for the existance of the login user"""
         if(self.user is None):
-            raise Exception(
-                    msg='Teacher cannot be saved without an authentication register.'
-                        + ' Please, give the teacher an associated user so he can login.')
+            raise Exception(msg=MSGEXEPTION)
         models.Model.save(self, force_insert=force_insert, force_update=force_update, using=using)

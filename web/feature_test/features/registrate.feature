@@ -12,4 +12,4 @@ Feature: As a student I can register myself into seal
 		 When I click in the "Registrate" link
 		  And I fill in the registration form with user "test"
 		  And I submit the form
-		 Then I should see "You Must Be a Rorbot"
+		 Then I should see "You Must Be a Robot"

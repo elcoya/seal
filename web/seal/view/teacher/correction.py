@@ -7,13 +7,18 @@ from seal.model import Correction
 from django.contrib.auth.decorators import login_required
 from seal.utils.managemail import Managemail
 
+PATHREDIRECTINDEX = "/teacher/correction/edit/%s"
+PATHOKINDEX = "/teacher/delivery/list/%s"
+PATHOKEDITCORRECTION =  "/teacher/delivery/list/%s"
+SUBJECTEMAIL = "You have a correction to see on SEAL"
+BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s"
+
 @login_required
 def index(request, iddelivery):  
     delivery = Delivery.objects.get(pk=iddelivery)
     correction = Correction.objects.filter(delivery=delivery)
-    if len(correction) != 0: 
-        pathredirect = "/teacher/correction/edit/" + str(correction[0].pk)
-        return HttpResponseRedirect(pathredirect)
+    if len(correction) != 0:
+        return HttpResponseRedirect(PATHREDIRECTINDEX % str(correction[0].pk))
     else:
         if (request.method == 'POST'):
             correction = Correction(delivery=delivery)
@@ -21,8 +26,7 @@ def index(request, iddelivery):
             if (form.is_valid()):
                 form.save()
                 sendmail(delivery)
-                pathok = "/teacher/delivery/list/" + str(delivery.practice.pk)
-                return HttpResponseRedirect(pathok)
+                return HttpResponseRedirect(PATHOKINDEX % str(delivery.practice.pk))
         else:
             form = CorrectionForm()
         return render(request, 'correction/index.html', {'form': form, 'delivery': delivery}, context_instance=RequestContext(request))
@@ -36,8 +40,7 @@ def editcorrection(request, idcorrection):
             form_edit = form.save(commit=False)
             form_edit.save()
             sendmail(correction.delivery)
-            pathok = "/teacher/delivery/list/" + str(correction.delivery.practice.pk)
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKEDITCORRECTION % str(correction.delivery.practice.pk))
     else:    
         form = CorrectionForm(instance=correction)
     return render(request, 'correction/index.html', 
@@ -46,6 +49,5 @@ def editcorrection(request, idcorrection):
 
 def sendmail(delivery):
     managemail = Managemail()
-    subject = "You have a correction to see on SEAL"
-    body = "You have a correction to see in delivery: " + str(delivery.pk) + " from practice: "+ delivery.practice.uid
-    managemail.sendmail(subject, body, delivery.student.email) 
+    managemail.sendmail(SUBJECTEMAIL, BODYEMAIL % (str(delivery.pk), delivery.practice.uid), delivery.student.email) 
+    

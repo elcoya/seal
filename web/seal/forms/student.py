@@ -3,6 +3,9 @@ from seal.model.student import Student
 from django import forms
 from django.contrib.auth.models import User
 
+ERRORNOPASSWD = "A password must be supplied"
+ERRORPASSWDNOTMATCH = "Passwords does not match"
+
 class StudentForm(ModelForm):
     class Meta:
         model = Student
@@ -16,13 +19,13 @@ class StudentForm(ModelForm):
         uid = self.cleaned_data['uid']
         passwd = self.cleaned_data['passwd']
         if((not (User.objects.filter(username=uid).exists())) and (passwd=='')):
-            raise forms.ValidationError("A password must be supplied")
+            raise forms.ValidationError(ERRORNOPASSWD)
 
     def clean_passwd_again(self):
         passwd = self.data['passwd']
         passwd_again = self.cleaned_data['passwd_again']
         if((passwd or passwd_again) and (not (passwd == passwd_again)) ):
-            raise forms.ValidationError("Passwords does not match")
+            raise forms.ValidationError(ERRORPASSWDNOTMATCH)
         uid = self.cleaned_data['uid']
         if(User.objects.filter(username=uid).exists()):
             user = User.objects.get(username=uid)
@@ -35,4 +38,3 @@ class StudentForm(ModelForm):
             user.set_password(passwd)
             user.save()
         self.instance.user = user
-    

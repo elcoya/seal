@@ -9,9 +9,14 @@ from django.template.context import RequestContext
 from seal.forms.student import StudentForm, Student
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+PATHOKNEWSTUDENT = "/teacher/course/editcourse/%s"
+PATHOKEDITSTUDENT = "/teacher/course/editcourse/%s"
+PATHOKENROLED = "/teacher/students/"
+MAXPAGINATOR = 10
+
 def index(request):
     student_list = Student.objects.all().order_by('uid')
-    paginator = Paginator(student_list, 10) # Show 10 practice per page
+    paginator = Paginator(student_list, MAXPAGINATOR) # Show 10 practice per page
     page = request.GET.get('page')
     try:
         students = paginator.page(page)
@@ -28,8 +33,7 @@ def newstudent(request, idcourse):
         form = StudentForm(request.POST)
         if (form.is_valid()):
             form.save()
-            pathok = "/teacher/course/editcourse/"+str(idcourse)
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKNEWSTUDENT % str(idcourse))
     else:
         form = StudentForm(initial={'courses': [idcourse]})
     return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
@@ -40,8 +44,7 @@ def editstudent(request, idcourse, idstudent):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
             form.save()
-            pathok = "/teacher/course/editcourse/"+str(idcourse)
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKEDITSTUDENT % str(idcourse))
     else:
         form = StudentForm( instance = student)
     return render(request, 'student/editstudent.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
@@ -52,8 +55,7 @@ def edit_unenrolled_student(request, idstudent):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
             form.save()
-            pathok = "/teacher/students/"
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKENROLED)
     else:
         form = StudentForm( instance = student)
     return render(request, 'student/editstudent.html', {'form': form}, context_instance=RequestContext(request))
