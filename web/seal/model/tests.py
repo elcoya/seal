@@ -16,3 +16,5 @@ from seal.test.unit.practiceTest import PracticeTest
 from seal.test.unit.studentTest import StudentTest
 from seal.test.unit.suscriptionTest import SuscriptionTest
 from seal.test.unit.teacherTest import TeacherTest
+
+from test.autocheck_runner import TestAutocheckRunner

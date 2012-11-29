@@ -209,7 +209,7 @@ def behave():
 
 
 def test():
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web/seal"):
         local("python manage.py test")
-
 
