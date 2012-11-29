@@ -7,6 +7,9 @@ from django import forms
 from seal.model.student import Student
 from django.forms.forms import Form
 
+ERRORUIDVALIDATION = "User uid is not available"
+ERRORPASSWDNOTMATCH = "Passwords does not match"
+
 class RegistrationForm(Form):
     """
     Registrtion form for new Student
@@ -20,10 +23,10 @@ class RegistrationForm(Form):
     def clean_uid(self):
         uid = self.cleaned_data['uid']
         if(Student.objects.filter(uid=uid)):
-            raise forms.ValidationError("User '" + uid + "' is not available")
+            raise forms.ValidationError(ERRORUIDVALIDATION)
     
     def clean_passwd_again(self):
         passwd = self.cleaned_data['passwd']
         passwd_again = self.cleaned_data['passwd_again']
         if(not (passwd == passwd_again)):
-            raise forms.ValidationError("Passwords does not match")
+            raise forms.ValidationError(ERRORPASSWDNOTMATCH)

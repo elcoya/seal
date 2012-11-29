@@ -13,10 +13,15 @@ from django.contrib.auth.decorators import login_required
 from seal.forms.script import PracticeScriptForm
 from seal.model.script import Script
 
+PATHOKNEWPRACTICE =  "/teacher/course/editcourse/%s"
+PATHOKEDITPRACTICE = "/course/editcourse/%s"
+PATHOKSCRIPT = "/teacher/course/editcourse/%s"
+MAXPAGINATOR = 10
+
 @login_required
 def index(request):
     practice_list = Practice.objects.all().order_by('-deadline')
-    paginator = Paginator(practice_list, 10) # Show 10 practice per page
+    paginator = Paginator(practice_list, MAXPAGINATOR) # Show 10 practice per page
     page = request.GET.get('page')
     try:
         practices = paginator.page(page)
@@ -34,8 +39,7 @@ def newpractice(request, idcourse):
         form = PracticeForm(request.POST, request.FILES)
         if (form.is_valid()):
             form.save()
-            pathok = "/teacher/course/editcourse/" + str(idcourse)
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKNEWPRACTICE % str(idcourse))
     else:
         form = PracticeForm(initial={'course': idcourse})
     return render(request, 'practice/uploadpractice.html', {'form': form, 'idcourse':idcourse})
@@ -48,8 +52,7 @@ def editpractice(request, idcourse , idpractice):
         if (form.is_valid()):
             form_edit = form.save(commit=False)
             form_edit.save()
-            pathok = "/course/editcourse/" + str(idcourse)
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKEDITPRACTICE % str(idcourse))
     else:
         form = PracticeForm(instance=practice)
     return render(request, 'practice/editpractice.html', {'form': form, 'idcourse': idcourse,}, context_instance=RequestContext(request))
@@ -60,15 +63,14 @@ def script(request, idcourse , idpractice):
     script_text = ''
     if (request.method == 'POST'):
         if (Script.objects.filter(practice=practice).exists()):
-            script = Script.objects.get(practice=practice)
+            script_instance = Script.objects.get(practice=practice)
         else:
-            script = Script(practice=practice)
-        form = PracticeScriptForm(request.POST, request.FILES, instance=script)
+            script_instance = Script(practice=practice)
+        form = PracticeScriptForm(request.POST, request.FILES, instance=script_instance)
         if (form.is_valid()):
-            formEdit = form.save(commit=False)
-            formEdit.save()
-            pathok = "/teacher/course/editcourse/" + str(idcourse)
-            return HttpResponseRedirect(pathok)
+            form_edit = form.save(commit=False)
+            form_edit.save()
+            return HttpResponseRedirect(PATHOKSCRIPT % str(idcourse))
     else:
         if(practice.script_set.all()):
             form = PracticeScriptForm(instance=practice.script_set.all()[0])

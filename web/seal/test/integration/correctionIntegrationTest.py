@@ -88,11 +88,3 @@ class CorrectionIntegrationTest(TestCase):
         self.assertEqual(saved_correction.publicComent, self.correction_public_comment)
         self.assertEqual(saved_correction.privateComent, self.correction_private_comment)
         self.assertEqual(saved_correction.grade, self.correction_grade)
-    
-    def testCorrectionStringify(self):
-        correction = Correction()
-        correction.publicComent = self.correction_public_comment
-        correction.privateComent = self.correction_private_comment
-        correction.grade = self.correction_grade
-        self.assertEqual(str(correction), str(self.correction_grade) + " - " + self.correction_public_comment)
-    

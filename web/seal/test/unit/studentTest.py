@@ -10,7 +10,8 @@ from seal.model import Student
 
 class StudentTest(TestCase):
     
-    def testStudentModelDescription(self):
+    def testStudentToStringInputNameReturnName(self):
+        name = "Name"
         student = Student()
-        student.name = "Nombre"
-        self.assertEqual(str(student), "Nombre")
+        student.name = name
+        self.assertEqual(str(student), name)

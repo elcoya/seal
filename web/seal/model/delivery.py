@@ -6,7 +6,7 @@ import ConfigParser
 config = ConfigParser.ConfigParser()
 config.readfp(open(os.environ['PROJECT_PATH'] + 'web/conf/local.cfg'))
 BASE_PATH = config.get("Path", "path.workspace")
-
+FOLDERNAME = "delivery_files/"
 
 class Delivery(models.Model):
     """Delivery class.
@@ -17,7 +17,7 @@ class Delivery(models.Model):
      
     """
     
-    file = models.FileField(upload_to=BASE_PATH + "delivery_files/")
+    file = models.FileField(upload_to=BASE_PATH + FOLDERNAME)
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()

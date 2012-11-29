@@ -10,6 +10,8 @@ from django.template.context import RequestContext
 from seal.model.practice import Practice
 from django.http import HttpResponse
 
+TYPEPDF = "application/pdf"
+
 @login_required
 def practicelist(request, idcourse):
     course = Course.objects.get(pk=idcourse)
@@ -22,6 +24,6 @@ def practicelist(request, idcourse):
 def download(request, idpractice):
     practice = Practice.objects.get(pk=idpractice)
     filename = practice.file.name.split('/')[-1]
-    response = HttpResponse(practice.file, content_type='application/pdf')
+    response = HttpResponse(practice.file, content_type=TYPEPDF)
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response

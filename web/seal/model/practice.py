@@ -8,6 +8,8 @@ config = ConfigParser.ConfigParser()
 config.readfp(open(os.environ['PROJECT_PATH'] + 'web/conf/local.cfg'))
 BASE_PATH = config.get("Path", "path.workspace")
 
+FOLDERNAME = "practice_files/"
+
 class Practice(models.Model):
     """Assignment.
     
@@ -18,7 +20,7 @@ class Practice(models.Model):
     
     uid = models.CharField(max_length=32)
     course = models.ForeignKey(Course)
-    file = models.FileField(upload_to=BASE_PATH + "practice_files/")
+    file = models.FileField(upload_to=BASE_PATH + FOLDERNAME)
     deadline = models.DateField()
     
     class Meta:

@@ -9,7 +9,8 @@ from django.test import TestCase
 from seal.model import Practice
 
 class PracticeTest(TestCase):
-    def testPracticeModelDescription(self):
+    def testPracticeToStringReturnPracticeUid(self):
+        uid = "practice_uid"
         practice = Practice()
-        practice.uid = "practice_uid"
-        self.assertEqual(str(practice), "practice_uid")
+        practice.uid = uid
+        self.assertEqual(str(practice), uid)

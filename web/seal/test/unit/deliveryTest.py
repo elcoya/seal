@@ -6,18 +6,19 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from seal.model import Delivery, Student, Practice
-
+from seal.model import Delivery, Student, Practice, Course
 
 class DeliveryTest(TestCase):
-    def testDeliveryModelDescription(self):
-        student = Student()
-        student.name = "Nombre y Apellido"
-        practice = Practice()
-        practice.uid = "Tp inicial"
+    def setUp(self):
+        course = Course.objects.create(name = "2012-1", pk = 1)
+        self.student = Student.objects.create(name = "Nombre y Apellido")
+        self.practice = Practice.objects.create(uid = "Tp inicial", course = course, deadline = '2012-11-25') 
         
+    def testDeliveryToStringReturnNamePracticeNameStudentAndDeadLinePractice(self):    
+        deadline = "2012-11-25"
+        str_practice_return = "Tp inicial - Nombre y Apellido - 2012-11-25"
         delivery = Delivery()
-        delivery.student = student
-        delivery.practice = practice
-        delivery.deliverDate = '2012-11-25'
-        self.assertEqual(str(delivery), "Tp inicial - Nombre y Apellido - 2012-11-25")
+        delivery.student = self.student
+        delivery.practice = self.practice
+        delivery.deliverDate = deadline
+        self.assertEqual(str(delivery), str_practice_return)

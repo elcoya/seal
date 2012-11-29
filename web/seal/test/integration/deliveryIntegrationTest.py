@@ -28,7 +28,7 @@ class DeliveryIntegrationTest(TestCase):
         practice.deadline = "2012-12-01" 
         practice.save()
      
-    def testDeliveryCreation(self):
+    def testDeliveryCreationComparePk(self):
         student = Student.objects.get(uid="85000")
         practice = Practice.objects.get(uid="Tp inicial")
         

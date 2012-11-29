@@ -3,6 +3,8 @@ from django.shortcuts import render
 from seal.model import Practice, Delivery
 from django.contrib.auth.decorators import login_required
 
+TYPEZIP = "application/zip"
+
 @login_required
 def listdelivery(request, idpractice):
     practice = Practice.objects.get(pk=idpractice)
@@ -13,6 +15,6 @@ def listdelivery(request, idpractice):
 def download(request, iddelivery):
     delivery = Delivery.objects.get(pk=iddelivery)
     filename = delivery.file.name.split('/')[-1]
-    response = HttpResponse(delivery.file, content_type='application/zip')
+    response = HttpResponse(delivery.file, content_type=TYPEZIP)
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response

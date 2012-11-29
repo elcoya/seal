@@ -3,6 +3,12 @@ from django.forms import forms
 from seal.model import Delivery
 import os
 
+ERRORTYPEPERMITED = "Only zip is permited to upload!"
+TYPEZIP = "application/zip"
+TYPEXZIP = "application/x-zip-compressed"
+TYPEOCTETSTREAM = "application/octet-stream"
+EXTENTIONPERMITED = ".zip"
+
 class DeliveryForm(ModelForm):
     class Meta:
         model = Delivery
@@ -14,10 +20,9 @@ class DeliveryForm(ModelForm):
         filename = data.name
         ext = os.path.splitext(filename)[1]
         ext = ext.lower()
-        if ((detected_type in ("application/zip", "application/x-zip-compressed")) or 
-            (detected_type == "application/octet-stream" and ext == ".zip")):
+        if ((detected_type in (TYPEZIP, TYPEXZIP)) or 
+            (detected_type == TYPEOCTETSTREAM and ext == EXTENTIONPERMITED)):
             return data
         else:
-            error = "Only zip is permited to upload! Type detected: " + str(detected_type)
-            raise forms.ValidationError(error)
+            raise forms.ValidationError(ERRORTYPEPERMITED)
         

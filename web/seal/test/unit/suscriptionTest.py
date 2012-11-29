@@ -8,9 +8,8 @@ from django.test import TestCase
 from seal.model import Suscription
 
 class SuscriptionTest(TestCase):
-    def testSuscriptionModelDescription(self):
+    def testSuscriptionToStringInsterPk1return1(self):
         pk = 1
         suscription = Suscription()
         suscription.pk = pk
-        assert_pk = str(suscription)
-        self.assertEqual(assert_pk, str(pk), "Suscription to string expected to be " + str(pk) + " but was " + assert_pk)
+        self.assertEqual(str(suscription), str(pk))

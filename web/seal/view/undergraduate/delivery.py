@@ -6,6 +6,8 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from seal.model.autocheck import Autocheck
 
+PATHOKNEWDELIVERY = "/undergraduate/practice/list/%s"
+
 @login_required
 def newdelivery(request, idpractice):
     idstudent = request.user.student_set.get(uid=request.user.username).pk
@@ -19,12 +21,10 @@ def newdelivery(request, idpractice):
             autocheck = Autocheck()
             autocheck.delivery = form.instance
             autocheck.save()
-            pathok = "/undergraduate/practice/list/" + str(practice.course_id)
-            return HttpResponseRedirect(pathok)
+            return HttpResponseRedirect(PATHOKNEWDELIVERY % str(practice.course_id))
     else:
         form = DeliveryForm()
     deliveries = Delivery.objects.filter(student=student, practice=practice)
     return render(request, 'delivery/uploaddelivery.html', 
                   {'form': form, 'idstudent' : idstudent, 'idcourse' : practice.course_id, 
                    'namepractice':practice.uid, 'deliveries': deliveries})
-

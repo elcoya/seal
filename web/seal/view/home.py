@@ -17,27 +17,36 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from seal.utils.managemail import Managemail
 
+REDIRECTADMIN = "/admin"
+REDIRECTTEACHER = "/teacher"
+REDIRECTUNDERGRADUATE = "/undergraduate"
+REDIRECTINDEX = "index.html"
+ERRORCAPTCHA = "You Must Be a Robot"
+SUBJECTMAIL = "Registration SEAL Successful"
+BODYMAIL =  "You have been registered in SEAL with username: %s and password: %s"
+REDIRECTLOGOUT = "/"
+
 @login_required
 def index(request):
     user = request.user
     if(user.is_superuser):
-        return HttpResponseRedirect('/admin')
+        return HttpResponseRedirect(REDIRECTADMIN)
     elif(Teacher.objects.filter(user_id=user.id)):
-        return HttpResponseRedirect('/teacher')
+        return HttpResponseRedirect(REDIRECTTEACHER)
     elif(Student.objects.filter(user_id=user.id).exists()):
-        return HttpResponseRedirect('/undergraduate')
+        return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
-        return render_to_response('index.html')
+        return render_to_response(REDIRECTINDEX)
 
 @login_required
 def redirect(request):
     user = request.user
     if(user.is_superuser):
-        return HttpResponseRedirect('/admin')
+        return HttpResponseRedirect(REDIRECTADMIN)
     elif(Teacher.objects.filter(user_id=user.id).exists()):
-        return HttpResponseRedirect('/teacher')
+        return HttpResponseRedirect(REDIRECTTEACHER)
     else:
-        return HttpResponseRedirect('/undergraduate')
+        return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
 
 def register(request):
     if (request.method == 'POST'):
@@ -62,11 +71,10 @@ def register(request):
                 student.save()
                 sendmail(student, form.data['passwd'])
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
-        else:  
-            captcha_response = 'You Must Be a Rorbot'  
+        else:
             return render_to_response('registration/register.html', 
                                       {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY, 
-                                       'captcha_response': captcha_response}, 
+                                       'captcha_response': ERRORCAPTCHA}, 
                                       context_instance=RequestContext(request))  
     else:
         form = RegistrationForm()
@@ -76,28 +84,11 @@ def register(request):
 
 def sendmail(student, passw):
     managemail = Managemail()
-    subject = "Registration SEAL Successful"
-    body = "You have been registered in SEAL with username: " + student.uid + " and password: " + passw
-    managemail.sendmail(subject, body, student.email)
+    managemail.sendmail(SUBJECTMAIL, BODYMAIL % (student.uid, passw), student.email)
                 
-def login(request, user):
-    if (request.method == 'POST'):
-        form = LoginForm(request.POST)
-        username = form.data.username
-        password = form.data.password
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/student')
-            else:
-                form.non_field_errors.add('This user is no longer active')
-        else:
-            form.non_field_errors.add('Invalid login')
-
 def logout_page(request):
     """
     Log users out and re-direct them to the main page.
     """
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(REDIRECTLOGOUT)

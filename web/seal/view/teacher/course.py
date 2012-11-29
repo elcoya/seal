@@ -13,10 +13,13 @@ from django.contrib.auth.decorators import login_required
 import os
 import sys
 
+PATHOKNEWCOURSE = "/"
+MAXPAGINATOR = 25
+
 @login_required
 def index(request):
     courses_list = Course.objects.all().order_by('-name')
-    paginator = Paginator(courses_list, 25) # Show 25 courses per page
+    paginator = Paginator(courses_list, MAXPAGINATOR) # Show 25 courses per page
     page = request.GET.get('page')
     try:
         courses = paginator.page(page)
@@ -47,7 +50,7 @@ def editcourse(request, idcourse):
         if (form.is_valid()):
             form_edit = form.save(commit=False)
             form_edit.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(PATHOKNEWCOURSE)
     else:
         form = CourseForm( instance = course)
         practices = course.practice_set.all().order_by('deadline')

@@ -12,6 +12,7 @@ from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.teacher import Teacher
 from django.contrib.auth.models import User
+from seal.model.script import Script
 
 def clean_up_database_tables():
     Autocheck.objects.all().delete()
@@ -51,6 +52,14 @@ def create_a_student(student_name, student_email, course_name):
     student.save()
     student.courses.add(Course.objects.get(name=course_name))
     student.save()
+
+def load_a_script(course_name, practice_uid, script_file):
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(course=course, uid=practice_uid)
+    practice.script_set.all().delete()
+    script = Script()
+    script.practice = practice
+    script.save()
 
 def create_a_delivery(delivery_filepath, student_name, course_name, practice_uid, delivery_date):
     delivery = Delivery()
