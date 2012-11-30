@@ -201,10 +201,32 @@ def stop():
     file.close()
     os.remove("/tmp/seal_server.pid")
 
+def start_daemon():
+    print "[fabric] launching daemon..."
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    daemon_process = Popen(["nohup", "python", "daemon/daemon/daemon.py"], stdout = open("/tmp/daemon.out", 'w+', 0), env=os.environ)
+    local("echo " + str(daemon_process.pid) + " > /tmp/seal_daemon.pid")
+    print("[fabric] daemon active... pid: " + str(daemon_process.pid))
+
+def stop_daemon():
+    print "[fabric] stopping daemon..."
+    file = open("/tmp/seal_daemon.pid")
+    line = file.readline()
+    local("kill -2 " + line)
+    file.close()
+    os.remove("/tmp/seal_daemon.pid")
+    print("[fabric] daemon killed - pid: " + line)
+
+
 def test():
     os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web/seal"):
         local("python manage.py test")
+
+def test(app_name):
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    with lcd("web/seal"):
+        local("python manage.py test " + app_name)
 
 def behave():
     with lcd("web/feature_test"):

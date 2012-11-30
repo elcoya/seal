@@ -15,6 +15,8 @@ class AutocheckRunner():
     
     """
     
+    TMP_DIR = "tmp_dir"
+    
     def get_pending_autochecks(self):
         pending_autochecks = Autocheck.objects.filter(status=0)
         return self.filter_autochecks(pending_autochecks)
@@ -23,50 +25,50 @@ class AutocheckRunner():
         
         return autochecks
     
+    def move_delivery_zip_to_assigned_dir(self, delivery):
+        return
+    
+    def setup_enviroment(self, delivery, script):
+        shutil.rmtree(AutocheckRunner.TMP_DIR, ignore_errors=True)
+        os.mkdir(AutocheckRunner.TMP_DIR)
+        shutil.copy(delivery.file.name, AutocheckRunner.TMP_DIR + "/" + os.path.basename(delivery.file.name))
+        zipfile = ZipFile(AutocheckRunner.TMP_DIR + "/" + os.path.basename(delivery.file.name))
+        zipfile.extractall(AutocheckRunner.TMP_DIR)
+        shutil.copy(script.file.name, AutocheckRunner.TMP_DIR + "/" + os.path.basename(script.file.name))
+    
+    def run_script(self, autocheck=None, script=None):
+        script_file_name = AutocheckRunner.TMP_DIR + "/" + os.path.basename(script.file.name)
+        process = subprocess.Popen(["chmod", "a+x", script_file_name])
+        process.wait()
+        process = subprocess.Popen([script_file_name], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+        exit_value = process.wait()
+        output = process.communicate()
+        captured_stdout = output[0]
+        autocheck.exit_value = exit_value
+        autocheck.captured_stdout = captured_stdout
+        autocheck.status = 1 + (-2 * exit_value)
+        return {"exit_value" : exit_value, "captured_stdout" : captured_stdout}
+    
+    def clean_up_tmp_dir(self):
+        shutil.rmtree(AutocheckRunner.TMP_DIR, ignore_errors=True)
+    
     def run(self):
-        """
-        
-        Runs the corresponding script for every Delivery which has not yet been
-        run.
-        
-        """
+        """Runs the corresponding script for every Delivery which has not yet been run."""
         
         results = {"successfull" : 0, "failed" : 0}
-        pending_autochecks = Autocheck.objects.filter(status=0)
+        pending_autochecks = self.get_pending_autochecks()
         for pending_autocheck in pending_autochecks:
             delivery = pending_autocheck.delivery
             practice = delivery.practice
             if (practice.script_set.all()):
                 script = practice.script_set.all()[0]
+                self.setup_enviroment(delivery, script)
                 script_result = self.run_script(pending_autocheck, script)
-                pending_autocheck.exit_value = script_result["exit_value"]
-                pending_autocheck.captured_stdout += script_result["captured_stdout"]
+                self.clean_up_tmp_dir()
                 if(script_result["exit_value"] == 0):
-                    pending_autocheck.status = 1 #successfull
                     results["successfull"] += 1
                 else :
-                    pending_autocheck.status = -1 #failed
                     results["failed"] += 1
                 pending_autocheck.save()
         return results;
     
-    def run_script(self, autocheck=None, script=None):
-        tmp_dir = "tmp_zip"
-        script_file_name = os.path.basename(script.file.name)
-        zipfile = ZipFile(autocheck.delivery.file)
-        shutil.rmtree(tmp_dir, ignore_errors=True)
-        os.mkdir(tmp_dir)
-        zipfile.extractall(tmp_dir)
-        self.copy(script.file.name, tmp_dir + "/" + script_file_name)
-        process = subprocess.Popen(["chmod", "a+x", tmp_dir + "/" + script_file_name])
-        process.wait()
-        process = subprocess.Popen([tmp_dir + "/" + script_file_name], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
-        exit_value = process.wait()
-        output = process.communicate()
-        captured_stdout = output[0]
-        
-        shutil.rmtree(tmp_dir, ignore_errors=True)
-        return {"exit_value" : exit_value, "captured_stdout" : captured_stdout}
-    
-    def copy(self, from_path, to_path):
-        shutil.copyfile(from_path, to_path)

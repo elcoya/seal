@@ -28,6 +28,7 @@ def create_a_course(course_name):
     course = Course()
     course.name = course_name
     course.save()
+    return course
 
 def create_a_practice(course_name, practice_deadline, practice_filepath, practice_uid):
     practice = Practice()
@@ -36,6 +37,7 @@ def create_a_practice(course_name, practice_deadline, practice_filepath, practic
     practice.file = practice_filepath
     practice.uid = practice_uid
     practice.save()
+    return practice
 
 def get_user_for_student(student_name):
     user = User.objects.get_or_create(username=student_name)[0]
@@ -52,6 +54,7 @@ def create_a_student(student_name, student_email, course_name):
     student.save()
     student.courses.add(Course.objects.get(name=course_name))
     student.save()
+    return student
 
 def load_a_script(course_name, practice_uid, script_file):
     course = Course.objects.get(name=course_name)
@@ -59,7 +62,9 @@ def load_a_script(course_name, practice_uid, script_file):
     practice.script_set.all().delete()
     script = Script()
     script.practice = practice
+    script.file = script_file
     script.save()
+    return script
 
 def create_a_delivery(delivery_filepath, student_name, course_name, practice_uid, delivery_date):
     delivery = Delivery()
@@ -69,6 +74,7 @@ def create_a_delivery(delivery_filepath, student_name, course_name, practice_uid
     delivery.practice = Practice.objects.get(course=course, uid=practice_uid)
     delivery.deliverDate = delivery_date
     delivery.save()
+    return delivery
 
 def create_an_autocheck(delivery_filepath, stdout, exit_value, status):
     autocheck = Autocheck()
@@ -77,3 +83,4 @@ def create_an_autocheck(delivery_filepath, stdout, exit_value, status):
     autocheck.exit_value = exit_value
     autocheck.status = status
     autocheck.save()
+    return autocheck
