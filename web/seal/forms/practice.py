@@ -11,8 +11,10 @@ class PracticeForm(ModelForm):
         
     def clean_file(self):
         data = self.cleaned_data['file']
-        if (str(data).count("/") == 0):
+        try:
             ext = data.content_type
             if (ext != TYPEPDF):
                 raise forms.ValidationError(ERRORTYPEPERMITED)
+        except AttributeError:
+            pass  
         return data
