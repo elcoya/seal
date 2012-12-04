@@ -13,9 +13,7 @@ from django.contrib.auth.decorators import login_required
 from seal.forms.script import PracticeScriptForm
 from seal.model.script import Script
 
-PATHOKNEWPRACTICE =  "/teacher/course/editcourse/%s"
-PATHOKEDITPRACTICE = "/course/editcourse/%s"
-PATHOKSCRIPT = "/teacher/course/editcourse/%s"
+PATHOK =  "/teacher/course/editcourse/%s"
 MAXPAGINATOR = 10
 
 @login_required
@@ -39,7 +37,7 @@ def newpractice(request, idcourse):
         form = PracticeForm(request.POST, request.FILES)
         if (form.is_valid()):
             form.save()
-            return HttpResponseRedirect(PATHOKNEWPRACTICE % str(idcourse))
+            return HttpResponseRedirect(PATHOK % str(idcourse))
     else:
         form = PracticeForm(initial={'course': idcourse})
     return render(request, 'practice/uploadpractice.html', {'form': form, 'idcourse':idcourse})
@@ -52,7 +50,7 @@ def editpractice(request, idcourse , idpractice):
         if (form.is_valid()):
             form_edit = form.save(commit=False)
             form_edit.save()
-            return HttpResponseRedirect(PATHOKEDITPRACTICE % str(idcourse))
+            return HttpResponseRedirect(PATHOK % str(idcourse))
     else:
         form = PracticeForm(instance=practice)
     return render(request, 'practice/editpractice.html', {'form': form, 'idcourse': idcourse,}, context_instance=RequestContext(request))
@@ -70,7 +68,7 @@ def script(request, idcourse , idpractice):
         if (form.is_valid()):
             form_edit = form.save(commit=False)
             form_edit.save()
-            return HttpResponseRedirect(PATHOKSCRIPT % str(idcourse))
+            return HttpResponseRedirect(PATHOK % str(idcourse))
     else:
         if(practice.script_set.all()):
             form = PracticeScriptForm(instance=practice.script_set.all()[0])
