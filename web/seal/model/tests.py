@@ -3,6 +3,8 @@
 This file exists for the only purpouse of having Django acknowledging the tests
 
 """
+
+# web tests
 from seal.test.integration.autocheckIntegrationTest import AutocheckIntegrationTest
 from seal.test.integration.correctionIntegrationTest import CorrectionIntegrationTest
 from seal.test.integration.courseIntegrationTest import CourseIntegrationTest
@@ -18,4 +20,7 @@ from seal.test.unit.studentTest import StudentTest
 from seal.test.unit.suscriptionTest import SuscriptionTest
 from seal.test.unit.teacherTest import TeacherTest
 
-from daemon_test.autocheck_runner_test import TestAutocheckRunner
+# daemon tests
+#from daemon_test.autocheck_runner_test import TestAutocheckRunner
+from daemon_test.run_script_command_test import TestRunScriptCommand
+
