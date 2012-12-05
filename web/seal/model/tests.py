@@ -23,4 +23,5 @@ from seal.test.unit.teacherTest import TeacherTest
 # daemon tests
 #from daemon_test.autocheck_runner_test import TestAutocheckRunner
 from daemon_test.run_script_command_test import TestRunScriptCommand
+from daemon_test.publish_result_visitor_test import PublishResultVisitorTest
 

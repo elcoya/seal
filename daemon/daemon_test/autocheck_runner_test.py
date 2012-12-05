@@ -44,7 +44,6 @@ class TestAutocheckRunner(TestCase):
         self.delivery = create_a_delivery(self.delivery_filepath, self.student_name, self.course_name, self.practice_uid, self.delivery_date)
         self.autocheck = create_an_autocheck(self.delivery_filepath, self.stdout, self.exit_value, self.status)
 
-
     def tearDown(self):
         clean_up_database_tables()
 
