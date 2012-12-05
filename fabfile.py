@@ -152,7 +152,7 @@ def run_features_tests(context = None):
 def prepare_deploy(context = None):
     """Syncronizes the database and runs all the tests"""
     prepare_db(context)
-    run_tests(context)
+    test()
     if (config.get("Enviroment", "location") == "dev"):
         run_features_tests(context)
 
@@ -217,7 +217,7 @@ def stop_daemon():
     os.remove("/tmp/seal_daemon.pid")
     print("[fabric] daemon killed - pid: " + line)
 
-def test(app_name):
+def test(app_name=''):
     os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web/seal"):
         local("python manage.py test " + app_name)
