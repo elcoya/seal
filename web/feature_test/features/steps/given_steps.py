@@ -58,6 +58,25 @@ def step(context, username, password):
         student.user = user
         student.save()
 
+@given('Student "{username}" exists with email "{email}"')
+def step(context, username, email):
+    if(Student.objects.filter(uid=username).exists()):
+        student = Student.objects.get(uid=username)
+        student.user.set_password(username)
+        student.user.save()
+        student.save()
+    else:
+        student = Student()
+        student.name = capitalize(username)
+        student.uid = username
+        student.email = email
+        user = User()
+        user.username = username
+        user.set_password(username)
+        user.save()
+        student.user = user
+        student.save()
+
 @given('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
     if(context.browser.find_elements_by_link_text('logout')):
