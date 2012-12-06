@@ -165,6 +165,7 @@ def invoke_test_deploy(context = None):
 
 def run_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web"):
         local("coverage run seal/manage.py test model")
         if(config.get("Enviroment", "location") == "travis"):
@@ -175,8 +176,9 @@ def run_coverage_analysis(context = None):
 def pylint():
     """Runs the pylint analysis and saves the report to be available"""
     print "launching pylint static analysis..."
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with settings(warn_only=True):
-        result = local("pylint seal --rcfile=pylintrc > pylint_report/pylint.html")
+        result = local("pylint web/seal daemon/daemon --rcfile=pylintrc > pylint_report/pylint.html")
     print "pylint static analysis complete... exit status: " + str(result.return_code)
     print "you can access the report result pylint_report/pylint.html"
 
