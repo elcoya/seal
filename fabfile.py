@@ -196,6 +196,13 @@ def start():
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
 
+def start_ip(ip):
+    print("[fabric] launching server instance.")
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", str(ip) + ":8000", "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
+    local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
+    print("[fabric] server online... pid: " + str(server_process.pid))
+
 def stop():
     file = open("/tmp/seal_server.pid")
     line = file.readline()
