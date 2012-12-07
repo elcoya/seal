@@ -1,9 +1,9 @@
-from seal.model.autocheck import Autocheck
-from seal.model.delivery import Delivery
-from zipfile import ZipFile
 import os
 import shutil
-import subprocess
+from daemon.selection.autocheck_selection_strategy_pending_and_runnable import AutocheckSelectionStrategyPendingAndRunnable
+from daemon.preparation.prepare_files_strategy_zip import PrepareFilesStrategyZip
+from daemon.excecution.run_script_command import RunScriptCommand
+from daemon.publication.publish_results_visitor_web import PublishResultsVisitorWeb
 
 class AutocheckRunner():
     """
@@ -17,37 +17,17 @@ class AutocheckRunner():
     
     TMP_DIR = "tmp_dir"
     
-    def get_pending_autochecks(self):
-        pending_autochecks = Autocheck.objects.filter(status=0)
-        return self.filter_autochecks(pending_autochecks)
-    
-    def filter_autochecks(self, autochecks):
-        
-        return autochecks
-    
-    def move_delivery_zip_to_assigned_dir(self, delivery):
-        return
+    def __init__(self):
+        self.selection_strategy = AutocheckSelectionStrategyPendingAndRunnable()
+        self.prepare_files_strategy = PrepareFilesStrategyZip()
+        self.run_script_command = RunScriptCommand()
+        self.publish_result_visitors = (PublishResultsVisitorWeb(), )
     
     def setup_enviroment(self, delivery, script):
         shutil.rmtree(AutocheckRunner.TMP_DIR, ignore_errors=True)
-        os.mkdir(AutocheckRunner.TMP_DIR)
-        shutil.copy(delivery.file.name, AutocheckRunner.TMP_DIR + "/" + os.path.basename(delivery.file.name))
-        zipfile = ZipFile(AutocheckRunner.TMP_DIR + "/" + os.path.basename(delivery.file.name))
-        zipfile.extractall(AutocheckRunner.TMP_DIR)
+        self.prepare_files_strategy.zip = delivery.file.name
+        self.prepare_files_strategy.prepare_files(AutocheckRunner.TMP_DIR)
         shutil.copy(script.file.name, AutocheckRunner.TMP_DIR + "/" + os.path.basename(script.file.name))
-    
-    def run_script(self, autocheck=None, script=None):
-        script_file_name = AutocheckRunner.TMP_DIR + "/" + os.path.basename(script.file.name)
-        process = subprocess.Popen(["chmod", "a+x", script_file_name])
-        process.wait()
-        process = subprocess.Popen([script_file_name], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
-        exit_value = process.wait()
-        output = process.communicate()
-        captured_stdout = output[0]
-        autocheck.exit_value = exit_value
-        autocheck.captured_stdout = captured_stdout
-        autocheck.status = 1 + (-2 * exit_value)
-        return {"exit_value" : exit_value, "captured_stdout" : captured_stdout}
     
     def clean_up_tmp_dir(self):
         shutil.rmtree(AutocheckRunner.TMP_DIR, ignore_errors=True)
@@ -56,19 +36,23 @@ class AutocheckRunner():
         """Runs the corresponding script for every Delivery which has not yet been run."""
         
         results = {"successfull" : 0, "failed" : 0}
-        pending_autochecks = self.get_pending_autochecks()
+        pending_autochecks = self.selection_strategy.get_autochecks()
         for pending_autocheck in pending_autochecks:
             delivery = pending_autocheck.delivery
             practice = delivery.practice
+            # FIXME: the selection strategy should get only the autochecks for practices with associated autochecks
             if (practice.script_set.all()):
                 script = practice.script_set.all()[0]
                 self.setup_enviroment(delivery, script)
-                script_result = self.run_script(pending_autocheck, script)
+                self.run_script_command.set_script(script)
+                script_result = self.run_script_command.excecute()
+                for visitor in self.publish_result_visitors:
+                    script_result.accept(visitor)
+                
                 self.clean_up_tmp_dir()
-                if(script_result["exit_value"] == 0):
+                if(script_result.exit_value == 0):
                     results["successfull"] += 1
                 else :
                     results["failed"] += 1
-                pending_autocheck.save()
         return results;
     

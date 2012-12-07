@@ -1,10 +1,8 @@
-from seal.test.integration.utils import clean_up_database_tables,\
-    create_a_course, create_a_student, create_a_practice, create_a_delivery,\
-    create_an_autocheck, load_a_script
-
-from django.test import TestCase
 from daemon.result.script_result import ScriptResult
-from daemon.visitor.publish_results_visitor_web import PublishResultsVisitorWeb
+from daemon.publication.publish_results_visitor_web import PublishResultsVisitorWeb
+from unittest.case import TestCase
+from mock import Mock
+from seal.model.autocheck import Autocheck
 
 class PublishResultVisitorTest(TestCase):
 
@@ -30,25 +28,22 @@ class PublishResultVisitorTest(TestCase):
     
     
     def setUp(self):
-        clean_up_database_tables()
-        self.course = create_a_course(self.course_name)
-        self.student = create_a_student(self.student_name, self.student_email, self.course_name)
-        self.practice = create_a_practice(self.course_name, self.practice_deadline, self.practice_filepath, self.practice_uid)
-        self.script = load_a_script(self.course_name, self.practice_uid, self.script_file)
-        self.delivery = create_a_delivery(self.delivery_filepath, self.student_name, self.course_name, self.practice_uid, self.delivery_date)
-        self.autocheck = create_an_autocheck(self.delivery_filepath, self.stdout, self.exit_value, self.status)
+        self.autocheck = Mock(spec=Autocheck) # create_an_autocheck(self.delivery_filepath, self.stdout, self.exit_value, self.status)
         self.script_result = ScriptResult()
         self.script_result.autocheck = self.autocheck
         self.script_result.exit_value = self.exit_value
         self.script_result.captured_stdout = self.stdout
     
     def tearDown(self):
-        clean_up_database_tables()
+        pass
     
-    def testTheVisitorShouldSaveTheModificationsToTheDatabaseSoThatItWillBeReflectedOnTheWebsite(self):
+    def testTheVisitorShouldSaveTheModificationsToTheDatabaseSoThatTheResultsWillBeReflectedOnTheWebsite(self):
         publish_result_visitor_web = PublishResultsVisitorWeb()
         self.script_result.accept(publish_result_visitor_web)
         self.assertEqual(self.autocheck.exit_value, 0)
         self.assertEqual(self.autocheck.captured_stdout, self.stdout)
         self.assertEqual(self.autocheck.status, 1)
-
+        self.autocheck.save.assert_called()
+    
+    def testTheVisitorShouldInvokeTheEmailSendingProcessForTheVisitedResult(self):
+        pass
