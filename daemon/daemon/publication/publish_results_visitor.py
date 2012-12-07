@@ -1,9 +1,3 @@
-'''
-Created on 04/12/2012
-
-@author: anibal
-'''
-from abc import abstractmethod
 
 class PublishResultsVisitor:
     """
@@ -13,6 +7,5 @@ class PublishResultsVisitor:
     
     """
     
-    @abstractmethod
     def visit(self, visitable):
         yield None
