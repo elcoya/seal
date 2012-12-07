@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% comment %}
+
+Main page to recovery password.
+
+{% endcomment %}
+{% block addl_styles %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css" />
+{% endblock %}
+{% block head %}
+    <title>SEAL | Recovery Password</title>
+{% endblock %}
+{% block subtitle %}Recovery Password{% endblock %}
+{% block body %}
+	<nav>	
+		<p>
+			<a href="/">Login</a>
+		</p>
+	</nav>
+    <div class="content" >
+        {% if form.errors %}
+            <p class="error" >E-mail or Username didn't match, please try again.</p>
+        {% endif %}
+
+        <form method="post">
+        	{% csrf_token %}
+            <p>
+                <label for="id_username">Username:</label>
+                {{ form.uid }}
+            </p>
+            <p>
+                <label for="id_email">E-mail:<br></label>
+                {{ form.email }}
+            </p>
+            <input type="submit" value="Recover" style="margin: 5px 0 5px 205px; width: 70px; " />
+        </form>
+    </div>
+{% endblock %}

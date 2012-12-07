@@ -6,25 +6,31 @@ Created on 26/10/2012
 from seal.recaptcha.client import captcha
 from seal.model.student import Student
 from seal.model.teacher import Teacher
-from seal.forms.login import LoginForm
 from seal.forms.registration import RegistrationForm
+from seal.forms.recoverypass import RecoveryForm
 from django.contrib.auth.models import User
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from seal.utils.managemail import Managemail
+from django.forms.util import ErrorList
 
+LENGTHPASSWORD = 8
 REDIRECTADMIN = "/admin"
 REDIRECTTEACHER = "/teacher"
 REDIRECTUNDERGRADUATE = "/undergraduate"
 REDIRECTINDEX = "index.html"
+REDIRECTLOGOUT = "/"
 ERRORCAPTCHA = "You Must Be a Robot"
+
 SUBJECTMAIL = "Registration SEAL Successful"
 BODYMAIL =  "You have been registered in SEAL with username: %s and password: %s"
-REDIRECTLOGOUT = "/"
+
+SUBJECTMAILRECOVERY = "Recovery SEAL Successful"
+BODYMAILRECOVERY = "You have been recovery info for SEAL. INFO username: %s and new password: %s"
 
 @login_required
 def index(request):
@@ -81,14 +87,41 @@ def register(request):
     return render(request, 'registration/register.html', 
                   {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY}, 
                   context_instance=RequestContext(request))
-
-def sendmail(student, passw):
-    managemail = Managemail()
-    managemail.sendmail(SUBJECTMAIL, BODYMAIL % (student.uid, passw), student.email)
-                
+                    
 def logout_page(request):
     """
     Log users out and re-direct them to the main page.
     """
     logout(request)
     return HttpResponseRedirect(REDIRECTLOGOUT)
+
+def recovery_pass(request):
+    if (request.method=='POST'):
+        form = RecoveryForm(request.POST)
+        if (form.is_valid()):
+            try:
+                student = Student.objects.get(uid = form.data['uid'], email = form.data['email'])
+                user = student.user
+                password = random_pass_generate()
+                user.set_password(password)
+                user.save()
+                sendmailrecovery(student, password)
+                return render(request, 'registration/recovery-success.html', context_instance=RequestContext(request))
+            except Student.DoesNotExist:
+                form._errors["error"] = ErrorList([u"error user"])
+    else:
+        form = RecoveryForm()
+    return render(request, 'registration/recovery_pass.html', 
+                  {'form': form,}, context_instance=RequestContext(request))
+
+def sendmailrecovery(student, passw):
+    managemail = Managemail()
+    managemail.sendmail(SUBJECTMAILRECOVERY, BODYMAILRECOVERY % (student.uid, passw), student.email)
+
+def random_pass_generate():
+    newpass = User.objects.make_random_password(length=LENGTHPASSWORD)
+    return newpass
+
+def sendmail(student, passw):
+    managemail = Managemail()
+    managemail.sendmail(SUBJECTMAIL, BODYMAIL % (student.uid, passw), student.email)

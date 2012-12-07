@@ -106,6 +106,12 @@ def step(context, uid):
     form.find_element_by_name('passwd_again').send_keys('seal')
     form.find_element_by_name('email').send_keys('foo@foo.foo')
 
+@when('I fill the recovery form with user "{uid}" and email "{email}"')
+def step(context, uid, email):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('uid').send_keys(uid)
+    form.find_element_by_name('email').send_keys(email)
+
 @when('I am in the delivery page of practice "{practice}"')
 def step(context,practice):
     p = Practice.objects.get(uid=practice)
