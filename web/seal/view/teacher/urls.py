@@ -41,6 +41,6 @@ urlpatterns += patterns('view.teacher.suscription',
 )
 
 urlpatterns += patterns('view.teacher.autocheck',
-    url(r'^runautocheck', 'run_autocheck_subprocess'),
+    #url(r'^runautocheck', 'run_autocheck_subprocess'),
     url(r'^autocheck/(?P<iddelivery>\d+)/$', 'details'),
 )

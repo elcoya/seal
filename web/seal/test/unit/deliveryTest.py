@@ -7,15 +7,16 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from seal.model import Delivery, Student, Practice
+from mock import Mock
 #from mock import MagicMock
 
 class DeliveryTest(TestCase):
     def setUp(self):
-        #self.student = MagicMock(spec=Student)
-        self.student = Student()
+        self.student = Mock(spec=Student)
+        #self.student = Student()
         self.student.name = "Nombre y Apellido"
-        #self.practice = MagicMock(spec=Practice)
-        self.practice = Practice()
+        self.practice = Mock(spec=Practice)
+        #self.practice = Practice()
         self.practice.uid = "Tp inicial"
     
     def testDeliveryToStringReturnNamePracticeNameStudentAndDeadLinePractice(self):    
@@ -23,8 +24,8 @@ class DeliveryTest(TestCase):
         str_practice_return = "Tp inicial - Nombre y Apellido - 2012-11-25"
         delivery = Delivery()
         
-        isinstance(self.student, Student)
-        isinstance(self.practice, Practice)
+        print isinstance(self.student, Student)
+        print isinstance(self.practice, Practice)
         
         delivery.student = self.student
         delivery.practice = self.practice
