@@ -17,6 +17,8 @@ class TestAutocheckSelectionStrategy(unittest.TestCase):
         # FIXME: the selection strategy uses Autocheck.objects, and that is not 'mockable'. This is an alternative action.
         autocheck_selection_strategy = AutocheckSelectionStrategyPendingAndRunnable()
         autocheck_selection_strategy.object_manager = Mock()
+        
         autocheck_selection_strategy.get_autochecks()
+        
         autocheck_selection_strategy.object_manager.filter.assert_called_with(status=0)
     

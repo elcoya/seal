@@ -12,7 +12,7 @@ sys.path.append(config.get("Path", "path.project.web"))      # Required to use t
 sys.path.append(config.get("Path", "path.project.daemon"))      # Required to use the app model
 sys.path.append(config.get("Path", "path.project.web") + "seal/") # Fixes 'No module named model'
 
-from autocheck_runner import AutocheckRunner
+from daemon.autocheck_runner import AutocheckRunner
 from datetime import datetime
 import time
 

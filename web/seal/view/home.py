@@ -30,7 +30,7 @@ SUBJECTMAIL = "Registration SEAL Successful"
 BODYMAIL =  "You have been registered in SEAL with username: %s and password: %s"
 
 SUBJECTMAILRECOVERY = "Recovery SEAL Successful"
-BODYMAILRECOVERY = "You have been recovery info for SEAL. INFO username: %s and new password: %s"
+BODYMAILRECOVERY = "You have requested a password recovery for SEAL. Your new login information is username: %s and new password: %s"
 
 @login_required
 def index(request):
