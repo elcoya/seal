@@ -21,9 +21,9 @@ class RunScriptCommand():
     def set_script(self, script):
         self.script = script
     
-    def excecute(self):
+    def execute(self):
         if(self.script is None):
-            raise IllegalStateException(reason="In order to excecute the script, you must set it first.")
+            raise IllegalStateException(reason="In order to execute the script, you must set it first.")
         # We must ensure the script is runnable
         process = subprocess.Popen(["chmod", "a+x", self.script])
         process.wait()

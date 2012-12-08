@@ -1,4 +1,4 @@
-from daemon.excecution.run_script_command import RunScriptCommand
+from daemon.execution.run_script_command import RunScriptCommand
 from daemon.exceptions.illegal_state_exception import IllegalStateException
 from unittest.case import TestCase
 
@@ -19,12 +19,12 @@ class TestRunScriptCommand(TestCase):
     def testRunScriptCommandMustRunTheScriptAndEndSuccessfully(self):
         runner = RunScriptCommand()
         runner.set_script(self.script_file_path + self.script_file_name)
-        result = runner.excecute()
+        result = runner.execute()
         self.assertEquals(result.exit_value, 0)
         self.assertEquals(result.captured_stdout, self.text)
         
     def testRunScriptCommandShouldRiseIllegalStateExceptionIfCalledBeforeSettingScript(self):
         runner = RunScriptCommand()
         with self.assertRaises(IllegalStateException):
-            runner.excecute()
+            runner.execute()
         

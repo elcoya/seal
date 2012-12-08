@@ -2,7 +2,7 @@ import os
 import shutil
 from daemon.selection.autocheck_selection_strategy_pending_and_runnable import AutocheckSelectionStrategyPendingAndRunnable
 from daemon.preparation.prepare_files_strategy_zip import PrepareFilesStrategyZip
-from daemon.excecution.run_script_command import RunScriptCommand
+from daemon.execution.run_script_command import RunScriptCommand
 from daemon.publication.publish_results_visitor_web import PublishResultsVisitorWeb
 
 class AutocheckRunner():
@@ -45,7 +45,7 @@ class AutocheckRunner():
                 script = practice.script_set.all()[0]
                 self.setup_enviroment(delivery, script)
                 self.run_script_command.set_script(script)
-                script_result = self.run_script_command.excecute()
+                script_result = self.run_script_command.execute()
                 for visitor in self.publish_result_visitors:
                     script_result.accept(visitor)
                 
