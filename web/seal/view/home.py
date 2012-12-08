@@ -75,7 +75,7 @@ def register(request):
                 student.uid = form.data['uid']
                 student.email = form.data['email']
                 student.save()
-                sendmail(student, form.data['passwd'])
+                sendmail(student, form.data['passwd'], SUBJECTMAIL, BODYMAIL)
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
         else:
             return render_to_response('registration/register.html', 
@@ -105,7 +105,7 @@ def recovery_pass(request):
                 password = random_pass_generate()
                 user.set_password(password)
                 user.save()
-                sendmailrecovery(student, password)
+                sendmail(student, password, SUBJECTMAILRECOVERY, BODYMAILRECOVERY)
                 return render(request, 'registration/recovery-success.html', context_instance=RequestContext(request))
             except Student.DoesNotExist:
                 form._errors["error"] = ErrorList([u"error user"])
@@ -114,14 +114,13 @@ def recovery_pass(request):
     return render(request, 'registration/recovery_pass.html', 
                   {'form': form,}, context_instance=RequestContext(request))
 
-def sendmailrecovery(student, passw):
+def sendmail(student, passw, subject, body):
     managemail = Managemail()
-    managemail.sendmail(SUBJECTMAILRECOVERY, BODYMAILRECOVERY % (student.uid, passw), student.email)
-
+    managemail.setText(body % (student.uid, passw))
+    managemail.setSubjet(subject)
+    managemail.setRecipient(student.email)
+    managemail.sendmail()
+    
 def random_pass_generate():
     newpass = User.objects.make_random_password(length=LENGTHPASSWORD)
     return newpass
-
-def sendmail(student, passw):
-    managemail = Managemail()
-    managemail.sendmail(SUBJECTMAIL, BODYMAIL % (student.uid, passw), student.email)
