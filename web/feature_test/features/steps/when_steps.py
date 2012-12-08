@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from seal.model import Course, Student, Practice, Delivery, Suscription
 
 import ConfigParser
-from daemon.autocheck_runner import AutocheckRunner
 from seal.model.autocheck import Autocheck
 import time
 config = ConfigParser.ConfigParser()
@@ -184,9 +183,3 @@ def step(context, practice_uid, course_name, student_uid):
     autocheck = Autocheck()
     autocheck.delivery = delivery
     autocheck.save()
-
-@when(u'I run the Autocheck process')
-def step(context):
-    runner = AutocheckRunner()
-    runner.run()
-

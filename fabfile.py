@@ -232,6 +232,7 @@ def test(app_name=''):
         local("python manage.py test " + app_name)
 
 def behave():
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web/feature_test"):
         local("behave")
 

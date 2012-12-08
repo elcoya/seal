@@ -11,7 +11,6 @@ from seal.forms import student
 from seal.model.suscription import Suscription
 from seal.model.script import Script
 from seal.model.autocheck import Autocheck
-from daemon.autocheck_runner import AutocheckRunner
 
 base_url = 'http://localhost:8000/'
 
@@ -268,6 +267,28 @@ def step(context, practice_uid, course_name, student_uid):
     autocheck.delivery = delivery
     autocheck.save()
 
-@given(u'autocheck process is run')
-def step(context):
-    AutocheckRunner().run()
+@given(u'autocheck for all deliveries has status "{str_status}"')
+def step(context, str_status):
+    autochecks = Autocheck.objects.all()
+    status_map = {"successfull": 1, "failed": -1, "pending": 0}
+    status = status_map[str_status]
+    for autocheck in autochecks:
+        autocheck.status = status
+        autocheck.save()
+
+@given(u'autocheck for all deliveries has exit_value "{exit_value}"')
+def step(context, exit_value):
+    autochecks = Autocheck.objects.all()
+    value = int(exit_value)
+    for autocheck in autochecks:
+        autocheck.exit_value = value
+        autocheck.save()
+
+@given(u'autocheck for all deliveries has stdout "{stdout}"')
+def step(context, stdout):
+    autochecks = Autocheck.objects.all()
+    for autocheck in autochecks:
+        autocheck.captured_stdout = stdout
+        autocheck.save()
+
+
