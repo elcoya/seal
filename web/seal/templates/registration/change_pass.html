@@ -9,13 +9,13 @@ Main page to recovery password.
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css" />
 {% endblock %}
 {% block head %}
-<title>SEAL | Recovery Password</title>
+<title>SEAL | Change Password</title>
 {% endblock %}
-{% block subtitle %}Recovery Password{% endblock %}
+{% block subtitle %} Change Password{% endblock %}
 {% block body %}
 <nav>
 	<p>
-		<a href="/">Login</a>
+		<a href="/">Home</a>
 	</p>
 </nav>
 <div class="content" >
@@ -24,7 +24,8 @@ Main page to recovery password.
 		<table>
 			{{ form.as_table }}
 		</table>
-		<input type="submit" value="Recover" style="margin: 5px 0 5px 205px; width: 70px; " />
+		<input type="submit" value="Change" style="margin: 5px 0 5px 205px; width: 70px; " />
+
 	</form>
 </div>
 {% endblock %}

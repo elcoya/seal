@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^redirect/?', home.redirect),
     url(r'^registration/?$', home.register),
     url(r'^logout/?$', home.logout_page),
+    url(r'^changepassw/?$', home.change_password),
     url(r'^login/?$', 'django.contrib.auth.views.login'),
     url(r'^recoverypass/?$', home.recovery_pass)
 )

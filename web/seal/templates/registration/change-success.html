@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+{% block extrastyle %}
+{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
+{% endblock %}
+{% block bodyclass %}dashboard{% endblock %}
+{% block body %}
+<div>
+	{% csrf_token %}
+	<nav>	
+		<p>
+			<a href="/">Home</a>
+		</p>
+	</nav>
+	<div>Change password successfully! Check your email to see the change info</div>
+	<footer>
+	</footer>
+</div>
+{% endblock %}

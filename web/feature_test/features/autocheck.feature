@@ -24,7 +24,7 @@ Feature: As a Student I should be able to upload my deliveries and trigger the a
           And I log in as "teacher" "teacher"
          When I am in the list page of delivery from "TP Intro"
           And I click in the "successfull" link
-         Then I should see "this is the successfull bash script."
+         Then I should see "this is the successfull bash script"
           And I should see "Automatic check result: successfull"
 
     Scenario: As a student browse the results of an automatic check
@@ -40,5 +40,5 @@ Feature: As a Student I should be able to upload my deliveries and trigger the a
           And I log in as "student" "student"
          When I am in the delivery page of practice "TP Intro"
           And I click in the "successfull" link
-         Then I should see "this is the successfull bash script."
+         Then I should see "this is the successfull bash script"
           And I should see "Automatic check result: successfull"

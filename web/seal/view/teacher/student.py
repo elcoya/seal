@@ -8,9 +8,9 @@ from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from seal.forms.student import StudentForm, Student
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
 
-PATHOKNEWSTUDENT = "/teacher/course/editcourse/%s"
-PATHOKEDITSTUDENT = "/teacher/course/editcourse/%s"
+PATHOK = "/teacher/course/editcourse/%s"
 PATHOKENROLED = "/teacher/students/"
 MAXPAGINATOR = 10
 
@@ -32,8 +32,15 @@ def newstudent(request, idcourse):
     if (request.method == 'POST'):
         form = StudentForm(request.POST)
         if (form.is_valid()):
+            user = User()
+            user.username = form.data['uid']
+            user.set_password(form.data['passwd'])
+            user.email = form.data['email']
+            user.last_name = form.data['name']
+            user.save()
+            form.instance.user = user
             form.save()
-            return HttpResponseRedirect(PATHOKNEWSTUDENT % str(idcourse))
+            return HttpResponseRedirect(PATHOK % str(idcourse))
     else:
         form = StudentForm(initial={'courses': [idcourse]})
     return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
@@ -43,8 +50,13 @@ def editstudent(request, idcourse, idstudent):
     if (request.method == 'POST'):
         form = StudentForm(request.POST, instance = student)
         if (form.is_valid()):
+            if (form.data['passwd']!=''):
+                student.user.set_password(form.data['passwd'])
+            student.user.last_name = form.data['name']
+            student.user.email = form.data['email']
+            student.user.save()
             form.save()
-            return HttpResponseRedirect(PATHOKEDITSTUDENT % str(idcourse))
+            return HttpResponseRedirect(PATHOK % str(idcourse))
     else:
         form = StudentForm( instance = student)
     return render(request, 'student/editstudent.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))

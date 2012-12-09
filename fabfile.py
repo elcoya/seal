@@ -238,16 +238,6 @@ def behave():
 
 def feature(arg):
     """It runs all behave features which contains te arg value"""
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web/feature_test"):
         local("behave -i " + arg)
-
-
-def features(args):
-    """Still failling. DO NOT USE. It runs all behave features having names matchig with any of the arguments.
-    
-    If a feature matches more than just one argument, it will be run many times.
-
-    """
-    with lcd("web/feature_test"):
-        for arg in args:
-            local("behave -i " + arg)

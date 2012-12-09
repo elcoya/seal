@@ -8,8 +8,7 @@ from django.contrib.auth.decorators import login_required
 from seal.utils.managemail import Managemail
 
 PATHREDIRECTINDEX = "/teacher/correction/edit/%s"
-PATHOKINDEX = "/teacher/delivery/list/%s"
-PATHOKEDITCORRECTION =  "/teacher/delivery/list/%s"
+PATHOK = "/teacher/delivery/list/%s"
 SUBJECTEMAIL = "You have a correction to see on SEAL"
 BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s"
 
@@ -26,7 +25,7 @@ def index(request, iddelivery):
             if (form.is_valid()):
                 form.save()
                 sendmail(delivery)
-                return HttpResponseRedirect(PATHOKINDEX % str(delivery.practice.pk))
+                return HttpResponseRedirect(PATHOK % str(delivery.practice.pk))
         else:
             form = CorrectionForm()
         return render(request, 'correction/index.html', {'form': form, 'delivery': delivery}, context_instance=RequestContext(request))
@@ -40,7 +39,7 @@ def editcorrection(request, idcorrection):
             form_edit = form.save(commit=False)
             form_edit.save()
             sendmail(correction.delivery)
-            return HttpResponseRedirect(PATHOKEDITCORRECTION % str(correction.delivery.practice.pk))
+            return HttpResponseRedirect(PATHOK % str(correction.delivery.practice.pk))
     else:    
         form = CorrectionForm(instance=correction)
     return render(request, 'correction/index.html', 
@@ -49,5 +48,7 @@ def editcorrection(request, idcorrection):
 
 def sendmail(delivery):
     managemail = Managemail()
-    managemail.sendmail(SUBJECTEMAIL, BODYEMAIL % (str(delivery.pk), delivery.practice.uid), delivery.student.email) 
-    
+    managemail.setSubjet(SUBJECTEMAIL)
+    managemail.setBody(BODYEMAIL % (str(delivery.pk), delivery.practice.uid))
+    managemail.setRecipient(delivery.student.email)
+    managemail.sendmail()
