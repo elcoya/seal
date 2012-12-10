@@ -81,10 +81,10 @@ def submit (recaptcha_challenge_field,
             }
         )
     
-    httpresp = urllib2.urlopen (request)
+    httpresp = urllib2.urlopen(request)
 
-    return_values = httpresp.read ().splitlines ();
-    httpresp.close();
+    return_values = httpresp.read().splitlines()
+    httpresp.close()
 
     return_code = return_values [0]
 

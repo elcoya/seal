@@ -11,7 +11,7 @@ class Managemail(object):
         self.email = EmailMessage()
         
     def setSubjet(self, subject):
-        self.email.subject = subject;
+        self.email.subject = subject
     
     def setText(self, text):
         self.email.body = text

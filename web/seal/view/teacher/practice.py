@@ -73,7 +73,7 @@ def script(request, idcourse , idpractice):
         if(practice.script_set.all()):
             form = PracticeScriptForm(instance=practice.script_set.all()[0])
             script_file = open(practice.script_set.all()[0].file.name, "r")
-            script_text = script_file.read();
+            script_text = script_file.read()
             script_file.close()
         else:
             form = PracticeScriptForm()

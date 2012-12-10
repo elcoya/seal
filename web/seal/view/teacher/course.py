@@ -11,7 +11,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 import os
-import sys
 
 PATHOKNEWCOURSE = "/"
 MAXPAGINATOR = 25
@@ -71,7 +70,7 @@ def editcourse(request, idcourse):
         table_students = []
         for student in students:
             table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
-    return render(request,'course/editcourse.html',
+    return render(request, 'course/editcourse.html',
                   {'form': form, 'table_contents': table_contents, 'table_students': table_students, 
                    'course': course, 'idcourse': course.pk }, 
                   context_instance=RequestContext(request))

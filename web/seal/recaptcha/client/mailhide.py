@@ -8,24 +8,23 @@ except:
 
 MAIL_HIDE_BASE="http://www.google.com/recaptcha/mailhide"
 
-def asurl (email,
-                 public_key,
-                 private_key):
-    """Wraps an email address with reCAPTCHA mailhide and
+def asurl (email, public_key, private_key):
+    """
+    
+    Wraps an email address with reCAPTCHA mailhide and
     returns the url. public_key is the public key from reCAPTCHA
     (in the base 64 encoded format). Private key is the AES key, and should
-    be 32 hex chars."""
+    be 32 hex chars.
+    
+    """
     
     cryptmail = _encrypt_string (email, base64.b16decode (private_key, casefold=True), '\0' * 16)
     base64crypt = base64.urlsafe_b64encode (cryptmail)
 
     return "%s/d?k=%s&c=%s" % (MAIL_HIDE_BASE, public_key, base64crypt)
 
-def ashtml (email,
-                  public_key,
-                  private_key):
-    """Wraps an email address with reCAPTCHA Mailhide and
-    returns html that displays the email"""
+def ashtml (email, public_key, private_key):
+    """Wraps an email address with reCAPTCHA Mailhide and returns html that displays the email"""
 
     url = asurl (email, public_key, private_key)
     (userpart, domainpart) = _doterizeemail (email)
