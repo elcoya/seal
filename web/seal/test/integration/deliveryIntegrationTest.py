@@ -28,19 +28,19 @@ class DeliveryIntegrationTest(TestCase):
         practice.deadline = "2012-12-01" 
         practice.save()
      
-    def testDeliveryCreationComparePk(self):
+    def test_delivery_creation_compare_pk(self):
         student = Student.objects.get(uid="85000")
         practice = Practice.objects.get(uid="Tp inicial")
         
-        pDelivery = Delivery()
-        pDelivery.file = "pathFile"
-        pDelivery.student = student
-        pDelivery.practice = practice
-        pDelivery.deliverDate = '2012-11-30'
-        pDelivery.save()
+        p_delivery = Delivery()
+        p_delivery.file = "pathFile"
+        p_delivery.student = student
+        p_delivery.practice = practice
+        p_delivery.deliverDate = '2012-11-30'
+        p_delivery.save()
         
-        cDelivery = Delivery.objects.get(student=student, practice=practice)
-        self.assertEqual(pDelivery.pk, cDelivery.pk)
+        c_delivery = Delivery.objects.get(student=student, practice=practice)
+        self.assertEqual(p_delivery.pk, c_delivery.pk)
     
     def tearDown(self):
         Delivery.objects.filter(file="pathFile", deliverDate="2012-11-30").delete()
@@ -48,5 +48,5 @@ class DeliveryIntegrationTest(TestCase):
         student.delete()
         practice = Practice.objects.get(uid="Tp inicial")
         practice.delete()
-        pCourse = Course.objects.get(name='2012-2')
-        pCourse.delete()
+        p_course = Course.objects.get(name='2012-2')
+        p_course.delete()

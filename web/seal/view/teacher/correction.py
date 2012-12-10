@@ -48,7 +48,7 @@ def editcorrection(request, idcorrection):
 
 def sendmail(delivery):
     managemail = Managemail()
-    managemail.setSubjet(SUBJECTEMAIL)
-    managemail.setBody(BODYEMAIL % (str(delivery.pk), delivery.practice.uid))
-    managemail.setRecipient(delivery.student.email)
+    managemail.set_subjet(SUBJECTEMAIL)
+    managemail.set_body(BODYEMAIL % (str(delivery.pk), delivery.practice.uid))
+    managemail.set_recipient(delivery.student.email)
     managemail.sendmail()

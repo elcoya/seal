@@ -130,9 +130,9 @@ def change_password(request):
         
 def sendmail(user, passw, subject, body):
     managemail = Managemail()
-    managemail.setBody(body % (user.username, passw))
-    managemail.setSubjet(subject)
-    managemail.setRecipient(user.email)
+    managemail.set_body(body % (user.username, passw))
+    managemail.set_subjet(subject)
+    managemail.set_recipient(user.email)
     managemail.sendmail()
     
 def random_pass_generate():

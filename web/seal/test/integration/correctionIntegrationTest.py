@@ -72,7 +72,7 @@ class CorrectionIntegrationTest(TestCase):
         self.create_a_student()
         self.create_a_delivery()
     
-    def testCorrectionCreation(self):
+    def test_correction_creation(self):
         correction = Correction()
         correction.publicComent = self.correction_public_comment
         correction.privateComent = self.correction_private_comment

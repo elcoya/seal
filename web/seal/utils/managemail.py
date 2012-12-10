@@ -10,13 +10,13 @@ class Managemail(object):
     def __init__(self):
         self.email = EmailMessage()
         
-    def setSubjet(self, subject):
+    def set_subjet(self, subject):
         self.email.subject = subject
     
-    def setBody(self, text):
+    def set_body(self, text):
         self.email.body = text
     
-    def setRecipient(self, recipient):
+    def set_recipient(self, recipient):
         self.email.to = [recipient,]
     
     def sendmail(self):

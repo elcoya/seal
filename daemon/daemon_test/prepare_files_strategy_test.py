@@ -3,7 +3,7 @@ from auto_correction.preparation.prepare_files_strategy_zip import PrepareFilesS
 from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 from unittest.case import TestCase
 
-import ConfigParser
+import ConfigParser, os
 config = ConfigParser.ConfigParser()
 config.readfp(open(os.environ['PROJECT_PATH'] + 'daemon/conf/local.cfg'))
 
