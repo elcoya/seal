@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from seal.model import Course, Student, Practice, Delivery, Suscription
 
 import ConfigParser
-from daemon.autocheck_runner import AutocheckRunner
+from auto_correction.autocheck_runner import AutocheckRunner
 from seal.model.autocheck import Autocheck
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))

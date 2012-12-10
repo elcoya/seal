@@ -1,5 +1,5 @@
-from daemon.execution.run_script_command import RunScriptCommand
-from daemon.exceptions.illegal_state_exception import IllegalStateException
+from auto_correction.execution.run_script_command import RunScriptCommand
+from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 from unittest.case import TestCase
 
 class TestRunScriptCommand(TestCase):

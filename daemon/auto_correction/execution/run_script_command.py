@@ -1,6 +1,6 @@
 import subprocess
-from daemon.exceptions.illegal_state_exception import IllegalStateException
-from daemon.result.script_result import ScriptResult
+from auto_correction.exceptions.illegal_state_exception import IllegalStateException
+from auto_correction.result.script_result import ScriptResult
 
 class RunScriptCommand():
     """

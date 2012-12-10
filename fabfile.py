@@ -178,7 +178,7 @@ def pylint():
     print "launching pylint static analysis..."
     os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with settings(warn_only=True):
-        result = local("pylint web/seal daemon/daemon --rcfile=pylintrc > pylint_report/pylint.html")
+        result = local("pylint web/seal daemon/auto_correction --rcfile=pylintrc > pylint_report/pylint.html")
     print "pylint static analysis complete... exit status: " + str(result.return_code)
     print "you can access the report result pylint_report/pylint.html"
 
@@ -213,7 +213,16 @@ def stop():
 def start_daemon():
     print "[fabric] launching daemon..."
     os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
-    daemon_process = Popen(["nohup", "python", "daemon/daemon/daemon.py"], stdout = open("/tmp/daemon.out", 'w+', 0), env=os.environ)
+    sys.path.append(config.get("Path", "path.project.web"))
+    sys.path.append(config.get("Path", "path.project.daemon"))
+    
+    print os.environ
+    for path in sys.path:
+        print path
+    print config.get("Path", "path.project.web")
+    print config.get("Path", "path.project.daemon")
+    
+    daemon_process = Popen(["nohup", "python", "daemon/auto_correction/daemon.py"], stdout = open("/tmp/daemon.out", 'w+', 0), env=os.environ)
     local("echo " + str(daemon_process.pid) + " > /tmp/seal_daemon.pid")
     print("[fabric] daemon active... pid: " + str(daemon_process.pid))
 
@@ -238,6 +247,7 @@ def behave():
 
 def feature(arg):
     """It runs all behave features which contains te arg value"""
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
     with lcd("web/feature_test"):
         local("behave -i " + arg)
 

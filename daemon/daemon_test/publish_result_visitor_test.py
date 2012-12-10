@@ -1,5 +1,5 @@
-from daemon.result.script_result import ScriptResult
-from daemon.publication.publish_results_visitor_web import PublishResultsVisitorWeb
+from auto_correction.result.script_result import ScriptResult
+from auto_correction.publication.publish_results_visitor_web import PublishResultsVisitorWeb
 from unittest.case import TestCase
 from mock import Mock
 from seal.model.autocheck import Autocheck

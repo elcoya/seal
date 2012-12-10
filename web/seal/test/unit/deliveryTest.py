@@ -20,9 +20,6 @@ class DeliveryTest(TestCase):
         str_practice_return = "Tp inicial - Nombre y Apellido - 2012-11-25"
         delivery = Delivery()
         
-        print isinstance(self.student, Student)
-        print isinstance(self.practice, Practice)
-        
         delivery.student = self.student
         delivery.practice = self.practice
         delivery.deliverDate = deliveryDate

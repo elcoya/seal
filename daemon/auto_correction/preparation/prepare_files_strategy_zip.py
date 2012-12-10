@@ -1,6 +1,6 @@
-from daemon.preparation.prepare_files_strategy import PrepareFilesStrategy
+from auto_correction.preparation.prepare_files_strategy import PrepareFilesStrategy
 from zipfile import ZipFile
-from daemon.exceptions.illegal_state_exception import IllegalStateException
+from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 
 class PrepareFilesStrategyZip(PrepareFilesStrategy):
     """

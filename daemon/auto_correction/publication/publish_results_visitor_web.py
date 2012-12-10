@@ -1,4 +1,4 @@
-from daemon.publication.publish_results_visitor import PublishResultsVisitor
+from auto_correction.publication.publish_results_visitor import PublishResultsVisitor
 
 
 class PublishResultsVisitorWeb(PublishResultsVisitor):

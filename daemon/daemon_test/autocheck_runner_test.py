@@ -1,16 +1,9 @@
 from django.test import TestCase
-from seal.model.autocheck import Autocheck
 from seal.test.integration.utils import clean_up_database_tables,\
     create_a_course, create_a_student, create_a_practice, create_a_delivery,\
     create_an_autocheck, load_a_script
-from daemon.autocheck_runner import AutocheckRunner
-from seal.settings import project_base_path
-from seal.model.script import Script
-from seal.model.delivery import Delivery
-from seal.model.practice import Practice
-from seal.model.course import Course
+from auto_correction.autocheck_runner import AutocheckRunner
 import os
-import shutil
 from zipfile import ZipFile
 
 class TestAutocheckRunner(TestCase):

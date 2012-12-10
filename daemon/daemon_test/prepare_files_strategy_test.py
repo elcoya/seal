@@ -1,7 +1,6 @@
 import shutil
-import os
-from daemon.preparation.prepare_files_strategy_zip import PrepareFilesStrategyZip
-from daemon.exceptions.illegal_state_exception import IllegalStateException
+from auto_correction.preparation.prepare_files_strategy_zip import PrepareFilesStrategyZip
+from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 from unittest.case import TestCase
 
 import ConfigParser
