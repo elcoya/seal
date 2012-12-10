@@ -5,9 +5,9 @@ from unittest.case import TestCase
 
 import ConfigParser
 config = ConfigParser.ConfigParser()
-config.readfp(open('../conf/local.cfg'))
+config.readfp(open(os.environ['PROJECT_PATH'] + 'daemon/conf/local.cfg'))
 
-import os, errno
+import errno
 
 class TestPrepareFilesStrategy(TestCase):
     

@@ -16,7 +16,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from seal.utils.managemail import Managemail
-from django.forms.util import ErrorList
+from seal.forms.changepass import ChangePasswForm
 
 LENGTHPASSWORD = 8
 REDIRECTADMIN = "/admin"
@@ -27,10 +27,14 @@ REDIRECTLOGOUT = "/"
 ERRORCAPTCHA = "You Must Be a Robot"
 
 SUBJECTMAIL = "Registration SEAL Successful"
-BODYMAIL =  "You have been registered in SEAL with username: %s and password: %s"
+BODYMAIL = "You have been registered in SEAL with username: %s and password: %s"
 
 SUBJECTMAILRECOVERY = "Recovery SEAL Successful"
 BODYMAILRECOVERY = "You have requested a password recovery for SEAL. Your new login information is username: %s and new password: %s"
+
+SUBJECTMAILCHANGE = "Change SEAL password Successful"
+BODYMAILCHANGE = "You have requested a password change for SEAL. Your new login information is username: %s and new password: %s"
+
 
 @login_required
 def index(request):
@@ -75,17 +79,17 @@ def register(request):
                 student.uid = form.data['uid']
                 student.email = form.data['email']
                 student.save()
-                sendmail(student, form.data['passwd'], SUBJECTMAIL, BODYMAIL)
+                sendmail(user, form.data['passwd'], SUBJECTMAIL, BODYMAIL)
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
         else:
-            return render_to_response('registration/register.html', 
-                                      {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY, 
-                                       'captcha_response': ERRORCAPTCHA}, 
+            return render_to_response('registration/register.html',
+                                      {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY,
+                                       'captcha_response': ERRORCAPTCHA},
                                       context_instance=RequestContext(request))  
     else:
         form = RegistrationForm()
-    return render(request, 'registration/register.html', 
-                  {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY}, 
+    return render(request, 'registration/register.html',
+                  {'form': form, 'captcha_publick': settings.RECAPTCHA_PUB_KEY},
                   context_instance=RequestContext(request))
                     
 def logout_page(request):
@@ -96,29 +100,39 @@ def logout_page(request):
     return HttpResponseRedirect(REDIRECTLOGOUT)
 
 def recovery_pass(request):
-    if (request.method=='POST'):
+    if (request.method == 'POST'):
         form = RecoveryForm(request.POST)
         if (form.is_valid()):
-            try:
-                student = Student.objects.get(uid = form.data['uid'], email = form.data['email'])
-                user = student.user
-                password = random_pass_generate()
-                user.set_password(password)
-                user.save()
-                sendmail(student, password, SUBJECTMAILRECOVERY, BODYMAILRECOVERY)
-                return render(request, 'registration/recovery-success.html', context_instance=RequestContext(request))
-            except Student.DoesNotExist:
-                form._errors["error"] = ErrorList([u"error user"])
+            user = User.objects.get(username=form.data['uid'], email=form.data['email'])
+            password = random_pass_generate()
+            user.set_password(password)
+            user.save()
+            sendmail(user, password, SUBJECTMAILRECOVERY, BODYMAILRECOVERY)
+            return render(request, 'registration/recovery-success.html', context_instance=RequestContext(request))
     else:
         form = RecoveryForm()
-    return render(request, 'registration/recovery_pass.html', 
-                  {'form': form,}, context_instance=RequestContext(request))
+    return render(request, 'registration/recovery_pass.html',
+                  {'form': form, }, context_instance=RequestContext(request))
 
-def sendmail(student, passw, subject, body):
+def change_password(request):
+    if (request.method == 'POST'):
+        form = ChangePasswForm(request.POST)
+        if (form.is_valid()):
+            user = User.objects.get(username=form.data['uid'])
+            user.set_password(form.data['passwd'])
+            user.save()
+            sendmail(user, form.data['passwd'], SUBJECTMAILCHANGE, BODYMAILCHANGE)
+            return render(request, 'registration/change-success.html', context_instance=RequestContext(request))
+    else:
+        form = ChangePasswForm()
+    return render(request, 'registration/change_pass.html',
+                  {'form': form, }, context_instance=RequestContext(request))
+        
+def sendmail(user, passw, subject, body):
     managemail = Managemail()
-    managemail.setText(body % (student.uid, passw))
+    managemail.setBody(body % (user.username, passw))
     managemail.setSubjet(subject)
-    managemail.setRecipient(student.email)
+    managemail.setRecipient(user.email)
     managemail.sendmail()
     
 def random_pass_generate():

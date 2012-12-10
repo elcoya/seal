@@ -13,7 +13,7 @@ class Managemail(object):
     def setSubjet(self, subject):
         self.email.subject = subject
     
-    def setText(self, text):
+    def setBody(self, text):
         self.email.body = text
     
     def setRecipient(self, recipient):

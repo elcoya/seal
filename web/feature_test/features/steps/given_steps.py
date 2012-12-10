@@ -34,6 +34,7 @@ def step(context, username, password):
         user = User()
         user.username = username
         user.set_password(password)
+        user.email = username + "@foo.foo"
         user.save()
         teacher.user = user
         teacher.save()
@@ -53,6 +54,7 @@ def step(context, username, password):
         user = User()
         user.username = username
         user.set_password(password)
+        user.email = username + "@foo.foo"
         user.save()
         student.user = user
         student.save()
@@ -72,6 +74,7 @@ def step(context, username, email):
         user = User()
         user.username = username
         user.set_password(username)
+        user.email = email
         user.save()
         student.user = user
         student.save()
