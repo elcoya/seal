@@ -1,6 +1,7 @@
 from auto_correction.execution.run_script_command import RunScriptCommand
 from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 from unittest.case import TestCase
+import subprocess
 
 class TestRunScriptCommand(TestCase):
 
@@ -15,6 +16,9 @@ class TestRunScriptCommand(TestCase):
         f = open(self.script_file_path + self.script_file_name, "w")
         f.writelines((self.heading, self.body, self.exit,));
         f.close()
+        # We must ensure the script is runnable
+        process = subprocess.Popen(["chmod", "a+x", self.script_file_path + self.script_file_name])
+        process.wait()
     
     def testRunScriptCommandMustRunTheScriptAndEndSuccessfully(self):
         runner = RunScriptCommand()

@@ -12,9 +12,6 @@ class RunScriptCommand():
     
     """
     
-    KEY_EXIT_VALUE = "exit_value"
-    KEY_CAPTURED_STDOUT = "captured_stdout"
-    
     def __init__(self):
         self.script = None
     
@@ -24,9 +21,6 @@ class RunScriptCommand():
     def execute(self):
         if(self.script is None):
             raise IllegalStateException(reason="In order to execute the script, you must set it first.")
-        # We must ensure the script is runnable
-        process = subprocess.Popen(["chmod", "a+x", self.script])
-        process.wait()
         # now we may call the script
         process = subprocess.Popen([self.script], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
         # finally, we must capture all results so the can be published

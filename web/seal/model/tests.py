@@ -26,4 +26,5 @@ from daemon_test.run_script_command_test import TestRunScriptCommand
 from daemon_test.publish_result_visitor_test import PublishResultVisitorTest
 from daemon_test.prepare_files_strategy_test import TestPrepareFilesStrategy
 from daemon_test.autocheck_selection_strategy_test import TestAutocheckSelectionStrategy
+from daemon_test.corrector_test import CorrectorTest
 

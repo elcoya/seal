@@ -4,6 +4,7 @@ from selection.autocheck_selection_strategy_pending_and_runnable import Autochec
 from preparation.prepare_files_strategy_zip import PrepareFilesStrategyZip
 from execution.run_script_command import RunScriptCommand
 from publication.publish_results_visitor_web import PublishResultsVisitorWeb
+from auto_correction.preparation.setup_enviroment import SetupEnviroment
 
 class AutocheckRunner():
     """
@@ -19,15 +20,9 @@ class AutocheckRunner():
     
     def __init__(self):
         self.selection_strategy = AutocheckSelectionStrategyPendingAndRunnable()
-        self.prepare_files_strategy = PrepareFilesStrategyZip()
+        self.setup_enviroment = SetupEnviroment()
         self.run_script_command = RunScriptCommand()
         self.publish_result_visitors = (PublishResultsVisitorWeb(), )
-    
-    def setup_enviroment(self, delivery, script):
-        shutil.rmtree(AutocheckRunner.TMP_DIR, ignore_errors=True)
-        self.prepare_files_strategy.zip = delivery.file.name
-        self.prepare_files_strategy.prepare_files(AutocheckRunner.TMP_DIR)
-        shutil.copy(script.file.name, AutocheckRunner.TMP_DIR + "/" + os.path.basename(script.file.name))
     
     def clean_up_tmp_dir(self):
         shutil.rmtree(AutocheckRunner.TMP_DIR, ignore_errors=True)
@@ -38,22 +33,18 @@ class AutocheckRunner():
         results = {"successfull" : 0, "failed" : 0}
         pending_autochecks = self.selection_strategy.get_autochecks()
         for pending_autocheck in pending_autochecks:
-            delivery = pending_autocheck.delivery
-            practice = delivery.practice
-            # FIXME: the selection strategy should get only the autochecks for practices with associated autochecks
-            if (practice.script_set.all()):
-                script = practice.script_set.all()[0]
-                self.setup_enviroment(delivery, script)
-                self.run_script_command.set_script(script.file.name)
-                script_result = self.run_script_command.execute()
-                script_result.autocheck = pending_autocheck
-                for visitor in self.publish_result_visitors:
-                    script_result.accept(visitor)
-                
-                self.clean_up_tmp_dir()
-                if(script_result.exit_value == 0):
-                    results["successfull"] += 1
-                else :
-                    results["failed"] += 1
+            
+            self.setup_enviroment.run(pending_autocheck)
+            self.run_script_command.set_script(pending_autocheck.delivery.practice.script.file.name)
+            script_result = self.run_script_command.execute()
+            script_result.autocheck = pending_autocheck
+            for visitor in self.publish_result_visitors:
+                script_result.accept(visitor)
+            
+            self.clean_up_tmp_dir()
+            if(script_result.exit_value == 0):
+                results["successfull"] += 1
+            else :
+                results["failed"] += 1
         return results;
     

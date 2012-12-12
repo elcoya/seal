@@ -30,3 +30,8 @@ class Practice(models.Model):
     def __str__(self):
         """Stringify the Practice or assignment"""
         return (str(self.uid))
+    
+    def get_script(self):
+        if (not self.script_set.all()):
+            return None
+        return self.script_set.all()[0]
