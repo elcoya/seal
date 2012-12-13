@@ -20,11 +20,11 @@ class CourseIntegrationTest(TestCase):
         course_name = '2012-1C'
         aCourse = Course.objects.get_or_create(name=course_name)[0]
         aStudent = Student.objects.get_or_create(name="Juan Perez", uid='1234', email = "email@pagnia.com.ar")[0]
-        aCourse.student_set.add(aStudent)
+        aCourse.add_student(aStudent)
         aCourse.save()
         
         aCourse = Course.objects.get(name=course_name)
-        self.assertTrue(aStudent in aCourse.student_set.all(), 'Set, expected to contain Juan Perez')
+        self.assertTrue(aStudent in aCourse.get_students(), 'Set, expected to contain Juan Perez')
     
     def testCourseDeleteStudent(self):
         """
@@ -32,17 +32,17 @@ class CourseIntegrationTest(TestCase):
         """
         aCourse = Course.objects.get_or_create(name='2012-1C')[0]
         aStudent = Student.objects.get_or_create(name="Juan Perez", uid='1234', email = "email@pagnia.com.ar")[0]
-        aCourse.student_set.add(aStudent)
+        aCourse.add_student(aStudent)
         aCourse.save()
         
         aCourse = Course.objects.get(name='2012-1C')
-        self.assertTrue(aStudent in aCourse.student_set.all(), 'Set, expected to contain Juan Perez')
+        self.assertTrue(aStudent in aCourse.get_students(), 'Set, expected to contain Juan Perez')
         
-        aCourse.student_set.remove(aStudent)
+        aCourse.remove_student(aStudent)
         aCourse.save()
         
         aCourse = Course.objects.get(name='2012-1C')
-        self.assertFalse(aStudent in aCourse.student_set.all(), 'Set, expected to have no Juan Perez student')
+        self.assertFalse(aStudent in aCourse.get_students(), 'Set, expected to have no Juan Perez student')
     
     def testCourseAddAssignment(self):
         """
@@ -51,7 +51,7 @@ class CourseIntegrationTest(TestCase):
         aCourse = Course.objects.get_or_create(name='2012-1C')[0]
         assignment = Practice.objects.get_or_create(uid="LPC", course=aCourse, file="pathfile", deadline="2012-12-01")[0]
         aCourse = Course.objects.get(name='2012-1C')
-        self.assertTrue(assignment in aCourse.practice_set.all(), 'Set, expected to contain LPC')
+        self.assertTrue(assignment in aCourse.get_practices(), 'Set, expected to contain LPC')
     
     def testCourseDeleteAssignment(self):
         """
@@ -59,9 +59,9 @@ class CourseIntegrationTest(TestCase):
         """
         aCourse = Course.objects.get_or_create(name='2012-1C')[0]
         assignment = Practice.objects.get_or_create(uid="LPC", course=aCourse, file="pathfile", deadline="2012-12-01")[0]
-        self.assertTrue(assignment in aCourse.practice_set.all(), 'Set, expected to contain LPC')
+        self.assertTrue(assignment in aCourse.get_practices(), 'Set, expected to contain LPC')
         assignment.delete()
         
         aCourse = Course.objects.get(name='2012-1C')
-        self.assertFalse(assignment in aCourse.practice_set.all(), 'Set, not expected to contain LPC')
+        self.assertFalse(assignment in aCourse.get_practices(), 'Set, not expected to contain LPC')
     

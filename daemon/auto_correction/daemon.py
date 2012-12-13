@@ -14,11 +14,11 @@ sys.path.append(config.get("Path", "path.project.web") + "seal/") # Fixes 'No mo
 
 print os.environ['PYTHONPATH'].split(":")
 
-import autocheck_runner
+import automatic_correction_runner
 from datetime import datetime
 import time
 
-autocheck_runner = autocheck_runner.AutocheckRunner()
+automatic_correction_runner = automatic_correction_runner.AutomaticCorrectionRunner()
 ref_timestamp = datetime.today()
 
 
@@ -30,7 +30,7 @@ l.addHandler(logging.StreamHandler(stream=stream))
 
 
 while True:
-    result = autocheck_runner.run()
+    result = automatic_correction_runner.run()
     cur_timestamp = datetime.today()
     print str(cur_timestamp) + " | run check should not be running: results " + str(result)
     with open(config.get("Path", "path.daemon.log"), "a") as f:

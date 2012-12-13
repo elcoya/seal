@@ -4,7 +4,7 @@ from django.shortcuts import render
 from seal.model import Practice, Delivery, Student
 from datetime import date
 from django.contrib.auth.decorators import login_required
-from seal.model.autocheck import Autocheck
+from seal.model.automatic_correction import AutomaticCorrection
 
 PATHOKNEWDELIVERY = "/undergraduate/practice/list/%s"
 
@@ -18,9 +18,9 @@ def newdelivery(request, idpractice):
         form = DeliveryForm(request.POST, request.FILES, instance=delivery)
         if (form.is_valid()):
             form.save()
-            autocheck = Autocheck()
-            autocheck.delivery = form.instance
-            autocheck.save()
+            automatic_correction = AutomaticCorrection()
+            automatic_correction.delivery = form.instance
+            automatic_correction.save()
             return HttpResponseRedirect(PATHOKNEWDELIVERY % str(practice.course_id))
     else:
         form = DeliveryForm()

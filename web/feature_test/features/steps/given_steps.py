@@ -10,7 +10,7 @@ from string import capitalize
 from seal.forms import student
 from seal.model.suscription import Suscription
 from seal.model.script import Script
-from seal.model.autocheck import Autocheck
+from seal.model.automatic_correction import AutomaticCorrection
 
 base_url = 'http://localhost:8000/'
 
@@ -151,8 +151,8 @@ def step(context,name, course):
 @given('student "{name}" does not exist in course "{course}"')
 def step(context,name, course):
     course = Course.objects.get(name=course)
-    if(course.student_set.filter(uid=name).exists()):
-        course.student_set.remove(uid=name)
+    if(course.get_students(uid=name).exists()):
+        course.get_students().remove(uid=name)
 
 @given('student "{name}" exists without course')
 def step(context,name):
@@ -162,14 +162,14 @@ def step(context,name):
 @given('there are no student in "{course}"')
 def step(context, course):
     c = Course.objects.get(name=course)
-    studnets = c.student_set.all()
-    for student in studnets:
+    students = c.get_students()
+    for student in students:
         student.delete()
 
 @given('there are no practices in course "{course}"')
 def step(context, course):
     c = Course.objects.get(name=course)
-    practices = c.practice_set.all()
+    practices = c.get_practices()
     for practice in practices:
         practice.delete()
         
@@ -249,7 +249,7 @@ def step(context, practice_uid, course_name):
 def impl(context, script_name, practice_uid, course_name):
     course = Course.objects.get(name=course_name)
     practice = Practice.objects.get(uid=practice_uid, course=course)
-    practice.script_set.all().delete()
+    practice.delete_script()
     script = Script()
     script.file="data/"+script_name
     script.practice = practice
@@ -266,32 +266,32 @@ def step(context, practice_uid, course_name, student_uid):
     delivery.practice = practice
     delivery.deliverDate = '2012-11-22'
     delivery.save()
-    autocheck = Autocheck()
-    autocheck.delivery = delivery
-    autocheck.save()
+    automatic_correction = AutomaticCorrection()
+    automatic_correction.delivery = delivery
+    automatic_correction.save()
 
-@given(u'autocheck for all deliveries has status "{str_status}"')
+@given(u'automatic_correction for all deliveries has status "{str_status}"')
 def step(context, str_status):
-    autochecks = Autocheck.objects.all()
+    automatic_corrections = AutomaticCorrection.objects.all()
     status_map = {"successfull": 1, "failed": -1, "pending": 0}
     status = status_map[str_status]
-    for autocheck in autochecks:
-        autocheck.status = status
-        autocheck.save()
+    for automatic_correction in automatic_corrections:
+        automatic_correction.status = status
+        automatic_correction.save()
 
-@given(u'autocheck for all deliveries has exit_value "{exit_value}"')
+@given(u'automatic_correction for all deliveries has exit_value "{exit_value}"')
 def step(context, exit_value):
-    autochecks = Autocheck.objects.all()
+    automatic_corrections = AutomaticCorrection.objects.all()
     value = int(exit_value)
-    for autocheck in autochecks:
-        autocheck.exit_value = value
-        autocheck.save()
+    for automatic_correction in automatic_corrections:
+        automatic_correction.exit_value = value
+        automatic_correction.save()
 
-@given(u'autocheck for all deliveries has stdout "{stdout}"')
+@given(u'automatic_correction for all deliveries has stdout "{stdout}"')
 def step(context, stdout):
-    autochecks = Autocheck.objects.all()
-    for autocheck in autochecks:
-        autocheck.captured_stdout = stdout
-        autocheck.save()
+    automatic_correction = AutomaticCorrection.objects.all()
+    for automatic_correction in automatic_correction:
+        automatic_correction.captured_stdout = stdout
+        automatic_correction.save()
 
 

@@ -28,7 +28,7 @@
 					<td>Uid</td>
 					<td>Delivery Date</td>
 					<td>Status</td>
-					<td>Autocheck</td>
+					<td>Automatic Correction</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,8 +46,8 @@
 						</a>
 					</td>
 					<td style="width: 20%; text-align: center; ">
-						<a href="/undergraduate/autocheck/{{ delivery.pk }}">
-							{{ delivery.autocheck_set.all.0.get_status }}
+						<a href="/undergraduate/automatic_correction/{{ delivery.pk }}">
+							{{ delivery.get_automatic_correction.get_status }}
 						</a>
 					</td>
 				</tr>

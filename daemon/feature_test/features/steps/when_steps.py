@@ -4,8 +4,8 @@ from selenium.webdriver.common.by import By
 from seal.model import Course, Student, Practice, Delivery, Suscription
 
 import ConfigParser
-from auto_correction.autocheck_runner import AutocheckRunner
-from seal.model.autocheck import Autocheck
+from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
+from seal.model.automatic_correction import AutomaticCorrection
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))
 pathproject = config.get("Path", "path.project.web")
@@ -174,12 +174,12 @@ def step(context, practice_uid, course_name, student_uid):
     delivery.practice = practice
     delivery.deliverDate = '2012-11-22'
     delivery.save()
-    autocheck = Autocheck()
-    autocheck.delivery = delivery
-    autocheck.save()
+    automatic_correction = AutomaticCorrection()
+    automatic_correction.delivery = delivery
+    automatic_correction.save()
 
-@when(u'I run the Autocheck process')
+@when(u'I run the AutomaticCorrection process')
 def step(context):
-    runner = AutocheckRunner()
+    runner = AutomaticCorrectionRunner()
     runner.run()
 

@@ -35,3 +35,6 @@ class Practice(models.Model):
         if (not self.script_set.all()):
             return None
         return self.script_set.all()[0]
+    
+    def delete_script(self):
+        self.script_set.all().delete()

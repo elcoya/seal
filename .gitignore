@@ -7,4 +7,4 @@ coverage_report
 pylint_report
 workspace/delivery_files
 workspace/practice_files
-workspace/autocheck_scripts
+workspace/automatic_correction_scripts

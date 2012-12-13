@@ -40,7 +40,7 @@ urlpatterns += patterns('view.teacher.suscription',
     url(r'^suscription/rejectGroup/(?P<idcourse>\d+)/', 'rejectgroup'),
 )
 
-urlpatterns += patterns('view.teacher.autocheck',
-    #url(r'^runautocheck', 'run_autocheck_subprocess'),
-    url(r'^autocheck/(?P<iddelivery>\d+)/$', 'details'),
+urlpatterns += patterns('view.teacher.automatic_correction',
+    #url(r'^runautomatic_correction', 'run_automatic_correction_subprocess'),
+    url(r'^automatic_correction/(?P<iddelivery>\d+)/$', 'details'),
 )

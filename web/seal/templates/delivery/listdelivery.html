@@ -14,7 +14,7 @@
 					<td>Deliver Date</td>
 					<td>Delivery</td>
 					<td>&nbsp;</td>
-					<td>Autocheck</td>
+					<td>Automatic Correction</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,7 +26,7 @@
 					<td style="text-align: center; ">{{ delivery.deliverDate }}</td>
 					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">Download</a></td>
 					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}">Correction</a></td>
-					<td style="text-align: center; "><a href="/teacher/autocheck/{{ delivery.pk }}">{{ delivery.autocheck_set.all.0.get_status }}</a></td>
+					<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>
 				</tr>
 				{% empty %}
 				<tr>

@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from seal.model import Course, Student, Practice, Delivery, Suscription
 
 import ConfigParser
-from seal.model.autocheck import Autocheck
+from seal.model.automatic_correction import AutomaticCorrection
 import time
 config = ConfigParser.ConfigParser()
 config.readfp(open('../conf/local.cfg'))
@@ -188,6 +188,6 @@ def step(context, practice_uid, course_name, student_uid):
     delivery.practice = practice
     delivery.deliverDate = '2012-11-22'
     delivery.save()
-    autocheck = Autocheck()
-    autocheck.delivery = delivery
-    autocheck.save()
+    automatic_correction = AutomaticCorrection()
+    automatic_correction.delivery = delivery
+    automatic_correction.save()

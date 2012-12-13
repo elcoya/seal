@@ -15,7 +15,7 @@ TYPEPDF = "application/pdf"
 @login_required
 def practicelist(request, idcourse):
     course = Course.objects.get(pk=idcourse)
-    practices = course.practice_set.all().order_by('deadline')
+    practices = course.get_practices().order_by('deadline')
     return render(request, 'practice/practiceList.html', 
                   {'practices': practices, 'coursename': course.name, }, 
                   context_instance=RequestContext(request))

@@ -16,7 +16,7 @@ class Script(models.Model):
     """
     
     practice = models.ForeignKey(Practice, unique=True)
-    file = models.FileField(upload_to=BASE_PATH + "autocheck_scripts/", max_length=128)
+    file = models.FileField(upload_to=BASE_PATH + "automatic_correction_scripts/", max_length=128)
 
     def __str__(self):
         return str(self.practice) + " - " + os.path.basename(self.file.name)

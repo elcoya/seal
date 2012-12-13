@@ -82,5 +82,5 @@ def step(context, practice_uid, course_name, student_uid, status):
     course = Course.objects.get(name=course_name)
     practice = Practice.objects.get(uid= practice_uid, course=course)
     delivery = Delivery.objects.get(student=student, practice=practice)
-    autocheck = delivery.autocheck_set.all()[0]
-    assert status == autocheck.get_status()
+    automatic_correction = delivery.get_automatic_correction()
+    assert status == automatic_correction.get_status()

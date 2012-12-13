@@ -1,5 +1,5 @@
 import unittest
-from auto_correction.autocheck_runner import AutocheckRunner
+from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
 from mock import Mock
 from auto_correction.result.script_result import ScriptResult
 
@@ -7,20 +7,20 @@ class CorrectorTest(unittest.TestCase):
 
 
     def testEjecutarDeberiaConsultarCorreccionesPendientes(self):
-        corrector = AutocheckRunner()
+        corrector = AutomaticCorrectionRunner()
         selection_strategy_mock = Mock()
-        selection_strategy_mock.get_autochecks.return_value = list()
+        selection_strategy_mock.get_automatic_corrections.return_value = list()
         corrector.selection_strategy = selection_strategy_mock
         
         corrector.run()
         
-        corrector.selection_strategy.get_autochecks.assert_called()
+        corrector.selection_strategy.get_automatic_corrections.assert_called()
         
     def testEjecutarDeberiaInvocarAlCorregirCuandoHayCorreccionesPendientes(self):
-        corrector = AutocheckRunner()
-        autocheck = Mock()
+        corrector = AutomaticCorrectionRunner()
+        automatic_correction = Mock()
         selection_strategy_mock = Mock()
-        selection_strategy_mock.get_autochecks.return_value = (autocheck, )
+        selection_strategy_mock.get_automatic_corrections.return_value = (automatic_correction, )
         setup_enviroment_mock = Mock()
         script_result = ScriptResult()
         script_result.exit_value = 0
@@ -37,7 +37,7 @@ class CorrectorTest(unittest.TestCase):
         
         corrector.run()
         
-        selection_strategy_mock.get_autochecks.assert_called()
+        selection_strategy_mock.get_automatic_corrections.assert_called()
         setup_enviroment_mock.setup_enviroment.assert_called()
         execution_command_mock.execute.assert_called()
         publication_visitor.visit.assert_called()

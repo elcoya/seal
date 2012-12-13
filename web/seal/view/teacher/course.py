@@ -52,12 +52,12 @@ def editcourse(request, idcourse):
             return HttpResponseRedirect(PATHOKNEWCOURSE)
     else:
         form = CourseForm( instance = course)
-        practices = course.practice_set.all().order_by('deadline')
+        practices = course.get_practices().order_by('deadline')
         table_contents = []
         for practice in practices:
             ndeliveries = Delivery.objects.filter(practice=practice.pk).count()
-            if (practice.script_set.all()):
-                script = practice.script_set.all()[0]
+            if (practice.get_script()):
+                script = practice.get_script()
                 table_contents.append({'pk': practice.pk, 
                                        'uid': practice.uid, 
                                        'deadline': practice.deadline, 
@@ -66,7 +66,7 @@ def editcourse(request, idcourse):
             else:
                 table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
                                        'ndeliveries':  ndeliveries})
-        students = course.student_set.all().order_by('name')
+        students = course.get_students().order_by('name')
         table_students = []
         for student in students:
             table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})

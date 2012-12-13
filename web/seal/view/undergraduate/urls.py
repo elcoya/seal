@@ -23,6 +23,6 @@ urlpatterns += patterns('view.undergraduate.suscription',
     url(r'^suscription/suscribe/(?P<idcourse>\d+)/$', 'newsuscription'),   
 )
 
-urlpatterns += patterns('view.undergraduate.autocheck',
-    url(r'^autocheck/(?P<iddelivery>\d+)/$', 'details'),
+urlpatterns += patterns('view.undergraduate.automatic_correction',
+    url(r'^automatic_correction/(?P<iddelivery>\d+)/$', 'details'),
 )

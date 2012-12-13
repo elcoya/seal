@@ -9,7 +9,7 @@ class PublishResultsVisitorWeb(PublishResultsVisitor):
     """
     
     def visit(self, visitable):
-        visitable.autocheck.exit_value = visitable.exit_value
-        visitable.autocheck.captured_stdout = visitable.captured_stdout
-        visitable.autocheck.status = 1 + (-2 * visitable.exit_value)
-        visitable.autocheck.save()
+        visitable.automatic_correction.exit_value = visitable.exit_value
+        visitable.automatic_correction.captured_stdout = visitable.captured_stdout
+        visitable.automatic_correction.status = 1 + (-2 * visitable.exit_value)
+        visitable.automatic_correction.save()

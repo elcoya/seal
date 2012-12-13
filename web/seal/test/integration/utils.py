@@ -3,7 +3,7 @@
 General utility funtions grouped together to avoid code duplication
 
 """
-from seal.model.autocheck import Autocheck
+from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.correction import Correction
 from seal.model.delivery import Delivery
 from seal.model.practice import Practice
@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from seal.model.script import Script
 
 def clean_up_database_tables():
-    Autocheck.objects.all().delete()
+    AutomaticCorrection.objects.all().delete()
     Correction.objects.all().delete()
     Delivery.objects.all().delete()
     Practice.objects.all().delete()
@@ -59,7 +59,7 @@ def create_a_student(student_name, student_email, course_name):
 def load_a_script(course_name, practice_uid, script_file):
     course = Course.objects.get(name=course_name)
     practice = Practice.objects.get(course=course, uid=practice_uid)
-    practice.script_set.all().delete()
+    practice.get_script().delete()
     script = Script()
     script.practice = practice
     script.file = script_file
@@ -76,11 +76,11 @@ def create_a_delivery(delivery_filepath, student_name, course_name, practice_uid
     delivery.save()
     return delivery
 
-def create_an_autocheck(delivery_filepath, stdout, exit_value, status):
-    autocheck = Autocheck()
-    autocheck.delivery = Delivery.objects.get(file=delivery_filepath)
-    autocheck.captured_stdout = stdout;
-    autocheck.exit_value = exit_value
-    autocheck.status = status
-    autocheck.save()
-    return autocheck
+def create_an_automatic_correction(delivery_filepath, stdout, exit_value, status):
+    automatic_correction = AutomaticCorrection()
+    automatic_correction.delivery = Delivery.objects.get(file=delivery_filepath)
+    automatic_correction.captured_stdout = stdout;
+    automatic_correction.exit_value = exit_value
+    automatic_correction.status = status
+    automatic_correction.save()
+    return automatic_correction

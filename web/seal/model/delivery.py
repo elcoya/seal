@@ -25,3 +25,9 @@ class Delivery(models.Model):
     def __str__(self):
         """Stringify the Delivery"""
         return (str(self.practice) + " - " + str(self.student) + " - " + str(self.deliverDate))
+    
+    def get_automatic_correction(self):
+        if(self.automaticcorrection_set.all().exists()):
+            return self.automaticcorrection_set.all()[0]
+        else:
+            return None

@@ -36,6 +36,9 @@ def step(context, text):
 @then('I should see "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
+    if("susccessfull" in text):
+        with open("/tmp/behave.out", "a") as f:
+            f.write(body.text + "\n")
     assert text in body.text
 
 @then('I enter in the page with this title "{text}"')
@@ -82,5 +85,5 @@ def step(context, practice_uid, course_name, student_uid, status):
     course = Course.objects.get(name=course_name)
     practice = Practice.objects.get(uid= practice_uid, course=course)
     delivery = Delivery.objects.get(student=student, practice=practice)
-    autocheck = delivery.autocheck_set.all()[0]
-    assert status == autocheck.get_status()
+    automatic_correction = delivery.get_automatic_correction()
+    assert status == automatic_correction.get_status()
