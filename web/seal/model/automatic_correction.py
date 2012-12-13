@@ -1,10 +1,10 @@
 from django.db import models
 from seal.model.delivery import Delivery
 
-class Autocheck(models.Model):
+class AutomaticCorrection(models.Model):
     """
     
-    Autocheck objects are the entities which represents the automatic check that
+    AutomaticCorrection objects are the entities which represents the automatic check that
     SEAL can run on the deliveries made by the Students.
     
     """
@@ -17,10 +17,10 @@ class Autocheck(models.Model):
     status = models.IntegerField(default=0)
     
     def __str__(self):
-        """Stringify the Autocheck"""
-        return ("Autocheck | exit value: " + str(self.exit_value) + " - status: " + self.status)
+        """Stringify the AutomaticCorrection"""
+        return ("AutomaticCorrection | exit value: " + str(self.exit_value) + " - status: " + self.status)
     
     def get_status(self):
         """Returns a status raw value as a human readable value"""
-        return Autocheck.STATUS_STRINGS[self.status]
+        return AutomaticCorrection.STATUS_STRINGS[self.status]
     

@@ -6,7 +6,7 @@ from seal.model.delivery import Delivery
 @login_required
 def details(request, iddelivery):
     delivery = Delivery.objects.get(pk=iddelivery)
-    autocheck = delivery.autocheck_set.all()[0]
-    return render(request, 'autocheck/detailsundergraduate.html',
-                  {'autocheck': autocheck, 'practice': delivery.practice},
+    automatic_correction = delivery.get_automatic_correction()
+    return render(request, 'automatic_correction/detailsundergraduate.html',
+                  {'automatic_correction': automatic_correction, 'practice': delivery.practice},
                   context_instance=RequestContext(request))

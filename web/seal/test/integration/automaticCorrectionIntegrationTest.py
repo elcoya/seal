@@ -1,10 +1,10 @@
 from django.test import TestCase
-from seal.model.autocheck import Autocheck
+from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.delivery import Delivery
 from seal.test.integration.utils import clean_up_database_tables, create_a_student, \
-create_a_course, create_a_practice, create_a_delivery, create_an_autocheck
+create_a_course, create_a_practice, create_a_delivery, create_an_automatic_correction
 
-class AutocheckIntegrationTest(TestCase):
+class AutomaticCorrectionIntegrationTest(TestCase):
     
     course_name = "2012-2"
     student_name = "student"
@@ -24,12 +24,12 @@ class AutocheckIntegrationTest(TestCase):
         create_a_student(self.student_name, self.student_email, self.course_name)
         create_a_practice(self.course_name, self.practice_deadline, self.practice_filepath, self.practice_uid)
         create_a_delivery(self.delivery_filepath, self.student_name, self.course_name, self.practice_uid, self.delivery_date)
-        create_an_autocheck(self.delivery_filepath, self.stdout, self.exit_value, self.status)
+        create_an_automatic_correction(self.delivery_filepath, self.stdout, self.exit_value, self.status)
     
-    def testAutocheckCreation(self):
+    def testAutomaticCorrectionCreation(self):
         delivery = Delivery.objects.get(file=self.delivery_filepath)
-        autocheck = Autocheck.objects.get(delivery=delivery, exit_value=self.exit_value, status=self.status)
-        self.assertEqual(autocheck.captured_stdout, self.stdout)
-        self.assertEqual(autocheck.exit_value, self.exit_value)
-        self.assertEqual(autocheck.status, self.status)
-        self.assertEqual(autocheck.get_status( ), "pending")
+        automatic_correction = AutomaticCorrection.objects.get(delivery=delivery, exit_value=self.exit_value, status=self.status)
+        self.assertEqual(automatic_correction.captured_stdout, self.stdout)
+        self.assertEqual(automatic_correction.exit_value, self.exit_value)
+        self.assertEqual(automatic_correction.status, self.status)
+        self.assertEqual(automatic_correction.get_status( ), "pending")

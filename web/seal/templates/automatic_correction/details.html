@@ -1,26 +1,26 @@
 {% extends "teacher/teacher.html" %}
 {% block content %}
 
-{% if autocheck.status %}
+{% if automatic_correction.status %}
 
 <div>
 	<div>
 		<div>
 			<p>Automatic check result: 
 				<span style="font-weight: bold; color: 
-				{% if autocheck.status > 0 %}
+				{% if automatic_correction.status > 0 %}
 					green
 				{% else %}
 					red
 				{% endif %}
 				;">
-					{{ autocheck.get_status }}
+					{{ automatic_correction.get_status }}
 				</span>
 			</p>
 		</div>
 		<div style="padding: 20px 0 5px;">Autorun output</div>
 		<div class="output-container" >
-			<pre>{{ autocheck.captured_stdout }}</pre>
+			<pre>{{ automatic_correction.captured_stdout }}</pre>
 		</div>
 	</div>
 </div>

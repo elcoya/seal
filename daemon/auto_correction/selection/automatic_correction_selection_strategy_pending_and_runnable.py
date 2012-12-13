@@ -1,23 +1,23 @@
-from auto_correction.selection.autocheck_selection_strategy import AutocheckSelectionStrategy
-from seal.model.autocheck import Autocheck
+from auto_correction.selection.automatic_correction_selection_strategy import AutomaticCorrectionSelectionStrategy
+from seal.model.automatic_correction import AutomaticCorrection
 from django.db import transaction
 
 class ListFilter():
-    """Filters Autochecks for which there is no script to be run"""
+    """Filters AutomaticCorrections for which there is no script to be run"""
     
     def __init__(self):
-        self.autochecks = None
+        self.automatic_corrections = None
     
-    def set_list(self, autochecks):
-        self.autochecks = autochecks
+    def set_list(self, automatic_corrections):
+        self.automatic_corrections = automatic_corrections
         
     def filter(self):
-        return [autocheck for autocheck in self.autochecks if autocheck.delivery.practice.script_set.all()]
+        return [automatic_corrections for automatic_corrections in self.automatic_corrections if automatic_corrections.delivery.practice.get_script()]
 
-class AutocheckSelectionStrategyPendingAndRunnable(AutocheckSelectionStrategy):
+class AutomaticCorrectionSelectionStrategyPendingAndRunnable(AutomaticCorrectionSelectionStrategy):
     """
     
-    Selection strategy to obtain the autochecks which have yet not been checked and 
+    Selection strategy to obtain the automatic_corrections which have yet not been checked and 
     it's status is pending (integer value 0)
     
     """
@@ -37,11 +37,11 @@ class AutocheckSelectionStrategyPendingAndRunnable(AutocheckSelectionStrategy):
         transaction.commit()
     
     def __init__(self):
-        self.object_manager = Autocheck.objects
+        self.object_manager = AutomaticCorrection.objects
         self.list_filter = ListFilter()
     
-    def get_autochecks(self):
+    def get_automatic_corrections(self):
+        pending_automatic_corrections = self.object_manager.filter(status=0)
+        self.list_filter.set_list(automatic_corrections=pending_automatic_corrections)
         self.flush_transaction()
-        pending_autochecks = self.object_manager.filter(status=0)
-        self.list_filter.set_list(autochecks=pending_autochecks)
         return self.list_filter.filter()
