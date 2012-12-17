@@ -21,8 +21,9 @@ config.readfp(open('web/conf/local.cfg'))
 sys.path.append(config.get("Path", "path.project.web"))      # Required to use the app model
 sys.path.append(config.get("Path", "path.project.daemon"))
 sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
-os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 project_base_path = os.path.realpath(os.path.dirname(__file__))
 os.environ['PROJECT_PATH'] = project_base_path + "/"
 
@@ -163,9 +164,13 @@ def invoke_test_deploy(context = None):
         local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
         local("cat requestUpdate.php")
 
+
+def set_pythonpath():
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon") + ":" + config.get("Path", "path.project.web") + "seal/"
+
 def run_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     with lcd("web"):
         local("coverage run seal/manage.py test model")
         if(config.get("Enviroment", "location") == "travis"):
@@ -176,7 +181,7 @@ def run_coverage_analysis(context = None):
 def pylint():
     """Runs the pylint analysis and saves the report to be available"""
     print "launching pylint static analysis..."
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     with settings(warn_only=True):
         result = local("pylint web/seal daemon/auto_correction --rcfile=pylintrc > pylint_report/pylint.html")
     print "pylint static analysis complete... exit status: " + str(result.return_code)
@@ -191,14 +196,15 @@ def run():
 
 def start():
     print("[fabric] launching server instance.")
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
 
+
 def start_ip(ip):
     print("[fabric] launching server instance.")
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", str(ip) + ":8000", "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
@@ -210,23 +216,14 @@ def stop():
     file.close()
     os.remove("/tmp/seal_server.pid")
 
-def start_daemon():
+def start_daemon_DEPRECATED():
     print "[fabric] launching daemon..."
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
-    sys.path.append(config.get("Path", "path.project.web"))
-    sys.path.append(config.get("Path", "path.project.daemon"))
-    
-    print os.environ
-    for path in sys.path:
-        print path
-    print config.get("Path", "path.project.web")
-    print config.get("Path", "path.project.daemon")
-    
-    daemon_process = Popen(["nohup", "python", "daemon/auto_correction/daemon.py"], stdout = open("/tmp/daemon.out", 'w+', 0), env=os.environ)
+    set_pythonpath()
+    daemon_process = Popen(["nohup", "python", "daemon/auto_correction/daemon_control.py"], stdout = open("/tmp/daemon.out", 'w+', 0), env=os.environ)
     local("echo " + str(daemon_process.pid) + " > /tmp/seal_daemon.pid")
     print("[fabric] daemon active... pid: " + str(daemon_process.pid))
 
-def stop_daemon():
+def stop_daemon_DEPRECATED():
     print "[fabric] stopping daemon..."
     file = open("/tmp/seal_daemon.pid")
     line = file.readline()
@@ -235,18 +232,30 @@ def stop_daemon():
     os.remove("/tmp/seal_daemon.pid")
     print("[fabric] daemon killed - pid: " + line)
 
+
+def start_daemon():
+    set_pythonpath()
+    with lcd("daemon/auto_correction"):
+        local("python daemon_control.py start")
+
+def stop_daemon():
+    set_pythonpath()
+    with lcd("daemon/auto_correction"):
+        local("python daemon_control.py stop")
+
+
 def test(app_name=''):
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     with lcd("web/seal"):
         local("python manage.py test " + app_name)
 
 def behave():
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     with lcd("web/feature_test"):
         local("behave")
 
 def feature(arg):
     """It runs all behave features which contains te arg value"""
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     with lcd("web/feature_test"):
         local("behave -i " + arg)

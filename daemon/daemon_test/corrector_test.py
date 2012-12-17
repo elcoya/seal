@@ -19,6 +19,8 @@ class CorrectorTest(unittest.TestCase):
     def testEjecutarDeberiaInvocarAlCorregirCuandoHayCorreccionesPendientes(self):
         corrector = AutomaticCorrectionRunner()
         automatic_correction = Mock()
+        return_value = Mock()
+        automatic_correction.delivery.practice.get_script.return_value = return_value
         selection_strategy_mock = Mock()
         selection_strategy_mock.get_automatic_corrections.return_value = (automatic_correction, )
         setup_enviroment_mock = Mock()

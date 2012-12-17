@@ -27,4 +27,5 @@ from daemon_test.publish_result_visitor_test import PublishResultVisitorTest
 from daemon_test.prepare_files_strategy_test import TestPrepareFilesStrategy
 from daemon_test.automatic_correction_selection_strategy_test import TestAutomaticCorrectionSelectionStrategy
 from daemon_test.corrector_test import CorrectorTest
+from daemon_test.setup_enviroment_test import TestSetupEnviroment
 

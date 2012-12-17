@@ -1,10 +1,9 @@
-import os
 import shutil
 from selection.automatic_correction_selection_strategy_pending_and_runnable import AutomaticCorrectionSelectionStrategyPendingAndRunnable
-from preparation.prepare_files_strategy_zip import PrepareFilesStrategyZip
 from execution.run_script_command import RunScriptCommand
 from publication.publish_results_visitor_web import PublishResultsVisitorWeb
 from auto_correction.preparation.setup_enviroment import SetupEnviroment
+from celery import task
 
 class AutomaticCorrectionRunner():
     """
@@ -16,7 +15,7 @@ class AutomaticCorrectionRunner():
     
     """
     
-    TMP_DIR = "tmp_dir"
+    TMP_DIR = "/tmp/tmp_dir"
     
     def __init__(self):
         self.selection_strategy = AutomaticCorrectionSelectionStrategyPendingAndRunnable()
@@ -34,8 +33,8 @@ class AutomaticCorrectionRunner():
         pending_automatic_corrections = self.selection_strategy.get_automatic_corrections()
         for pending_automatic_correction in pending_automatic_corrections:
             
-            self.setup_enviroment.run(pending_automatic_correction)
-            self.run_script_command.set_script(pending_automatic_correction.delivery.practice.script.file.name)
+            self.setup_enviroment.run(pending_automatic_correction, AutomaticCorrectionRunner.TMP_DIR)
+            self.run_script_command.set_script(pending_automatic_correction.delivery.practice.get_script().file.name)
             script_result = self.run_script_command.execute()
             script_result.automatic_correction = pending_automatic_correction
             for visitor in self.publish_result_visitors:
