@@ -2,13 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template.context import RequestContext
 from seal.model.delivery import Delivery
+from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
 
-#@login_required
-#def run_automatic_correction_subprocess(request):
-#    runner = AutomaticCorrectionRunner()
-#    results = runner.run()
-#    return render(request, 'automatic_correction/results.html', {'results': results}, 
-#                  context_instance=RequestContext(request))
+@login_required
+def run_automatic_correction_subprocess(request):
+    runner = AutomaticCorrectionRunner()
+    results = runner.run()
+    return render(request, 'automatic_correction/results.html', {'results': results}, 
+                  context_instance=RequestContext(request))
 
 @login_required
 def details(request, iddelivery):
