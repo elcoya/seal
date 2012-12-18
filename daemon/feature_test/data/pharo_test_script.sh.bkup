@@ -2,16 +2,16 @@
 
 # I must first build the copy of the pharo enviroment to run the test
 # Fill it in
-workdir='/usr/local/lib/pharo/pharo-wk'
+cp -r /usr/local/lib/pharo/pharo-wk ./workdir
 # Relocate the delivered .st file to where it should be
 st_to_be_tested=`ls|grep '\.st'`
 
 for file in $st_to_be_tested; do
-	cp $st_to_be_tested $workdir/pharo-2.0/
+	cp $st_to_be_tested workdir/pharo-2.0/
 done
 
 # To generate the test file y change to the directory where the image should be
-cd $workdir/pharo-2.0/
+cd workdir/pharo-2.0/
 
 # generate test.st file
 echo "|unaSecuencia|" > test.st
@@ -54,7 +54,7 @@ echo "Transcript cr." >> test.st
 echo "Transcript cr." >> test.st
 
 echo "\"Al finalizar de ejecutar las pruebas simplemente salimos\"" >> test.st
-echo "Smalltalk exitSucess" >> test.st
+echo "Smalltalk exitSuccess" >> test.st
 echo "" >> test.st
 # file generated
 
@@ -77,8 +77,8 @@ $command
 exit_value=$?
 
 # Cleanup
-cd $workdir/pharo-2.0/
-rm $concatenated_list
+cd ..
+rm -r workdir
 
 # Finally exit with the returned value
 exit $exit_value
