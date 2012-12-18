@@ -33,13 +33,18 @@ class FabricContext:
     """
     server_process = None
 
+
+def set_pythonpath():
+    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon") + ":" + config.get("Path", "path.project.web") + "seal/"
+
+
 def launch_server(context):
     """
     Launches the test instance of the application server in a separate process
     to run the feature tests.
     """
     print("[fabric] launching server instance for feature tests.")
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon")
+    set_pythonpath()
     context.server_process = Popen(["python", "web/seal/manage.py", "runserver", "--noreload"])
     print("[fabric] server online... pid: " + str(context.server_process.pid))
 
@@ -87,6 +92,7 @@ def create_super_user():
     user to access the admin site. Teachers can be created from the admin site
     and Students register themselves.
     """
+    set_pythonpath()
     from django.contrib.auth.models import User
     try:
         admin_user = User.objects.get_by_natural_key('seal')
@@ -164,9 +170,6 @@ def invoke_test_deploy(context = None):
         local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
         local("cat requestUpdate.php")
 
-
-def set_pythonpath():
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon") + ":" + config.get("Path", "path.project.web") + "seal/"
 
 def run_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
