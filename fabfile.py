@@ -92,6 +92,8 @@ def create_super_user():
     user to access the admin site. Teachers can be created from the admin site
     and Students register themselves.
     """
+    set_pythonpath()
+    from django.contrib.auth.models import User
     try:
         admin_user = User.objects.get_by_natural_key('seal')
         print "Super user already exists: " + str(admin_user)
@@ -132,8 +134,6 @@ def prepare_db(context = None):
             mysql_cmd += "SET foreign_key_checks = 1;"
             cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
             local(cmd)
-    set_pythonpath()
-    from django.contrib.auth.models import User
     with lcd("web"):
         local("python seal/manage.py syncdb --noinput")
     create_super_user()
