@@ -35,7 +35,9 @@ class FabricContext:
 
 
 def set_pythonpath():
-    os.environ["PYTHONPATH"] = config.get("Path", "path.project.web") + ":" + config.get("Path", "path.project.daemon") + ":" + config.get("Path", "path.project.web") + "seal/"
+    import os
+    project_base_path = os.path.realpath(os.path.dirname(__file__))
+    os.environ["PYTHONPATH"] = project_base_path + "/web/" + ":" + project_base_path + "/daemon/" + ":" + project_base_path + "/web/seal/"
 
 
 def launch_server(context):
