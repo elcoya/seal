@@ -10,6 +10,7 @@ class AutomaticCorrection(models.Model):
     """
     
     STATUS_STRINGS = {-1:"failed", 0:"pending", 1:"successfull"}
+    STATUS_UNKNOWN = 'unknown status'
     
     delivery = models.ForeignKey(Delivery, unique=True)
     captured_stdout = models.CharField(max_length=10240, blank=True)
@@ -22,5 +23,9 @@ class AutomaticCorrection(models.Model):
     
     def get_status(self):
         """Returns a status raw value as a human readable value"""
-        return AutomaticCorrection.STATUS_STRINGS[self.status]
+        try:
+            status_string = AutomaticCorrection.STATUS_STRINGS[self.status]
+        except:
+            status_string = AutomaticCorrection.STATUS_UNKNOWN
+        return status_string
     
