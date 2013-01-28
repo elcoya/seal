@@ -38,6 +38,7 @@ def set_pythonpath():
     import os
     project_base_path = os.path.realpath(os.path.dirname(__file__))
     os.environ["PYTHONPATH"] = project_base_path + "/web/" + ":" + project_base_path + "/daemon/" + ":" + project_base_path + "/web/seal/"
+    print "PYTHONPATH set to : \"" + os.environ["PYTHONPATH"] + "\""
 
 
 def launch_server(context):
@@ -196,7 +197,8 @@ def run():
     """Main command for the fabric run"""
     ctxt = FabricContext()
     prepare_deploy(ctxt)
-    invoke_test_deploy(ctxt)
+    # This line is called to rise the flag in the test server to activate the update and deploy of the changes
+    # invoke_test_deploy(ctxt)
     run_coverage_analysis()
 
 def start():
