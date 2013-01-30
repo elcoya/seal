@@ -1,14 +1,6 @@
 from django.db import models
 from seal.model.course import Course
-
-import os
-(PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
-import ConfigParser
-config = ConfigParser.ConfigParser()
-config.readfp(open(os.environ['PROJECT_PATH'] + 'web/conf/local.cfg'))
-BASE_PATH = config.get("Path", "path.workspace")
-
-FOLDERNAME = "practice_files/"
+from seal.utils.managepath import Managepath
 
 class Practice(models.Model):
     """Assignment.
@@ -17,10 +9,10 @@ class Practice(models.Model):
     Students to do in order to pass the Course.
     
     """
-    
+    managepath = Managepath()
     uid = models.CharField(max_length=32)
     course = models.ForeignKey(Course)
-    file = models.FileField(upload_to=BASE_PATH + FOLDERNAME)
+    file = models.FileField(upload_to=managepath.get_practice_path())
     deadline = models.DateField()
     
     class Meta:

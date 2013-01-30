@@ -1,12 +1,6 @@
 from django.db import models
 from seal.model import Student, Practice
-import os
-(PRACTICE_FILE_PATH, FILE_PATH) = os.path.split(os.path.realpath(os.path.dirname(__file__)))
-import ConfigParser
-config = ConfigParser.ConfigParser()
-config.readfp(open(os.environ['PROJECT_PATH'] + 'web/conf/local.cfg'))
-BASE_PATH = config.get("Path", "path.workspace")
-FOLDERNAME = "delivery_files/"
+from seal.utils.managepath import Managepath
 
 class Delivery(models.Model):
     """Delivery class.
@@ -16,8 +10,8 @@ class Delivery(models.Model):
     package.
      
     """
-    
-    file = models.FileField(upload_to=BASE_PATH + FOLDERNAME)
+    managepath = Managepath()
+    file = models.FileField(upload_to=managepath.get_delivery_path())
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()

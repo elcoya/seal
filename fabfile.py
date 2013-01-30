@@ -10,22 +10,21 @@ from __future__ import with_statement
 from fabric.api import local, settings
 from fabric.context_managers import lcd
 from subprocess import Popen
-import time
-
-
-import ConfigParser, os
-import sys
+import ConfigParser, os, sys, time
 from fileinput import close
-config = ConfigParser.ConfigParser()
-config.readfp(open('web/conf/local.cfg'))
-sys.path.append(config.get("Path", "path.project.web"))      # Required to use the app model
-sys.path.append(config.get("Path", "path.project.daemon"))
-sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
 
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 project_base_path = os.path.realpath(os.path.dirname(__file__))
+WEB_PATH = project_base_path + "/web/"
+DAEMON_PATH = project_base_path + "/daemon/"
+BEHAVE_PATH = project_base_path + "/web/seal/"
+sys.path.append(WEB_PATH)      # Required to use the app model
+sys.path.append(DAEMON_PATH)
+sys.path.append(BEHAVE_PATH) # Fixes 'No module named model'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 os.environ['PROJECT_PATH'] = project_base_path + "/"
+config = ConfigParser.ConfigParser()
+config.readfp(open(WEB_PATH+'/conf/local.cfg'))
+
 
 class FabricContext:
     """
@@ -35,9 +34,7 @@ class FabricContext:
 
 
 def set_pythonpath():
-    import os
-    project_base_path = os.path.realpath(os.path.dirname(__file__))
-    os.environ["PYTHONPATH"] = project_base_path + "/web/" + ":" + project_base_path + "/daemon/" + ":" + project_base_path + "/web/seal/"
+    os.environ["PYTHONPATH"] = WEB_PATH + ":" + DAEMON_PATH + ":" + BEHAVE_PATH
     print "PYTHONPATH set to : \"" + os.environ["PYTHONPATH"] + "\""
 
 
