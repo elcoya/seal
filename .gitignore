@@ -8,3 +8,4 @@ pylint_report
 workspace/delivery_files
 workspace/practice_files
 workspace/automatic_correction_scripts
+daemon/auto_correction/seal-daemon.log
