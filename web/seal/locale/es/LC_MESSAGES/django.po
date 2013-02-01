@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-01 12:10-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: templates/admin/base.html:28 templates/teacher/teacher.html:15
+msgid "Welcome,"
+msgstr "Bienvenido, "
+
+#: templates/admin/base.html:33
+msgid "Documentation"
+msgstr "Documentacion"
+
+#: templates/admin/base.html:35
+msgid "Change password"
+msgstr "Cambiar Password"
+
+#: templates/admin/base.html:36
+msgid "Log out"
+msgstr "Desconectarse"
+
+#: templates/admin/base_site.html:4 templates/admin/base_site.html.py:7
+msgid "ADFS - Automatic Delivery free system"
+msgstr "SEAL - Sistema de Entregas Automatizadas Libre"
+
+#: templates/admin/index.html:18
+#, python-format
+msgid "Models available in the %(name)s application."
+msgstr "Modelos habilitado en la applicacion %(name)s."
+
+#: templates/admin/index.html:19
+#, python-format
+msgid "%(name)s"
+msgstr ""
+
+#: templates/admin/index.html:29
+msgid "Add"
+msgstr "Crear"
+
+#: templates/admin/index.html:35 templates/registration/login.html:47
+msgid "Change"
+msgstr "Modificar"
+
+#: templates/admin/index.html:45
+msgid "You don't have permission to edit anything."
+msgstr "No tienes permisos para editar"
+
+#: templates/admin/index.html:53
+msgid "Recent Actions"
+msgstr "Acciones Recientes"
+
+#: templates/admin/index.html:54
+msgid "My Actions"
+msgstr "Mis Acciones"
+
+#: templates/admin/index.html:58
+msgid "None available"
+msgstr "No habilitado"
+
+#: templates/admin/index.html:72
+msgid "Unknown content"
+msgstr "Contenido desconocido"
+
+#: templates/registration/login.html:20
+msgid "Your username and password didn't match, please try again."
+msgstr ""
+"Su nombre de usuario y su contraseña no coinciden, por favor intente "
+"nuevamente"
+
+#: templates/registration/login.html:27
+msgid "Username:"
+msgstr "Nombre de Usuario"
+
+#: templates/registration/login.html:31
+msgid "Password:"
+msgstr "Contraseña"
+
+#: templates/registration/login.html:35
+msgid "login"
+msgstr "Ingresar"
+
+#: templates/registration/login.html:41
+msgid "Select Idioms"
+msgstr "Seleccionar Idioma"
+
+#: templates/registration/login.html:52
+msgid "New to ADFS?"
+msgstr "Nuevo en SEAL?"
+
+#: templates/registration/login.html:52
+msgid "Registrate"
+msgstr "Registrate"
+
+#: templates/registration/login.html:54
+msgid "Forgot your Password?"
+msgstr "Perdiste tu contraseña?"
+
+#: templates/registration/login.html:54
+msgid "Recovery"
+msgstr "Recuperala"
+
+#: templates/teacher/index.html:10
+msgid "New Course"
+msgstr "Nuevo Curso"
+
+#: templates/teacher/index.html:13 templates/teacher/teacher.html:22
+msgid "Courses"
+msgstr "Cursos"
+
+#: templates/teacher/index.html:14 templates/teacher/teacher.html:20
+msgid "Students"
+msgstr "Estudiantes"
+
+#: templates/teacher/index.html:24
+msgid "There are yet no courses"
+msgstr "No hay cursos cargados"
+
+#: templates/teacher/teacher.html:13
+msgid "Teacher"
+msgstr "Docente"
+
+#: templates/teacher/teacher.html:15
+msgid "Change Password"
+msgstr "Cambiar Password"
+
+#: templates/teacher/teacher.html:15
+msgid "logout"
+msgstr "Desconectarse"
+
+#: templates/teacher/teacher.html:19
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/teacher/teacher.html:21
+msgid "Practices"
+msgstr "Practicas"
+
+#: templates/teacher/teacher.html:35
+msgid "You are not allowed in this section"
+msgstr "No tienes permismo para entrar en esta seccion"
