@@ -1,4 +1,5 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% comment %}
 	Main page of the teacher's portal.
 {% endcomment %}
@@ -6,11 +7,11 @@
 {% block title %}Teacher{% endblock %}
 
 {% block content %}
-	<div style="text-align: right; padding: 2px 0;"><a href="/teacher/course/newcourse">New Course</a></div>
+	<div style="text-align: right; padding: 2px 0;"><a href="/teacher/course/newcourse">{% trans "New Course" %}</a></div>
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
-			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >Courses</td>
-				<td>Students</td>
+			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " > {% trans "Courses" %}</td>
+				<td>{% trans "Students" %}</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,7 +21,7 @@
 		    	<td style="width: 30%; text-align: center; ">{{ dict.count }}</td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="2" style="text-align: center; ">There are yet no courses</td></tr>
+		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no courses" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% comment %}
 This is the main template for all teacher pages.
 {% endcomment %}
@@ -9,16 +10,16 @@ This is the main template for all teacher pages.
 {% block head %}
     <title>SEAL | {% block title %}{% endblock %}</title>
 {% endblock %}
-{% block subtitle %}Teacher{% endblock %}
+{% block subtitle %}{% trans "Teacher" %}{% endblock %}
 {% block welcome %}
-	<div class="welcome-msg">Welcome {{ user.last_name }} | <a href="/changepassw/">Change Password</a> | <a href="/logout/">logout</a> </div>
+	<div class="welcome-msg">{% trans "Welcome," %} {{ user.last_name }} | <a href="/changepassw/">{% trans "Change Password" %}</a> | <a href="/logout/">{% trans "logout" %} </a> </div>
 {% endblock %}
 {% block nav %}
 <nav>
-	<a href="/teacher">Home</a> | 
-	<a href="/teacher/students">Students</a>  | 
-	<a href="/teacher/practices">Practices</a> | 
-	<a href="/teacher/course">Courses</a>
+	<a href="/teacher">{% trans "Home" %}</a> | 
+	<a href="/teacher/students">{% trans "Students" %}</a>  | 
+	<a href="/teacher/practices">{% trans "Practices" %}</a> | 
+	<a href="/teacher/course">{% trans "Courses" %}</a>
 </nav>
 {% endblock %}
 {% block body %}
@@ -31,7 +32,7 @@ This is the main template for all teacher pages.
 	    </footer>
 	{% else %}
 		<div class="main-content" >
-	    	<p style="color: #A44; font-weight: bold; text-align: center;">You are not allowed in this section</p>
+	    	<p style="color: #A44; font-weight: bold; text-align: center;">{% trans "You are not allowed in this section" %}</p>
 	    </div>
 	    <footer>
 	        <span>© 2012, SEAL</span>
