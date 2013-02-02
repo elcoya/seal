@@ -20,4 +20,4 @@ install:
   - pip install -q mock
 
 # command to run tests, e.g. python setup.py test
-script: fab run
+script: fab runtravis

@@ -22,8 +22,6 @@ sys.path.append(DAEMON_PATH)
 sys.path.append(MODEL_PATH)         # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 os.environ['PROJECT_PATH'] = project_base_path + "/"
-config = ConfigParser.ConfigParser()
-config.readfp(open(WEB_PATH+'/conf/local.cfg'))
 
 import seal.settings
 USER = seal.settings.USER
@@ -41,10 +39,11 @@ def set_pythonpath():
     print "PYTHONPATH set to : \"" + os.environ["PYTHONPATH"] + "\""
 
 
+# launch and kill server instance to run feature tests
 def launch_server(context):
     """
     Launches the test instance of the application server in a separate process
-    to run the feature tests.
+    to run_travis the feature tests.
     """
     print("[fabric] launching server instance for feature tests.")
     set_pythonpath()
@@ -60,6 +59,8 @@ def kill_server(context):
     context.server_process.terminate()
     print("[fabric] server killed...")
 
+
+# Database access utility funtions
 def get_mysql_bash():
     """
     Builds the string that should be used to call a command over the database.
@@ -115,34 +116,45 @@ def create_super_user():
         u.save()
         print "User account created"
 
-def prepare_db(context = None):
+
+def create_and_prepare_db(context = None):
     """
     Resets the database applying the latests changes made in the app model.
     """
-    print("[fabric] preparing database.")
-    if(config.get("Enviroment", "location") == "travis"):
-        print("Travis location detected. Seting up database layout...")
-        cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;")
-        local(cmd)
-        cmd = get_mysql_bash()
-        local(cmd + " < build_files/ci_grant_privileges_in_travis_db.sql")
-        print("Layout set.")
-    else:
-        print("Environment detected. No need to create either database user nor schema.")
-        print("Sincronizing DB...")
-        cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
-        output = local(cmd + " -N ", capture=True)
-        if (output != ""):
-            mysql_cmd = "SET foreign_key_checks = 0; "
-            mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
-            mysql_cmd += "SET foreign_key_checks = 1;"
-            cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
-            local(cmd)
+    print("[fabric] creating and preparing database.")
+    print("Travis location detected. Seting up database layout...")
+    cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;")
+    local(cmd)
+    cmd = get_mysql_bash()
+    local(cmd + " < build_files/ci_grant_privileges_in_travis_db.sql")
+    print("Layout set.")
     with lcd("web"):
         local("python seal/manage.py syncdb --noinput")
     create_super_user()
     print("syncdb complete")
 
+
+def prepare_db(context = None):
+    """
+    Resets the database applying the latests changes made in the app model.
+    """
+    print("[fabric] preparing database.")
+    print("Sincronizing DB...")
+    cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
+    output = local(cmd + " -N ", capture=True)
+    if (output != ""):
+        mysql_cmd = "SET foreign_key_checks = 0; "
+        mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
+        mysql_cmd += "SET foreign_key_checks = 1;"
+        cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
+        local(cmd)
+    with lcd("web"):
+        local("python seal/manage.py syncdb --noinput")
+    create_super_user()
+    print("syncdb complete")
+
+
+# Running test
 def run_tests(context = None):
     """Runs the application tests for the Django app"""
     print("[fabric] invoking tests.")
@@ -160,31 +172,25 @@ def run_features_tests(context = None):
         local("behave")
     kill_server(context)
 
-def prepare_deploy(context = None):
-    """Syncronizes the database and runs all the tests"""
-    prepare_db(context)
-    test()
-    if (config.get("Enviroment", "location") == "dev"):
-        run_features_tests(context)
-
-def invoke_test_deploy(context = None):
-    """Calls a url in the test server to update the test instance"""
-    if(config.get("Enviroment", "location") == "travis"):
-        print("[fabric] tests run successfully... deploying to test instance.")
-        local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
-        local("cat requestUpdate.php")
 
 
-def run_coverage_analysis(context = None):
+# Coverage analysis
+def run_html_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
     set_pythonpath()
     with lcd("web"):
-        local("coverage run seal/manage.py test model")
-        if(config.get("Enviroment", "location") == "travis"):
-            local("coverage report")
-        else:
-            local("coverage html")
+        local("coverage run_travis seal/manage.py test model")
+        local("coverage html")
 
+def run_plain_report_coverage_analysis(context = None):
+    """Invokes the test coverage analysis and generates the reports"""
+    set_pythonpath()
+    with lcd("web"):
+        local("coverage run_travis seal/manage.py test model")
+        local("coverage report")
+
+
+# Pylint check
 def pylint():
     """Runs the pylint analysis and saves the report to be available"""
     print "launching pylint static analysis..."
@@ -194,13 +200,32 @@ def pylint():
     print "pylint static analysis complete... exit status: " + str(result.return_code)
     print "you can access the report result pylint_report/pylint.html"
 
-def run():
-    """Main command for the fabric run"""
+
+# to be invoked from the development enviroment
+def rundev():
     ctxt = FabricContext()
-    prepare_deploy(ctxt)
+    prepare_db(ctxt)
+    test()
+    run_features_tests(ctxt)
+    run_html_coverage_analysis()
+
+
+# to call the test update and deploy process and should be used from travis
+def invoke_test_deploy(context = None):
+    """Calls a url in the test server to update the test instance"""
+    print("[fabric] tests run_travis successfully... deploying to test instance.")
+    local("wget http://ixion-tech.com.ar/seal/requestUpdate.php")
+    local("cat requestUpdate.php")
+
+def runtravis():
+    """Main command for the fabric run_travis"""
+    ctxt = FabricContext()
+    create_and_prepare_db(ctxt)
+    test()
     # This line is called to rise the flag in the test server to activate the update and deploy of the changes
     # invoke_test_deploy(ctxt)
-    run_coverage_analysis()
+    run_plain_report_coverage_analysis()
+
 
 def start():
     print("[fabric] launching server instance.")
@@ -223,23 +248,6 @@ def stop():
     local("kill -2 " + line)
     file.close()
     os.remove("/tmp/seal_server.pid")
-
-def start_daemon_DEPRECATED():
-    print "[fabric] launching daemon..."
-    set_pythonpath()
-    daemon_process = Popen(["nohup", "python", "daemon/auto_correction/daemon_control.py"], stdout = open("/tmp/daemon.out", 'w+', 0), env=os.environ)
-    local("echo " + str(daemon_process.pid) + " > /tmp/seal_daemon.pid")
-    print("[fabric] daemon active... pid: " + str(daemon_process.pid))
-
-def stop_daemon_DEPRECATED():
-    print "[fabric] stopping daemon..."
-    file = open("/tmp/seal_daemon.pid")
-    line = file.readline()
-    local("kill -2 " + line)
-    file.close()
-    os.remove("/tmp/seal_daemon.pid")
-    print("[fabric] daemon killed - pid: " + line)
-
 
 def start_daemon():
     set_pythonpath()
