@@ -1,6 +1,6 @@
 from django.db import models
 from seal.model import Student, Practice
-from seal.utils.managepath import Managepath
+from seal.utils import managepath
 
 class Delivery(models.Model):
     """Delivery class.
@@ -10,8 +10,7 @@ class Delivery(models.Model):
     package.
      
     """
-    managepath = Managepath()
-    file = models.FileField(upload_to=managepath.get_delivery_path())
+    file = models.FileField(upload_to=managepath.get_instance().get_delivery_path())
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()

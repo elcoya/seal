@@ -6,11 +6,9 @@ from seal.model import Course, Student, Practice, Delivery, Suscription
 import ConfigParser
 from seal.model.automatic_correction import AutomaticCorrection
 import time
-from seal.utils.managepath import Managepath
+from seal.utils import managepath
 
-managepath = Managepath()
-
-pathproject = managepath.get_web_path()
+pathproject = managepath.get_instance().get_web_path()
 filePath = pathproject + "feature_test/data/pdftest.pdf"
 deliveryPath = pathproject + "feature_test/data/delivery.zip"
 scriptPath = pathproject + "feature_test/data/"

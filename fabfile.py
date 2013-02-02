@@ -179,14 +179,14 @@ def run_html_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
     set_pythonpath()
     with lcd("web"):
-        local("coverage run_travis seal/manage.py test model")
+        local("coverage run seal/manage.py test model")
         local("coverage html")
 
 def run_plain_report_coverage_analysis(context = None):
     """Invokes the test coverage analysis and generates the reports"""
     set_pythonpath()
     with lcd("web"):
-        local("coverage run_travis seal/manage.py test model")
+        local("coverage run seal/manage.py test model")
         local("coverage report")
 
 

@@ -7,17 +7,16 @@ import shutil
 # The next few steps are required to load the configuration and include the application model for the behavioural tests.
 import os, sys
 from django.contrib.auth import login
-from seal.utils.managepath import Managepath
-managepath = Managepath()
+from seal.utils import managepath
 
-sys.path.append(managepath.get_web_path())         # Required to use the app model
-sys.path.append(managepath.get_daemon_path())
-sys.path.append(managepath.get_behave_path()) # Fixes 'No module named model'
+sys.path.append(managepath.get_instance().get_web_path())         # Required to use the app model
+sys.path.append(managepath.get_instance().get_daemon_path())
+sys.path.append(managepath.get_instance().get_model_path()) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
-practicePath = managepath.get_practice_path()
-deliveryPath = managepath.get_delivery_path()
-scriptPath = managepath.get_script_path()
+practicePath = managepath.get_instance().get_practice_path()
+deliveryPath = managepath.get_instance().get_delivery_path()
+scriptPath = managepath.get_instance().get_script_path()
 
 # Now we can load our model
 from seal.model import Course, Student, Practice, Delivery, Teacher, Correction, Suscription

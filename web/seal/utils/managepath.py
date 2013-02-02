@@ -7,34 +7,41 @@ import os
 
 class Managepath(object):
     
+    INSTANCE = None
+    
     def __init__(self):
         #Ver con anibal.
-        BASE_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-        self.BASE_PROJECT_PATH = BASE_PATH + "/"
-        self.DELIVERY_FILE_PATH = BASE_PATH + "/workspace/delivery_files/"
-        self.PRACTICE_FILE_PATH = BASE_PATH + "/workspace/practice_files/"
-        self.SCRIPT_FILE_PATH = BASE_PATH + "/workspace/automatic_correction_scripts/"
-        self.DAEMON_PATH = BASE_PATH + "/daemon/"
-        self.WEB_PATH = BASE_PATH + "/web/"
-        self.BEHAVE_PATH = BASE_PATH + "/web/seal/"
+        base_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+        self.base_proyect_path = base_path + "/"
+        self.delivery_file_path = base_path + "/workspace/delivery_files/"
+        self.practice_file_path = base_path + "/workspace/practice_files/"
+        self.script_file_path = base_path + "/workspace/automatic_correction_scripts/"
+        self.daemon_path = base_path + "/daemon/"
+        self.web_path = base_path + "/web/"
+        self.model_path = base_path + "/web/seal/"
     
     def get_base_proyect_path(self):
-        return self.BASE_PROJECT_PATH
+        return self.base_proyect_path
     
     def get_delivery_path(self):
-        return self.DELIVERY_FILE_PATH
+        return self.delivery_file_path
     
     def get_practice_path(self):
-        return self.PRACTICE_FILE_PATH
+        return self.practice_file_path
     
     def get_script_path(self):
-        return self.SCRIPT_FILE_PATH
-    
-    def get_web_path(self):
-        return self.WEB_PATH
+        return self.script_file_path
     
     def get_daemon_path(self):
-        return self.DAEMON_PATH
+        return self.daemon_path
     
-    def get_behave_path(self):
-        return self.BEHAVE_PATH
+    def get_web_path(self):
+        return self.web_path
+    
+    def get_model_path(self):
+        return self.model_path
+    
+def get_instance():
+    if not Managepath.INSTANCE:
+        Managepath.INSTANCE = Managepath()
+    return Managepath.INSTANCE

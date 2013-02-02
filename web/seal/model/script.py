@@ -1,7 +1,6 @@
 from django.db import models
 from seal.model.practice import Practice
-from seal.utils.managepath import Managepath
-
+from seal.utils import managepath
 
 class Script(models.Model):
     """
@@ -11,9 +10,8 @@ class Script(models.Model):
     
     """
     
-    managepath = Managepath()    
     practice = models.ForeignKey(Practice, unique=True)
-    file = models.FileField(upload_to=managepath.get_script_path(), max_length=128)
+    file = models.FileField(upload_to=managepath.get_instance().get_script_path(), max_length=128)
 
     def __str__(self):
         return str(self.practice)
