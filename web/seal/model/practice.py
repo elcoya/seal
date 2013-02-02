@@ -1,6 +1,6 @@
 from django.db import models
 from seal.model.course import Course
-from seal.utils.managepath import Managepath
+from seal.utils import managepath
 
 class Practice(models.Model):
     """Assignment.
@@ -9,10 +9,9 @@ class Practice(models.Model):
     Students to do in order to pass the Course.
     
     """
-    managepath = Managepath()
     uid = models.CharField(max_length=32)
     course = models.ForeignKey(Course)
-    file = models.FileField(upload_to=managepath.get_practice_path())
+    file = models.FileField(upload_to=managepath.get_instance().get_practice_path())
     deadline = models.DateField()
     
     class Meta:
