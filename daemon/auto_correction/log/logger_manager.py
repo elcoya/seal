@@ -4,6 +4,7 @@ Created on 27/01/2013
 @author: anibal
 '''
 import logging
+from auto_correction.utils import managepath
 
 class LoggerManager:
     
@@ -13,7 +14,7 @@ class LoggerManager:
     LOGGER_NAME = "SEAL DAEMON"
     
     # FIXME: This should be in a configuration file or otherwise not hardcoded
-    LOGFILE = "/tmp/seal-daemon.log"
+    LOGFILE = managepath.get_instance().get_log_path() + "seal-daemon.log"
     LOG_LEVEL = logging.DEBUG
     
     def getLogger(self, logname=None):

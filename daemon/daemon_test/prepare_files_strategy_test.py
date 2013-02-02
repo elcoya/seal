@@ -4,14 +4,13 @@ from auto_correction.exceptions.illegal_state_exception import IllegalStateExcep
 from unittest.case import TestCase
 
 import ConfigParser, os
-config = ConfigParser.ConfigParser()
-config.readfp(open(os.environ['PROJECT_PATH'] + 'daemon/conf/local.cfg'))
+from auto_correction.utils import managepath
 
 import errno
 
 class TestPrepareFilesStrategy(TestCase):
     
-    DAEMON_BASE_PATH = config.get("Path", "path.project.daemon")      # Required to use the app model
+    DAEMON_BASE_PATH = managepath.get_instance().get_daemon_path()      # Required to use the app model
 
     UNZIP_DESTINATION_PATH = DAEMON_BASE_PATH + "test_tmp/unzip/"
     ZIP_FILE_PATH = DAEMON_BASE_PATH +"test_tmp/delivery.zip"

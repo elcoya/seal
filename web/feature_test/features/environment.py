@@ -12,7 +12,7 @@ managepath = Managepath()
 
 sys.path.append(managepath.get_web_path())         # Required to use the app model
 sys.path.append(managepath.get_daemon_path())
-sys.path.append(managepath.get_behave_path()) # Fixes 'No module named model'
+sys.path.append(managepath.get_model_path()) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
 practicePath = managepath.get_practice_path()

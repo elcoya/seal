@@ -4,14 +4,13 @@ from unittest.case import TestCase
 import ConfigParser, os
 from mock import Mock
 from auto_correction.preparation.setup_enviroment import SetupEnviroment
-config = ConfigParser.ConfigParser()
-config.readfp(open(os.environ['PROJECT_PATH'] + 'daemon/conf/local.cfg'))
+from auto_correction.utils import managepath
 
 import errno
 
 class TestSetupEnviroment(TestCase):
     
-    DAEMON_BASE_PATH = config.get("Path", "path.project.daemon")      # Required to use the app model
+    DAEMON_BASE_PATH = managepath.get_instance().get_daemon_path()      # Required to use the app model
 
     ORIGINAL_SCRIPT_FILE_PATH = DAEMON_BASE_PATH + "feature_test/data/"
     DESTINATION_PATH = DAEMON_BASE_PATH + "test_tmp/unzip/"

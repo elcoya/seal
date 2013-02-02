@@ -3,6 +3,7 @@ from selection.automatic_correction_selection_strategy_pending_and_runnable impo
 from execution.run_script_command import RunScriptCommand
 from publication.publish_results_visitor_web import PublishResultsVisitorWeb
 from auto_correction.preparation.setup_enviroment import SetupEnviroment
+from auto_correction.utils import managepath
 
 class AutomaticCorrectionRunner():
     """
@@ -14,7 +15,7 @@ class AutomaticCorrectionRunner():
     
     """
     
-    TMP_DIR = "/tmp/tmp_dir"
+    TMP_DIR = managepath.get_instance().get_automatic_correction_tmp_dir()
     SUCCESSFULL_RESULTS_KEY = "successfull"
     FAILED_RESULTS_KEY = "failed"
     
