@@ -5,17 +5,18 @@ from daemon.runner import DaemonRunner
 
 from seal import settings #your project settings file
 from django.core.management import setup_environ #environment setup function
-from auto_correction.log.log import Log
 import argparse
+from auto_correction.log.logger_manager import LoggerManager
 setup_environ(settings)
 
 from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
-
 class LoopRunner():
     
     LOOP_INTERVAL = 65
     
     def __init__(self):
+        logger_manager = LoggerManager()
+        self.log = logger_manager.get_new_logger("loop runner")
         self.loop_interval = LoopRunner.LOOP_INTERVAL # in seconds
         self.stdin_path = '/dev/null'
         self.stdout_path = '/dev/tty'
@@ -38,14 +39,15 @@ class LoopRunner():
         print str(datetime.today()) + " | " + str(result)
     
     def run(self):
-        log = Log()
-        log.info("Daemon's game loop started.")
+        self.log = LoggerManager().get_new_logger("daemon control")
+        self.log.info("Daemon's game loop started.")
         while True:
             start_timestamp = datetime.today()
             
             result = self.automatic_correction_runner.run()
-            self.print_result(result)
-            
+            self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
+                          result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
+                          result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
             finish_timestamp = datetime.today()
             self.stall_loop(start_timestamp, finish_timestamp)
 
@@ -54,11 +56,13 @@ parser.add_argument('command', metavar='start/stop',
                     help='the command that should be executed on the daemon')
 args = parser.parse_args()
 
-log = Log()
-log.info("Daemon action recived: " + args.command)
+logger_manager = LoggerManager()
+log = logger_manager.getLogger()
+log.info("Daemon action recived: '%s'", args.command)
 
 loop_runner = LoopRunner()
 daemon_runner = DaemonRunner(loop_runner) # runner.DaemonRunner(loop_runner)
+daemon_runner.daemon_context.files_preserve=[logger_manager.get_file_handler().stream]
 daemon_runner.do_action()
 
 if("start".__eq__(args.command.lower())):

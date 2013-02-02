@@ -16,6 +16,7 @@ import time
 import ConfigParser, os
 import sys
 from fileinput import close
+import pdb
 config = ConfigParser.ConfigParser()
 config.readfp(open('web/conf/local.cfg'))
 sys.path.append(config.get("Path", "path.project.web"))      # Required to use the app model
@@ -250,6 +251,11 @@ def stop_daemon():
     with lcd("daemon/auto_correction"):
         local("python daemon_control.py stop")
 
+def start_daemon_dbg():
+    set_pythonpath()
+    with lcd("daemon/auto_correction"):
+        pdb.set_trace()
+        local("python daemon_control.py start")
 
 def test(app_name=''):
     set_pythonpath()

@@ -1,17 +1,20 @@
 from auto_correction.selection.automatic_correction_selection_strategy import AutomaticCorrectionSelectionStrategy
 from seal.model.automatic_correction import AutomaticCorrection
 from django.db import transaction
+from auto_correction.log.logger_manager import LoggerManager
 
 class ListFilter():
     """Filters AutomaticCorrections for which there is no script to be run"""
     
     def __init__(self):
         self.automatic_corrections = None
+        self.log = LoggerManager().get_new_logger("list filter")
     
     def set_list(self, automatic_corrections):
         self.automatic_corrections = automatic_corrections
         
     def filter(self):
+        self.log.debug("filtering deliveries for practices without a correction script...")
         return [automatic_corrections for automatic_corrections in self.automatic_corrections if automatic_corrections.delivery.practice.get_script()]
 
 class AutomaticCorrectionSelectionStrategyPendingAndRunnable(AutomaticCorrectionSelectionStrategy):
@@ -39,9 +42,12 @@ class AutomaticCorrectionSelectionStrategyPendingAndRunnable(AutomaticCorrection
     def __init__(self):
         self.object_manager = AutomaticCorrection.objects
         self.list_filter = ListFilter()
+        self.log = LoggerManager().get_new_logger("selection strategy")
     
     def get_automatic_corrections(self):
+        self.log.debug("searching for deliveries with status pending...")
         pending_automatic_corrections = self.object_manager.filter(status=0)
         self.list_filter.set_list(automatic_corrections=pending_automatic_corrections)
         self.flush_transaction()
+        self.log.debug("deliveries obtained.")
         return self.list_filter.filter()

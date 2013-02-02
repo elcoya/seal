@@ -15,6 +15,8 @@ class AutomaticCorrectionRunner():
     """
     
     TMP_DIR = "/tmp/tmp_dir"
+    SUCCESSFULL_RESULTS_KEY = "successfull"
+    FAILED_RESULTS_KEY = "failed"
     
     def __init__(self):
         self.selection_strategy = AutomaticCorrectionSelectionStrategyPendingAndRunnable()
@@ -28,7 +30,7 @@ class AutomaticCorrectionRunner():
     def run(self):
         """Runs the corresponding script for every Delivery which has not yet been run."""
         
-        results = {"successfull" : 0, "failed" : 0}
+        results = {AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY : 0, AutomaticCorrectionRunner.FAILED_RESULTS_KEY : 0}
         pending_automatic_corrections = self.selection_strategy.get_automatic_corrections()
         for pending_automatic_correction in pending_automatic_corrections:
             
@@ -41,8 +43,8 @@ class AutomaticCorrectionRunner():
             
             self.clean_up_tmp_dir()
             if(script_result.exit_value == 0):
-                results["successfull"] += 1
+                results[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY] += 1
             else :
-                results["failed"] += 1
+                results[AutomaticCorrectionRunner.FAILED_RESULTS_KEY] += 1
         return results;
     
