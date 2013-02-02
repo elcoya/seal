@@ -3,21 +3,21 @@ from parse import *
 from selenium import webdriver
 from django.core.files import File
 import shutil
+
 # The next few steps are required to load the configuration and include the application model for the behavioural tests.
-import ConfigParser, os
+import os, sys
 from django.contrib.auth import login
-config = ConfigParser.ConfigParser()
-config.readfp(open('../conf/local.cfg'))
-import sys
-sys.path.append(config.get("Path", "path.project.web"))		 # Required to use the app model
-sys.path.append(config.get("Path", "path.project.daemon"))
-sys.path.append(config.get("Path", "path.behave.model")) # Fixes 'No module named model'
+from seal.utils.managepath import Managepath
+managepath = Managepath()
+
+sys.path.append(managepath.get_web_path())         # Required to use the app model
+sys.path.append(managepath.get_daemon_path())
+sys.path.append(managepath.get_behave_path()) # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 
-pathproject = config.get("Path", "path.project.web")
-filePath = pathproject + "seal/Delivery_Files"
-deliveryPath = pathproject + "/seal/Practice_Files"
-
+practicePath = managepath.get_practice_path()
+deliveryPath = managepath.get_delivery_path()
+scriptPath = managepath.get_script_path()
 
 # Now we can load our model
 from seal.model import Course, Student, Practice, Delivery, Teacher, Correction, Suscription
@@ -32,20 +32,7 @@ def before_all(context):
     Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
     Teacher.objects.all().delete()
     User.objects.exclude(username='seal').delete()
-#    User.objects.exclude(username='seal').delete()
-#    uid = 'teacher'
-#    user = User()
-#    user.username = uid
-#    user.set_password(uid)
-#    user.email = uid + "@foo.foo"
-#    user.save()
-#    teacher = Teacher()
-#    teacher.user = user
-#    teacher.name = uid
-#    teacher.uid = uid
-#    teacher.email = uid + "@foo.foo"
-#    teacher.save()
-
+    
 def after_all(context):
     Suscription.objects.all().delete()
     Correction.objects.all().delete()
@@ -55,18 +42,18 @@ def after_all(context):
     Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
     Teacher.objects.all().delete()
     User.objects.exclude(username='seal').delete()
-    if os.path.isdir(filePath):
-        shutil.rmtree(filePath)
+    if os.path.isdir(practicePath):
+        shutil.rmtree(practicePath)
     if os.path.isdir(deliveryPath):
         shutil.rmtree(deliveryPath)
-    
+    if os.path.isdir(scriptPath):
+        shutil.rmtree(scriptPath)
+        
 def before_feature(context, feature):
     context.browser = webdriver.Firefox()
     context.browser.get('http://localhost:8000/')
 
 def after_feature(context, feature):
-    #a = context.browser.find_element_by_link_text('Log out')
-    #a.click()
     Suscription.objects.all().delete()
     Correction.objects.all().delete()
     Delivery.objects.all().delete()
