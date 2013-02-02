@@ -5,6 +5,7 @@ Created on 27/01/2013
 '''
 import logging
 from auto_correction.utils import managepath
+import os
 
 class LoggerManager:
     
@@ -14,7 +15,8 @@ class LoggerManager:
     LOGGER_NAME = "SEAL DAEMON"
     
     # FIXME: This should be in a configuration file or otherwise not hardcoded
-    LOGFILE = managepath.get_instance().get_log_path() + "seal-daemon.log"
+    LOGFILE_PATH = managepath.get_instance().get_log_path()
+    LOGFILE = LOGFILE_PATH + "seal-daemon.log"
     LOG_LEVEL = logging.DEBUG
     
     def getLogger(self, logname=None):
@@ -23,6 +25,8 @@ class LoggerManager:
             logger = logging.getLogger(logname)
             logger.setLevel(logging.DEBUG)
             # create file handler which logs the messages
+            if(not os.path.isdir(LoggerManager.LOGFILE_PATH)):
+                os.makedirs(LoggerManager.LOGFILE_PATH)
             fh = logging.FileHandler(LoggerManager.LOGFILE)
             fh.setLevel(LoggerManager.LOG_LEVEL)
             LoggerManager.LOGGER_FH = fh
@@ -48,6 +52,8 @@ class LoggerManager:
         logger.setLevel(logging.DEBUG)
         # create file handler which logs the messages
         if (LoggerManager.LOGGER_FH is None):
+            if(not os.path.isdir(LoggerManager.LOGFILE_PATH)):
+                os.makedirs(LoggerManager.LOGFILE_PATH)
             fh = logging.FileHandler(LoggerManager.LOGFILE)
             fh.setLevel(LoggerManager.LOG_LEVEL)
             LoggerManager.LOGGER_FH = fh
