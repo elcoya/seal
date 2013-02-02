@@ -16,15 +16,20 @@ EMAIL_HOST_USER = 'sealteacher@gmail.com'
 EMAIL_HOST_PASSWORD = 'sealtpprof'
 EMAIL_PORT = 587
 
+#Key for captcha
 RECAPTCHA_PUB_KEY = "6LcuRdkSAAAAAOeCTPJ-FMf19ZOvVqRxdQjWgERE"
 RECAPTCHA_PRIVATE_KEY = "6LcuRdkSAAAAAAnez1roxSgBbTfQ_iPxPhOnv5vP"
+
+#user and password for database create
+USER="seal"
+PASSWORD="$3alSEAL"
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'seal',                      # Or path to database file if using sqlite3.
-        'USER': 'seal',                      # Not used with sqlite3.
-        'PASSWORD': '$3alSEAL',                  # Not used with sqlite3.
+        'USER': USER,                      # Not used with sqlite3.
+        'PASSWORD': PASSWORD,                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
         

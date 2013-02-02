@@ -16,15 +16,18 @@ from fileinput import close
 project_base_path = os.path.realpath(os.path.dirname(__file__))
 WEB_PATH = project_base_path + "/web/"
 DAEMON_PATH = project_base_path + "/daemon/"
-BEHAVE_PATH = project_base_path + "/web/seal/"
-sys.path.append(WEB_PATH)      # Required to use the app model
+MODEL_PATH = project_base_path + "/web/seal/"
+sys.path.append(WEB_PATH)           # Required to use the app model
 sys.path.append(DAEMON_PATH)
-sys.path.append(BEHAVE_PATH) # Fixes 'No module named model'
+sys.path.append(MODEL_PATH)         # Fixes 'No module named model'
 os.environ['DJANGO_SETTINGS_MODULE'] = 'seal.settings'
 os.environ['PROJECT_PATH'] = project_base_path + "/"
 config = ConfigParser.ConfigParser()
 config.readfp(open(WEB_PATH+'/conf/local.cfg'))
 
+import seal.settings
+USER = seal.settings.USER
+PASSWORD = seal.settings.PASSWORD
 
 class FabricContext:
     """
@@ -34,7 +37,7 @@ class FabricContext:
 
 
 def set_pythonpath():
-    os.environ["PYTHONPATH"] = WEB_PATH + ":" + DAEMON_PATH + ":" + BEHAVE_PATH
+    os.environ["PYTHONPATH"] = WEB_PATH + ":" + DAEMON_PATH + ":" + MODEL_PATH
     print "PYTHONPATH set to : \"" + os.environ["PYTHONPATH"] + "\""
 
 
@@ -64,8 +67,9 @@ def get_mysql_bash():
     command would allow you to connect to de database, if you want to invoke a
     given sql command, use get_mysql_bash_cmd.
     """
-    user = config.get("Database", "user")
-    passwd = config.get("Database", "pass")
+    user = USER
+    passwd = PASSWORD
+    
     local_cmd = "mysql -u " + user
     if (passwd != ""):
         local_cmd += " -p'" + passwd + "'"
@@ -77,8 +81,8 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
     with a given sql command. It uses the configuration given in the local.conf
     file.
     """
-    user = config.get("Database", "user")
-    passwd = config.get("Database", "pass")
+    user = USER
+    passwd = PASSWORD
     local_cmd = "mysql -e '" + sql_sentence + "' -u " + user
     if (database is not None and database != ""):
         local_cmd += " -D " + database + " "
