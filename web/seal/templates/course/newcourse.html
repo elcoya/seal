@@ -1,12 +1,13 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 <form id='formnewcoruse' action='' method='post'>
 	{% csrf_token %}
 	<table>
-		NEW COURSE<br><br>
+		{% trans "New Course" %}<br><br>
 		{{ form.as_table }}
 	</table>
-	<input type='submit' value='Save' />
-	<input type='reset' value='Reset' /> 
+	<input type='submit' value='{% trans "Save" %}' />
+	<footer><a href="/teacher">{% trans "back" %}</a></footer>
 </form>
 {% endblock %}

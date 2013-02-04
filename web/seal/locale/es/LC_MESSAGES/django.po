@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-01 12:10-0600\n"
+"POT-Creation-Date: 2013-02-04 07:06-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: templates/admin/base.html:28 templates/teacher/teacher.html:15
 msgid "Welcome,"
-msgstr "Bienvenido, "
+msgstr "Bienvenido,"
 
 #: templates/admin/base.html:33
 msgid "Documentation"
@@ -52,7 +52,8 @@ msgstr ""
 msgid "Add"
 msgstr "Crear"
 
-#: templates/admin/index.html:35 templates/registration/login.html:47
+#: templates/admin/index.html:35
+#: templates/registration/change_lenguaje.html:29
 msgid "Change"
 msgstr "Modificar"
 
@@ -76,6 +77,143 @@ msgstr "No habilitado"
 msgid "Unknown content"
 msgstr "Contenido desconocido"
 
+#: templates/course/editcourse.html:6
+#, python-format
+msgid "Course %(coursename)s edit"
+msgstr "Edicion de curso %(coursename)s"
+
+#: templates/course/editcourse.html:9 templates/course/newcourse.html:10
+#: templates/practice/editpractice.html:11
+#: templates/practice/uploadpractice.html:11
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/course/editcourse.html:13 templates/teacher/teacher.html:21
+msgid "Practices"
+msgstr "Practicas"
+
+#: templates/course/editcourse.html:14
+msgid "New Practice"
+msgstr "Nueva Practica"
+
+#: templates/course/editcourse.html:18 templates/course/editcourse.html:52
+#: templates/delivery/listdelivery.html:13
+msgid "Uid"
+msgstr "Identificador"
+
+#: templates/course/editcourse.html:19
+msgid "Dead Line"
+msgstr "Fecha Entrega"
+
+#: templates/course/editcourse.html:20
+msgid "# Deliveries"
+msgstr "# Entregas"
+
+#: templates/course/editcourse.html:21
+msgid "Script"
+msgstr "Script"
+
+#: templates/course/editcourse.html:35
+msgid "no script"
+msgstr "no hay Script"
+
+#: templates/course/editcourse.html:41
+msgid "There are yet no Practices"
+msgstr "No hay practicas cargadas"
+
+#: templates/course/editcourse.html:46 templates/teacher/index.html:14
+#: templates/teacher/teacher.html:20
+msgid "Students"
+msgstr "Estudiantes"
+
+#: templates/course/editcourse.html:47
+msgid "New Student"
+msgstr "Nuevo Estudiante"
+
+#: templates/course/editcourse.html:48
+msgid "Suscription"
+msgstr "Suscripciones"
+
+#: templates/course/editcourse.html:53
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/course/editcourse.html:54
+msgid "Email"
+msgstr "Correo Electronico"
+
+#: templates/course/editcourse.html:66
+msgid "There are yet no Students"
+msgstr "No hay estudiantes cargados"
+
+#: templates/course/editcourse.html:71 templates/course/newcourse.html:11
+#: templates/delivery/listdelivery.html:41
+#: templates/practice/editpractice.html:12
+#: templates/practice/uploadpractice.html:14
+msgid "back"
+msgstr "Regresar"
+
+#: templates/course/newcourse.html:7 templates/teacher/index.html:10
+msgid "New Course"
+msgstr "Nuevo Curso"
+
+#: templates/delivery/listdelivery.html:7
+#, python-format
+msgid "Deliveries of practice %(practice)s"
+msgstr "Entregas de la practica %(practice)s"
+
+#: templates/delivery/listdelivery.html:14
+msgid "Student Uid"
+msgstr "Identificador Estudiante"
+
+#: templates/delivery/listdelivery.html:15
+msgid "Student Name"
+msgstr "Nombre Estudiante"
+
+#: templates/delivery/listdelivery.html:16
+msgid "Deliver Date"
+msgstr "Fecha de Entrega"
+
+#: templates/delivery/listdelivery.html:17
+msgid "Delivery"
+msgstr "Entrega"
+
+#: templates/delivery/listdelivery.html:19
+msgid "Automatic Correction"
+msgstr "Correcciones Automaticas"
+
+#: templates/delivery/listdelivery.html:29
+msgid "Download"
+msgstr "Descargar"
+
+#: templates/delivery/listdelivery.html:30
+msgid "Correction"
+msgstr "Corregir"
+
+#: templates/delivery/listdelivery.html:35
+msgid "There are yet no deliveries"
+msgstr "No hay entregas cargadas"
+
+#: templates/practice/editpractice.html:8
+msgid "Edit Practice"
+msgstr "Editar Practica"
+
+#: templates/practice/uploadpractice.html:8
+msgid "Upload New Practice"
+msgstr "Subir Nueva Practica"
+
+#: templates/practice/uploadpractice.html:12
+msgid "Reset"
+msgstr "Limpiar"
+
+#: templates/registration/change_lenguaje.html:23
+msgid "Select Lenguaje"
+msgstr "Seleccione Idioma"
+
+#: templates/registration/login.html:14
+msgid "Login"
+msgstr "Ingresar"
+
 #: templates/registration/login.html:20
 msgid "Your username and password didn't match, please try again."
 msgstr ""
@@ -94,37 +232,33 @@ msgstr "Contraseña"
 msgid "login"
 msgstr "Ingresar"
 
-#: templates/registration/login.html:41
-msgid "Select Idioms"
-msgstr "Seleccionar Idioma"
-
-#: templates/registration/login.html:52
+#: templates/registration/login.html:39
 msgid "New to ADFS?"
 msgstr "Nuevo en SEAL?"
 
-#: templates/registration/login.html:52
+#: templates/registration/login.html:39
 msgid "Registrate"
 msgstr "Registrate"
 
-#: templates/registration/login.html:54
+#: templates/registration/login.html:41
 msgid "Forgot your Password?"
 msgstr "Perdiste tu contraseña?"
 
-#: templates/registration/login.html:54
+#: templates/registration/login.html:41
 msgid "Recovery"
 msgstr "Recuperala"
 
-#: templates/teacher/index.html:10
-msgid "New Course"
-msgstr "Nuevo Curso"
+#: templates/registration/login.html:43
+msgid "Change Lenguaje"
+msgstr "Seleccione Idioma"
+
+#: templates/registration/login.html:43
+msgid "Click Here"
+msgstr "Click Aqui"
 
 #: templates/teacher/index.html:13 templates/teacher/teacher.html:22
 msgid "Courses"
 msgstr "Cursos"
-
-#: templates/teacher/index.html:14 templates/teacher/teacher.html:20
-msgid "Students"
-msgstr "Estudiantes"
 
 #: templates/teacher/index.html:24
 msgid "There are yet no courses"
@@ -145,10 +279,6 @@ msgstr "Desconectarse"
 #: templates/teacher/teacher.html:19
 msgid "Home"
 msgstr "Inicio"
-
-#: templates/teacher/teacher.html:21
-msgid "Practices"
-msgstr "Practicas"
 
 #: templates/teacher/teacher.html:35
 msgid "You are not allowed in this section"

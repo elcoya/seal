@@ -1,16 +1,17 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 
 <form id='formuploadpractice' action='' method='post' enctype='multipart/form-data'>
 	{% csrf_token %}
 	<table>
-		UPLOAD NEW PRACTICE<br><br>
+		{% trans "Upload New Practice" %}<br><br>
 		{{ form.as_table }}
 	</table>
-	<input type='submit' value='Save' />
-	<input type='reset' value='Reset' /> 
+	<input type='submit' value='{% trans "Save" %}' />
+	<input type='reset' value='{% trans "Reset" %}' /> 
 	
-<footer><a href="/teacher/course/editcourse/{{ idcourse }}">back</a></footer>
+<footer><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "back" %}</a></footer>
 </form>
 
 {% endblock %}

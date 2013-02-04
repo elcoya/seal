@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% comment %}
+Page to change lengauje
+{% endcomment %}
+
+{% block addl_styles %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css" />
+{% endblock %}
+
+{% block head %}
+<br />
+<title>SEAL | Change Lenguaje</title>
+{% endblock %}
+{% block subtitle %} Change Lenguaje {% endblock %}
+{% block body %}
+
+<form action="/i18n/setlang/" method="post">
+	<div class="content" >
+		{% csrf_token %}
+		<input name="next" type="hidden" value="/" />
+		{% trans 'Select Lenguaje' %}
+		<select name="language" id="language">
+			{% for lang in LANGUAGES %}
+			<option value="{{ lang.0 }}">{{ lang.1 }}</option>
+			{% endfor %}
+		</select>
+		<input type="submit" value="{% trans 'Change'%}"/>
+	</div>
+</form>
+<footer><a href="/">{% trans "back" %}</a></footer>
+
+{% endblock %}

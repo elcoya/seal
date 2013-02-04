@@ -11,7 +11,7 @@ Main page to authenticate users.
 {% block head %}
 <title>SEAL | Login</title>
 {% endblock %}
-{% block subtitle %} Login {% endblock %}
+{% block subtitle %}{% trans "Login" %} {% endblock %}
 {% block body %}
 
 <div class="content" >
@@ -34,23 +34,12 @@ Main page to authenticate users.
 		<input type="hidden" name="next" value="{{ next }}" />
 		<input type="submit" value="{% trans 'login' %}" style="margin: 5px 0 5px 80px; width: 60px; " />
 	</form>
-
-	<form action="/i18n/setlang/" method="post">
-		{% csrf_token %}
-		<input name="next" type="hidden" value="/" />
-		{% trans 'Select Idioms' %}
-		<select name="language">
-			{% for lang in LANGUAGES %}
-			<option value="{{ lang.0 }}">{{ lang.1 }}</option>
-			{% endfor %}
-		</select>
-		<input type="submit" value="{% trans 'Change'%}"/>
-	</form>
-
 </div>
 
 <p class="registrate" > {% trans "New to ADFS?" %} <a href="/registration">{% trans "Registrate" %}</a>!
 </p>
 <p class="registrate" > {% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "Recovery" %}</a>
+</p>
+<p class="registrate" > {% trans "Change Lenguaje" %} <a href="/changelenguaje">{% trans "Click Here" %}</a>
 </p>
 {% endblock %}

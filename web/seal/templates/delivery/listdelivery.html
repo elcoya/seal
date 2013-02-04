@@ -1,20 +1,22 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 <body>
 	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 		<div style="clear: none; width: 50%; float: left;">
-			Deliveries of practice {{ practice.uid }} <br><br>
+			{% blocktrans with practice.uid as practice %}Deliveries of practice {{ practice }}{% endblocktrans %}
+		<br><br>
 		</div>
 		<table style="width: 100%;">
 			<thead style="text-align: center; ">
 				<tr>
-					<td>Uid</td>
-					<td>Student Uid</td>
-					<td>Student Name</td>
-					<td>Deliver Date</td>
-					<td>Delivery</td>
+					<td>{% trans "Uid" %}</td>
+					<td>{% trans "Student Uid" %}</td>
+					<td>{% trans "Student Name" %}</td>
+					<td>{% trans "Deliver Date" %}</td>
+					<td>{% trans "Delivery" %}</td>
 					<td>&nbsp;</td>
-					<td>Automatic Correction</td>
+					<td>{% trans "Automatic Correction" %}</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,18 +26,18 @@
 					<td style="text-align: center; ">{{ delivery.student.uid }}</td>
 					<td style="text-align: center; ">{{ delivery.student.name }}</td>					
 					<td style="text-align: center; ">{{ delivery.deliverDate }}</td>
-					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">Download</a></td>
-					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}">Correction</a></td>
+					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %}</a></td>
+					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}">{% trans "Correction" %}</a></td>
 					<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>
 				</tr>
 				{% empty %}
 				<tr>
-					<td colspan="4" style="text-align: center; ">There are yet no deliveries</td>
+					<td colspan="4" style="text-align: center; ">{% trans "There are yet no deliveries" %}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
-	<a href="/teacher/course/editcourse/{{practice.course_id}}">back</a>
+	<a href="/teacher/course/editcourse/{{practice.course_id}}">{% trans "back" %}</a>
 </body>
 {% endblock %}

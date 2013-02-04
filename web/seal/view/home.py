@@ -138,3 +138,7 @@ def sendmail(user, passw, subject, body):
 def random_pass_generate():
     newpass = User.objects.make_random_password(length=LENGTHPASSWORD)
     return newpass
+
+def change_lenguaje(request):
+    return render(request,'registration/change_lenguaje.html')
+    

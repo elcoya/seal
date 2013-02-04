@@ -1,23 +1,24 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 <form id='formeditcoruse' action='' method='post'>
 	{% csrf_token %}
-	<div>Course {{course.name}} edit</div>
+	<div>{% blocktrans with course.name as coursename %}Course {{coursename}} edit{% endblocktrans %}</div>
 	<table style="margin: 20px 0;">
 		{{ form.as_table }}
-		<tr><td colspan="2" style="text-align: right; "><input type='submit' value='Save' /></td></tr>
+		<tr><td colspan="2" style="text-align: right; "><input type='submit' value='{% trans "Save" %}' /></td></tr>
 	</table>	
 </form>
 <div style="width: 800px; margin: auto; padding: 15px 0; clear: both;" >
-	<div style="clear: none; width: 50%; float: left;">Practices</div>
-	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/practices/newpractice/{{ idcourse }}" >New Practice</a></div>
+	<div style="clear: none; width: 50%; float: left;">{% trans "Practices" %}</div>
+	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/practices/newpractice/{{ idcourse }}" >{% trans "New Practice" %}</a></div>
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
 			<tr>
-				<td>Uid</td>
-				<td>Dead Line</td>
-				<td># Deliveries</td>
-				<td>Script</td>
+				<td>{% trans "Uid" %}</td>
+				<td>{% trans "Dead Line" %}</td>
+				<td>{% trans "# Deliveries" %}</td>
+				<td>{% trans "Script" %}</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,26 +32,26 @@
 			    		{% if dict.script %}
 			    			{{ dict.script }}
 			    		{% else %}
-			    			no script
+			    			{% trans "no script" %}
 			    		{% endif %}
 		    		</a>
 		    	</td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="4" style="text-align: center; ">There are yet no Practices</td></tr>
+		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Practices" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>
 	<br><br>
-	<div style="clear: none; width: 50%; float: left;">Students</div>
-	<div style="clear: none; text-align: right; width: 25%; float: left;"><a href="/teacher/students/newstudent/{{ idcourse }}" >New Student</a></div>
-	<div style="clear: none; text-align: right; width: 25%; float: left;"><a href="/teacher/suscription/list/{{ idcourse }}" >Suscription</a></div>
+	<div style="clear: none; width: 50%; float: left;">{% trans "Students" %}</div>
+	<div style="clear: none; text-align: right; width: 25%; float: left;"><a href="/teacher/students/newstudent/{{ idcourse }}" >{% trans "New Student" %}</a></div>
+	<div style="clear: none; text-align: right; width: 25%; float: left;"><a href="/teacher/suscription/list/{{ idcourse }}" >{% trans "Suscription" %}</a></div>
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
 			<tr>
-				<td>Uid</td>
-				<td>Name</td>
-				<td>Email</td>
+				<td>{% trans "Uid" %}</td>
+				<td>{% trans "Name" %}</td>
+				<td>{% trans "Email" %}</td>
 			</tr>
 		</thead>
 		
@@ -62,10 +63,10 @@
 		    	<td style="width: 33%; text-align: center; ">{{ student.email }}</td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="4" style="text-align: center; ">There are yet no Students</td></tr>
+		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Students" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>
 </div>
-<footer><a href="/teacher">back</a></footer>
-{% endblock %}
+<footer><a href="/teacher">{% trans "back" %}</a></footer>
+{% endblock %}S

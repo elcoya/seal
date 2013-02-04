@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^changepassw/?$', home.change_password),
     url(r'^login/?$', 'django.contrib.auth.views.login'),
     url(r'^recoverypass/?$', home.recovery_pass),
+    url(r'^changelenguaje/?$', home.change_lenguaje),
     url(r'^i18n/', include('django.conf.urls.i18n'))
 )
 
