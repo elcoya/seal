@@ -1,4 +1,5 @@
 {% extends "undergraduate/undergraduate.html" %}
+{% load i18n %}
 {% comment %}
 
 Main page of the Undergraduate's portal.
@@ -12,7 +13,7 @@ Undergraduate
 {% block content %}
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
-			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >Courses</td></tr>
+			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >{% trans "Courses" %}</td></tr>
 		</thead>
 		<tbody>
 		{% for dict in table_contents %}
@@ -20,10 +21,10 @@ Undergraduate
 		    	<td style="width: 70%; text-indent: 15px; " ><a href="/undergraduate/practice/list/{{dict.pk}}">{{ dict.name }}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="2" style="text-align: center; ">There are yet no courses in which you are enrolled</td></tr>
+		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no courses in which you are enrolled" %}</td></tr>
 		{% endfor %}
 		</tbody>
 		
 	</table>
-	<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/undergraduate/suscription/" >Suscription</a></div> 
+	<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/undergraduate/suscription/" >{% trans "Suscription" %}</a></div> 
 {% endblock %}

@@ -10,10 +10,9 @@ Page to change lengauje
 {% endblock %}
 
 {% block head %}
-<br />
 <title>SEAL | Change Lenguaje</title>
 {% endblock %}
-{% block subtitle %} Change Lenguaje {% endblock %}
+{% block subtitle %}{% trans "Change Lenguaje" %} {% endblock %}
 {% block body %}
 
 <form action="/i18n/setlang/" method="post">

@@ -1,18 +1,19 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 
 <form id='formpracticescript' action='' method='post' enctype="multipart/form-data">
 	{% csrf_token %}
 	<table>
-		Upload Script<br><br>
+		{% trans "Upload Script" %}<br><br>
 		{{ form.as_table }}
 	</table>
-	<input type='submit' value='Save' />
-	<div><a href="/teacher/course/editcourse/{{ idcourse }}">back</a></div>
+	<input type='submit' value='{% trans "Save" %}' />
+	<div><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "back" %}</a></div>
 </form>	
 
 {% if practice.script_set.all %}
-	<div style="padding: 20px 0 5px;">Script content</div>
+	<div style="padding: 20px 0 5px;">{% trans "Script content" %}</div>
 	<div class="script-container" >
 		<pre>{{ script_text }}</pre>
 	</div>

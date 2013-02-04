@@ -1,33 +1,34 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 <body>
 	<div style="width: 800px; text-align: left; margin: auto;">
 		<div>
 			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
-				<div style="clear: none; width: 50%; float: left;">Students List</div>
+				<div style="clear: none; width: 50%; float: left;">{% trans "Students List" %}</div>
 			</div>
 				<table style="width: 100%;">
 					<tbody>
 					{% for student in students %}
 					    <tr><td>{{ student.name }}</a></td></tr>
 					{% empty %}
-					    <tr><td>0 student</td></tr>
+					    <tr><td>{% trans "0 student" %}</td></tr>
 					{% endfor %}
 					</tbody>
 					{% if students|length > 0 %}
 						<tfoot style="text-align: center;"><tr>
 						    <td class="pagination">
-						    		<a href="?page=1">first</a>
+						    		<a href="?page=1">{% trans "first" %}</a>
 						        {% if students.has_previous %}
-							            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+							            <a href="?page={{ contacts.previous_page_number }}">{% trans "previous" %}</a>
 						        {% endif %}
 						        <span class="current">
 						            Page {{ students.number }} of {{ students.paginator.num_pages }}.
 						        </span>
 						        {% if students.has_next %}
-							            <a href="?page={{ contacts.next_page_number }}">next</a>
+							            <a href="?page={{ contacts.next_page_number }}">{% trans "next" %}</a>
 						        {% endif %}
-						        	<a href="?page={{ courses.paginator.num_pages }}">last</a>
+						        	<a href="?page={{ courses.paginator.num_pages }}">{% trans "last" %}</a>
 						    </td>
 						</tr></tfoot>
 					{% endif %}

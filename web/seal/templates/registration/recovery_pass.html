@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% comment %}
 
 Main page to recovery password.
@@ -11,11 +12,11 @@ Main page to recovery password.
 {% block head %}
 <title>SEAL | Recovery Password</title>
 {% endblock %}
-{% block subtitle %}Recovery Password{% endblock %}
+{% block subtitle %}{% trans "Recovery Password" %}{% endblock %}
 {% block body %}
 <nav>
 	<p>
-		<a href="/">Login</a>
+		<a href="/">{% trans "Login" %}</a>
 	</p>
 </nav>
 <div class="content" >
@@ -24,7 +25,7 @@ Main page to recovery password.
 		<table>
 			{{ form.as_table }}
 		</table>
-		<input type="submit" value="Recover" style="margin: 5px 0 5px 205px; width: 70px; " />
+		<input type="submit" value="{% trans 'Recover' %}" style="margin: 5px 0 5px 205px; width: 70px; " />
 	</form>
 </div>
 {% endblock %}
