@@ -15,7 +15,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from seal.utils.managemail import Managemail
+from seal.model.mail import Mail
 from seal.forms.changepass import ChangePasswForm
 
 LENGTHPASSWORD = 8
@@ -79,7 +79,8 @@ def register(request):
                 student.uid = form.data['uid']
                 student.email = form.data['email']
                 student.save()
-                sendmail(user, form.data['passwd'], SUBJECTMAIL, BODYMAIL)
+                mail = Mail()
+                mail.save_mail(SUBJECTMAIL, BODYMAIL % (user.username, form.data['passwd']), user.email)
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
         else:
             return render_to_response('registration/register.html',
@@ -107,7 +108,8 @@ def recovery_pass(request):
             password = random_pass_generate()
             user.set_password(password)
             user.save()
-            sendmail(user, password, SUBJECTMAILRECOVERY, BODYMAILRECOVERY)
+            mail = Mail()
+            mail.save_mail(SUBJECTMAILRECOVERY, BODYMAILRECOVERY % (user.username, password), user.email)
             return render(request, 'registration/recovery-success.html', context_instance=RequestContext(request))
     else:
         form = RecoveryForm()
@@ -121,20 +123,14 @@ def change_password(request):
             user = User.objects.get(username=form.data['uid'])
             user.set_password(form.data['passwd'])
             user.save()
-            sendmail(user, form.data['passwd'], SUBJECTMAILCHANGE, BODYMAILCHANGE)
+            mail = Mail()
+            mail.save_mail(SUBJECTMAILCHANGE, BODYMAILCHANGE % (user.username, form.data['passwd']), user.email)
             return render(request, 'registration/change-success.html', context_instance=RequestContext(request))
     else:
         form = ChangePasswForm()
     return render(request, 'registration/change_pass.html',
                   {'form': form, }, context_instance=RequestContext(request))
-        
-def sendmail(user, passw, subject, body):
-    managemail = Managemail()
-    managemail.set_body(body % (user.username, passw))
-    managemail.set_subjet(subject)
-    managemail.set_recipient(user.email)
-    managemail.sendmail()
-    
+           
 def random_pass_generate():
     newpass = User.objects.make_random_password(length=LENGTHPASSWORD)
     return newpass

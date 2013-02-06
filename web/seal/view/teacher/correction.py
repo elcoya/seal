@@ -5,12 +5,12 @@ from django.template.context import RequestContext
 from seal.forms.correction import CorrectionForm
 from seal.model import Correction
 from django.contrib.auth.decorators import login_required
-from seal.utils.managemail import Managemail
+from seal.model.mail import Mail
 
 PATHREDIRECTINDEX = "/teacher/correction/edit/%s"
 PATHOK = "/teacher/delivery/list/%s"
 SUBJECTEMAIL = "You have a correction to see on SEAL"
-BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s"
+BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s. Coment: %s. Grade: %s"
 
 @login_required
 def index(request, iddelivery):  
@@ -24,7 +24,8 @@ def index(request, iddelivery):
             form = CorrectionForm(request.POST, instance=correction)
             if (form.is_valid()):
                 form.save()
-                sendmail(delivery)
+                mail = Mail()
+                mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.email )
                 return HttpResponseRedirect(PATHOK % str(delivery.practice.pk))
         else:
             form = CorrectionForm()
@@ -38,17 +39,12 @@ def editcorrection(request, idcorrection):
         if (form.is_valid()):
             form_edit = form.save(commit=False)
             form_edit.save()
-            sendmail(correction.delivery)
+            mail = Mail()
+            mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.email )
             return HttpResponseRedirect(PATHOK % str(correction.delivery.practice.pk))
     else:    
         form = CorrectionForm(instance=correction)
     return render(request, 'correction/index.html', 
                   {'form': form, 'delivery': correction.delivery}, 
                   context_instance=RequestContext(request))
-
-def sendmail(delivery):
-    managemail = Managemail()
-    managemail.set_subjet(SUBJECTEMAIL)
-    managemail.set_body(BODYEMAIL % (str(delivery.pk), delivery.practice.uid))
-    managemail.set_recipient(delivery.student.email)
-    managemail.sendmail()
+    
