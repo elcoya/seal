@@ -15,6 +15,10 @@ scriptPath = pathproject + "feature_test/data/"
 
 base_url = 'http://localhost:8000/'
 
+@when('I am in the index page')
+def step(context):
+    context.browser.get(base_url)
+
 @when('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
     form = context.browser.find_element_by_tag_name('form')
@@ -29,6 +33,11 @@ def step(context, loginData):
     form.find_element_by_name('username').send_keys(splitted[0])
     form.find_element_by_name('password').send_keys(splitted[1])
     form.submit()
+
+@when('I logout')
+def step(context):
+    a = context.browser.find_element_by_link_text('logout')
+    a.click()
 
 @when('I enter in the course list')
 def step(context):

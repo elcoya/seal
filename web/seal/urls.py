@@ -1,4 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
+#import serializer
+from rest_framework.urlpatterns import format_suffix_patterns
+from seal.view import serializer
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -28,4 +31,17 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
     url(r'^undergraduate/?', include('view.undergraduate.urls')),
+)
+
+#url serializer
+urlpatterns += patterns('',
+    url(r'^mailserializer/$', serializer.MailList.as_view(), name='user-list'),
+)
+
+# Format suffixes
+urlpatterns += format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
+
+# Default login/logout views
+urlpatterns += patterns('',
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )

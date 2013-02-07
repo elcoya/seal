@@ -5,6 +5,8 @@ from seal.model import Student, Practice, Delivery
 import re
 from seal.model.course import Course
 
+base_url = 'http://localhost:8000/'
+
 @then('I should see "{text1}" before "{text2}"')
 def step(context, text1, text2):
     trs = context.browser.find_elements(By.TAG_NAME, "tr")
@@ -45,6 +47,10 @@ def step(context, text):
 def step(context, text):
     titlebrowser = context.browser.title 
     assert titlebrowser == text
+
+@then('I am in the index page')
+def step(context):
+    context.browser.get(base_url) 
  
 @then('I logout')
 def step(context):

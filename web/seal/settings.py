@@ -83,6 +83,11 @@ STATIC_URL = '/static/'
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
+
 import os
 project_base_path = os.path.realpath(os.path.dirname(__file__))
 # Additional locations of static files
@@ -147,6 +152,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'rest_framework',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'model',
