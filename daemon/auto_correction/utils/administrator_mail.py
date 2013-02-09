@@ -47,6 +47,12 @@ class AdministratorMail(object):
         session.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
         return(session)         
 
+    def delete_mail(self, mail):
+        url_to_delete = HTTP_SERIALIZER + str(mail['id'])
+        self.log.debug("Sending delete request for mail id %d", mail['id'])
+        response = requests.delete(url_to_delete, auth=(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS))
+        self.log.info("Delete response: %s", str(response))
+       
     def send_mails(self):     
         mails = self.request_pending_mails()
         if (len(mails) == 0):
@@ -60,3 +66,6 @@ class AdministratorMail(object):
                 session.sendmail(EMAIL_HOST_USER, recipient, mail_prepared)
                 session.quit()
                 self.log.info("Mail sent to " + recipient + " subject " + subject)
+                self.delete_mail(mail)
+                
+                
