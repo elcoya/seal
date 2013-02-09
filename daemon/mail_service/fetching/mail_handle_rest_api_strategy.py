@@ -33,7 +33,8 @@ class MailHandleRESTAPIStrategy(MailFetchStrategy):
     def get_pending_mails(self):
         self.log.info("Request pending mails list")
         mail_request = self.requests.get(self.http_serializer, auth=(self.auth_user, self.auth_pass))
-        if (mail_request.status_code == MailHandleRESTAPIStrategy.HTTP_OK_RESPONSE):         
+        if (mail_request.status_code == MailHandleRESTAPIStrategy.HTTP_OK_RESPONSE):
+            self.log.debug("request content recived: %s", str(mail_request.content))
             mail_content = mail_request.content
             self.json_translator.json = mail_content
             return self.json_translator.get_mails_list()

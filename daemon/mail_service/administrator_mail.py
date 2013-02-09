@@ -35,7 +35,7 @@ class AdministratorMail(object):
         
     def send_mails(self):
         mails = self.mail_handle_strategy.get_pending_mails()
-        if (mails):
+        if (len(mails)==0):
             self.log.info("There ara not mails to be delivered")
         else:
             self.log.info("Found %d mails awaiting sending.", len(mails))
