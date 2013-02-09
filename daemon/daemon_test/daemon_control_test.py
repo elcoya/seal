@@ -8,7 +8,7 @@ from auto_correction.daemon_control import LoopRunner
 from mock import Mock
 
 
-class Test(unittest.TestCase):
+class TestLoopRunner(unittest.TestCase):
 
 
     def testLoopRunnerMustInvokeAutomaticCorrectionMethodRunWhileItsRunning(self):

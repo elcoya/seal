@@ -49,7 +49,7 @@ class LoggerManager:
             logger = logging.getLogger(logname)
         else:
             logger = logging.getLogger()
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel(LoggerManager.LOG_LEVEL)
         # create file handler which logs the messages
         if (LoggerManager.LOGGER_FH is None):
             if(not os.path.isdir(LoggerManager.LOGFILE_PATH)):
@@ -61,7 +61,7 @@ class LoggerManager:
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
             fh.setFormatter(formatter)
             # add the handler to the logger
-            logger.addHandler(fh)
         else:
             fh = LoggerManager.LOGGER_FH
+        logger.addHandler(fh)
         return logger

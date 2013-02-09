@@ -7,7 +7,7 @@ from seal import settings #your project settings file
 from django.core.management import setup_environ #environment setup function
 import argparse
 from auto_correction.log.logger_manager import LoggerManager
-from auto_correction.utils.administrator_mail import AdministratorMail
+from mail_service.administrator_mail import AdministratorMail
 setup_environ(settings)
 
 from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
