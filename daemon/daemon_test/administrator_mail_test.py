@@ -17,10 +17,10 @@ class TestMailAdministrator(unittest.TestCase):
         mail_fetch_strategy_mock = Mock()
         pending_mails = (Mock(), Mock(), Mock())
         mail_fetch_strategy_mock.get_pending_mails.return_value = pending_mails
-        mail_administrator.mail_fetch_strategy = mail_fetch_strategy_mock
+        mail_administrator.mail_handle_strategy = mail_fetch_strategy_mock
         mail_administrator.session_helper = session_helper_mock
         
-        mail_administrator.send_mails_2()
+        mail_administrator.send_mails()
         
         session_helper_mock.get_server_session.assert_called()
         session_helper_mock.close_server_session.assert_called()

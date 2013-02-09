@@ -9,7 +9,7 @@ import requests, json
 from mail_service.util.mail import Mail
 from mail_service.fetching.json_to_mail_translator import JSONToMailTranslator
 
-class MailFetchFromRESTAPIStrategy(MailFetchStrategy):
+class MailHandleRESTAPIStrategy(MailFetchStrategy):
     """
     Implementation of the fetching strategy for mails waiting to be sent through the REST API
     """
@@ -33,8 +33,13 @@ class MailFetchFromRESTAPIStrategy(MailFetchStrategy):
     def get_pending_mails(self):
         self.log.info("Request pending mails list")
         mail_request = self.requests.get(self.http_serializer, auth=(self.auth_user, self.auth_pass))
-        if (mail_request.status_code == MailFetchFromRESTAPIStrategy.HTTP_OK_RESPONSE):         
+        if (mail_request.status_code == MailHandleRESTAPIStrategy.HTTP_OK_RESPONSE):         
             mail_content = mail_request.content
             self.json_translator.json = mail_content
             return self.json_translator.get_mails_list()
-
+    
+    def request_mail_deletion(self, mail):
+        self.log.debug("Sending delete request for mail id %d", mail.id)
+        #response = requests.delete(url_to_delete, auth=(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS))
+        return self.requests.delete(self.http_serializer + str(mail.id), auth=(self.auth_user, self.auth_pass))
+        
