@@ -14,7 +14,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 	 	  And I submit the form
 	 	  And I logout
 	 	  And I log in as "seal" "seal"
-	 	  And I click in the "Mails to send" link
+	 	  And I click in the "Mails to send Serializer" link
 	 	 Then I should see "You have a correction to see on SEAL"
 	 	  And I am in the index page
 	 	  And I logout
@@ -27,7 +27,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 		  And I submit the form
 		  And I am in the index page
   	      And I log in as "seal" "seal"
-	 	  And I click in the "Mails to send" link
+	 	  And I click in the "Mails to send Serializer" link
 	 	 Then I should see "Recovery SEAL Successful"
 	 	  And I am in the index page
 	 	  And I logout
@@ -41,7 +41,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 		  And I am in the index page
 		  And I logout
   	      And I log in as "seal" "seal"
-	 	  And I click in the "Mails to send" link
+	 	  And I click in the "Mails to send Serializer" link
 	 	 Then I should see "Change SEAL password Successful"
 	 	  And I am in the index page
 	 	  And I logout

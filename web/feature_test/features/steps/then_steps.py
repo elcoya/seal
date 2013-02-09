@@ -30,6 +30,11 @@ def impl(context, text):
     body = context.browser.find_element_by_tag_name('body')
     assert text not in body.text
 
+@then('I should see \'{text}\'')
+def impl(context, text):
+    body = context.browser.find_element_by_tag_name('body')
+    assert text not in body.text
+
 @then('I should see pattern "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
