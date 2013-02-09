@@ -37,6 +37,18 @@ urlpatterns += patterns('',
 urlpatterns += patterns('',
     url(r'^mailserializer/$', serializer.MailList.as_view(), name='mail-list'),
     url(r'^mailserializer/(?P<pk>\d+)/?$', serializer.MailDetail.as_view(), name='mail-detail'),
+    
+    url(r'^automaticcorrectionserializer/$', serializer.AutomaticCorrectionList.as_view(), name='automatic_correction-list'),
+    url(r'^automaticcorrectionserializer/(?P<pk>\d+)/?$', serializer.AutomaticCorrectionDetail.as_view(), name='automatic_correction-detail'),
+    
+    url(r'^deliveryserializer/$', serializer.DeliveryList.as_view(), name='delivery-list'),
+    url(r'^deliveryserializer/(?P<pk>\d+)/?$', serializer.DeliveryDetail.as_view(), name='delivery-detail'),
+    
+    url(r'^practiceserializer/$', serializer.PracticeList.as_view(), name='practice-list'),
+    url(r'^practiceserializer/(?P<pk>\d+)/?$', serializer.PracticeDetail.as_view(), name='practice-detail'),
+    
+    url(r'^scriptserializer/$', serializer.ScriptList.as_view(), name='script-list'),
+    url(r'^scriptceserializer/(?P<pk>\d+)/?$', serializer.ScriptDetail.as_view(), name='script-detail'),
 )
 
 # Format suffixes
