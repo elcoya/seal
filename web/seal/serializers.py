@@ -8,10 +8,9 @@ from rest_framework import serializers
 from seal.model.mail import Mail
 
 
-class MailSerializer(serializers.HyperlinkedModelSerializer):
-     
+class MailSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Mail
-        fields = ('subject', 'body', 'recipient', 'status')
-
+        fields = ('id', 'subject', 'body', 'recipient')
         

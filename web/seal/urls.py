@@ -35,7 +35,8 @@ urlpatterns += patterns('',
 
 #url serializer
 urlpatterns += patterns('',
-    url(r'^mailserializer/$', serializer.MailList.as_view(), name='user-list'),
+    url(r'^mailserializer/$', serializer.MailList.as_view(), name='mail-list'),
+    url(r'^mailserializer/(?P<pk>\d+)/?$', serializer.MailDetail.as_view(), name='mail-detail'),
 )
 
 # Format suffixes
