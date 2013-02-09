@@ -10,12 +10,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sealteacher@gmail.com'
-EMAIL_HOST_PASSWORD = 'sealtpprof'
-EMAIL_PORT = 587
-
 #Key for captcha
 RECAPTCHA_PUB_KEY = "6LcuRdkSAAAAAOeCTPJ-FMf19ZOvVqRxdQjWgERE"
 RECAPTCHA_PRIVATE_KEY = "6LcuRdkSAAAAAAnez1roxSgBbTfQ_iPxPhOnv5vP"

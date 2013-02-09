@@ -7,6 +7,7 @@ from seal import settings #your project settings file
 from django.core.management import setup_environ #environment setup function
 import argparse
 from auto_correction.log.logger_manager import LoggerManager
+from auto_correction.utils.administrator_mail import AdministratorMail
 setup_environ(settings)
 
 from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
@@ -24,6 +25,7 @@ class LoopRunner():
         self.pidfile_path =  '/tmp/foo.pid'
         self.pidfile_timeout = 5
         self.automatic_correction_runner = AutomaticCorrectionRunner()
+        self.administrator_mail = AdministratorMail()
     
     def stall_loop(self, start_timestamp, finish_timestamp):
         delta = finish_timestamp - start_timestamp
@@ -42,6 +44,7 @@ class LoopRunner():
         self.log = LoggerManager().get_new_logger("daemon control")
         self.log.info("Daemon's game loop started.")
         while True:
+            self.administrator_mail.send_mails()
             start_timestamp = datetime.today()
             
             result = self.automatic_correction_runner.run()
@@ -50,6 +53,8 @@ class LoopRunner():
                           result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
             finish_timestamp = datetime.today()
             self.stall_loop(start_timestamp, finish_timestamp)
+           
+
 
 parser = argparse.ArgumentParser(description='Starts or stops the seal daemon.')
 parser.add_argument('command', metavar='start/stop', 
