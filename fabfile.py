@@ -71,11 +71,11 @@ def get_mysql_bash(user=None, password=None):
     if(user is None):
         user = USER
     if(password is None):
-        passwd = PASSWORD
+        password = PASSWORD
     
     local_cmd = "mysql -u " + user
-    if (passwd != ""):
-        local_cmd += " -p'" + passwd + "'"
+    if (password != ""):
+        local_cmd += " -p'" + password + "'"
     return local_cmd
 
 def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None, user=None, password=None):
@@ -87,12 +87,12 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None, user=None
     if(user is None):
         user = USER
     if(password is None):
-        passwd = PASSWORD
+        password = PASSWORD
     local_cmd = "mysql -e '" + sql_sentence + "' -u " + user
     if (database is not None and database != ""):
         local_cmd += " -D " + database + " "
-    if (passwd != ""):
-        local_cmd += " -p'" + passwd + "' "
+    if (password != ""):
+        local_cmd += " -p'" + password + "' "
     return local_cmd
 
 def create_super_user():
