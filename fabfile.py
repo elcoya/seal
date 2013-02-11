@@ -61,29 +61,33 @@ def kill_server(context):
 
 
 # Database access utility funtions
-def get_mysql_bash():
+def get_mysql_bash(user=None, password=None):
     """
     Builds the string that should be used to call a command over the database.
     It is used to include the username and password to access the service. This
     command would allow you to connect to de database, if you want to invoke a
     given sql command, use get_mysql_bash_cmd.
     """
-    user = USER
-    passwd = PASSWORD
+    if(user is None):
+        user = USER
+    if(password is None):
+        passwd = PASSWORD
     
     local_cmd = "mysql -u " + user
     if (passwd != ""):
         local_cmd += " -p'" + passwd + "'"
     return local_cmd
 
-def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None):
+def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None, user=None, password=None):
     """
     Builds the string that should be used to call a command over the database
     with a given sql command. It uses the configuration given in the local.conf
     file.
     """
-    user = USER
-    passwd = PASSWORD
+    if(user is None):
+        user = USER
+    if(password is None):
+        passwd = PASSWORD
     local_cmd = "mysql -e '" + sql_sentence + "' -u " + user
     if (database is not None and database != ""):
         local_cmd += " -D " + database + " "
@@ -123,7 +127,7 @@ def create_and_prepare_db(context = None):
     """
     print("[fabric] creating and preparing database.")
     print("Travis location detected. Seting up database layout...")
-    cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;")
+    cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;", user='root', password='')
     local(cmd)
     cmd = get_mysql_bash()
     local(cmd + " < build_files/ci_grant_privileges_in_travis_db.sql")
@@ -230,7 +234,7 @@ def runtravis():
 def start():
     print("[fabric] launching server instance.")
     set_pythonpath()
-    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
+    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open("output.txt", 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
 
