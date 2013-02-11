@@ -18,6 +18,8 @@ install:
   - pip install -q selenium
   - pip install -q coverage
   - pip install -q mock
+  - pip install -q djangorestframework
+  - pip install -q requests
 
 # command to run tests, e.g. python setup.py test
 script: fab runtravis
