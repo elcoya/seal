@@ -19,7 +19,8 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
                  http_automatic_correction_serializer=None, 
                  http_delivery_serializer=None,
                  http_practice_serializer=None,
-                 http_script_serializer=None):
+                 http_script_serializer=None,
+                 http_mail_serializer=None):
         """
         Constructor
         """
@@ -29,6 +30,7 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
         self.http_delivery_serializer = http_delivery_serializer
         self.http_practice_serializer = http_practice_serializer
         self.http_script_serializer = http_script_serializer
+        self.http_mail_serializer = http_mail_serializer
         self.auth_user = auth_user
         self.auth_pass = auth_pass
         
@@ -81,7 +83,17 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
         self.log.debug(response)
         self.log.debug(response.content)
         return response
-
+    
+    def save_mail(self, mail):
+        self.log.info("Posting mail result.")
+        data = {"recipient": mail.recipient,
+                "subject" : mail.subject,
+                "body" : mail.body}
+        self.log.debug("Mail data: %s", str(data))
+        response = self.requests.post(self.http_mail_serializer, data, auth=(self.auth_user, self.auth_pass))
+        self.log.debug(response.content)
+        return response
+    
 #        data = {"id": mail.id, 
 #                "recipient": mail.recipient, 
 #                "subject": "modified subject"}

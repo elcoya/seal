@@ -31,7 +31,7 @@ class LoggerManager:
             fh.setLevel(LoggerManager.LOG_LEVEL)
             LoggerManager.LOGGER_FH = fh
             # create formatter and add it to the handler
-            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
             fh.setFormatter(formatter)
             # add the handler to the logger
             logger.addHandler(fh)

@@ -10,11 +10,11 @@ class PublishResultsVisitorWeb(PublishResultsVisitor):
     
     """
     
-    HTTP_AUTOMATIC_CORRECTION_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
+    HTTP_MAIL_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
     
     def __init__(self, auth_user, auth_pass):
         self.log = LoggerManager().get_new_logger("result publication")
-        self.rest_api_helper = RestApiHelper(auth_user, auth_pass, PublishResultsVisitorWeb.HTTP_AUTOMATIC_CORRECTION_SERIALIZER)
+        self.rest_api_helper = RestApiHelper(auth_user, auth_pass, PublishResultsVisitorWeb.HTTP_MAIL_SERIALIZER)
     
     def visit(self, visitable):
         self.log.debug("publishing results...")

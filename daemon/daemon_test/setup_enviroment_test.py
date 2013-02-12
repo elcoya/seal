@@ -1,7 +1,7 @@
 import shutil
 from unittest.case import TestCase
 
-import ConfigParser, os
+import os
 from mock import Mock
 from auto_correction.preparation.setup_enviroment import SetupEnviroment
 from auto_correction.utils import managepath

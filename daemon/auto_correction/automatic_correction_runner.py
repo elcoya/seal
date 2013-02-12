@@ -5,6 +5,7 @@ from publication.publish_results_visitor_web import PublishResultsVisitorWeb
 from auto_correction.preparation.setup_enviroment import SetupEnviroment
 from auto_correction.utils import managepath
 from auto_correction.selection.automatic_correction_selection_strategy_through_rest_api import AutomaticCorrectionSelectionStrategyThroughRestApi
+from auto_correction.publication.publish_results_visitor_mail import PublishResultsVisitorMail
 
 HTTP_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
 SERIALIZER_AUTH_USER = 'seal'
@@ -28,7 +29,8 @@ class AutomaticCorrectionRunner():
         self.selection_strategy = AutomaticCorrectionSelectionStrategyThroughRestApi(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS)
         self.setup_enviroment = SetupEnviroment()
         self.run_script_command = RunScriptCommand()
-        self.publish_result_visitors = (PublishResultsVisitorWeb(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS), )
+        self.publish_result_visitors = (PublishResultsVisitorWeb(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS), 
+                                        PublishResultsVisitorMail(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS),)
     
     def clean_up_tmp_dir(self):
         shutil.rmtree(AutomaticCorrectionRunner.TMP_DIR, ignore_errors=True)
