@@ -4,6 +4,11 @@ from execution.run_script_command import RunScriptCommand
 from publication.publish_results_visitor_web import PublishResultsVisitorWeb
 from auto_correction.preparation.setup_enviroment import SetupEnviroment
 from auto_correction.utils import managepath
+from auto_correction.selection.automatic_correction_selection_strategy_through_rest_api import AutomaticCorrectionSelectionStrategyThroughRestApi
+
+HTTP_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
+SERIALIZER_AUTH_USER = 'seal'
+SERIALIZER_AUTH_PASS = 'seal'
 
 class AutomaticCorrectionRunner():
     """
@@ -20,10 +25,10 @@ class AutomaticCorrectionRunner():
     FAILED_RESULTS_KEY = "failed"
     
     def __init__(self):
-        self.selection_strategy = AutomaticCorrectionSelectionStrategyPendingAndRunnable()
+        self.selection_strategy = AutomaticCorrectionSelectionStrategyThroughRestApi(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS)
         self.setup_enviroment = SetupEnviroment()
         self.run_script_command = RunScriptCommand()
-        self.publish_result_visitors = (PublishResultsVisitorWeb(), )
+        self.publish_result_visitors = (PublishResultsVisitorWeb(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS), )
     
     def clean_up_tmp_dir(self):
         shutil.rmtree(AutomaticCorrectionRunner.TMP_DIR, ignore_errors=True)
@@ -36,7 +41,7 @@ class AutomaticCorrectionRunner():
         for pending_automatic_correction in pending_automatic_corrections:
             
             self.setup_enviroment.run(pending_automatic_correction, AutomaticCorrectionRunner.TMP_DIR)
-            self.run_script_command.set_script(pending_automatic_correction.delivery.practice.get_script().file.name)
+            self.run_script_command.set_script(pending_automatic_correction.script)
             script_result = self.run_script_command.execute()
             script_result.automatic_correction = pending_automatic_correction
             for visitor in self.publish_result_visitors:

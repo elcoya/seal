@@ -20,13 +20,12 @@ class SetupEnviroment():
         self.log.debug("cleaning up working directory...")
         shutil.rmtree(working_dir, ignore_errors=True)
         self.log.debug("preparing delivery files...")
-        self.prepare_files_strategy.zip = automatic_correction.delivery.file.name
+        self.prepare_files_strategy.zip = automatic_correction.delivery
         os.mkdir(working_dir)
         self.prepare_files_strategy.prepare_files(working_dir)
-        shutil.copy(automatic_correction.delivery.practice.get_script().file.name, 
-                    working_dir + "/" + os.path.basename(automatic_correction.delivery.practice.get_script().file.name))
+        shutil.copy(automatic_correction.script, working_dir + "/" + os.path.basename(automatic_correction.script))
         # We must ensure the script is runnable
-        process = subprocess.Popen(["chmod", "a+x", working_dir + "/" + os.path.basename(automatic_correction.delivery.practice.get_script().file.name)])
+        process = subprocess.Popen(["chmod", "a+x", working_dir + "/" + os.path.basename(automatic_correction.script)])
         process.wait()
         self.log.debug("enviroment set.")
         

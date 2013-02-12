@@ -26,6 +26,7 @@ class JSONToMailTranslator():
         mails_data_list = json.loads(self.json)['results']
         mails_list = []
         for mail_data in mails_data_list:
+            #self.log("Processing mail data: %s", mail_data)
             mail = Mail()
             mail.id = mail_data['id']
             mail.recipient = mail_data['recipient']

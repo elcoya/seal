@@ -8,12 +8,14 @@ from rest_framework import generics, reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from seal.serializers import MailSerializer, AutomaticCorrectionSerializer,\
-    DeliverySerializer, PracticeSerializer, ScriptSerializer
+    DeliverySerializer, PracticeSerializer, ScriptSerializer,\
+    RichAutomaticCorrectionSerializer
 from seal.model.mail import Mail
 from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.delivery import Delivery
 from seal.model.practice import Practice
 from seal.model.script import Script
+from seal.utils.rich_automatic_correction import RichAutomaticCorrection
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -60,6 +62,14 @@ class AutomaticCorrectionDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     model = AutomaticCorrection
     serializer_class = AutomaticCorrectionSerializer
+
+class RichAutomaticCorrectionList(generics.ListCreateAPIView):
+    """
+    API endpoint to list the automatic corrections enriched with the paths to the delivery file and
+    the script to run as automated correction.
+    """
+    queryset = AutomaticCorrection.objects.filter(status=0)
+    serializer_class = RichAutomaticCorrectionSerializer
     
 class DeliveryList(generics.ListCreateAPIView):
     """

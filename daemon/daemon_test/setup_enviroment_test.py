@@ -36,9 +36,8 @@ class TestSetupEnviroment(TestCase):
         strategy = Mock()
         setup_enviroment.prepare_files_strategy = strategy
         automatic_correction = Mock()
-        return_value = Mock()
-        return_value.file.name = TestSetupEnviroment.ORIGINAL_SCRIPT_FILE_PATH + TestSetupEnviroment.SCRIPT_FILE_NAME
-        automatic_correction.delivery.practice.get_script.return_value = return_value
+        return_value = TestSetupEnviroment.ORIGINAL_SCRIPT_FILE_PATH + TestSetupEnviroment.SCRIPT_FILE_NAME
+        automatic_correction.script = return_value
         
         setup_enviroment.run(automatic_correction, TestSetupEnviroment.DESTINATION_PATH)
         

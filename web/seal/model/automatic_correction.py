@@ -19,7 +19,7 @@ class AutomaticCorrection(models.Model):
     
     def __str__(self):
         """Stringify the AutomaticCorrection"""
-        return ("AutomaticCorrection | exit value: " + str(self.exit_value) + " - status: " + self.status)
+        return ("AutomaticCorrection | exit value: " + str(self.exit_value) + " - status: " + str(self.status))
     
     def get_status(self):
         """Returns a status raw value as a human readable value"""
@@ -28,4 +28,10 @@ class AutomaticCorrection(models.Model):
         except:
             status_string = AutomaticCorrection.STATUS_UNKNOWN
         return status_string
+    
+    def get_delivery_file(self):
+        return self.delivery.file.path
+    
+    def get_correction_script(self):
+        return self.delivery.practice.get_script().file.path
     

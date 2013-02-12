@@ -38,12 +38,19 @@ class PublishResultVisitorTest(TestCase):
         pass
     
     def testTheVisitorShouldSaveTheModificationsToTheDatabaseSoThatTheResultsWillBeReflectedOnTheWebsite(self):
-        publish_result_visitor_web = PublishResultsVisitorWeb()
+        user = Mock()
+        password = Mock()
+        publish_result_visitor_web = PublishResultsVisitorWeb(user, password)
+        rest_api_helper = Mock()
+        publish_result_visitor_web.rest_api_helper = rest_api_helper
+        
         self.script_result.accept(publish_result_visitor_web)
+        
         self.assertEqual(self.automatic_correction.exit_value, 0)
         self.assertEqual(self.automatic_correction.captured_stdout, self.stdout)
         self.assertEqual(self.automatic_correction.status, 1)
         self.automatic_correction.save.assert_called()
+        rest_api_helper.save_automatic_correction.assert_called_with(self.automatic_correction)
     
     def testTheVisitorShouldInvokeTheEmailSendingProcessForTheVisitedResult(self):
         pass
