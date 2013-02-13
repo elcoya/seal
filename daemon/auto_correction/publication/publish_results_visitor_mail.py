@@ -35,7 +35,7 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
         self.log.debug("building mail...")
         mail = Mail()
         mail.subject = "Automatic correction results"
-        mail.recipient = "sealstudent@gmail.com" # TODO: add user_mail to the automatic correction brought from the rest request # result.automatic_correction.user_mail
+        mail.recipient = result.automatic_correction.user_mail
         exit_value = result.exit_value
         captured_stdout = result.captured_stdout
         status = 1 + (-2 * result.exit_value)

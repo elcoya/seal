@@ -51,7 +51,8 @@ class RichAutomaticCorrectionSerializer(serializers.ModelSerializer):
     
     get_correction_script = serializers.CharField()
     get_delivery_file = serializers.CharField()
+    user_mail = serializers.CharField()
     
     class Meta:
         model = AutomaticCorrection
-        fields = ('id', 'delivery', 'captured_stdout', 'exit_value', 'status', 'get_delivery_file', 'get_correction_script')
+        fields = ('id', 'delivery', 'captured_stdout', 'exit_value', 'status', 'get_delivery_file', 'get_correction_script', 'user_mail')

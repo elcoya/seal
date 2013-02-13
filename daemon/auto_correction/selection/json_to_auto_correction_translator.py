@@ -32,6 +32,7 @@ class JSONToAutoCorrectionTranslator():
             automatic_correction.delivery_id = automatic_correction_data['delivery']
             automatic_correction.delivery = automatic_correction_data['get_delivery_file']
             automatic_correction.script = automatic_correction_data['get_correction_script']
+            automatic_correction.user_mail = automatic_correction_data['user_mail']
             automatic_correction_list.append(automatic_correction);
         return automatic_correction_list
 

@@ -3,6 +3,7 @@ from auto_correction.publication.publish_results_visitor_web import PublishResul
 from unittest.case import TestCase
 from mock import Mock
 from seal.model.automatic_correction import AutomaticCorrection
+from auto_correction.publication.publish_results_visitor_mail import PublishResultsVisitorMail
 
 class PublishResultVisitorTest(TestCase):
 
@@ -53,4 +54,14 @@ class PublishResultVisitorTest(TestCase):
         rest_api_helper.save_automatic_correction.assert_called_with(self.automatic_correction)
     
     def testTheVisitorShouldInvokeTheEmailSendingProcessForTheVisitedResult(self):
-        pass
+        user = Mock()
+        password = Mock()
+        publish_result_visitor_mail = PublishResultsVisitorMail(user, password)
+        rest_api_helper = Mock()
+        publish_result_visitor_mail.rest_api_helper = rest_api_helper
+        
+        self.script_result.accept(publish_result_visitor_mail)
+        
+        rest_api_helper.save_mail.assert_called()
+    
+    

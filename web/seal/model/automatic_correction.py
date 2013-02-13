@@ -35,3 +35,6 @@ class AutomaticCorrection(models.Model):
     def get_correction_script(self):
         return self.delivery.practice.get_script().file.path
     
+    def user_mail(self):
+        return self.delivery.student.email
+    
