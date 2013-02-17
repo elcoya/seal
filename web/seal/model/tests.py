@@ -35,5 +35,6 @@ from daemon_test.mail_test import TestMailUtilityClass
 from daemon_test.prepare_files_strategy_test import TestPrepareFilesStrategy
 from daemon_test.publish_result_visitor_test import PublishResultVisitorTest
 from daemon_test.run_script_command_test import TestRunScriptCommand
+from daemon_test.run_script_timeout_test import TestProcessTimeout
 from daemon_test.setup_enviroment_test import TestSetupEnviroment
 
