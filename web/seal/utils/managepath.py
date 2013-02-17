@@ -13,6 +13,7 @@ class Managepath(object):
         #Ver con anibal.
         base_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
         self.base_proyect_path = base_path + "/"
+        self.workspace_file_path = base_path + "/workspace/"
         self.delivery_file_path = base_path + "/workspace/delivery_files/"
         self.practice_file_path = base_path + "/workspace/practice_files/"
         self.script_file_path = base_path + "/workspace/automatic_correction_scripts/"
@@ -22,6 +23,9 @@ class Managepath(object):
     
     def get_base_proyect_path(self):
         return self.base_proyect_path
+    
+    def get_workspace_proyect_path(self):
+        return self.workspace_file_path
     
     def get_delivery_path(self):
         return self.delivery_file_path
