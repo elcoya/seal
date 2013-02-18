@@ -19,6 +19,16 @@ MANAGERS = ADMINS
 RECAPTCHA_PUB_KEY = "6LcuRdkSAAAAAOeCTPJ-FMf19ZOvVqRxdQjWgERE"
 RECAPTCHA_PRIVATE_KEY = "6LcuRdkSAAAAAAnez1roxSgBbTfQ_iPxPhOnv5vP"
 
+import os
+
+#path customizables###################################################
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+WORKSPACE_PATH = BASE_PATH + "/workspace/"
+DELIVERY_FILE_PATH = WORKSPACE_PATH + "delivery_files/"
+PRACTICE_FILE_PATH = WORKSPACE_PATH + "practice_files/"
+SCRIPT_FILE_PATH = WORKSPACE_PATH + "automatic_correction_scripts/"
+######################################################################
+
 #user and password for database create
 USER="seal"
 PASSWORD="$3alSEAL"
@@ -97,7 +107,6 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
-import os
 project_base_path = os.path.realpath(os.path.dirname(__file__))
 # Additional locations of static files
 STATICFILES_DIRS = (

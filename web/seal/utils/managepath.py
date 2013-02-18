@@ -4,23 +4,24 @@ Created on 30/01/2013
 @author: martin
 '''
 import os
+from django.conf import settings
 
 class Managepath(object):
     
     INSTANCE = None
     
     def __init__(self):
-        #Ver con anibal.
         base_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
         self.base_proyect_path = base_path + "/"
-        self.workspace_file_path = base_path + "/workspace/"
-        self.delivery_file_path = base_path + "/workspace/delivery_files/"
-        self.practice_file_path = base_path + "/workspace/practice_files/"
-        self.script_file_path = base_path + "/workspace/automatic_correction_scripts/"
         self.daemon_path = base_path + "/daemon/"
         self.web_path = base_path + "/web/"
         self.model_path = base_path + "/web/seal/"
-    
+        
+        self.workspace_file_path = settings.WORKSPACE_PATH
+        self.delivery_file_path = settings.DELIVERY_FILE_PATH
+        self.practice_file_path = settings.PRACTICE_FILE_PATH
+        self.script_file_path = settings.SCRIPT_FILE_PATH
+        
     def get_base_proyect_path(self):
         return self.base_proyect_path
     
