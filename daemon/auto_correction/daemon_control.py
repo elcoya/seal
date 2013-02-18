@@ -44,13 +44,15 @@ class LoopRunner():
         self.log = LoggerManager().get_new_logger("daemon control")
         self.log.info("Daemon's game loop started.")
         while True:
-            self.administrator_mail.send_mails()
             start_timestamp = datetime.today()
             
             result = self.automatic_correction_runner.run()
             self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
                           result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
                           result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
+            
+            self.administrator_mail.send_mails()
+            
             finish_timestamp = datetime.today()
             self.stall_loop(start_timestamp, finish_timestamp)
            
