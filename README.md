@@ -56,3 +56,9 @@ https://docs.google.com/document/d/1dBCXFkzwcSSTNkbK1ESLRpfidv5y6DR4kxhkDBYF3S0/
 ####Docstring conventions
 http://www.python.org/dev/peps/pep-0008/
 http://www.python.org/dev/peps/pep-0257/
+
+###Documento de Investigacion sobre API REST
+https://docs.google.com/document/d/1mgqw8kq7xer96PD4IBq_QYugs3M5hqmk_aV7o2XdUTQ/edit
+
+###Documento de Configuracion Django-Apache
+https://docs.google.com/document/d/1bLaPKvRCEnlsRhZggzhcn506nSL6jFi1z3fM7C6Nbeo/edit
