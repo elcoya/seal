@@ -1,10 +1,10 @@
-from django.test import TestCase
 from seal.test.integration.utils import clean_up_database_tables,\
     create_a_course, create_a_student, create_a_practice, create_a_delivery,\
     create_an_automatic_correction, load_a_script
 from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
 import os
 from zipfile import ZipFile
+from unittest.case import TestCase
 
 class TestAutomaticCorrectionRunner(TestCase):
 

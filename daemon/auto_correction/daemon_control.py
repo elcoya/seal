@@ -4,11 +4,9 @@ from datetime import datetime
 from daemon.runner import DaemonRunner
 
 from seal import settings #your project settings file
-from django.core.management import setup_environ #environment setup function
 import argparse
 from auto_correction.log.logger_manager import LoggerManager
 from mail_service.administrator_mail import AdministratorMail
-setup_environ(settings)
 
 from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
 class LoopRunner():

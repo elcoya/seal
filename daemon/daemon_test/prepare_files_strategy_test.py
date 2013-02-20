@@ -11,10 +11,11 @@ import errno
 class TestPrepareFilesStrategy(TestCase):
     
     DAEMON_BASE_PATH = managepath.get_instance().get_daemon_path()      # Required to use the app model
+    INPUT_DATA_FILES_PATH = managepath.get_instance().get_base_proyect_path() + "web/feature_test/data/"
 
     UNZIP_DESTINATION_PATH = DAEMON_BASE_PATH + "test_tmp/unzip/"
     ZIP_FILE_PATH = DAEMON_BASE_PATH +"test_tmp/delivery.zip"
-    ORIGINAL_ZIP_FILE_PATH = DAEMON_BASE_PATH + "feature_test/data/delivery.zip"
+    ORIGINAL_ZIP_FILE_PATH = INPUT_DATA_FILES_PATH + "delivery.zip"
     ZIPPED_FILE_NAME = "prueba.txt"
     
 
