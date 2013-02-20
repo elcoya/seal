@@ -15,8 +15,8 @@ Feature: As a teacher I want to see the delivery lists of one practice
     	  And course "2012-1" exists
           And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-02"
           And Student "martin" exists with password "martin"	
-          And student "Martin" exists in course "2012-1"
-          And exist delivery of "TP Intro" from student "Martin" whit dalivery date "2012-11-01"
-		  And exist delivery of "TP Intro" from student "Martin" whit dalivery date "2012-11-02"		
+          And student "martin" exists in course "2012-1"
+          And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
+		  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-02"		
 		 When I am in the list page of delivery from "TP Intro"
          Then I should see "Nov. 1, 2012" before "Nov. 2, 2012"  

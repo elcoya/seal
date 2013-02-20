@@ -3,7 +3,7 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
  	Scenario: No Course Enrolled
  		Given Student "martin" exists with password "martin"
     	  And course "2012-1" exists
- 		  And student "Martin" exists without course
+ 		  And student "martin" exists without course
           And I log in as "martin" "martin"
  		 Then I should see "There are yet no courses in which you are enrolled"
  
@@ -11,7 +11,7 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
 		Given Student "martin" exists with password "martin"
     	  And course "2012-1" exists
 		  And course "2011-2" exists
-		  And student "Martin" exists in course "2012-1" and in course "2011-2"
+		  And student "martin" exists in course "2012-1" and in course "2011-2"
           And I log in as "martin" "martin"
 		 Then I should see "2012-1" before "2011-2" 
  		  
@@ -19,7 +19,7 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
 		Given Student "martin" exists with password "martin"
           And I log in as "martin" "martin"
     	  And course "2012-1" exists
-		  And student "Martin" exists in course "2012-1"
+		  And student "martin" exists in course "2012-1"
 		 When I click in the "2012-1" link
 		 Then I should see "There are yet no Practices" 
 		 
@@ -27,7 +27,7 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
 		Given Student "martin" exists with password "martin"
           And I log in as "martin" "martin"
     	  And course "2012-1" exists
-		  And student "Martin" exists in course "2012-1"
+		  And student "martin" exists in course "2012-1"
 		  And practice "TP 1" exists in course "2012-1" with deadline "2012-12-02"
           And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 		 When I click in the "2012-1" link

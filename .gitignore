@@ -11,3 +11,4 @@ workspace/automatic_correction_scripts
 daemon/auto_correction/seal-daemon.log
 workspace
 output.txt
+web/seal/seal.db

@@ -20,6 +20,7 @@ RECAPTCHA_PUB_KEY = "6LcuRdkSAAAAAOeCTPJ-FMf19ZOvVqRxdQjWgERE"
 RECAPTCHA_PRIVATE_KEY = "6LcuRdkSAAAAAAnez1roxSgBbTfQ_iPxPhOnv5vP"
 
 import os
+web_base_path = os.path.realpath(os.path.dirname(__file__))
 
 #path customizables###################################################
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -35,13 +36,17 @@ PASSWORD="$3alSEAL"
 
 DATABASES = {
     'default': {
+        #FOR SQLITE##############################
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': web_base_path + '/seal.db',  
+        #########################################
+        
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'seal',                      # Or path to database file if using sqlite3.
+        'NAME': 'seal',                     # Or path to database file if using sqlite3.
         'USER': USER,                      # Not used with sqlite3.
         'PASSWORD': PASSWORD,                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
-        
     },
 }
 
@@ -71,18 +76,17 @@ USE_L10N = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 #FOR APACHE########################################################
-#from seal.utils import managepath
-#MEDIA_ROOT = managepath.get_instance().get_workspace_proyect_path()
+MEDIA_ROOT = WORKSPACE_PATH
 ####################################################################
-MEDIA_ROOT = ''
+#MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 #FOR APACHE################################
-#MEDIA_URL = 'http://localhost:8000/media/'
+MEDIA_URL = 'http://localhost:8000/media/'
 ###########################################
-MEDIA_URL = '' 
+#MEDIA_URL = '' 
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -93,9 +97,9 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 #FOR APACHE##################################
-#STATIC_URL = 'http://localhost:8000/static/'
+STATIC_URL = 'http://localhost:8000/static/'
 #############################################
-STATIC_URL = '/static/' 
+#STATIC_URL = '/static/' 
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -107,13 +111,12 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
-project_base_path = os.path.realpath(os.path.dirname(__file__))
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    project_base_path + '/static/',
+    web_base_path + '/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -158,7 +161,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    project_base_path + '/templates/'
+    web_base_path + '/templates/'
 )
 
 INSTALLED_APPS = (

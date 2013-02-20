@@ -28,7 +28,8 @@ def step(context, username, password):
         teacher.save()
     else:
         teacher = Teacher()
-        teacher.name = capitalize(username)
+        #teacher.name = capitalize(username)
+        teacher.name = username
         teacher.uid = username
         teacher.email = username + "@foo.foo"
         user = User()
@@ -48,7 +49,8 @@ def step(context, username, password):
         student.save()
     else:
         student = Student()
-        student.name = capitalize(username)
+        #student.name = capitalize(username)
+        student.name = username
         student.uid = username
         student.email = username + "@foo.foo"
         user = User()
@@ -68,7 +70,8 @@ def step(context, username, email):
         student.save()
     else:
         student = Student()
-        student.name = capitalize(username)
+        #student.name = capitalize(username)
+        student.name = username
         student.uid = username
         student.email = email
         user = User()
