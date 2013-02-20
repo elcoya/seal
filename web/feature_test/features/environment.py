@@ -40,6 +40,9 @@ def before_feature(context, feature):
     context.browser = webdriver.Firefox()
     context.browser.get('http://localhost:8000/')
 
+def after_scenario(context, scenario):
+    context.browser.get('http://localhost:8000/logout')
+
 def after_feature(context, feature):
     Suscription.objects.all().delete()
     Correction.objects.all().delete()
@@ -54,8 +57,17 @@ def after_feature(context, feature):
 
 def after_all(context):
     if os.path.isdir(practicePath):
-        shutil.rmtree(practicePath)
+        try:
+            shutil.rmtree(practicePath)
+        except OSError as err:
+            print("Not Permition to delete practice test file (run as root to delete this) - " + str(err))
     if os.path.isdir(deliveryPath):
-        shutil.rmtree(deliveryPath)
+        try:
+            shutil.rmtree(deliveryPath)
+        except OSError as err:
+            print("Not Permition to delete delivery test file (run as root to delete this) - " + str(err))
     if os.path.isdir(scriptPath):
-        shutil.rmtree(scriptPath)
+        try:
+            shutil.rmtree(scriptPath)
+        except OSError as err:
+            print("Not Permition to delete script test file (run as root to delete this) - " + str(err))

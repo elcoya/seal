@@ -157,7 +157,11 @@ def prepare_db(context = None):
     create_super_user()
     print("syncdb complete")
 
-
+def syncdb(contest = None):
+    with lcd("web"):
+        local("python seal/manage.py syncdb")
+    print("syncdb complete")
+ 
 # Running test
 def run_tests(context = None):
     """Runs the application tests for the Django app"""

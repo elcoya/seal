@@ -168,7 +168,7 @@ def step(context,student,course):
     s = Student.objects.get(uid=student)
     c = Course.objects.get(name=course)
     s = Suscription.objects.get(student=s, course=c)
-    checkbox = context.browser.find_elements(By.ID, s.pk)
+    checkbox = context.browser.find_elements(By.ID, str(s.pk))
     checkbox[0].click()
     
 @when('I click the button "{name}"')
@@ -206,4 +206,7 @@ def step(context, lenguaje):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('language').send_keys(lenguaje)
 
+@when("I wait")
+def step(context):
+    time.sleep(5)
     

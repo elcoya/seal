@@ -14,7 +14,7 @@ Feature: As a user I want to see the student list
           And course "2012-1" exists
           And Student "martin" exists with password "martin"
           And Student "anibal" exists with password "anibal"
-          And student "Martin" exists in course "2012-1"
-          And student "Anibal" exists in course "2012-1"
+          And student "martin" exists in course "2012-1"
+          And student "anibal" exists in course "2012-1"
          when I am in the modifier page of course "2012-1"
-         Then I should see "Anibal" before "Martin" 
+         Then I should see "anibal" before "martin" 
