@@ -1,6 +1,6 @@
 from django.db import models
 from seal.model.course import Course
-from seal.utils import managepath
+#from seal.utils import managepath
 
 class Practice(models.Model):
     """Assignment.
@@ -11,7 +11,7 @@ class Practice(models.Model):
     """
     uid = models.CharField(max_length=32)
     course = models.ForeignKey(Course)
-    file = models.FileField(upload_to=managepath.get_instance().get_practice_path())
+    #file = models.FileField(upload_to=managepath.get_instance().get_practice_path())
     deadline = models.DateField()
     
     class Meta:
@@ -29,3 +29,12 @@ class Practice(models.Model):
     
     def delete_script(self):
         self.script_set.all().delete()
+
+    def get_practice_file(self):
+        if (not self.practicefile_set.all()):
+            return None
+        return self.practicefile_set.all()
+
+    def delete_practice_file(self):
+        self.practicefile_set.all().delete()
+    

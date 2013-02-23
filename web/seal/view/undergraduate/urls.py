@@ -7,7 +7,8 @@ urlpatterns = patterns('view.undergraduate.home',
 
 urlpatterns += patterns('view.undergraduate.practice',
     url(r'^practice/list/(?P<idcourse>\d+)/$', 'practicelist'),
-    url(r'^practice/download/(?P<idpractice>\d+)/$', 'download'),
+    url(r'^practice/practiceFile/(?P<idpractice>\d+)/$', 'practiceFilelist'),
+    url(r'^practice/download/(?P<idpracticefile>\d+)/$', 'download'),
 )
 
 urlpatterns += patterns('view.undergraduate.delivery',

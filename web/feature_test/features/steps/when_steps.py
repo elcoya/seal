@@ -53,6 +53,12 @@ def step(context, coursename):
     form.find_element_by_name('courses').send_keys(coursename)
     form.find_element_by_name('passwd').send_keys('dummy')
     form.find_element_by_name('passwd_again').send_keys('dummy')
+
+@when('I fill the upload file form with name "{namefile}"')
+def step(context, namefile):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('name').send_keys(namefile)
+    form.find_element_by_name('file').send_keys(filePath)
     
 @when('I submit the form')
 def step(context):
@@ -73,7 +79,6 @@ def step(context, practice_uid, course_name):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('uid').send_keys(practice_uid)
     form.find_element_by_name('course').send_keys(course_name)
-    form.find_element_by_name('file').send_keys(filePath)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
 
 @when('I fill the delivery form with default data')

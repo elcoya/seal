@@ -5,6 +5,7 @@ Created on 23/10/2012
 '''
 from django.http import HttpResponseRedirect
 from seal.forms.practice import PracticeForm
+from seal.model.practice_file import PracticeFile
 from django.shortcuts import render, render_to_response
 from seal.model.practice import Practice
 from django.template.context import RequestContext
@@ -12,8 +13,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from seal.forms.script import PracticeScriptForm
 from seal.model.script import Script
+from seal.forms.practiceFile import PracticeFileForm
+from django.http import HttpResponse
 
 PATHOK =  "/teacher/course/editcourse/%s"
+PATHFILEOK = "/teacher/practices/practicefile/%s/%s"
 MAXPAGINATOR = 10
 
 @login_required
@@ -80,3 +84,35 @@ def script(request, idcourse , idpractice):
     return render(request, 'practice/script.html', 
                   {'form': form, 'practice': practice, 'idcourse': idcourse, 'script_text': script_text}, 
                   context_instance=RequestContext(request))
+
+@login_required
+def practicefilelist(request, idcourse, idpractice):
+    practice = Practice.objects.get(pk = idpractice)
+    practiceFiles = practice.get_practice_file()
+    form = PracticeScriptForm()
+    if (request.method == 'POST'):
+        practice_file_instance = PracticeFile(practice=practice)
+        form = PracticeFileForm(request.POST, request.FILES, instance=practice_file_instance)
+        if (form.is_valid()):
+            form_edit = form.save(commit=False)
+            form_edit.save()
+            return HttpResponseRedirect(PATHFILEOK % (str(idcourse), str(practice.pk)))
+    else:
+        form = PracticeFileForm()
+    return render(request, 'practice/uploadFile.html', {'form': form, 'idcourse':idcourse, 'namepractice':practice.uid, 'practiceFiles': practiceFiles})
+
+@login_required
+def download(request, idpracticefile):
+    practicefile = PracticeFile.objects.get(pk=idpracticefile)
+    filename = practicefile.file.name.split('/')[-1]
+    response = HttpResponse(practicefile.file)
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
+
+@login_required
+def delete(request, idpracticefile):
+    practicefile = PracticeFile.objects.get(pk=idpracticefile)
+    idcourse = practicefile.practice.course.pk
+    practice = practicefile.practice
+    practicefile.delete()
+    return HttpResponseRedirect(PATHFILEOK % (str(idcourse), str(practice.pk)))
