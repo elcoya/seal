@@ -2,16 +2,16 @@ Feature: As a user I want to see the course list on the home page
 
     Scenario: Index page shows course list ordered
        Given Teacher "teacher" exists with password "teacher"
-         And I log in as "teacher" "teacher"
          And course "2012-1" exists
          And course "2011-1" exists
+         And I log in as "teacher" "teacher"
          And I am in the index page
         Then I should see "2012-1" before "2011-1" 
     
     Scenario: Index page course list links to edit courses
        Given Teacher "teacher" exists with password "teacher"
-         And I log in as "teacher" "teacher"
          And course "2012-1" exists
+         And I log in as "teacher" "teacher"
          And I am in the index page
         Then I should see link to "2012-1" in the list
          

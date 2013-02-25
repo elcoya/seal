@@ -32,18 +32,8 @@ def before_all(context):
     Teacher.objects.all().delete()
     Mail.objects.all().delete()
     User.objects.exclude(username='seal').delete()
-    
+
 def before_scenario(context, scenario):
-    context.browser.get('http://localhost:8000/')
-
-def before_feature(context, feature):
-    context.browser = webdriver.Firefox()
-    context.browser.get('http://localhost:8000/')
-
-def after_scenario(context, scenario):
-    context.browser.get('http://localhost:8000/logout')
-
-def after_feature(context, feature):
     Suscription.objects.all().delete()
     Correction.objects.all().delete()
     Delivery.objects.all().delete()
@@ -53,7 +43,37 @@ def after_feature(context, feature):
     Teacher.objects.all().delete()
     Mail.objects.all().delete()
     User.objects.exclude(username='seal').delete()
+    context.browser = webdriver.Firefox()
+    context.browser.get('http://localhost:8000/')
+
+#def before_feature(context, feature):
+#    context.browser = webdriver.Firefox()
+#    context.browser.get('http://localhost:8000/')
+
+def after_scenario(context, scenario):
+    Suscription.objects.all().delete()
+    Correction.objects.all().delete()
+    Delivery.objects.all().delete()
+    Practice.objects.all().delete()
+    Course.objects.all().delete()
+    Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
+    Teacher.objects.all().delete()
+    Mail.objects.all().delete()
+    User.objects.exclude(username='seal').delete()
+    context.browser.get('http://localhost:8000/logout')
     context.browser.close()
+
+#def after_feature(context, feature):
+#    Suscription.objects.all().delete()
+#    Correction.objects.all().delete()
+#    Delivery.objects.all().delete()
+#    Practice.objects.all().delete()
+#    Course.objects.all().delete()
+#    Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
+#    Teacher.objects.all().delete()
+#    Mail.objects.all().delete()
+#    User.objects.exclude(username='seal').delete()
+#    context.browser.close()
 
 def after_all(context):
     if os.path.isdir(practicePath):

@@ -17,6 +17,7 @@
 					<td>{% trans "Delivery" %}</td>
 					<td>&nbsp;</td>
 					<td>{% trans "Automatic Correction" %}</td>
+					<td>&nbsp;</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,6 +30,7 @@
 					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %}</a></td>
 					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}">{% trans "Correction" %}</a></td>
 					<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>
+					<td style="text-align: center; "><a href="/teacher/delivery/explore/{{ delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
 				</tr>
 				{% empty %}
 				<tr>

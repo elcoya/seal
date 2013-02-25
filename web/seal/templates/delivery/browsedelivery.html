@@ -1,0 +1,27 @@
+{% extends "teacher/teacher.html" %}
+{% block content %}
+<body>
+	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
+		<div>
+			Delivery detail {{ delivery.pk }}
+		</div>
+		<div >
+			<ul>
+				{% for filepath in files_list %}
+					<li>
+						<a href="/teacher/delivery/browse/{{ delivery.pk }}/{{ filepath }}" >{{ filepath }}</a>
+					</li>
+				{% empty %}
+					<li>No files where found in this delivery</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div><a href="/teacher/delivery/list/{{ delivery.practice.pk }}">back</a></div>
+		{% if file_content %}
+			<div class="file-browser">
+				<pre>{{ file_content }}</pre>
+			</div>
+		{% endif %}
+	</div>
+</body>
+{% endblock %}

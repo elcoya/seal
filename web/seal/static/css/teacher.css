@@ -23,3 +23,20 @@ div.output-container {
 	-moz-border-radius: 3px; 
 	border-radius: 3px;
 }
+
+li {
+	text-indent: 0;
+	text-align: left;
+	padding: 0;
+}
+
+div.file-browser {
+	border: thin solid black;
+	margin: auto;
+	padding: 15px;
+}
+
+pre {
+	text-align: left;
+}
+
