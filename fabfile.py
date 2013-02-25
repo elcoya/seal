@@ -120,6 +120,73 @@ def create_super_user():
         u.save()
         print "User account created"
 
+def populate_database():
+    """
+    After the database is cleaned up, it is necessary to create a set of objects to be able to try out the 
+    developed features. A Teacher, a Student, a Course, 2 Practices, 2 Deliveries for each practice with
+    their corresponding AutomaticCorrections will be created with basic information.
+    """
+    set_pythonpath()
+    from django.contrib.auth.models import User
+    from seal.model.teacher import Teacher
+    from seal.model.student import Student
+    from seal.model.course import Course
+    from seal.model.practice import Practice
+    from seal.model.delivery import Delivery
+    from seal.model.automatic_correction import AutomaticCorrection
+    from seal.model.suscription import Suscription
+    
+    try:
+        admin_user = User.objects.get_by_natural_key('seal')
+        print "Super user already exists: " + str(admin_user)
+    except:
+        u = User.objects.create(
+            username='seal',
+            first_name='Seal',
+            last_name='Administrator',
+            email='seal@gmail.com',
+            is_superuser=True,
+            is_staff=True,
+            is_active=True
+        )
+        u.set_password('seal')
+        u.save()
+        print "User account created"
+    
+    DELIVERY_FILE_PATH = os.path.join(os.path.dirname(__file__), "workspace", "delivery_files")
+    PRACTICE_FILE_PATH = os.path.join(os.path.dirname(__file__), "workspace", "practice_files")
+    local("mkdir " + DELIVERY_FILE_PATH)
+    local("mkdir " + PRACTICE_FILE_PATH)
+    local("cp web/feature_test/data/pdftest.pdf " + PRACTICE_FILE_PATH)
+    local("cp web/feature_test/data/delivery.zip " + DELIVERY_FILE_PATH)
+    local("cp web/feature_test/data/delivery-2.zip " + DELIVERY_FILE_PATH)
+    local("cp web/feature_test/data/delivery-3.zip " + DELIVERY_FILE_PATH)
+    
+    teacher_user = User.objects.get_or_create(username="teacher", email='sealteacher@gmail.com', 
+                                              first_name="teacher name", last_name="Auto Teacher")[0]
+    teacher_user.set_password("teacher")
+    teacher_user.save()
+    teacher = Teacher.objects.get_or_create(name="teacher", uid="teacher", user=teacher_user, email='sealteacher@gmail.com')[0]
+    student_user = User.objects.get_or_create(username="student", email='sealstudent@gmail.com', 
+                                              first_name="student name", last_name="Auto Student")[0]
+    student_user.set_password("student")
+    student_user.save()
+    student = Student.objects.get_or_create(name="student", email="sealstudent@gmail.com", user=student_user, uid="student")[0]
+    course = Course.objects.get_or_create(name="2013-1C")[0]
+    student.courses.add(course)
+    student.save()
+    
+    practice_1 = Practice.objects.get_or_create(uid="TP Auto 1", course=course, file=os.path.join(PRACTICE_FILE_PATH,"pdftest.pdf"), deadline="2013-04-01")[0]
+    practice_2 = Practice.objects.get_or_create(uid="TP Auto 2", course=course, file=os.path.join(PRACTICE_FILE_PATH,"pdftest.pdf"), deadline="2013-04-20")[0]
+    delivery_1_1 = Delivery.objects.get_or_create(deliverDate="2013-03-21", file=os.path.join(DELIVERY_FILE_PATH,"delivery.zip"), practice=practice_1, student=student)[0]
+    delivery_1_2 = Delivery.objects.get_or_create(deliverDate="2013-03-25", file=os.path.join(DELIVERY_FILE_PATH,"delivery-2.zip"), practice=practice_1, student=student)[0]
+    delivery_2_1 = Delivery.objects.get_or_create(deliverDate="2013-04-10", file=os.path.join(DELIVERY_FILE_PATH,"delivery.zip"), practice=practice_2, student=student)[0]
+    delivery_2_2 = Delivery.objects.get_or_create(deliverDate="2013-04-18", file=os.path.join(DELIVERY_FILE_PATH,"delivery-3.zip"), practice=practice_2, student=student)[0]
+    AutomaticCorrection.objects.get_or_create(captured_stdout="automatically generated standard output:\n\nFAILURE", delivery=delivery_1_1, exit_value=1, status=-1)[0]
+    AutomaticCorrection.objects.get_or_create(captured_stdout="automatically generated standard output:\n\nSUCCESS", delivery=delivery_1_2, exit_value=0, status= 1)[0]
+    AutomaticCorrection.objects.get_or_create(captured_stdout="automatically generated standard output:\n\nFAILURE", delivery=delivery_2_1, exit_value=1, status=-1)[0]
+    AutomaticCorrection.objects.get_or_create(captured_stdout="automatically generated standard output:\n\nSUCCESS", delivery=delivery_2_2, exit_value=0, status= 1)[0]
+
 
 def create_and_prepare_db(context = None):
     """
