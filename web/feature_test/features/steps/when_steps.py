@@ -59,6 +59,16 @@ def step(context):
     form = context.browser.find_element_by_tag_name('form')
     form.submit()
 
+@when('I click the link to "{link_text}"')
+def step(context, link_text):
+    links = context.browser.find_elements_by_tag_name('a')
+    link_to_click = False
+    for link in links:
+        if (link_text in link.get_attribute("href")):
+            link_to_click = link
+            break
+    link.click()
+
 @when('I click in the "{text}" link')
 def step(context, text):
     a = context.browser.find_element_by_link_text(text)
@@ -147,6 +157,11 @@ def step(context,student,practice):
     d = Delivery.objects.get(student=s, practice=p)
     addres = base_url + 'teacher/correction/'+str(d.pk)
     context.browser.get(addres)
+
+@when('I am at the explore delivery page for delivery "{id_delivery}"')
+def step(context, id_delivery):
+    address = base_url + 'teacher/delivery/explore/' + id_delivery
+    context.browser.get(address)
 
 @when('I fill the form with "{coment1}" "{coment2}" "{grade}"')
 def step(context, coment1, coment2, grade):

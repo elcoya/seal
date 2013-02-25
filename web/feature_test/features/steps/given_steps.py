@@ -11,6 +11,9 @@ from seal.forms import student
 from seal.model.suscription import Suscription
 from seal.model.script import Script
 from seal.model.automatic_correction import AutomaticCorrection
+import os
+from shutil import copyfile
+from os import makedirs
 
 base_url = 'http://localhost:8000/'
 
@@ -49,7 +52,6 @@ def step(context, username, password):
         student.save()
     else:
         student = Student()
-        #student.name = capitalize(username)
         student.name = username
         student.uid = username
         student.email = username + "@foo.foo"
@@ -257,7 +259,31 @@ def impl(context, script_name, practice_uid, course_name):
     script.file="data/"+script_name
     script.practice = practice
     script.save()
-    
+
+@given(u'a delivery exists for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}" with id "{delivery_id}"')
+def step(context, practice_uid, course_name, student_uid, delivery_id):
+    student = Student.objects.get(uid=student_uid)
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid=practice_uid, course=course)
+    # delivery = Delivery.objects.get_or_create(pk=delivery_id, student=student, practice=practice)
+    delivery = Delivery()
+    delivery.pk = delivery_id
+    src = "data/delivery.zip"
+    dst = "../../workspace/delivery_files/delivery.zip"
+    if(not os.path.exists("../../workspace/delivery_files/")):
+        makedirs("../../workspace/delivery_files/")
+    if(not os.path.exists(dst)):
+        copyfile(src, dst)
+    delivery.file = dst
+    delivery.student = student
+    delivery.practice = practice
+    delivery.deliverDate = '2012-11-22'
+    delivery.save()
+    automatic_correction = AutomaticCorrection()
+    automatic_correction.delivery = delivery
+    automatic_correction.save()
+
+
 @given(u'a delivery exists for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}"')
 def step(context, practice_uid, course_name, student_uid):
     student = Student.objects.get(uid=student_uid)

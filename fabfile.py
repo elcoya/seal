@@ -155,8 +155,10 @@ def populate_database():
     
     DELIVERY_FILE_PATH = os.path.join(os.path.dirname(__file__), "workspace", "delivery_files")
     PRACTICE_FILE_PATH = os.path.join(os.path.dirname(__file__), "workspace", "practice_files")
-    local("rm -r " + DELIVERY_FILE_PATH)
-    local("rm -r " + PRACTICE_FILE_PATH)
+    if(os.path.exists(DELIVERY_FILE_PATH)):
+        local("rm -r " + DELIVERY_FILE_PATH)
+    if(os.path.exists(PRACTICE_FILE_PATH)):
+        local("rm -r " + PRACTICE_FILE_PATH)
     local("mkdir " + DELIVERY_FILE_PATH)
     local("mkdir " + PRACTICE_FILE_PATH)
     local("cp web/feature_test/data/pdftest.pdf " + PRACTICE_FILE_PATH)

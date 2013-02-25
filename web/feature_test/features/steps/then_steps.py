@@ -2,6 +2,7 @@ from behave import *
 from selenium import webdriver 
 from selenium.webdriver.common.by import By
 from seal.model import Student, Practice, Delivery
+import time
 import re
 from seal.model.course import Course
 
@@ -34,6 +35,14 @@ def impl(context, text):
 def impl(context, text):
     body = context.browser.find_element_by_tag_name('body')
     assert text not in body.text
+
+@then('I should see a link to "{link_text}"')
+def step(context, link_text):
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text in link.get_attribute("href"))
+    assert match
 
 @then('I should see pattern "{text}"')
 def step(context, text):
@@ -98,3 +107,8 @@ def step(context, practice_uid, course_name, student_uid, status):
     delivery = Delivery.objects.get(student=student, practice=practice)
     automatic_correction = delivery.get_automatic_correction()
     assert status == automatic_correction.get_status()
+
+@then("I wait")
+def step(context):
+    time.sleep(5)
+    
