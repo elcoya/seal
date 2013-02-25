@@ -62,3 +62,6 @@ https://docs.google.com/document/d/1mgqw8kq7xer96PD4IBq_QYugs3M5hqmk_aV7o2XdUTQ/
 
 ###Documento de Configuracion Django-Apache
 https://docs.google.com/document/d/1bLaPKvRCEnlsRhZggzhcn506nSL6jFi1z3fM7C6Nbeo/edit
+
+###Documento de Instalacion de Ambiente de Produccion
+https://docs.google.com/document/d/1BNC2SOmIxynRK6cXU7i2sFcpgTeFQIXLC_iejkc_E4k/edit

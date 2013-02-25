@@ -30,7 +30,7 @@ class PracticeSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Practice
-        fields = ('id', 'uid', 'course', 'file', 'deadline', 'get_script')
+        fields = ('id', 'uid', 'course', 'deadline', 'get_script')
 
 class DeliverySerializer(serializers.ModelSerializer):
     

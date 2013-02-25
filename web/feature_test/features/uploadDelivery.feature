@@ -9,5 +9,4 @@ Feature: As a student I want to upload a delivery
          When I am in the upload page of practice "TP Intro"
           And I fill the delivery form with default data
           And I submit the form
-		  And I click in the "Delivery" link
 		 Then I should see the delivery in the list

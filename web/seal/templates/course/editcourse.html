@@ -17,20 +17,26 @@
 			<tr>
 				<td>{% trans "Uid" %}</td>
 				<td>{% trans "Dead Line" %}</td>
+				<td>{% trans "Files" %}</td>	
 				<td>{% trans "# Deliveries" %}</td>
 				<td>{% trans "Script" %}</td>
 			</tr>
 		</thead>
 		<tbody>
-		{% for dict in table_contents %}
+		{% for practice in table_contents %}
 		    <tr>
-		    	<td style="text-align: center; " ><a href="/teacher/practices/editpractice/{{ course.pk }}/{{ dict.pk }}">{{ dict.uid }}</a></td>
-		    	<td style="text-align: center; ">{{ dict.deadline }}</td>
-		    	<td style="text-align: center; "><a href="/teacher/delivery/list/{{dict.pk}}">{{ dict.ndeliveries }}</a></td>
+		    	<td style="text-align: center; " ><a href="/teacher/practices/editpractice/{{ course.pk }}/{{ practice.pk }}">{{ practice.uid }}</a></td>
+		    	<td style="text-align: center; ">{{ practice.deadline }}</td>
 		    	<td style="text-align: center; ">
-		    		<a href="/teacher/practices/script/{{ course.pk }}/{{ dict.pk }}">
-			    		{% if dict.script %}
-			    			{{ dict.script }}
+		    		<a href="/teacher/practices/practicefile/{{ course.pk }}/{{ practice.pk }}">
+			    		{% trans "Upload Files" %}
+			    	</a>
+		    	</td>
+		    	<td style="text-align: center; "><a href="/teacher/delivery/list/{{practice.pk}}">{{ practice.ndeliveries }}</a></td>
+		    	<td style="text-align: center; ">
+		    		<a href="/teacher/practices/script/{{ course.pk }}/{{ practice.pk }}">
+			    		{% if practice.script %}
+			    			{{ practice.script }}
 			    		{% else %}
 			    			{% trans "no script" %}
 			    		{% endif %}

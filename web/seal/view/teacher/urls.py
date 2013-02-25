@@ -9,6 +9,9 @@ urlpatterns += patterns('view.teacher.practice',
     url(r'^practices/newpractice/(?P<idcourse>\d+)$', 'newpractice'),
     url(r'^practices/editpractice/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'editpractice'),
     url(r'^practices/script/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'script'),
+    url(r'^practices/practicefile/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'practicefilelist'),
+    url(r'^practices/downloadfile/(?P<idpracticefile>\d+)/$', 'download'),
+    url(r'^practices/deletefile/(?P<idpracticefile>\d+)/$', 'delete'),
 )
 
 urlpatterns += patterns('view.teacher.student',

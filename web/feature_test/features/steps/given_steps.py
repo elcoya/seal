@@ -11,6 +11,7 @@ from seal.forms import student
 from seal.model.suscription import Suscription
 from seal.model.script import Script
 from seal.model.automatic_correction import AutomaticCorrection
+from seal.model.practice_file import PracticeFile
 import os
 from shutil import copyfile
 from os import makedirs
@@ -186,7 +187,6 @@ def step (context, practice_uid, course_name, dead_line):
     practice = Practice()
     practice.uid = practice_uid
     practice.deadline = dead_line
-    practice.file = 'test_file.pdf'
     practice.course = c
     practice.save()
 
@@ -299,6 +299,16 @@ def step(context, practice_uid, course_name, student_uid):
     automatic_correction.delivery = delivery
     automatic_correction.save()
 
+@given('file "{filename}" existe in the practice "{practice_uid}" and course "{course_name}"')
+def step(context, practice_uid, course_name, filename):
+    course = Course.objects.get(name=course_name)
+    practice = Practice.objects.get(uid=practice_uid, course=course)
+    practiceFile = PracticeFile()
+    practiceFile.name = filename
+    practiceFile.file = "data/file.pdf"
+    practiceFile.practice = practice
+    practiceFile.save()
+    
 @given(u'automatic_correction for all deliveries has status "{str_status}"')
 def step(context, str_status):
     automatic_corrections = AutomaticCorrection.objects.all()
@@ -322,5 +332,4 @@ def step(context, stdout):
     for automatic_correction in automatic_correction:
         automatic_correction.captured_stdout = stdout
         automatic_correction.save()
-
 

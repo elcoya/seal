@@ -6,7 +6,7 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from seal.model.automatic_correction import AutomaticCorrection
 
-PATHOKNEWDELIVERY = "/undergraduate/practice/list/%s"
+PATHOKNEWDELIVERY = "/undergraduate/delivery/upload/%s"
 
 @login_required
 def newdelivery(request, idpractice):
@@ -21,7 +21,7 @@ def newdelivery(request, idpractice):
             automatic_correction = AutomaticCorrection()
             automatic_correction.delivery = form.instance
             automatic_correction.save()
-            return HttpResponseRedirect(PATHOKNEWDELIVERY % str(practice.course_id))
+            return HttpResponseRedirect(PATHOKNEWDELIVERY % str(practice.pk))
     else:
         form = DeliveryForm()
     deliveries = Delivery.objects.filter(student=student, practice=practice)
