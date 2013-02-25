@@ -69,7 +69,7 @@ def editcourse(request, idcourse):
         students = course.get_students().order_by('name')
         table_students = []
         for student in students:
-            table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid})
+            table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid, 'corrector': student.corrector})
     return render(request, 'course/editcourse.html',
                   {'form': form, 'table_contents': table_contents, 'table_students': table_students, 
                    'course': course, 'idcourse': course.pk }, 

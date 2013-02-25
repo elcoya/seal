@@ -24,11 +24,9 @@ Feature: As a user I want to see the course list on the home page
         Then I should see "Course 2012-1 edit"
          And I should have the edit form for courses with "2012-1" course data in it	
     
-    @dev
 	Scenario: Index page shows course list empty
        Given Teacher "teacher" exists with password "teacher"
          And I log in as "teacher" "teacher"
          And there are no courses
          And I am in the index page
         Then I should see "There are yet no courses"
-    

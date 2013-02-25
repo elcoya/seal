@@ -1,6 +1,7 @@
 from django.db import models
 from seal.model import Student, Practice
 from seal.utils import managepath
+from seal.model.teacher import Teacher
 
 class Delivery(models.Model):
     """Delivery class.
@@ -14,6 +15,7 @@ class Delivery(models.Model):
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()
+    corrector = models.ForeignKey(Teacher, null=True, blank=True)
     
     def __str__(self):
         """Stringify the Delivery"""

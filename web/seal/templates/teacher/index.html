@@ -1,29 +1,74 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% comment %}
-	Main page of the teacher's portal.
+Main page of the teacher's portal.
 {% endcomment %}
 
 {% block title %}Teacher{% endblock %}
 
 {% block content %}
-	<div style="text-align: right; padding: 2px 0;"><a href="/teacher/course/newcourse">{% trans "New Course" %}</a></div>
-	<table style="width: 100%;">
-		<thead style="text-align: center; ">
-			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " > {% trans "Courses" %}</td>
-				<td>{% trans "Students" %}</td>
-			</tr>
-		</thead>
-		<tbody>
+<div style="text-align: right; padding: 2px 0;">
+	<a href="/teacher/course/newcourse">{% trans "New Course" %}</a>
+</div>
+<table style="width: 100%;">
+	<thead style="text-align: center; ">
+		<tr>
+			<td style="width: 70%; text-indent: 15px; text-align: left; " > {% trans "Courses" %}</td>
+			<td>{% trans "Students" %}</td>
+		</tr>
+	</thead>
+	<tbody>
 		{% for dict in table_contents %}
-		    <tr>
-		    	<td style="width: 70%; text-indent: 15px; " ><a href="/teacher/course/editcourse/{{dict.pk}}">{{ dict.name }}</a></td>
-		    	<td style="width: 30%; text-align: center; ">{{ dict.count }}</td>
-		    </tr>
+		<tr>
+			<td style="width: 70%; text-indent: 15px; " ><a href="/teacher/course/editcourse/{{dict.pk}}">{{ dict.name }}</a></td>
+			<td style="width: 30%; text-align: center; ">{{ dict.count }}</td>
+		</tr>
 		{% empty %}
-		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no courses" %}</td></tr>
+		<tr>
+			<td colspan="2" style="text-align: center; ">{% trans "There are yet no courses" %}</td>
+		</tr>
 		{% endfor %}
-		</tbody>
-	</table>
+	</tbody>
+</table>
+<br>
+<table style="width: 100%;">
+	<thead style="text-align: center; ">
+		<tr>
+			<td>{% trans "Delivery" %}</td>
+			<td>{% trans "Student" %}</td>
+			<td>{% trans "Practice" %}</td>
+			<td>{% trans "Course" %}</td>	
+			<td>{% trans "Delivery Date" %}</td>
+			<td>{% trans "Correction" %}</td>
+		</tr>
+	</thead>
+	<tbody>
+		<div style="clear: none; width: 50%; float: left;">
+			{% trans "List of my corrections" %}
+		</div>
+		<br><br>
+		{% for delivery in deliveries %}
+		<tr>
+			<td style="text-align: center;" ><a href="/teacher/delivery/detail/{{ delivery.pk}}">{{ delivery.pk }}</a></td>
+			<td style="text-align: center;">{{ delivery.student.name }}</td>
+			<td style="text-align: center;">{{ delivery.practice.uid }}</td>
+			<td style="text-align: center;">{{ delivery.practice.course }}</td>
+			<td style="text-align: center;">{{ delivery.delierydate }}</td>
+			<td style="text-align: center; width: 33%;"><a href="/teacher/correction/{{ delivery.pk}}">
+				{% if delivery.correction %}
+			    	{% trans "Corrected" %}
+			    {% else %}
+			    	{% trans "Pending" %}
+			    {% endif %}
+			</a></td>
+		</tr>
+		{% empty %}
+		<tr>
+			<td colspan="7" style="text-align: center; ">{% trans "There are no corrections" %}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+
+</table>
 <!-- 	<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/course/newcourse" >New Course</a></div> -->
 {% endblock %}

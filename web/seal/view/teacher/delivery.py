@@ -64,3 +64,9 @@ def browse(request, iddelivery, file_to_browse=None):
 @login_required
 def explore(request, iddelivery):
     return browse(request, iddelivery)
+
+@login_required
+def detail(request, iddelivery):
+    delivery = Delivery.objects.get(pk=iddelivery);
+    return render(request, 'delivery/deliverydetail.html', {'delivery': delivery})
+

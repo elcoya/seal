@@ -12,7 +12,7 @@ EXTENTIONPERMITED = ".zip"
 class DeliveryForm(ModelForm):
     class Meta:
         model = Delivery
-        exclude = ('student', 'practice', 'deliverDate',)
+        exclude = ('student', 'practice', 'deliverDate','corrector')
         
     def clean_file(self):
         data = self.cleaned_data['file']

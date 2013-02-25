@@ -175,13 +175,13 @@ def populate_database():
                                               first_name="student name", last_name="Auto Student")[0]
     student_user.set_password("student")
     student_user.save()
-    student = Student.objects.get_or_create(name="student", email="sealstudent@gmail.com", user=student_user, uid="student")[0]
+    student = Student.objects.get_or_create(name="student", email="sealstudent@gmail.com", user=student_user, uid="student", corrector=teacher)[0]
     course = Course.objects.get_or_create(name="2013-1C")[0]
     student.courses.add(course)
     student.save()
     
-    practice_1 = Practice.objects.get_or_create(uid="TP Auto 1", course=course, file=os.path.join(PRACTICE_FILE_PATH,"pdftest.pdf"), deadline="2013-04-01")[0]
-    practice_2 = Practice.objects.get_or_create(uid="TP Auto 2", course=course, file=os.path.join(PRACTICE_FILE_PATH,"pdftest.pdf"), deadline="2013-04-20")[0]
+    practice_1 = Practice.objects.get_or_create(uid="TP Auto 1", course=course, deadline="2013-04-01")[0]
+    practice_2 = Practice.objects.get_or_create(uid="TP Auto 2", course=course, deadline="2013-04-20")[0]
     delivery_1_1 = Delivery.objects.get_or_create(deliverDate="2013-03-21", file=os.path.join(DELIVERY_FILE_PATH,"delivery.zip"), practice=practice_1, student=student)[0]
     delivery_1_2 = Delivery.objects.get_or_create(deliverDate="2013-03-25", file=os.path.join(DELIVERY_FILE_PATH,"delivery-2.zip"), practice=practice_1, student=student)[0]
     delivery_2_1 = Delivery.objects.get_or_create(deliverDate="2013-04-10", file=os.path.join(DELIVERY_FILE_PATH,"delivery.zip"), practice=practice_2, student=student)[0]

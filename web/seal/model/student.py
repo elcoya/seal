@@ -1,6 +1,7 @@
 from django.db import models
 from seal.model.course import Course
 from django.contrib.auth.models import User
+from seal.model.teacher import Teacher
 
 class Student(models.Model):
     """
@@ -23,6 +24,7 @@ class Student(models.Model):
     email = models.CharField(max_length = 90)
     courses = models.ManyToManyField(Course, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    corrector = models.ForeignKey(Teacher, null=True, blank=True)
     
     def __str__(self):
         """Stringify the Student"""

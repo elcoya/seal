@@ -1,5 +1,6 @@
 from django.db import models
 from seal.model.delivery import Delivery
+from seal.model.teacher import Teacher
 
 
 class Correction(models.Model):
@@ -14,7 +15,8 @@ class Correction(models.Model):
     privateComent = models.TextField(max_length=2000)
     grade = models.FloatField()
     delivery = models.ForeignKey(Delivery)
+    corrector = models.ForeignKey(Teacher)
     
     def __str__(self):
         """Stringify the Correction"""
-        return (str(self.grade) + " - " + self.publicComent)
+        return ("Grade: " + str(self.grade) + " - Public Coment: " + self.publicComent)

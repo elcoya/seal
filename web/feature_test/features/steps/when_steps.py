@@ -221,12 +221,17 @@ def step(context, practice_uid, course_name, student_uid):
     automatic_correction.delivery = delivery
     automatic_correction.save()
 
-@when("I select lenguaje {lenguaje}")
+@when('I select lenguaje "{lenguaje}"')
 def step(context, lenguaje):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('language').send_keys(lenguaje)
 
+@when('I select the corrector "{corrector}"')
+def step(context, corrector):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('corrector').send_keys(corrector)
+
 @when("I wait")
 def step(context):
     time.sleep(5)
-    
+     

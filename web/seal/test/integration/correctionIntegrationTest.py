@@ -6,12 +6,15 @@ from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.suscription import Suscription
 from django.contrib.auth.models import User
+from seal.model.teacher import Teacher
 
 class CorrectionIntegrationTest(TestCase):
     
     course_name = "course_name"
     student_name = "student"
+    teacher_name = "teacher"
     student_email = "email@student.foo"
+    teacher_email = "teacher@teacher.foo"
     practice_deadline = "2012-12-01"
     practice_filepath = "filepath"
     practice_uid = "practice_uid"
@@ -50,6 +53,14 @@ class CorrectionIntegrationTest(TestCase):
         student.courses.add(Course.objects.get(name=self.course_name))
         student.save()
     
+    def create_a_teacher(self):
+        teacher = Teacher()
+        teacher.name = self.teacher_name
+        teacher.uid = self.teacher_name
+        teacher.email = self.teacher_email
+        teacher.user = self.get_user_for_student()
+        teacher.save()
+    
     def create_a_delivery(self):
         delivery = Delivery()
         delivery.file = self.delivery_filepath
@@ -66,19 +77,23 @@ class CorrectionIntegrationTest(TestCase):
         Suscription.objects.all().delete()
         Course.objects.all().delete()
         Student.objects.all().delete()
+        Teacher.objects.all().delete()
         
         self.create_a_course()
         self.create_a_practice()
         self.create_a_student()
         self.create_a_delivery()
-    
+        self.create_a_teacher()
+        
     def test_correction_creation(self):
         correction = Correction()
         correction.publicComent = self.correction_public_comment
         correction.privateComent = self.correction_private_comment
         correction.grade = self.correction_grade
         delivery = Delivery.objects.get(file=self.delivery_filepath)
+        teacher = Teacher.objects.get(uid=self.teacher_name)
         correction.delivery = delivery
+        correction.corrector = teacher
         correction.save()
         
         corrections = Correction.objects.all()

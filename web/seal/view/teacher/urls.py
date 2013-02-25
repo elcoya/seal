@@ -32,6 +32,8 @@ urlpatterns += patterns('view.teacher.delivery',
     url(r'^delivery/download/(?P<iddelivery>\d+)/$', 'download'),
     url(r'^delivery/browse/(?P<iddelivery>\d+)/(?P<file_to_browse>[\w\-\./]+)/$', 'browse'),
     url(r'^delivery/explore/(?P<iddelivery>\d+)/$', 'explore'),
+    url(r'^delivery/detail/(?P<iddelivery>\d+)/$', 'detail'),
+
 )
 
 urlpatterns += patterns('view.teacher.correction',
