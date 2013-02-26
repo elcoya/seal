@@ -51,15 +51,6 @@ def before_scenario(context, scenario):
 #    context.browser.get('http://localhost:8000/')
 
 def after_scenario(context, scenario):
-    Suscription.objects.all().delete()
-    Correction.objects.all().delete()
-    Delivery.objects.all().delete()
-    Practice.objects.all().delete()
-    Course.objects.all().delete()
-    Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
-    Teacher.objects.all().delete()
-    Mail.objects.all().delete()
-    User.objects.exclude(username='seal').delete()
     context.browser.get('http://localhost:8000/logout')
     context.browser.close()
 
@@ -91,3 +82,12 @@ def after_all(context):
             shutil.rmtree(scriptPath)
         except OSError as err:
             print("Not Permition to delete script test file (run as root to delete this) - " + str(err))
+    Suscription.objects.all().delete()
+    Correction.objects.all().delete()
+    Delivery.objects.all().delete()
+    Practice.objects.all().delete()
+    Course.objects.all().delete()
+    Student.objects.all().delete() # Given Students are authenticated users, can't delete them without deleting the users
+    Teacher.objects.all().delete()
+    Mail.objects.all().delete()
+    User.objects.exclude(username='seal').delete()

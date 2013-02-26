@@ -168,6 +168,12 @@ def step(context, id_delivery):
     address = base_url + 'teacher/delivery/explore/' + id_delivery
     context.browser.get(address)
 
+@when(u'I am at the browse delivery page for delivery "{id_delivery}" browsing "{file_path}"')
+def step(context, id_delivery, file_path):
+    address = base_url + 'teacher/delivery/browse/' + id_delivery + "/" + file_path
+    context.browser.get(address)
+
+
 @when('I fill the form with "{coment1}" "{coment2}" "{grade}"')
 def step(context, coment1, coment2, grade):
     form = context.browser.find_element_by_tag_name('form')
