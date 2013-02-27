@@ -30,7 +30,7 @@
 					<td style="text-align: center; ">{{ file.name }}</td>
 					<td style="text-align: center; ">{{ file.file }}</td>
 					<td style="text-align: center; "><a href="/teacher/practices/downloadfile/{{ file.pk }}"> {% trans "Download" %} </a></td>
-					<td style="text-align: center; "><a href="#"> {% trans "Edit" %} </a></td>
+					<td style="text-align: center; "><a href="/teacher/practices/editfile/{{ file.pk }}"> {% trans "Edit" %} </a></td>
 					<td style="text-align: center; "><a href="/teacher/practices/deletefile/{{ file.pk }}"> {% trans "Delete" %} </a></td>
 				</tr>
 				{% empty %}

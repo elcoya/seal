@@ -1,0 +1,17 @@
+{% extends "teacher/teacher.html" %}
+{% load i18n %}
+{% block content %}
+<form id='form-edit-practice' action='' method='post' >
+	{% csrf_token %}
+	<div>Edit File: {{ file_basename }}</div>
+	{% if edited %}
+		<div>Edited successfully</div>
+	{% endif %}
+	<table>
+		{{ form.as_table }}
+	</table>
+	<input type='submit' value='{% trans "Save" %}' />
+	<input type='reset' value='{% trans "Reset" %}' /> 
+</form>
+<footer><a href="/teacher/practices/practicefile/{{ practicefile.practice.pk }}/{{ practicefile.practice.pk }}/">{% trans "back" %}</a></footer>
+{% endblock %}

@@ -15,6 +15,8 @@ from seal.forms.script import PracticeScriptForm
 from seal.model.script import Script
 from seal.forms.practiceFile import PracticeFileForm
 from django.http import HttpResponse
+from seal.forms.edit_practice_file import EditPracticeFileForm
+import os
 
 PATHOK =  "/teacher/course/editcourse/%s"
 PATHFILEOK = "/teacher/practices/practicefile/%s/%s"
@@ -116,3 +118,24 @@ def delete(request, idpracticefile):
     practice = practicefile.practice
     practicefile.delete()
     return HttpResponseRedirect(PATHFILEOK % (str(idcourse), str(practice.pk)))
+
+@login_required
+def edit(request, idpracticefile):
+    practicefile = PracticeFile.objects.get(pk=idpracticefile)
+    file_path = practicefile.file.name # os.path.join(extraction_dir, file_to_browse)
+    file_basename = os.path.basename(file_path)
+    edited = (request.method == 'POST')
+    if (request.method == 'POST'):
+        form = EditPracticeFileForm(request.POST)
+        if (form.is_valid()):
+            edited_file_content = form.clean_data['file_content']
+            with open(file_path, 'w') as content_file:
+                content_file.write(edited_file_content)
+    else:
+        file_content = None
+        with open(file_path, 'r') as content_file:
+            file_content = content_file.read()
+        form = EditPracticeFileForm(initial={'content': file_content})
+    return render(request, 'practice/editPracticeFile.html',
+                  {'form': form, 'practicefile': practicefile, 'file_basename': file_basename, 'edited': edited})
+
