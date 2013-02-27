@@ -12,6 +12,7 @@ from seal.model.suscription import Suscription
 from seal.model.script import Script
 from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.practice_file import PracticeFile
+from seal.utils import managepath
 import os
 from shutil import copyfile
 from os import makedirs
@@ -270,9 +271,10 @@ def step(context, practice_uid, course_name, student_uid, delivery_id):
     delivery = Delivery()
     delivery.pk = delivery_id
     src = "data/delivery.zip"
-    dst = "../../workspace/delivery_files/delivery.zip"
-    if(not os.path.exists("../../workspace/delivery_files/")):
-        makedirs("../../workspace/delivery_files/")
+    delivery_path = managepath.get_instance().get_delivery_path()
+    dst = os.path.join(delivery_path, "delivery.zip")
+    if(not os.path.exists(delivery_path)):
+        makedirs(delivery_path)
     if(not os.path.exists(dst)):
         copyfile(src, dst)
     delivery.file = dst

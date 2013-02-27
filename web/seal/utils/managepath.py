@@ -22,6 +22,8 @@ class Managepath(object):
         self.practice_file_path = settings.PRACTICE_FILE_PATH
         self.script_file_path = settings.SCRIPT_FILE_PATH
         
+        self.temporary_files_path = "/tmp/"
+        
     def get_base_proyect_path(self):
         return self.base_proyect_path
     
@@ -45,6 +47,9 @@ class Managepath(object):
     
     def get_model_path(self):
         return self.model_path
+    
+    def get_temporary_files_path(self):
+        return self.temporary_files_path
     
 def get_instance():
     if not Managepath.INSTANCE:

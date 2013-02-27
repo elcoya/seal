@@ -41,13 +41,11 @@ def walk_directory(files_list, path, relative_path):
 
 @login_required
 def browse(request, iddelivery, file_to_browse=None):
-    print "file: " + str(file_to_browse)
     delivery = Delivery.objects.get(pk=iddelivery);
-    extraction_dir = os.path.join(managepath.get_instance().get_workspace_proyect_path(), str(delivery.pk))
+    extraction_dir = os.path.join(managepath.get_instance().get_temporary_files_path(), str(delivery.pk))
     if (not os.path.exists(extraction_dir)):
         zipfile = ZipFile(delivery.file)
         zipfile.extractall(extraction_dir)
-    
     
     files_list = []
     walk_directory(files_list, extraction_dir, None)
