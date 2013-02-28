@@ -63,13 +63,18 @@ class AutomaticCorrectionDetail(generics.RetrieveUpdateDestroyAPIView):
     model = AutomaticCorrection
     serializer_class = AutomaticCorrectionSerializer
 
+def filter(automatic_corrections):
+    return [automatic_corrections for automatic_corrections in automatic_corrections if automatic_corrections.delivery.practice.get_script()]
+
 class RichAutomaticCorrectionList(generics.ListCreateAPIView):
     """
     API endpoint to list the automatic corrections enriched with the paths to the delivery file and
     the script to run as automated correction.
     """
-    queryset = AutomaticCorrection.objects.filter(status=0)
+    queryset = filter(AutomaticCorrection.objects.filter(status=0))
     serializer_class = RichAutomaticCorrectionSerializer
+    
+    
     
 class DeliveryList(generics.ListCreateAPIView):
     """
