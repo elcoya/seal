@@ -342,3 +342,29 @@ def step(context, teacher, student):
     s = Student.objects.get(uid=student)
     s.corrector = t
     s.save()
+
+@given(u'text file is bound to practice "{practice_name}" with id "{practice_file_id}"')
+def step(context, practice_name, practice_file_id):
+    practice_path = managepath.get_instance().get_practice_path()
+    if not os.path.exists(practice_path):
+        os.makedirs(name=practice_path)
+    practice_filename = "practice_text_file.txt"
+    practice_filepath = os.path.join(practice_path, practice_filename)
+    with open(practice_filepath, 'w') as test_file:
+        lines = ["first line\n",
+                 "second line\n",
+                 "third line\n",
+                 "fourth line\n",
+                 "fifth line\n"]
+        test_file.writelines(lines)
+    practice = Practice.objects.filter(uid=practice_name)[0]
+    practice_file = PracticeFile()
+    practice_file.pk = practice_file_id
+    practice_file.name = "Prueba"
+    practice_file.file = practice_filepath
+    practice_file.practice = practice
+    practice_file.save()
+    
+
+
+

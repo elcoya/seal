@@ -128,7 +128,7 @@ def edit(request, idpracticefile):
     if (request.method == 'POST'):
         form = EditPracticeFileForm(request.POST)
         if (form.is_valid()):
-            edited_file_content = form.clean_data['file_content']
+            edited_file_content = form.data['content']
             with open(file_path, 'w') as content_file:
                 content_file.write(edited_file_content)
     else:

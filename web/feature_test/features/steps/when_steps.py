@@ -240,4 +240,22 @@ def step(context, corrector):
 @when("I wait")
 def step(context):
     time.sleep(5)
-     
+
+@when(u'I am at the list files page for practice "{practice_name}"')
+def step(context, practice_name):
+    practice = Practice.objects.get(uid=practice_name)
+    address = base_url + 'teacher/practices/practicefile/' + str(practice.pk) + "/" + str(practice.pk)
+    context.browser.get(address)
+
+@when(u'I am at the edit text file page for practice "{practice_name}"')
+def step(context, practice_name):
+    practice = Practice.objects.get(uid=practice_name)
+    practice_file = practice.get_practice_file()[0]
+    address = base_url + 'teacher/practices/editfile/' + str(practice_file.pk)
+    context.browser.get(address)
+
+@when(u'I edit the practice text file in the form')
+def step(context):
+    textarea = context.browser.find_element_by_tag_name('textarea')
+    textarea.send_keys("only line")
+

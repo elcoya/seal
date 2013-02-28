@@ -44,6 +44,11 @@ def step(context, link_text):
         match = match or (link_text in link.get_attribute("href"))
     assert match
 
+@then('I should see link to "{text}" in the list')
+def step(context, text):
+    a = context.browser.find_element_by_link_text(text)
+    assert text in a.text
+    
 @then('I should see pattern "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
@@ -74,11 +79,6 @@ def step(context):
 @then('I close de browser')
 def step(context):
     context.browser.close()
-    
-@then('I should see link to "{text}" in the list')
-def step(context, text):
-    a = context.browser.find_element_by_link_text(text)
-    assert text in a.text
     
 @then('I should have the edit form for courses with "{text}" course data in it')
 def step(context, text):
