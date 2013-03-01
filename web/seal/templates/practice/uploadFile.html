@@ -19,9 +19,6 @@
 				<tr>
 					<td>{% trans "Name" %}</td>
 					<td>{% trans "File" %}</td>
-					<td></td>
-					<td></td>
-					<td></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,8 +26,12 @@
 				<tr>
 					<td style="text-align: center; ">{{ file.name }}</td>
 					<td style="text-align: center; ">{{ file.file }}</td>
-					<td style="text-align: center; "><a href="/teacher/practices/downloadfile/{{ file.pk }}"> {% trans "Download" %} </a></td>
-					<td style="text-align: center; "><a href="/teacher/practices/editfile/{{ file.pk }}"> {% trans "Edit" %} </a></td>
+					<td style="text-align: center; "><a href="/teacher/practices/downloadfile/{{ file.pk }}"> {% trans "Download" %} </a></td>				
+					{% if file.isEditable %}
+						<td style="text-align: center; "><a href="/teacher/practices/editfile/{{ file.pk }}"> {% trans "Edit" %} </a></td>
+					{% else %}
+						<td style="text-align: center; "> {% trans "Non-editable"  %}</td>
+					{% endif %}
 					<td style="text-align: center; "><a href="/teacher/practices/deletefile/{{ file.pk }}"> {% trans "Delete" %} </a></td>
 				</tr>
 				{% empty %}

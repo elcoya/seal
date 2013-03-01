@@ -1,11 +1,15 @@
 from django.db import models
 from seal.model.practice import Practice
 from seal.utils import managepath
+import mimetypes
+
 '''
 Created on 23/02/2013
 
 @author: martin
 '''
+
+TYPEEDITABLE = 'text'
 
 class PracticeFile(models.Model):
     """
@@ -20,3 +24,12 @@ class PracticeFile(models.Model):
     def __str__(self):
         """Stringify the Practice or assignment"""
         return (str(self.name))
+
+
+    def isEditable(self):
+        mime = str(mimetypes.guess_type(self.file.name)[0])
+        pos = mime.find(TYPEEDITABLE)
+        if (pos == 0):
+            return True
+        return False
+        
