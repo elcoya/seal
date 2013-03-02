@@ -1,33 +1,47 @@
-{% extends "base.html" %}
 {% load i18n %}
 {% comment %}
 Page to change lengauje
 {% endcomment %}
 
 {% block addl_styles %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login.css" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
 
 {% block head %}
 <title>SEAL | Change Lenguaje</title>
 {% endblock %}
-{% block subtitle %}{% trans "Change Lenguaje" %} {% endblock %}
+
 {% block body %}
-
-<form action="/i18n/setlang/" method="post">
-	<div class="content" >
-		{% csrf_token %}
-		<input name="next" type="hidden" value="/" />
-		{% trans 'Select Lenguaje' %}
-		<select name="language" id="language">
-			{% for lang in LANGUAGES %}
-			<option value="{{ lang.0 }}">{{ lang.1 }}</option>
-			{% endfor %}
-		</select>
-		<input type="submit" value="{% trans 'Change'%}"/>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="/">SEAL</a>
+				<div class="nav-collapse collapse">
+					{% block nav %}{% endblock %}
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
 	</div>
-</form>
-<footer><a href="/">{% trans "back" %}</a></footer>
-
+	<br>
+	<form action="/i18n/setlang/" class="form-signin" method="post">
+		<div class="content" >
+			{% csrf_token %}
+			<input name="next" type="hidden" value="/" />
+			<h2 align="center" class="form-signin-heading">{% trans 'Select Lenguaje' %}</h2>
+			<select name="language" id="language">
+				{% for lang in LANGUAGES %}
+				<option value="{{ lang.0 }}">{{ lang.1 }}</option>
+				{% endfor %}
+			</select>
+			<div align="center">
+				<button  class="btn btn-large btn-primary" type="submit">
+					Change
+				</button>
+			</div>
+		</div>
+	</form>
+</body>
 {% endblock %}
