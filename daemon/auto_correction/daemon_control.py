@@ -44,12 +44,18 @@ class LoopRunner():
         while True:
             start_timestamp = datetime.today()
             
-            result = self.automatic_correction_runner.run()
-            self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
-                          result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
-                          result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
-            
-            self.administrator_mail.send_mails()
+            try:
+                result = self.automatic_correction_runner.run()
+                self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
+                              result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
+                              result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
+            except Exception, e:
+                self.log.error("The automatic correction process failed. Have in mind that is required that the web service must be online.")
+                self.log.error(e)
+            try:
+                self.administrator_mail.send_mails()
+            except:
+                self.log.error("The mail sending process failed. Have in mind that is required that the web service must be online.")
             
             finish_timestamp = datetime.today()
             self.stall_loop(start_timestamp, finish_timestamp)
