@@ -31,11 +31,20 @@ https://github.com/elcoyaman/seal.git
 ###Gestor de Proyecto Asana
 https://app.asana.com/0/1575553467008/2088778110352
 
+###Documento de Instalacion de Ambiente de Produccion
+https://docs.google.com/document/d/1BNC2SOmIxynRK6cXU7i2sFcpgTeFQIXLC_iejkc_E4k/edit
+
 ###Documento de Instalacion de Ambiente de Desarrollo
 https://docs.google.com/document/d/114qFB8RCLp3xxWhmyH4Bkxmoa0BG-oYIqVzsXdWgUGw/edit#
 
 ###Documento de Instalacion de Behave
 https://docs.google.com/document/d/1bQeja4CuiCoNcPzU6BpyxvOvcqFIc7Vl0KqjqHXjBgI/edit
+
+###Documento de Investigacion sobre API REST
+https://docs.google.com/document/d/1mgqw8kq7xer96PD4IBq_QYugs3M5hqmk_aV7o2XdUTQ/edit
+
+###Documento de Configuracion Django-Apache
+https://docs.google.com/document/d/1bLaPKvRCEnlsRhZggzhcn506nSL6jFi1z3fM7C6Nbeo/edit
 
 ###URL de Travis. Servidor de Integración Continua
 https://travis-ci.org/#!/elcoyaman/seal
@@ -56,12 +65,3 @@ https://docs.google.com/document/d/1dBCXFkzwcSSTNkbK1ESLRpfidv5y6DR4kxhkDBYF3S0/
 ####Docstring conventions
 http://www.python.org/dev/peps/pep-0008/
 http://www.python.org/dev/peps/pep-0257/
-
-###Documento de Investigacion sobre API REST
-https://docs.google.com/document/d/1mgqw8kq7xer96PD4IBq_QYugs3M5hqmk_aV7o2XdUTQ/edit
-
-###Documento de Configuracion Django-Apache
-https://docs.google.com/document/d/1bLaPKvRCEnlsRhZggzhcn506nSL6jFi1z3fM7C6Nbeo/edit
-
-###Documento de Instalacion de Ambiente de Produccion
-https://docs.google.com/document/d/1BNC2SOmIxynRK6cXU7i2sFcpgTeFQIXLC_iejkc_E4k/edit
