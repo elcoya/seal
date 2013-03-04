@@ -3,36 +3,32 @@
 {% comment %}
 	This is the main template for all undergraduate (students) pages.
 {% endcomment %}
+
 {% block addl_styles %}
 	{{ block.super }}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/teacher.css" />
 {% endblock %}
+
 {% block head %}
     <title>SEAL</title>
 {% endblock %}
+
 {% block subtitle %}{% trans "Student's view" %}{% endblock %}
 {% block welcome %}
 	<div class="welcome-msg">{% trans "Welcome," %} {{ user.last_name }} | <a href="/changepassw/">{% trans "Change Password" %}</a> | <a href="/logout/">{% trans "logout" %}</a> </div>
 {% endblock %}
+
 {% block nav %}
-<nav>
-	<a href="/undergraduate">{% trans "Home" %}</a>
-</nav>
 {% endblock %}
+
 {% block body %}
 	{% if user.student_set.all %}
 		<div class="main-content" >
 	    	{% block content %}{% endblock %}
 	    </div>
-	    <footer>
-	        <span>© 2012, SEAL</span>
-	    </footer>
 	{% else %}
 		<div class="main-content" >
 	    	<p style="color: #A44; font-weight: bold; text-align: center; ">{% trans "You are not allowed in this section" %}</p>
 	    </div>
-	    <footer>
-	        <span>© 2012, SEAL</span>
-	    </footer>
 	{% endif %}
 {% endblock %}

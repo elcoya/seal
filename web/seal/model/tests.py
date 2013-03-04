@@ -19,6 +19,7 @@ from seal.test.unit.practiceTest import PracticeTest
 from seal.test.unit.studentTest import StudentTest
 from seal.test.unit.suscriptionTest import SuscriptionTest
 from seal.test.unit.teacherTest import TeacherTest
+from seal.test.unit.practiceFileTest import PracticeFileTest
 
 # daemon tests
 from daemon_test.administrator_mail_test import TestMailAdministrator

@@ -11,11 +11,15 @@
     	<div class="header" >SEAL</div>
     	<div class="main-container" >
     		<div class="subtitle-wrapper" >
-	    		<div class="subtitle">{% block subtitle %}&nbsp;{% endblock %}</div>
+	    		<div class="subtitle">{% block subtitle %}{% endblock %}</div>
 	    		{% block welcome %}{% endblock %}
     		</div>
     		{% block nav %}{% endblock %}
 	        {% block body %}{% endblock %}
     	</div>
+    	
+    	<footer>
+	        <span>© 2012, SEAL</span>
+	    </footer>
     </body>
 </html>
