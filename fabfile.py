@@ -202,7 +202,7 @@ def create_and_prepare_db(context = None):
     local(cmd)
     cmd = get_mysql_bash_cmd(sql_sentence = "create user seal IDENTIFIED BY '$3alSEAL';", user='root', password='')
     local(cmd)
-    cmd = get_mysql_bash_cmd(sql_sentence="GRANT ALL PRIVILEGES ON '%seal' TO seal@localhost IDENTIFIED BY '$3alSEAL';", 
+    cmd = get_mysql_bash_cmd(sql_sentence="GRANT ALL PRIVILEGES ON seal TO seal@localhost IDENTIFIED BY '$3alSEAL';", 
                              user='root', password='')
     local(cmd)
     print("Layout set.")
