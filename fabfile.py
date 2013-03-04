@@ -200,7 +200,7 @@ def create_and_prepare_db(context = None):
     print("Travis location detected. Seting up database layout...")
     cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;", user='root', password='')
     local(cmd)
-    cmd = get_mysql_bash_cmd(sql_sentence="GRANT ALL PRIVILEGES ON `%seal`.* TO `seal`@`localhost` IDENTIFIED BY '$3alSEAL';", 
+    cmd = get_mysql_bash_cmd(sql_sentence="GRANT ALL PRIVILEGES ON `%seal` TO `seal`@`localhost` IDENTIFIED BY '$3alSEAL';", 
                              user='root', password='')
     local(cmd)
     print("Layout set.")
