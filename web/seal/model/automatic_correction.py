@@ -33,7 +33,11 @@ class AutomaticCorrection(models.Model):
         return self.delivery.file.path
     
     def get_correction_script(self):
-        return self.delivery.practice.get_script().file.path
+        script = self.delivery.practice.get_script()
+        if script is not None:
+            return script.file.path
+        else:
+            return None
     
     def user_mail(self):
         return self.delivery.student.email

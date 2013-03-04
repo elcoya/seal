@@ -25,9 +25,13 @@ class AutomaticCorrectionSelectionStrategyThroughRestApi(AutomaticCorrectionSele
     def get_automatic_corrections(self):
         self.log.debug("searching for deliveries with status pending...")
         pending_automatic_corrections = self.rest_api_helper.get_automatic_corrections()
+        result = []
+        for pending_automatic_correction in pending_automatic_corrections:
+            if pending_automatic_correction.script is not None:
+                result.append(pending_automatic_correction)
         count = len(pending_automatic_corrections)
         if count > 0:
             self.log.debug("%d deliveries obtained.", count)
-        return pending_automatic_corrections
+        return result
 
 

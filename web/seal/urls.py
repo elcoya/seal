@@ -39,6 +39,7 @@ urlpatterns += patterns('',
     url(r'^mailserializer/(?P<pk>\d+)/?$', serializer.MailDetail.as_view(), name='mail-detail'),
     
     url(r'^richautomaticcorrectionserializer/$', serializer.RichAutomaticCorrectionList.as_view(), name='rich_automatic_correction-list'),
+    
     url(r'^automaticcorrectionserializer/$', serializer.AutomaticCorrectionList.as_view(), name='automatic_correction-list'),
     url(r'^automaticcorrectionserializer/(?P<pk>\d+)/?$', serializer.AutomaticCorrectionDetail.as_view(), name='automatic_correction-detail'),
     

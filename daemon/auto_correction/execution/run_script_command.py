@@ -3,6 +3,7 @@ from auto_correction.exceptions.illegal_state_exception import IllegalStateExcep
 from auto_correction.result.script_result import ScriptResult
 from auto_correction.log.logger_manager import LoggerManager
 from auto_correction.execution.run_script_timeout import ProcessTimeout
+import os
 
 class RunScriptCommand():
     """
@@ -14,7 +15,7 @@ class RunScriptCommand():
     
     """
     
-    TIME_OUT = 5 # seconds
+    TIME_OUT = 60 # seconds
     
     def __init__(self):
         self.script = None
@@ -29,7 +30,7 @@ class RunScriptCommand():
             raise IllegalStateException(reason="In order to execute the script, you must set it first.")
         # now we may call the script
         self.log.debug("launching correction process...")
-        process = subprocess.Popen([self.script], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen([self.script], shell=True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
         # must ensure that the process won't run forever
         process_timer = ProcessTimeout(process, RunScriptCommand.TIME_OUT)
         process_timer.start_timer()
