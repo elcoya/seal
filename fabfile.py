@@ -88,7 +88,7 @@ def get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = None, user=None
         user = USER
     if(password is None):
         password = PASSWORD
-    local_cmd = "mysql -e '" + sql_sentence + "' -u " + user
+    local_cmd = "mysql -e \"" + sql_sentence + "\" -u " + user
     if (database is not None and database != ""):
         local_cmd += " -D " + database + " "
     if (password != ""):
@@ -200,8 +200,9 @@ def create_and_prepare_db(context = None):
     print("Travis location detected. Seting up database layout...")
     cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;", user='root', password='')
     local(cmd)
-    cmd = get_mysql_bash(user='root', password='')
-    local(cmd + " < build_files/ci_grant_privileges_in_travis_db.sql")
+    cmd = get_mysql_bash_cmd(sql_sentence="GRANT ALL PRIVILEGES ON `%seal`.* TO `seal`@`localhost` IDENTIFIED BY '$3alSEAL';", 
+                             user='root', password='')
+    local(cmd)
     print("Layout set.")
     with lcd("web"):
         local("python seal/manage.py syncdb --noinput")
