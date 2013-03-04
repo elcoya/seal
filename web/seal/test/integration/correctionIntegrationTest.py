@@ -45,9 +45,7 @@ class CorrectionIntegrationTest(TestCase):
     
     def create_a_student(self):
         student = Student()
-        student.name = self.student_name
         student.uid = self.student_name
-        student.email = self.student_email
         student.user = self.get_user_for_student()
         student.save()
         student.courses.add(Course.objects.get(name=self.course_name))

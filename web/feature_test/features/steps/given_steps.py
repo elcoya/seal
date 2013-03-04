@@ -33,7 +33,6 @@ def step(context, username, password):
         teacher.save()
     else:
         teacher = Teacher()
-        #teacher.name = capitalize(username)
         teacher.name = username
         teacher.uid = username
         teacher.email = username + "@foo.foo"
@@ -54,11 +53,11 @@ def step(context, username, password):
         student.save()
     else:
         student = Student()
-        student.name = username
         student.uid = username
-        student.email = username + "@foo.foo"
         user = User()
         user.username = username
+        user.first_name = username
+        user.last_name = username
         user.set_password(password)
         user.email = username + "@foo.foo"
         user.save()
@@ -74,12 +73,11 @@ def step(context, username, email):
         student.save()
     else:
         student = Student()
-        #student.name = capitalize(username)
-        student.name = username
         student.uid = username
-        student.email = email
         user = User()
         user.username = username
+        user.first_name = username
+        user.last_name = username
         user.set_password(username)
         user.email = email
         user.save()
@@ -141,29 +139,29 @@ def step(context):
 def step(context,course):
     c = Course.objects.get_or_create(name=course)
 
-@given('student "{name}" exists in course "{course1}" and in course "{course2}"')
-def step(context,name, course1, course2):
+@given('student "{uid}" exists in course "{course1}" and in course "{course2}"')
+def step(context,uid, course1, course2):
     course1 = Course.objects.get(name=course1)
     course2 = Course.objects.get(name=course2)
-    student = Student.objects.get(name=name)
+    student = Student.objects.get(uid=uid)
     student.courses.add(course1)
     student.courses.add(course2)
 
-@given('student "{name}" exists in course "{course}"')
-def step(context,name, course):
+@given('student "{uid}" exists in course "{course}"')
+def step(context,uid, course):
     course = Course.objects.get(name=course)
-    student = Student.objects.get(name=name)
+    student = Student.objects.get(uid=uid)
     student.courses.add(course)
 
-@given('student "{name}" does not exist in course "{course}"')
-def step(context,name, course):
+@given('student "{uid}" does not exist in course "{course}"')
+def step(context,uid, course):
     course = Course.objects.get(name=course)
-    if(course.get_students(uid=name).exists()):
-        course.get_students().remove(uid=name)
+    if(course.get_students(uid=uid).exists()):
+        course.get_students().remove(uid=uid)
 
-@given('student "{name}" exists without course')
-def step(context,name):
-    student = Student.objects.get(name=name)
+@given('student "{uid}" exists without course')
+def step(context,uid):
+    student = Student.objects.get(uid=uid)
     student.courses.clear()
 
 @given('there are no student in "{course}"')
@@ -220,20 +218,18 @@ def step(context, uid):
         user.save()
         student = Student()
         student.user = user
-        student.name = uid
         student.uid = uid
-        student.email = "foo@foo.foo"
         student.save()
 
 @given('exist delivery of "{practice}" from student "{student}" whit dalivery date "{deliveryDate}"')
 def step(context,practice,student,deliveryDate):
-    s = Student.objects.get(name=student)
+    s = Student.objects.get(uid=student)
     p = Practice.objects.get(uid=practice)
     Delivery.objects.get_or_create(file="archivo.zip",student_id=s.pk,practice_id=p.pk, deliverDate=deliveryDate)
 
 @given('exist correction of delivery of "{student}" for "{practice}" with "{coment1}" "{coment2}" "{grade}" and corrector "{corrector}"')
 def step(context,practice,student,coment1,coment2,grade,corrector):
-    s = Student.objects.get(name=student)
+    s = Student.objects.get(uid=student)
     p = Practice.objects.get(uid=practice)
     d = Delivery.objects.get(student=s, practice=p)
     t = Teacher.objects.get(uid=corrector)
@@ -241,7 +237,7 @@ def step(context,practice,student,coment1,coment2,grade,corrector):
 
 @given('existe suscrition of student "{student}" for course "{course}" with suscription date "{suscriptionDate}" and state "{state}"')
 def step(context,student,course,suscriptionDate,state):
-    s = Student.objects.get(name=student)
+    s = Student.objects.get(uid=student)
     c = Course.objects.get(name=course)
     Suscription.objects.get_or_create(student_id=s.pk, course_id=c.pk, state=state, suscriptionDate=suscriptionDate)
 

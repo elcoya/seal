@@ -17,11 +17,13 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from seal.model.mail import Mail
 from seal.forms.changepass import ChangePasswForm
+from seal.model.course import Course
 
 LENGTHPASSWORD = 8
 REDIRECTADMIN = "/admin"
 REDIRECTTEACHER = "/teacher"
 REDIRECTUNDERGRADUATE = "/undergraduate"
+REDIRECTCOURSE = "/undergraduate/practice/list/%s"
 REDIRECTINDEX = "index.html"
 REDIRECTLOGOUT = "/"
 ERRORCAPTCHA = "You Must Be a Robot"
@@ -44,7 +46,11 @@ def index(request):
     elif(Teacher.objects.filter(user_id=user.id)):
         return HttpResponseRedirect(REDIRECTTEACHER)
     elif(Student.objects.filter(user_id=user.id).exists()):
-        return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
+        student = Student.objects.get(user_id=user.id)
+        if (student.courses.all().count() == 1):
+            return HttpResponseRedirect(REDIRECTCOURSE % student.courses.all()[0].pk)
+        else:
+            return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
         return render_to_response(REDIRECTINDEX)
 
@@ -69,16 +75,20 @@ def register(request):
             if (form.is_valid()):
                 user = User()
                 user.username = form.data['uid']
-                user.last_name = form.data['name']
+                user.first_name = form.data['first_name']
+                user.last_name = form.data['last_name']
                 user.set_password(form.data['passwd'])
                 user.email = form.data['email']
                 user.save()
                 student = Student()
                 student.user = user
-                student.name = form.data['name']
                 student.uid = form.data['uid']
-                student.email = form.data['email']
                 student.save()
+                if (Course.objects.all().count() > 0):
+                    course = Course.objects.all().order_by('-name')[0];
+                    student.courses.add(course)
+                    student.save()
+                
                 mail = Mail()
                 mail.save_mail(SUBJECTMAIL, BODYMAIL % (user.username, form.data['passwd']), user.email)
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))

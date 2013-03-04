@@ -20,7 +20,6 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
     	  And course "2012-1" exists
 		  And student "martin" exists in course "2012-1"
           And I log in as "martin" "martin"
-		 When I click in the "2012-1" link
 		 Then I should see "There are yet no Practices" 
 		 
 	Scenario: List practices of enrroles course with 2 practices order by deadline 
@@ -30,6 +29,5 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
           And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And practice "TP 1" exists in course "2012-1" with deadline "2012-12-02"
 	 	  And I log in as "martin" "martin"
-		 When I click in the "2012-1" link
 		 Then I should see "TP Intro" before "TP 1"	 
 

@@ -36,7 +36,8 @@ def newstudent(request, idcourse):
             user.username = form.data['uid']
             user.set_password(form.data['passwd'])
             user.email = form.data['email']
-            user.last_name = form.data['name']
+            user.first_name = form.data['first_name']
+            user.last_name = form.data['last_name']
             user.save()
             form.instance.user = user
             form.save()
@@ -48,17 +49,20 @@ def newstudent(request, idcourse):
 def editstudent(request, idcourse, idstudent):
     student = Student.objects.get(pk=idstudent)     
     if (request.method == 'POST'):
-        form = StudentForm(request.POST, instance = student)
+        form = StudentForm(request.POST, instance = student, 
+                           initial = {'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
+        
         if (form.is_valid()):
             if (form.data['passwd']!=''):
                 student.user.set_password(form.data['passwd'])
-            student.user.last_name = form.data['name']
             student.user.email = form.data['email']
+            student.user.first_name = form.data['first_name']
+            student.user.last_name = form.data['last_name']
             student.user.save()
             form.save()
             return HttpResponseRedirect(PATHOK % str(idcourse))
     else:
-        form = StudentForm( instance = student)
+        form = StudentForm(instance = student, initial = {'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
     return render(request, 'student/editstudent.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
 def edit_unenrolled_student(request, idstudent):

@@ -63,4 +63,4 @@ Feature: As a teacher I want to administrate de suscription
 		 And I click the button "Accept"
 		 And I click in the "logout" link
          And I log in as "martin" "martin"
-        Then I should see link to "2012-1" in the list 
+        Then I should see "There are yet no Practices"

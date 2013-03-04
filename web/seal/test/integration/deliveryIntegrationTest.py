@@ -16,9 +16,7 @@ class DeliveryIntegrationTest(TestCase):
         course.save()
         
         student = Student()
-        student.name = "Nombre y Apellido"
         student.uid = "85000"
-        student.email = "email@pagnia.com.ar"
         student.save()
         
         practice = Practice()

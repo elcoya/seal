@@ -4,7 +4,7 @@
 		{% csrf_token %}
 		<table>
 			<div style="width: 100%; text-align: left; margin: auto;">
-				CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}} - STUDENT {{delivery.student.name}} ({{delivery.student.uid}})
+				CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}} - STUDENT {{delivery.student.user.last_name}} ({{delivery.student.uid}})
 				<br><br>
 				CORRECTOR - {{corrector}}
 				<br><br>

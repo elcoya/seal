@@ -47,7 +47,8 @@ def step(context):
 @when('I fill the newstudent form with default data for course "{coursename}"')
 def step(context, coursename):
     form = context.browser.find_element_by_tag_name('form')
-    form.find_element_by_name('name').send_keys('Dummy Student')
+    form.find_element_by_name('first_name').send_keys('Dummy Student')
+    form.find_element_by_name('last_name').send_keys('Dummy Student')
     form.find_element_by_name('uid').send_keys('dummy')
     form.find_element_by_name('email').send_keys('dummy@foo.foo')
     form.find_element_by_name('courses').send_keys(coursename)
@@ -123,7 +124,8 @@ def step(context,course):
 @when('I fill in the registration form with user "{uid}"')
 def step(context, uid):
     form = context.browser.find_element_by_tag_name('form')
-    form.find_element_by_name('name').send_keys(uid)
+    form.find_element_by_name('first_name').send_keys(uid)
+    form.find_element_by_name('last_name').send_keys(uid) 
     form.find_element_by_name('uid').send_keys(uid)
     form.find_element_by_name('passwd').send_keys('seal')
     form.find_element_by_name('passwd_again').send_keys('seal')

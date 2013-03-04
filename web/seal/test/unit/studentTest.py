@@ -11,7 +11,7 @@ from seal.model import Student
 class StudentTest(TestCase):
     
     def testStudentToStringInputNameReturnName(self):
-        name = "Name"
+        uid = "uid"
         student = Student()
-        student.name = name
-        self.assertEqual(str(student), name)
+        student.uid = uid
+        self.assertEqual(str(student), uid)

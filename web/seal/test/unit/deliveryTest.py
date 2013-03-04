@@ -11,7 +11,7 @@ from seal.model import Delivery, Student, Practice
 class DeliveryTest(TestCase):
     def setUp(self):
         self.student = Student()
-        self.student.name = "Nombre y Apellido"
+        self.student.uid = "Nombre y Apellido"
         self.practice = Practice()
         self.practice.uid = "Tp inicial"
     

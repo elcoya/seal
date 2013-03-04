@@ -45,11 +45,9 @@ def get_user_for_student(student_name):
     user.save()
     return user
 
-def create_a_student(student_name, student_email, course_name):
+def create_a_student(student_name, course_name):
     student = Student()
-    student.name = student_name
     student.uid = student_name
-    student.email = student_email
     student.user = get_user_for_student(student_name)
     student.save()
     student.courses.add(Course.objects.get(name=course_name))

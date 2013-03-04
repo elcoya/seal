@@ -21,7 +21,7 @@ class AutomaticCorrectionIntegrationTest(TestCase):
     def setUp(self):
         clean_up_database_tables()
         create_a_course(self.course_name)
-        create_a_student(self.student_name, self.student_email, self.course_name)
+        create_a_student(self.student_name, self.course_name)
         create_a_practice(self.course_name, self.practice_deadline, self.practice_filepath, self.practice_uid)
         create_a_delivery(self.delivery_filepath, self.student_name, self.course_name, self.practice_uid, self.delivery_date)
         create_an_automatic_correction(self.delivery_filepath, self.stdout, self.exit_value, self.status)

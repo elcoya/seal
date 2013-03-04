@@ -16,7 +16,6 @@ REDIRECTOKNEWSUSCRIPTION = "/undergraduate/suscription"
 def index(request):
     student = request.user.student_set.get(uid=request.user.username)
     suscriptions = Suscription.objects.filter(student = student).order_by('suscriptionDate')
-    
     courses = Course.objects.all()
     student_courses = student.courses.all()
     courses_student_pending = []

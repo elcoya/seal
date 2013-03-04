@@ -19,14 +19,12 @@ class Student(models.Model):
     
     """
     
-    name = models.CharField(max_length = 100)
     uid = models.CharField(unique=True, max_length = 32)
-    email = models.CharField(max_length = 90)
     courses = models.ManyToManyField(Course, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     corrector = models.ForeignKey(Teacher, null=True, blank=True)
     
     def __str__(self):
         """Stringify the Student"""
-        return self.name
+        return self.uid
 

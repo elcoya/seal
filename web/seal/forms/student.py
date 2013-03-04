@@ -11,6 +11,8 @@ class StudentForm(ModelForm):
         model = Student
         exclude = ('user',)
     
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
     email = forms.EmailField()
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False)
     passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False)

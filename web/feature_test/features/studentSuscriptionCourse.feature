@@ -77,8 +77,9 @@ Feature: As a student I want to aplicate to a course
     Scenario: Student enroled in the only course, no courses to sucribe  
        Given student "martin" exists with password "martin"
 		 And there are no courses
-		 And I log in as "martin" "martin"
 		 And course "2012-1" exists
 		 And student "martin" exists in course "2012-1"
-		When I click in the "Suscription" link
+		 And I log in as "martin" "martin" 
+		When I click in the "Home" link
+		 And I click in the "Suscription" link
 		Then I should see "There are yet no Course to suscribe" 

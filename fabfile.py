@@ -175,7 +175,7 @@ def populate_database():
                                               first_name="student name", last_name="Auto Student")[0]
     student_user.set_password("student")
     student_user.save()
-    student = Student.objects.get_or_create(name="student", email="sealstudent@gmail.com", user=student_user, uid="student", corrector=teacher)[0]
+    student = Student.objects.get_or_create(user=student_user, uid="student", corrector=teacher)[0]
     course = Course.objects.get_or_create(name="2013-1C")[0]
     student.courses.add(course)
     student.save()
@@ -284,7 +284,7 @@ def pylint():
 
 
 # to be invoked from the development enviroment
-def rundev():
+def runfullcheck():
     ctxt = FabricContext()
     prepare_db(ctxt)
     test()

@@ -66,11 +66,8 @@ def editcourse(request, idcourse):
             else:
                 table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
                                        'ndeliveries':  ndeliveries})
-        students = course.get_students().order_by('name')
-        table_students = []
-        for student in students:
-            table_students.append({'pk': student.pk, 'name': student.name, 'email': student.email, 'uid': student.uid, 'corrector': student.corrector})
+        students = course.get_students().order_by('uid')
     return render(request, 'course/editcourse.html',
-                  {'form': form, 'table_contents': table_contents, 'table_students': table_students, 
+                  {'form': form, 'table_contents': table_contents, 'students': students, 
                    'course': course, 'idcourse': course.pk }, 
                   context_instance=RequestContext(request))

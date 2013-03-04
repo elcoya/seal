@@ -30,7 +30,7 @@ def index(request, iddelivery):
             if (form.is_valid()):
                 form.save()
                 mail = Mail()
-                mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.email )
+                mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.user.email )
                 return HttpResponseRedirect(PATHOK % str(delivery.practice.pk))
         else:
             form = CorrectionForm()
@@ -47,7 +47,7 @@ def editcorrection(request, idcorrection):
             form_edit = form.save(commit=False)
             form_edit.save()
             mail = Mail()
-            mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.email )
+            mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.user.email )
             return HttpResponseRedirect(PATHOK % str(correction.delivery.practice.pk))
     else:    
         form = CorrectionForm(instance=correction)

@@ -19,7 +19,7 @@ class CourseIntegrationTest(TestCase):
         """
         course_name = '2012-1C'
         aCourse = Course.objects.get_or_create(name=course_name)[0]
-        aStudent = Student.objects.get_or_create(name="Juan Perez", uid='1234', email = "email@pagnia.com.ar")[0]
+        aStudent = Student.objects.get_or_create(uid='1234')[0]
         aCourse.add_student(aStudent)
         aCourse.save()
         
@@ -31,7 +31,7 @@ class CourseIntegrationTest(TestCase):
         I Will add a Student from a Course and verify it contains the student
         """
         aCourse = Course.objects.get_or_create(name='2012-1C')[0]
-        aStudent = Student.objects.get_or_create(name="Juan Perez", uid='1234', email = "email@pagnia.com.ar")[0]
+        aStudent = Student.objects.get_or_create(uid='1234')[0]
         aCourse.add_student(aStudent)
         aCourse.save()
         

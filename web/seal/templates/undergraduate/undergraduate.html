@@ -19,8 +19,10 @@
 {% endblock %}
 
 {% block nav %}
+<nav>
+	<a href="/undergraduate">{% trans "Home" %}</a>
+</nav>
 {% endblock %}
-
 {% block body %}
 	{% if user.student_set.all %}
 		<div class="main-content" >

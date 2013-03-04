@@ -63,11 +63,11 @@
 		</thead>
 		
 		<tbody>
-		{% for student in table_students %}
+		{% for student in students %}
 		    <tr>
 		    	<td style="width: 25%; text-align: center; " ><a href="/teacher/students/editstudent/{{ idcourse }}/{{student.pk}}">{{ student.uid }}</a></td>
-		    	<td style="width: 25%; text-align: center; ">{{ student.name }}</td>
-		    	<td style="width: 25%; text-align: center; ">{{ student.email }}</td>
+		    	<td style="width: 25%; text-align: center; ">{{ student.user.last_name }}</td>
+		    	<td style="width: 25%; text-align: center; ">{{ student.user.email }}</td>
 		    	<td style="width: 25%; text-align: center; ">
 		    		{% if student.corrector %}
 			    		{{ student.corrector.name }}

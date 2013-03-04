@@ -14,7 +14,8 @@ class RegistrationForm(Form):
     """
     Registrtion form for new Student
     """
-    name = forms.CharField(max_length=100)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
     uid = forms.CharField(max_length=32)
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True))
     passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True))
