@@ -23,8 +23,5 @@ class TestAutomaticCorrectionSelectionStrategy(unittest.TestCase):
         
         self.assertEqual(actual_return_value, return_value)
         rest_api_helper.get_automatic_corrections.assert_called()
-        
-
-
 
 
