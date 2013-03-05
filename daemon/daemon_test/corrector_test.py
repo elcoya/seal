@@ -21,6 +21,7 @@ class CorrectorTest(unittest.TestCase):
         automatic_correction = Mock()
         return_value = Mock()
         automatic_correction.delivery.practice.get_script.return_value = return_value
+        automatic_correction.script = "test_script.sh"
         selection_strategy_mock = Mock()
         selection_strategy_mock.get_automatic_corrections.return_value = (automatic_correction, )
         setup_enviroment_mock = Mock()

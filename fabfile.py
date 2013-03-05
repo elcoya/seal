@@ -201,7 +201,7 @@ def create_and_prepare_db(context = None):
     cmd = get_mysql_bash_cmd(sql_sentence = "create database seal;", user='root', password='')
     local(cmd)
     cmd = get_mysql_bash(user='root', password='')
-    local("echo \"GRANT ALL PRIVILEGES ON seal.* TO 'seal'@'localhost' IDENTIFIED BY '$3alSEAL' WITH GRANT OPTION;\" | " + cmd)
+    local(cmd + " < build_files/ci_grant_privileges_in_travis_db.sql")
     print("Layout set.")
     with lcd("web"):
         local("python seal/manage.py syncdb --noinput")
