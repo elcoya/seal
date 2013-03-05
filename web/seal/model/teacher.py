@@ -17,14 +17,13 @@ class Teacher(models.Model):
     
     """
     
-    name = models.CharField(max_length = 100)
     uid = models.CharField(unique=True, max_length = 32)
-    email = models.CharField(max_length = 90)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    appointment = models.CharField(max_length = 50)
     
     def __str__(self):
         """Stringify the Teacher"""
-        return self.name
+        return self.user.last_name
     
     def save(self, force_insert=False, force_update=False, using=None):
         """Extends parent. Checks for the existance of the login user"""

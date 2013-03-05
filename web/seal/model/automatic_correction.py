@@ -40,5 +40,5 @@ class AutomaticCorrection(models.Model):
             return None
     
     def user_mail(self):
-        return self.delivery.student.email
+        return self.delivery.student.user.email
     
