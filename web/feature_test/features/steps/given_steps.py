@@ -33,11 +33,11 @@ def step(context, username, password):
         teacher.save()
     else:
         teacher = Teacher()
-        teacher.name = username
         teacher.uid = username
-        teacher.email = username + "@foo.foo"
         user = User()
         user.username = username
+        user.first_name = username
+        user.last_name = username
         user.set_password(password)
         user.email = username + "@foo.foo"
         user.save()

@@ -13,6 +13,7 @@ class CorrectionIntegrationTest(TestCase):
     course_name = "course_name"
     student_name = "student"
     teacher_name = "teacher"
+    teacher_appointment = "teacher"
     student_email = "email@student.foo"
     teacher_email = "teacher@teacher.foo"
     practice_deadline = "2012-12-01"
@@ -47,16 +48,15 @@ class CorrectionIntegrationTest(TestCase):
         student = Student()
         student.uid = self.student_name
         student.user = self.get_user_for_student()
-        student.save()
+        student.save() 
         student.courses.add(Course.objects.get(name=self.course_name))
         student.save()
     
     def create_a_teacher(self):
         teacher = Teacher()
-        teacher.name = self.teacher_name
         teacher.uid = self.teacher_name
-        teacher.email = self.teacher_email
         teacher.user = self.get_user_for_student()
+        teacher.appointment = self.teacher_appointment
         teacher.save()
     
     def create_a_delivery(self):

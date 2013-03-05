@@ -85,7 +85,7 @@ def register(request):
                 student.uid = form.data['uid']
                 student.save()
                 if (Course.objects.all().count() > 0):
-                    course = Course.objects.all().order_by('-name')[0];
+                    course = Course.objects.all().order_by('-pk')[0];
                     student.courses.add(course)
                     student.save()
                 

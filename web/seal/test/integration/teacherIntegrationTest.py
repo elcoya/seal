@@ -16,24 +16,21 @@ class TeacherIntegrationTest(TestCase):
         user.is_superuser = 0
         user.save()
         
-    def testCreationTeacherCompareName(self):
-        name = "teacher"
+    def testCreationTeacherCompareUid(self):
+        uid = "teacher"
         teacher = Teacher()
-        teacher.name = name
-        teacher.iud = name
-        teacher.email = "test@foo.foo"
+        teacher.uid = uid
+        teacher.appointment = uid
         teacher.user = User.objects.get(username="test")
         teacher.save()
-        c_teacher = Teacher.objects.get(name=name)
-        self.assertEqual(c_teacher.name, name)
+        c_teacher = Teacher.objects.get(uid=uid)
+        self.assertEqual(c_teacher.uid, uid)
         
     def testCreationWithoutUserCatchException(self):
         msg = 'Teacher cannot be saved without an authentication register. Please, give the teacher an associated user so he can login.'
         name = "teacher"
         teacher = Teacher()
-        teacher.name = name
         teacher.iud = name
-        teacher.email = "test@foo.foo"
         try:
             teacher.save()
             assert(False)

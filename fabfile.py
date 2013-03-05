@@ -170,7 +170,7 @@ def populate_database():
                                               first_name="teacher name", last_name="Auto Teacher")[0]
     teacher_user.set_password("teacher")
     teacher_user.save()
-    teacher = Teacher.objects.get_or_create(name="teacher", uid="teacher", user=teacher_user, email='sealteacher@gmail.com')[0]
+    teacher = Teacher.objects.get_or_create(uid="teacher", appointment="teacher", user=teacher_user)[0]
     student_user = User.objects.get_or_create(username="student", email='sealstudent@gmail.com', 
                                               first_name="student name", last_name="Auto Student")[0]
     student_user.set_password("student")
