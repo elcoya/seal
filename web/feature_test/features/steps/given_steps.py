@@ -34,6 +34,7 @@ def step(context, username, password):
     else:
         teacher = Teacher()
         teacher.uid = username
+        teacher.appointment = username
         user = User()
         user.username = username
         user.first_name = username

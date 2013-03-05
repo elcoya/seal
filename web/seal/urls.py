@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
-#import serializer
 from rest_framework.urlpatterns import format_suffix_patterns
-from seal.view import serializer
+from seal.view import serializer, teacher_admin
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -18,11 +17,14 @@ urlpatterns = patterns('',
     url(r'^login/?$', 'django.contrib.auth.views.login'),
     url(r'^recoverypass/?$', home.recovery_pass),
     url(r'^changelenguaje/?$', home.change_lenguaje),
-    url(r'^i18n/', include('django.conf.urls.i18n'))
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 )
 
 urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^listteacher/?$', teacher_admin.listteacher),
+    url(r'^newteacher/?$', teacher_admin.newteacher),
+    url(r'^editteacher/(?P<idteacher>\d+)/?$', teacher_admin.editteacher),
 )
 
 urlpatterns += patterns('',

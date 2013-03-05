@@ -1,0 +1,51 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<body>
+	<div id="content-main">
+		<h2> {% trans "List of Teacher" %}</h2>
+		<div style="clear: none; text-align: right; float: left;">
+			<a href="/newteacher" >{% trans "New Teacher" %}</a>
+		</div>
+		<br>
+		<br>
+		<table style="width: 100%;">
+			<thead style="text-align: center; ">
+				<tr>
+					<td><b>{% trans "Uid" %}</b></td>
+					<td><b>{% trans "First Name" %}</b></td>
+					<td><b>{% trans "Last Name" %}</b></td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for teacher in teachers %}
+				<tr>
+					<td style="text-align: center; "><a href="/editteacher/{{ teacher.pk }}">{{ teacher.uid }}</a></td>
+					<td style="text-align: center; ">{{ teacher.user.first_name }}</td>
+					<td style="text-align: center; ">{{ teacher.user.last_name }}</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="4" style="text-align: center; ">{% trans "There are yet no Teacher" %}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		<footer>
+			<a href="/">{% trans "back" %}</a>
+		</footer>
+	</div>
+</body>
+{% endblock %}

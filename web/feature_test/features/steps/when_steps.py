@@ -44,6 +44,18 @@ def step(context):
     a = context.browser.find_element_by_link_text('Courses')
     a.click()
 
+@when('I fill the teacher form with default data')
+def step(context):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('username').send_keys('teacher')
+    form.find_element_by_name('first_name').send_keys('First Teacher')
+    form.find_element_by_name('last_name').send_keys('Last Teacher')
+    form.find_element_by_name('uid').send_keys('teacher')
+    form.find_element_by_name('email').send_keys('teacher@foo.foo')
+    form.find_element_by_name('appointment').send_keys('teacher')    
+    form.find_element_by_name('passwd').send_keys('dummy')
+    form.find_element_by_name('passwd_again').send_keys('dummy')    
+
 @when('I fill the newstudent form with default data for course "{coursename}"')
 def step(context, coursename):
     form = context.browser.find_element_by_tag_name('form')
