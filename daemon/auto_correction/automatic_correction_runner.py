@@ -5,6 +5,7 @@ from auto_correction.preparation.setup_enviroment import SetupEnviroment
 from auto_correction.utils import managepath
 from auto_correction.selection.automatic_correction_selection_strategy_through_rest_api import AutomaticCorrectionSelectionStrategyThroughRestApi
 from auto_correction.publication.publish_results_visitor_mail import PublishResultsVisitorMail
+import os
 
 HTTP_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
 SERIALIZER_AUTH_USER = 'seal'
@@ -42,7 +43,7 @@ class AutomaticCorrectionRunner():
         for pending_automatic_correction in pending_automatic_corrections:
             
             self.setup_enviroment.run(pending_automatic_correction, AutomaticCorrectionRunner.TMP_DIR)
-            self.run_script_command.set_script(pending_automatic_correction.script)
+            self.run_script_command.set_script(AutomaticCorrectionRunner.TMP_DIR + "/" + os.path.basename(pending_automatic_correction.script))
             script_result = self.run_script_command.execute()
             script_result.automatic_correction = pending_automatic_correction
             for visitor in self.publish_result_visitors:

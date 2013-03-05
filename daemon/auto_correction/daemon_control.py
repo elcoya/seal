@@ -49,13 +49,13 @@ class LoopRunner():
                 self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
                               result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
                               result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
-            except Exception, e:
-                self.log.error("The automatic correction process failed. Have in mind that is required that the web service must be online.")
-                self.log.error(e)
+            except:
+                self.log.exception("The automatic correction process failed. Have in mind that is required that the web service must be online.")
+            
             try:
                 self.administrator_mail.send_mails()
             except:
-                self.log.error("The mail sending process failed. Have in mind that is required that the web service must be online.")
+                self.log.exception("The mail sending process failed. Have in mind that is required that the web service must be online.")
             
             finish_timestamp = datetime.today()
             self.stall_loop(start_timestamp, finish_timestamp)
