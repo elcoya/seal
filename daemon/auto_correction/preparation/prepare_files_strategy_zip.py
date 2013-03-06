@@ -2,6 +2,7 @@ from auto_correction.preparation.prepare_files_strategy import PrepareFilesStrat
 from zipfile import ZipFile
 from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 from auto_correction.log.logger_manager import LoggerManager
+import os
 
 class PrepareFilesStrategyZip(PrepareFilesStrategy):
     """
@@ -23,6 +24,15 @@ class PrepareFilesStrategyZip(PrepareFilesStrategy):
                                                 Try setting the zip attribute for this object.")
         zipfile = ZipFile(self.zip)
         zipfile.extractall(destination_path)
+        
+        self.log.debug("\n\nWalking destination path...")
+        for path, directories, files in os.walk(destination_path):
+            self.log.debug("path: %s", path)
+            for directory in directories:
+                self.log.debug("directory: %s", directory)
+            for a_file in files:
+                self.log.debug("file: %s", a_file)
+        self.log.debug("\n\n")
         
         self.log.debug("zip file extracted to %s.", destination_path)
     

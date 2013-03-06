@@ -46,7 +46,7 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
             self.json_translator.json = auto_correction_data
             return self.json_translator.get_automatic_corrections()
         else:
-            raise HTTP_204_NO_CONTENT
+            raise auto_correction_request.status_code
     
     def get_delivery(self, pk):
         self.log.debug("Retrieving delivery for id: %d", pk)

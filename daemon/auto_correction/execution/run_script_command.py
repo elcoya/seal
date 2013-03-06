@@ -4,6 +4,8 @@ from auto_correction.result.script_result import ScriptResult
 from auto_correction.log.logger_manager import LoggerManager
 from auto_correction.execution.run_script_timeout import ProcessTimeout
 import os
+from auto_correction.utils import managepath
+from fabric.context_managers import lcd
 
 class RunScriptCommand():
     """
@@ -30,7 +32,20 @@ class RunScriptCommand():
             raise IllegalStateException(reason="In order to execute the script, you must set it first.")
         # now we may call the script
         self.log.debug("launching correction process...")
+        
+        # FIXME: this is plain shit. We should try to use 'with'
+        automatic_correction_tmp_dir = managepath.get_instance().get_automatic_correction_tmp_dir()
+        current_dir = os.getcwd()
+        
+        self.log.debug("current dir: %s", current_dir)
+        self.log.debug("script dir : %s", automatic_correction_tmp_dir)
+        
+        os.chdir(automatic_correction_tmp_dir)
         process = subprocess.Popen([self.script], shell=True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+        os.chdir(current_dir)
+        # fin FIXME!!!
+        
+        
         # must ensure that the process won't run forever
         process_timer = ProcessTimeout(process, RunScriptCommand.TIME_OUT)
         process_timer.start_timer()

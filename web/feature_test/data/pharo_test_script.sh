@@ -21,6 +21,9 @@ st_files="tema1.st"
 
 # Relocate the delivered .st file to where it should be
 st_to_be_tested=`ls|grep '\.st$'`
+
+echo "st files found: $st_to_be_tested"
+
 delivery_files=""
 for file in $st_to_be_tested; do
 	cp $file $pharo_image_dir
@@ -31,20 +34,19 @@ done
 # I build the command
 command="$pharo_path -vm-display-null $pharo_image $st_files"
 echo $command
-exit 1
 $command
 
 # Capture the resultado
 exit_value=$?
 
 # Cleanup
-cd $pharo_image_dir
-if [ "$delivery_files" != '' ]
-	then
-		command="rm $delivery_files"
-		echo $command
-		$command
-fi
+#cd $pharo_image_dir
+#if [ "$delivery_files" != '' ]
+#	then
+#		command="rm $delivery_files"
+#		echo $command
+#		$command
+#fi
 
 # Finally exit with the returned value
 exit $exit_value
