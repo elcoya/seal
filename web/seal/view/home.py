@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from seal.model.mail import Mail
 from seal.forms.changepass import ChangePasswForm
-from seal.model.course import Course
+from seal.model.innings import Innings
 
 LENGTHPASSWORD = 8
 REDIRECTADMIN = "/admin"
@@ -47,8 +47,8 @@ def index(request):
         return HttpResponseRedirect(REDIRECTTEACHER)
     elif(Student.objects.filter(user_id=user.id).exists()):
         student = Student.objects.get(user_id=user.id)
-        if (student.courses.all().count() == 1):
-            return HttpResponseRedirect(REDIRECTCOURSE % student.courses.all()[0].pk)
+        if (student.innings.all().count() == 1):
+            return HttpResponseRedirect(REDIRECTCOURSE % student.innings.all()[0].course.pk)
         else:
             return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
@@ -59,11 +59,16 @@ def redirect(request):
     user = request.user
     if(user.is_superuser):
         return HttpResponseRedirect(REDIRECTADMIN)
-    elif(Teacher.objects.filter(user_id=user.id).exists()):
+    elif(Teacher.objects.filter(user_id=user.id)):
         return HttpResponseRedirect(REDIRECTTEACHER)
+    elif(Student.objects.filter(user_id=user.id).exists()):
+        student = Student.objects.get(user_id=user.id)
+        if (student.innings.all().count() == 1):
+            return HttpResponseRedirect(REDIRECTCOURSE % student.innings.all()[0].pk)
+        else:
+            return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
-        return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
-
+        return render_to_response(REDIRECTINDEX)
 def register(request):
     if (request.method == 'POST'):
         form = RegistrationForm(request.POST)
@@ -84,9 +89,9 @@ def register(request):
                 student.user = user
                 student.uid = form.data['uid']
                 student.save()
-                if (Course.objects.all().count() > 0):
-                    course = Course.objects.all().order_by('-pk')[0];
-                    student.courses.add(course)
+                if (Innings.objects.all().count() > 0):
+                    inning = Innings.objects.get(pk=form.data['inning']);
+                    student.innings.add(inning)
                     student.save()
                 
                 mail = Mail()

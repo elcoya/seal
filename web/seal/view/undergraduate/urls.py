@@ -21,7 +21,7 @@ urlpatterns += patterns('view.undergraduate.correction',
 
 urlpatterns += patterns('view.undergraduate.suscription',
     url(r'^suscription/$', 'index'),
-    url(r'^suscription/suscribe/(?P<idcourse>\d+)/$', 'newsuscription'),   
+    url(r'^suscription/suscribe/(?P<idinning>\d+)/$', 'newsuscription'),   
 )
 
 urlpatterns += patterns('view.undergraduate.automatic_correction',

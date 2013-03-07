@@ -13,15 +13,15 @@ Undergraduate
 {% block content %}
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
-			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >{% trans "Courses" %}</td></tr>
+			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >{% trans "Courses - Innings" %}</td></tr>
 		</thead>
 		<tbody>
-		{% for dict in table_contents %}
+		{% for inning in innings %}
 		    <tr>
-		    	<td style="width: 70%; text-indent: 15px; " ><a href="/undergraduate/practice/list/{{dict.pk}}">{{ dict.name }}</a></td>
+		    	<td style="width: 70%; text-indent: 15px; " ><a href="/undergraduate/practice/list/{{inning.course.pk}}">{{ inning }}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no courses in which you are enrolled" %}</td></tr>
+		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no innings in which you are enrolled" %}</td></tr>
 		{% endfor %}
 		</tbody>
 		

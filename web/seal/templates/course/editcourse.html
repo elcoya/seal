@@ -44,40 +44,33 @@
 		    	</td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Practices" %}</td></tr>
+		    <tr><td colspan="5" style="text-align: center; ">{% trans "There are yet no Practices" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>
 	<br><br>
-	<div style="clear: none; width: 50%; float: left;">{% trans "Students" %}</div>
-	<div style="clear: none; text-align: right; width: 25%; float: left;"><a href="/teacher/students/newstudent/{{ idcourse }}" >{% trans "New Student" %}</a></div>
-	<div style="clear: none; text-align: right; width: 25%; float: left;"><a href="/teacher/suscription/list/{{ idcourse }}" >{% trans "Suscription" %}</a></div>
+	<div style="clear: none; width: 50%; float: left;">{% trans "Innings" %}</div>
+	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/innings/newinning/{{ idcourse }}" >{% trans "New Inning" %}</a></div>
 	<table style="width: 100%;">
 		<thead style="text-align: center; ">
 			<tr>
-				<td>{% trans "Uid" %}</td>
 				<td>{% trans "Name" %}</td>
-				<td>{% trans "Email" %}</td>
-				<td>{% trans "Corrector" %}</td>
+				<td>{% trans "Descript" %}</td>
+				<td>{% trans "# Student" %}</td>
+				<td>{% trans "Student List" %}</td>
 			</tr>
 		</thead>
 		
 		<tbody>
-		{% for student in students %}
+		{% for inning_row in table_innings %}  
 		    <tr>
-		    	<td style="width: 25%; text-align: center; " ><a href="/teacher/students/editstudent/{{ idcourse }}/{{student.pk}}">{{ student.uid }}</a></td>
-		    	<td style="width: 25%; text-align: center; ">{{ student.user.last_name }}</td>
-		    	<td style="width: 25%; text-align: center; ">{{ student.user.email }}</td>
-		    	<td style="width: 25%; text-align: center; ">
-		    		{% if student.corrector %}
-			    		{{ student.corrector.name }}
-			    	{% else %}
-			    		{% trans "no corrector" %}
-			    	{% endif %}
-		    	</td>
+		    	<td style="width: 25%; text-align: center; " ><a href="/teacher/innings/editinning/{{inning_row.inning.pk}}">{{ inning_row.inning.name }}</a></td>
+		    	<td style="width: 25%; text-align: center; ">{{ inning_row.inning.description }}</td>
+		    	<td style="width: 25%; text-align: center; ">{{ inning_row.count }}</td>
+		    	<td style="width: 25%; text-align: center; " ><a href="/teacher/students/list/{{inning_row.inning.pk}}">{% trans "List" %}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Students" %}</td></tr>
+		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Innings" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>

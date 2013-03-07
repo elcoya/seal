@@ -16,6 +16,7 @@ from seal.utils import managepath
 import os
 from shutil import copyfile
 from os import makedirs
+from seal.model.innings import Innings
 
 base_url = 'http://localhost:8000/'
 
@@ -116,6 +117,10 @@ def step(context):
 def step(context):
     Course.objects.all().delete()
 
+@given('there are no innings')
+def step(context):
+    Innings.objects.all().delete()
+
 @given('there are no practices')
 def step(context):
     Practice.objects.all().delete()
@@ -140,35 +145,49 @@ def step(context):
 def step(context,course):
     c = Course.objects.get_or_create(name=course)
 
-@given('student "{uid}" exists in course "{course1}" and in course "{course2}"')
-def step(context,uid, course1, course2):
+@given('student "{uid}" exists in course "{course1}" inning "{inning1}" and in course "{course2}" inning "{inning2}"')
+def step(context,uid, course1, inning1, course2, inning2):
     course1 = Course.objects.get(name=course1)
     course2 = Course.objects.get(name=course2)
+    inning1 = Innings.objects.get(name=inning1, course = course1)
+    inning2 = Innings.objects.get(name=inning2, course = course2)
     student = Student.objects.get(uid=uid)
-    student.courses.add(course1)
-    student.courses.add(course2)
+    student.innings.add(inning1)
+    student.innings.add(inning2)
 
-@given('student "{uid}" exists in course "{course}"')
-def step(context,uid, course):
+@given('a inning with name "{name_inning}" and description "{descrip}" in the course "{course}"')
+def step(context, name_inning, descrip, course):
     course = Course.objects.get(name=course)
+    inning = Innings()
+    inning.name = name_inning
+    inning.description = descrip
+    inning.course = course
+    inning.save()
+    
+@given('student "{uid}" exists in course "{course}" and in inning "{inning_name}"')
+def step(context,uid, course, inning_name):
+    course = Course.objects.get(name=course)
+    inning = Innings.objects.get(name=inning_name, course=course) 
     student = Student.objects.get(uid=uid)
-    student.courses.add(course)
+    student.innings.add(inning)
 
-@given('student "{uid}" does not exist in course "{course}"')
-def step(context,uid, course):
-    course = Course.objects.get(name=course)
-    if(course.get_students(uid=uid).exists()):
-        course.get_students().remove(uid=uid)
+@given('student "{uid}" does not exist in course "{course_name}" and in inning "{inning_name}"')
+def step(context,uid, course_name, inning_name):
+    course = Course.objects.get(name=course_name)
+    inning = Innings.objects.get(name=inning_name, course=course)
+    if(inning.get_students(uid=uid).exists()):
+        inning.get_students().remove(uid=uid)
 
 @given('student "{uid}" exists without course')
 def step(context,uid):
     student = Student.objects.get(uid=uid)
-    student.courses.clear()
+    student.innings.clear()
 
-@given('there are no student in "{course}"')
-def step(context, course):
+@given('there are no student in course "{course}" inning "{inning}"')
+def step(context, course, inning):
     c = Course.objects.get(name=course)
-    students = c.get_students()
+    i = Innings.objects.get(name=inning, course=c)
+    students = i.get_students()
     for student in students:
         student.delete()
 
@@ -236,11 +255,12 @@ def step(context,practice,student,coment1,coment2,grade,corrector):
     t = Teacher.objects.get(uid=corrector)
     Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,grade=grade,delivery_id=d.pk,corrector_id=t.pk)
 
-@given('existe suscrition of student "{student}" for course "{course}" with suscription date "{suscriptionDate}" and state "{state}"')
-def step(context,student,course,suscriptionDate,state):
+@given('existe suscrition of student "{student}" for course "{course}" inning "{inning}" with suscription date "{suscriptionDate}" and state "{state}"')
+def step(context,student,course, inning, suscriptionDate,state):
     s = Student.objects.get(uid=student)
     c = Course.objects.get(name=course)
-    Suscription.objects.get_or_create(student_id=s.pk, course_id=c.pk, state=state, suscriptionDate=suscriptionDate)
+    i = Innings.objects.get(name=inning, course = c)
+    Suscription.objects.get_or_create(student_id=s.pk, inning_id=i.pk, state=state, suscriptionDate=suscriptionDate)
 
 @given('I am at the upload script form for practice "{practice_uid}" and course "{course_name}"')
 def step(context, practice_uid, course_name):
@@ -258,6 +278,15 @@ def impl(context, script_name, practice_uid, course_name):
     script.file="data/"+script_name
     script.practice = practice
     script.save()
+
+@given('the automatic correction of delivery with id "{iddelivery}" is "{status}"')
+def stop(context, iddelivery, status):
+    delivery = Delivery.objects.get(pk=iddelivery)
+    automaticCorrection = AutomaticCorrection.objects.get(delivery=delivery)
+    status_map = {"successfull": 1, "failed": -1, "pending": 0}
+    status = status_map[status]
+    automaticCorrection.status = status
+    automaticCorrection.save()
 
 @given(u'a delivery exists for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}" with id "{delivery_id}"')
 def step(context, practice_uid, course_name, student_uid, delivery_id):

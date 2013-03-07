@@ -5,7 +5,8 @@
 	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 		<div style="clear: none; width: 50%; float: left;">
 			{% blocktrans with delivery.practice.uid as practice %}Detail of delivery from practice {{ practice }}{% endblocktrans %}
-		<br><br>
+			<br>
+			<br>
 		</div>
 		<table style="width: 100%;">
 			<thead style="text-align: center; ">
@@ -15,19 +16,25 @@
 					<td>{% trans "Student Name" %}</td>
 					<td>{% trans "Deliver Date" %}</td>
 					<td>{% trans "Delivery" %}</td>
-					<td>&nbsp;</td>
+					<td>{% trans "Correction" %}</td>
 					<td>{% trans "Automatic Correction" %}</td>
-					<td>&nbsp;</td>
+					<td>{% trans "Navigate" %}</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td style="text-align: center; " >{{ delivery.pk }}</td>
 					<td style="text-align: center; ">{{ delivery.student.uid }}</td>
-					<td style="text-align: center; ">{{ delivery.student.name }}</td>					
+					<td style="text-align: center; ">{{ delivery.student.user.first_name }} {{ delivery.student.user.last_name }}</td>
 					<td style="text-align: center; ">{{ delivery.deliverDate }}</td>
-					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %}</a></td>
-					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}">{% trans "Correction" %}</a></td>
+					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %} </a></td>
+					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}/2">
+					{% if correction %}
+					{% trans "Corrected" %}
+					{% else %}
+					{% trans "Pending" %}
+					{% endif %} 
+					</a></td>
 					<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>
 					<td style="text-align: center; "><a href="/teacher/delivery/explore/{{ delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
 				</tr>

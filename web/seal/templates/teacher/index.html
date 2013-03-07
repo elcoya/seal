@@ -1,11 +1,6 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
-{% comment %}
-Main page of the teacher's portal.
-{% endcomment %}
-
 {% block title %}Teacher{% endblock %}
-
 {% block content %}
 <div style="text-align: right; padding: 2px 0;">
 	<a href="/teacher/course/newcourse">{% trans "New Course" %}</a>
@@ -37,9 +32,11 @@ Main page of the teacher's portal.
 			<td>{% trans "Delivery" %}</td>
 			<td>{% trans "Student" %}</td>
 			<td>{% trans "Practice" %}</td>
-			<td>{% trans "Course" %}</td>	
 			<td>{% trans "Delivery Date" %}</td>
-			<td>{% trans "Correction" %}</td>
+			<td>{% trans "Download" %}</td>
+			<td>{% trans "Correction" %}</td>	
+			<td>{% trans "Automatic Correction" %}</td>
+			<td>{% trans "Navigate" %}</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -47,24 +44,26 @@ Main page of the teacher's portal.
 			{% trans "List of my corrections" %}
 		</div>
 		<br><br>
-		{% for delivery in deliveries %}
+		{% for delivery_row in table_deliveries %}
 		<tr>
-			<td style="text-align: center;" ><a href="/teacher/delivery/detail/{{ delivery.pk}}">{{ delivery.pk }}</a></td>
-			<td style="text-align: center;">{{ delivery.student.uid }}</td>
-			<td style="text-align: center;">{{ delivery.practice.uid }}</td>
-			<td style="text-align: center;">{{ delivery.practice.course }}</td>
-			<td style="text-align: center;">{{ delivery.delierydate }}</td>
-			<td style="text-align: center; width: 33%;"><a href="/teacher/correction/{{ delivery.pk}}">
-				{% if delivery.correction %}
+			<td style="text-align: center;">{{ delivery_row.delivery.pk }}</td>
+			<td style="text-align: center;">{{ delivery_row.delivery.student.uid }}</td>
+			<td style="text-align: center;">{{ delivery_row.delivery.practice.uid }}</td>
+			<td style="text-align: center;">{{ delivery_row.delivery.deliverDate }}</td>
+			<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}">{% trans "Download" %}</a></td>
+			<td style="text-align: center;"><a href="/teacher/correction/{{ delivery_row.delivery.pk}}/1">
+				{% if delivery_row.correction %}
 			    	{% trans "Corrected" %}
 			    {% else %}
 			    	{% trans "Pending" %}
 			    {% endif %}
 			</a></td>
+			<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}">{{ delivery_row.delivery.get_automatic_correction.get_status }} </a></td>
+			<td style="text-align: center; "><a href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>		
 		</tr>
 		{% empty %}
 		<tr>
-			<td colspan="7" style="text-align: center; ">{% trans "There are no corrections" %}</td>
+			<td colspan="8" style="text-align: center; ">{% trans "There are no corrections" %}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

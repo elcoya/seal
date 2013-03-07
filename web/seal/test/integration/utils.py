@@ -13,6 +13,7 @@ from seal.model.student import Student
 from seal.model.teacher import Teacher
 from django.contrib.auth.models import User
 from seal.model.script import Script
+from seal.model.innings import Innings
 
 def clean_up_database_tables():
     AutomaticCorrection.objects.all().delete()
@@ -30,6 +31,14 @@ def create_a_course(course_name):
     course.save()
     return course
 
+def create_a_inning(inning_name, course_name):
+    inning = Innings()
+    inning.name = inning_name
+    inning.description = inning_name
+    inning.course = Course.objects.get(name=course_name)
+    inning.save()
+    return inning
+
 def create_a_practice(course_name, practice_deadline, practice_filepath, practice_uid):
     practice = Practice()
     practice.course = Course.objects.get(name=course_name)
@@ -45,12 +54,12 @@ def get_user_for_student(student_name):
     user.save()
     return user
 
-def create_a_student(student_name, course_name):
+def create_a_student(student_name, inning_name):
     student = Student()
     student.uid = student_name
     student.user = get_user_for_student(student_name)
     student.save()
-    student.courses.add(Course.objects.get(name=course_name))
+    student.innings.add(Innings.objects.get(name=inning_name))
     student.save()
     return student
 

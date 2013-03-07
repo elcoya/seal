@@ -6,6 +6,7 @@ Created on 04/11/2012
 from django import forms
 from seal.model.student import Student
 from django.forms.forms import Form
+from seal.model.innings import Innings
 
 ERRORUIDVALIDATION = "User uid is not available"
 ERRORPASSWDNOTMATCH = "Passwords does not match"
@@ -20,6 +21,7 @@ class RegistrationForm(Form):
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True))
     passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True))
     email = forms.EmailField()
+    inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="No Innings")
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']

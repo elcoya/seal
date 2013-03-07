@@ -1,5 +1,6 @@
 from django.db import models
-from seal.model import Course, Student
+from seal.model import Student
+from seal.model.innings import Innings
 
 class Suscription(models.Model):
     """
@@ -11,7 +12,7 @@ class Suscription(models.Model):
     
     """
     
-    course = models.ForeignKey(Course)
+    inning = models.ForeignKey(Innings)
     student = models.ForeignKey(Student)
     state = models.CharField(max_length = 32)
     suscriptionDate = models.DateField()

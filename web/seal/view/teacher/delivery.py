@@ -5,14 +5,19 @@ from django.contrib.auth.decorators import login_required
 from zipfile import ZipFile
 from seal.utils import managepath
 import os
+from seal.model.correction import Correction
 
 TYPEZIP = "application/zip"
 
 @login_required
 def listdelivery(request, idpractice):
     practice = Practice.objects.get(pk=idpractice)
+    table_deliveries = []
     deliveries = Delivery.objects.filter(practice=practice).order_by('deliverDate')
-    return render(request, 'delivery/listdelivery.html', {'deliveries': deliveries , 'practice': practice,})
+    for delivery in deliveries:
+        correction = Correction.objects.filter(delivery=delivery)
+        table_deliveries.append({'delivery': delivery, 'correction':correction})
+    return render(request, 'delivery/listdelivery.html', {'table_deliveries': table_deliveries , 'practice': practice,})
 
 @login_required
 def download(request, iddelivery):
@@ -66,5 +71,6 @@ def explore(request, iddelivery):
 @login_required
 def detail(request, iddelivery):
     delivery = Delivery.objects.get(pk=iddelivery);
-    return render(request, 'delivery/deliverydetail.html', {'delivery': delivery})
+    correction = Correction.objects.filter(delivery=delivery)
+    return render(request, 'delivery/deliverydetail.html', {'delivery': delivery, 'correction':correction})
 

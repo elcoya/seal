@@ -20,5 +20,7 @@ def index(request):
         deliveries = Delivery.objects.filter(student=student)
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)
-            table_deliveries.append({'pk': delivery.pk, 'delierydate': delivery.deliverDate, 'student': delivery.student, 'practice': delivery.practice, 'correction':correction})
-    return render_to_response('teacher/index.html', {'table_contents': table_contents, 'deliveries': table_deliveries}, context_instance=RequestContext(request))
+            status = delivery.get_automatic_correction().get_status()
+            if (status == "successfull"):
+                table_deliveries.append({'delivery': delivery, 'correction':correction})
+    return render_to_response('teacher/index.html', {'table_contents': table_contents, 'table_deliveries': table_deliveries}, context_instance=RequestContext(request))
