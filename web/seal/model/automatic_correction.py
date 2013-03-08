@@ -9,6 +9,10 @@ class AutomaticCorrection(models.Model):
     
     """
     
+    STATUS_PENDING = 0
+    STATUS_FAILED  = -1
+    STATUS_SUCCESSFULL = 1
+    
     STATUS_STRINGS = {-1:"failed", 0:"pending", 1:"successfull"}
     STATUS_UNKNOWN = 'unknown status'
     

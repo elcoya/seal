@@ -27,4 +27,6 @@ class Student(models.Model):
     def __str__(self):
         """Stringify the Student"""
         return self.uid
-
+    
+    def get_full_name(self):
+        return self.user.first_name + " " + self.user.last_name

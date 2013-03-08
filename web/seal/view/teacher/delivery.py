@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from zipfile import ZipFile
 from seal.utils import managepath
 import os
+from seal.model.student import Student
+from seal.model.automatic_correction import AutomaticCorrection
 
 TYPEZIP = "application/zip"
 

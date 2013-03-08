@@ -9,11 +9,16 @@ from django.template.context import RequestContext
 from seal.forms.student import StudentForm, Student
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from seal.model.automatic_correction import AutomaticCorrection
+from seal.model.course import Course
+from seal.model.practice import Practice
 
 PATHOK = "/teacher/course/editcourse/%s"
 PATHOKENROLED = "/teacher/students/"
 MAXPAGINATOR = 10
 
+@login_required
 def index(request):
     student_list = Student.objects.all().order_by('uid')
     paginator = Paginator(student_list, MAXPAGINATOR) # Show 10 practice per page
@@ -28,6 +33,7 @@ def index(request):
         students = paginator.page(paginator.num_pages)
     return render_to_response('student/index.html', {"students": students}, context_instance=RequestContext(request))
 
+@login_required
 def newstudent(request, idcourse):
     if (request.method == 'POST'):
         form = StudentForm(request.POST)
@@ -46,6 +52,7 @@ def newstudent(request, idcourse):
         form = StudentForm(initial={'courses': [idcourse]})
     return render(request, 'student/new-student.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
+@login_required
 def editstudent(request, idcourse, idstudent):
     student = Student.objects.get(pk=idstudent)     
     if (request.method == 'POST'):
@@ -65,6 +72,7 @@ def editstudent(request, idcourse, idstudent):
         form = StudentForm(instance = student, initial = {'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
     return render(request, 'student/editstudent.html', {'form': form, 'idcourse': idcourse}, context_instance=RequestContext(request))
 
+@login_required
 def edit_unenrolled_student(request, idstudent):
     student = Student.objects.get(pk=idstudent)     
     if (request.method == 'POST'):
@@ -75,3 +83,19 @@ def edit_unenrolled_student(request, idstudent):
     else:
         form = StudentForm( instance = student)
     return render(request, 'student/editstudent.html', {'form': form}, context_instance=RequestContext(request))
+
+@login_required
+def pendingdeliveries(request):
+    course_list = []
+    courses = Course.objects.all()
+    for course in courses:
+        practice_list = []
+        practices = Practice.objects.all()
+        for practice in practices:
+            students = Student.objects.exclude(delivery__automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL, delivery__practice=practice)
+            if len(students) > 0:
+                practice_list.append((practice, students))
+        if len(practice_list) > 0:
+            course_list.append((course, practice_list))
+    return render(request, 'student/delivery_pending.html', {'course_list': course_list})
+

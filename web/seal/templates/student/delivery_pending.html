@@ -1,0 +1,46 @@
+{% extends "teacher/teacher.html" %}
+{% load i18n %}
+{% block content %}
+<body>
+	<div style="width: 800px; text-align: left; margin: auto;">
+		<div>
+			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
+				<div style="clear: none; width: 50%; float: left;">{% trans "Students List" %}</div>
+			</div>
+			
+			{% for course, practices in course_list %}
+				<div>
+					<div>Course: {{ course.name }}</div>
+					<div>
+						{% for practice, students in practices %}
+				    		<div>
+				    			<div>Practice: {{ practice.uid }}</div>
+				    			<table>
+				    				<thead><tr>
+				    					<td>uid</td>
+				    					<td>name</td>
+				    				</tr></thead>
+				    				<tbody>
+				    					{% for student in students %}
+				    						<tr>
+				    							<td>{{ student.uid }}</td>
+				    							<td>{{ student.get_full_name }}</td>
+				    						</tr>
+				    					{% endfor %}
+				    				</tbody>
+				    			</table>
+				    		</div>	
+				    	{% endfor %}
+					</div>
+				</div>
+			{% empty %}
+				<table style="width: 100%;">
+					<tbody>
+			    		<tr><td>{% trans "0 student" %}</td></tr>
+			    	</tbody>
+			    </table>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+{% endblock %}

@@ -14,19 +14,21 @@ This is the main template for all teacher pages.
 {% block welcome %}
 	<div class="welcome-msg">{% trans "Welcome," %} {{ user.last_name }} | <a href="/changepassw/">{% trans "Change Password" %}</a> | <a href="/logout/">{% trans "logout" %} </a> </div>
 {% endblock %}
-{% block nav %}
-<nav>
-	<a href="/teacher">{% trans "Home" %}</a>
-</nav>
-{% endblock %}
-{% block body %}
-	{% if user.teacher_set.all %}
+{% if user.teacher_set.all %}
+	{% block nav %}
+		<nav>
+			<a href="/teacher">{% trans "Home" %}</a> | 
+			<a href="/#">Pending Subscriptions</a> | 
+			<a href="/teacher/students/pendingdelivery/">Students without deliveries</a>
+		</nav>
+	{% endblock %}
+	{% block body %}
 		<div class="main-content" >
 		    {% block content %}{% endblock %}
 	    </div>
-	{% else %}
-		<div class="main-content" >
-	    	<p style="color: #A44; font-weight: bold; text-align: center;">{% trans "You are not allowed in this section" %}</p>
-	    </div>
-	{% endif %}
-{% endblock %}
+	{% endblock %}
+{% else %}
+	<div class="main-content" >
+    	<p style="color: #A44; font-weight: bold; text-align: center;">{% trans "You are not allowed in this section" %}</p>
+    </div>
+{% endif %}
