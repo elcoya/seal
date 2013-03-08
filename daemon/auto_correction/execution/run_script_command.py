@@ -34,7 +34,7 @@ class RunScriptCommand():
         self.log.debug("launching correction process...")
         
         # FIXME: this is plain shit. We should try to use 'with'
-        automatic_correction_tmp_dir = managepath.get_instance().get_automatic_correction_tmp_dir()
+        automatic_correction_tmp_dir = os.path.dirname(self.script) # managepath.get_instance().get_automatic_correction_tmp_dir()
         current_dir = os.getcwd()
         
         self.log.debug("current dir: %s", current_dir)

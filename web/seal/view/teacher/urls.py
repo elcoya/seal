@@ -18,9 +18,16 @@ urlpatterns += patterns('view.teacher.practice',
 urlpatterns += patterns('view.teacher.student',
     url(r'^students/?$', 'index'),
     url(r'^students/pendingdelivery/$', 'pendingdeliveries'),
-    url(r'^students/newstudent/(?P<idcourse>\d+)$', 'newstudent'),
-    url(r'^students/editstudent/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
+    url(r'^students/newstudent/(?P<idinning>\d+)$', 'newstudent'),
+    url(r'^students/editstudent/(?P<idinning>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
     url(r'^students/editstudent/(?P<idstudent>\d+)/$', 'edit_unenrolled_student'),
+    url(r'^students/list/(?P<idinning>\d+)/$', 'list_student'),
+    url(r'^students/listdeliveries/(?P<idstudent>\d+)/(?P<idinning>\d+)/$', 'list_student_deliveries'),
+)
+
+urlpatterns += patterns('view.teacher.inning',
+    url(r'^innings/newinning/(?P<idcourse>\d+)/?$', 'newinning'),
+    url(r'^innings/editinning/(?P<idinning>\d+)/?$', 'editinning'),
 )
 
 urlpatterns += patterns('view.teacher.course',
@@ -38,14 +45,14 @@ urlpatterns += patterns('view.teacher.delivery',
 )
 
 urlpatterns += patterns('view.teacher.correction',
-    url(r'^correction/(?P<iddelivery>\d+)/$', 'index'),
-    url(r'^correction/edit/(?P<idcorrection>\d+)/$', 'editcorrection'),
+    url(r'^correction/(?P<iddelivery>\d+)/(?P<previus>\d+)/$', 'index'),
+    url(r'^correction/edit/(?P<idcorrection>\d+)/(?P<previus>\d+)/$', 'editcorrection'),
 )
 
 urlpatterns += patterns('view.teacher.suscription',
-    url(r'^suscription/list/(?P<idcourse>\d+)/$', 'listsuscription'),
-    url(r'^suscription/acceptGroup/(?P<idcourse>\d+)/', 'acceptgroup'),
-    url(r'^suscription/rejectGroup/(?P<idcourse>\d+)/', 'rejectgroup'),
+    url(r'^suscription/list/(?P<idinning>\d+)/$', 'listsuscription'),
+    url(r'^suscription/acceptGroup/(?P<idinning>\d+)/', 'acceptgroup'),
+    url(r'^suscription/rejectGroup/(?P<idinning>\d+)/', 'rejectgroup'),
 )
 
 urlpatterns += patterns('view.teacher.automatic_correction',

@@ -2,6 +2,7 @@ from auto_correction.execution.run_script_command import RunScriptCommand
 from auto_correction.exceptions.illegal_state_exception import IllegalStateException
 from unittest.case import TestCase
 import subprocess
+import os
 
 class TestRunScriptCommand(TestCase):
 
@@ -22,7 +23,7 @@ class TestRunScriptCommand(TestCase):
     
     def testRunScriptCommandMustRunTheScriptAndEndSuccessfully(self):
         runner = RunScriptCommand()
-        runner.set_script(self.script_file_path + self.script_file_name)
+        runner.set_script(os.path.join(self.script_file_path, self.script_file_name))
         result = runner.execute()
         self.assertEquals(result.exit_value, 0)
         self.assertEquals(result.captured_stdout, self.text)

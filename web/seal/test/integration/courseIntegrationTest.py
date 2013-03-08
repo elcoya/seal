@@ -2,6 +2,7 @@ from django.test import TestCase
 from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
+from seal.model.innings import Innings
 
 class CourseIntegrationTest(TestCase):
     def testCourseUniqueName(self):
@@ -12,38 +13,7 @@ class CourseIntegrationTest(TestCase):
         Course.objects.get_or_create(name=aName)
         course = Course.objects.get(name=aName)
         self.assertEqual(course.name, aName, "course's expected name was '" + aName + "' but actual was '" + course.name + "'")
-    
-    def testCourseAddStudent(self):
-        """
-        I will take a course and add a student to it. Then, try to get it from the database.
-        """
-        course_name = '2012-1C'
-        aCourse = Course.objects.get_or_create(name=course_name)[0]
-        aStudent = Student.objects.get_or_create(uid='1234')[0]
-        aCourse.add_student(aStudent)
-        aCourse.save()
-        
-        aCourse = Course.objects.get(name=course_name)
-        self.assertTrue(aStudent in aCourse.get_students(), 'Set, expected to contain Juan Perez')
-    
-    def testCourseDeleteStudent(self):
-        """
-        I Will add a Student from a Course and verify it contains the student
-        """
-        aCourse = Course.objects.get_or_create(name='2012-1C')[0]
-        aStudent = Student.objects.get_or_create(uid='1234')[0]
-        aCourse.add_student(aStudent)
-        aCourse.save()
-        
-        aCourse = Course.objects.get(name='2012-1C')
-        self.assertTrue(aStudent in aCourse.get_students(), 'Set, expected to contain Juan Perez')
-        
-        aCourse.remove_student(aStudent)
-        aCourse.save()
-        
-        aCourse = Course.objects.get(name='2012-1C')
-        self.assertFalse(aStudent in aCourse.get_students(), 'Set, expected to have no Juan Perez student')
-    
+         
     def testCourseAddAssignment(self):
         """
         I will take a course and add an assignment to it. Then, try to get it from the database.

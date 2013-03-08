@@ -33,7 +33,11 @@ class Course(models.Model):
         return partial_query
     
     def get_student_count(self):
-        return self.student_set.count()
+        innings = self.innings_set.all()
+        total = 0;
+        for inning in innings:
+            total = total + inning.student_set.count()
+        return total
     
     def add_student(self, student):
         self.student_set.add(student)

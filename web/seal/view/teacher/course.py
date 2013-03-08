@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 import os
+from seal.model.innings import Innings
 
 PATHOKNEWCOURSE = "/"
 MAXPAGINATOR = 25
@@ -66,8 +67,13 @@ def editcourse(request, idcourse):
             else:
                 table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
                                        'ndeliveries':  ndeliveries})
-        students = course.get_students().order_by('uid')
+        table_innings = []
+        innings = Innings.objects.filter(course=course)
+        for inning in innings:
+            count = inning.get_students_count()
+            table_innings.append({'inning': inning, 'count': count})
+            
     return render(request, 'course/editcourse.html',
-                  {'form': form, 'table_contents': table_contents, 'students': students, 
+                  {'form': form, 'table_contents': table_contents, 'table_innings': table_innings, 
                    'course': course, 'idcourse': course.pk }, 
                   context_instance=RequestContext(request))

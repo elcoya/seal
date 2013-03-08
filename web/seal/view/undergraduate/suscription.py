@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from datetime import date
 from django.template.context import RequestContext
+from seal.model.innings import Innings
 
 REDIRECTOKNEWSUSCRIPTION = "/undergraduate/suscription"
 
@@ -16,23 +17,36 @@ REDIRECTOKNEWSUSCRIPTION = "/undergraduate/suscription"
 def index(request):
     student = request.user.student_set.get(uid=request.user.username)
     suscriptions = Suscription.objects.filter(student = student).order_by('suscriptionDate')
-    courses = Course.objects.all()
-    student_courses = student.courses.all()
-    courses_student_pending = []
+    
+    innings = Innings.objects.all()
+    
+    student_innings = student.innings.all()
     suscript_pending = suscriptions.filter(state = "Pending")
+    
+    innings_same_course = []
+    for inning in student_innings:
+        course = inning.course
+        innigns_course = Innings.objects.filter(course=course)
+        for inning_same in innigns_course:
+            innings_same_course.append(inning_same)
+    
+    innings_student_pending = []
     for sus_pen in suscript_pending:
-        courses_student_pending.append(sus_pen.course)
+        course = sus_pen.inning.course
+        innigns_course_pend = Innings.objects.filter(course=course)
+        for inning_same_pend in innigns_course_pend:
+            innings_student_pending.append(inning_same_pend)
             
-    course_to_suscript = list(set(courses) - set(student_courses) - set(courses_student_pending))    
+    innings_to_suscript = list(set(innings) - set(innings_same_course) - set(innings_student_pending))    
     
     return render(request, 'suscription/suscription.html', 
-                  {'courses': course_to_suscript , 'suscriptions':suscriptions}, 
+                  {'innings': innings_to_suscript , 'suscriptions':suscriptions}, 
                   context_instance=RequestContext(request))
 
 @login_required
-def newsuscription(request, idcourse):
+def newsuscription(request, idinning):
     student = request.user.student_set.get(uid=request.user.username)
-    course = Course.objects.get(pk=idcourse)
-    suscription = Suscription(student = student, course = course, state = "Pending", suscriptionDate=date.today())
+    innign = Innings.objects.get(pk=idinning)
+    suscription = Suscription(student = student, inning = innign, state = "Pending", suscriptionDate=date.today())
     suscription.save()
     return HttpResponseRedirect(REDIRECTOKNEWSUSCRIPTION)

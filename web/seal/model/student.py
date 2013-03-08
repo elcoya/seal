@@ -1,7 +1,8 @@
 from django.db import models
-from seal.model.course import Course
 from django.contrib.auth.models import User
 from seal.model.teacher import Teacher
+from seal.model.innings import Innings
+from seal.model.course import Course
 
 class Student(models.Model):
     """
@@ -20,7 +21,7 @@ class Student(models.Model):
     """
     
     uid = models.CharField(unique=True, max_length = 32)
-    courses = models.ManyToManyField(Course, blank=True)
+    innings = models.ManyToManyField(Innings, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     corrector = models.ForeignKey(Teacher, null=True, blank=True)
     

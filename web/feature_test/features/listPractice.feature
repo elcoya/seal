@@ -20,8 +20,9 @@ Feature: As a user I want to see the practice list
     Scenario: List Delivery of Practices from home student
         Given Student "martin" exists with password "martin"
     	  And course "2012-1" exists
+    	  And a inning with name "tarde" and description "horario" in the course "2012-1"
     	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
           And I log in as "martin" "martin"
-    	  And student "martin" exists in course "2012-1"
+    	  And student "martin" exists in course "2012-1" and in inning "tarde"
     	 when I am in the delivery page of practice "TP Intro"
     	 Then I should see "There are yet no deliveries from this practice"

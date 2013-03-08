@@ -15,7 +15,7 @@
 		{% csrf_token %}
 		<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 			<div style="clear: none; width: 50%; float: left;">
-				{% blocktrans with course.name as coursename %}Pending Suscription of course {{ coursename }}{% endblocktrans %}
+				{% trans "Pending Suscription of inning  " %}{{ inning }}
 				<br>
 				<br>
 			</div>
@@ -36,7 +36,7 @@
 					<tr>
 						<td style="text-align: center; " >{{ suscription.pk }}</td>
 						<td style="text-align: center; ">{{ suscription.student.uid }}</td>
-						<td style="text-align: center; ">{{ suscription.student.name }}</td>
+						<td style="text-align: center; ">{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
 						<td style="text-align: center; ">{{ suscription.suscriptionDate }}</td>
 						<td align="center">
 						<input type="checkbox" id="{{ suscription.pk }}" name="suscription" value="{{ suscription.pk }}">
@@ -49,12 +49,12 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<input style="float: right" name="Accept" type="button" value="{% trans 'Accept' %}" onclick="this.form.action='/teacher/suscription/acceptGroup/{{course.id}}/';this.form.submit();" />
-			<input style="float: right" name="Reject" type="button" value="{% trans 'Reject' %}" onclick="this.form.action='/teacher/suscription/rejectGroup/{{course.id}}/';this.form.submit();"/>
+			<input style="float: right" name="Accept" type="button" value="{% trans 'Accept' %}" onclick="this.form.action='/teacher/suscription/acceptGroup/{{inning.id}}/';this.form.submit();" />
+			<input style="float: right" name="Reject" type="button" value="{% trans 'Reject' %}" onclick="this.form.action='/teacher/suscription/rejectGroup/{{inning.id}}/';this.form.submit();"/>
 			<br>
 			<br>
 			<div style="clear: none; width: 50%; float: left;">
-				{% blocktrans with course.name as coursename %}Suscription solver of course {{ coursename }}{% endblocktrans %}
+				{% trans "Suscription solver of course "%}{{ inning }} 
 				<br>
 				<br>
 			</div>
@@ -74,7 +74,7 @@
 					<tr>
 						<td style="text-align: center; ">{{ suscription.pk }}</td>
 						<td style="text-align: center; ">{{ suscription.student.uid }}</td>
-						<td style="text-align: center; ">{{ suscription.student.name }}</td>
+						<td style="text-align: center; ">{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
 						<td style="text-align: center; ">{{ suscription.suscriptionDate }}</td>
 						<td style="text-align: center; ">{{ suscription.resolveDate }}</td>
 						<td style="text-align: center; ">{{ suscription.state }}</td>
@@ -87,7 +87,7 @@
 				</tbody>
 			</table>
 		</div>
-		<a href="/teacher/course/editcourse/{{course.pk}}">{% trans "back" %}</a>
+		<a href="/teacher/students/list/{{inning.pk}}">{% trans "back" %}</a>
 	</form>
 </body>
 {% endblock %}
