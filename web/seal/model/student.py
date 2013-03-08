@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from seal.model.teacher import Teacher
 from seal.model.innings import Innings
-from seal.model.course import Course
 
 class Student(models.Model):
     """

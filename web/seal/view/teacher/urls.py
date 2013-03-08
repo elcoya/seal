@@ -53,6 +53,7 @@ urlpatterns += patterns('view.teacher.suscription',
     url(r'^suscription/list/(?P<idinning>\d+)/$', 'listsuscription'),
     url(r'^suscription/acceptGroup/(?P<idinning>\d+)/', 'acceptgroup'),
     url(r'^suscription/rejectGroup/(?P<idinning>\d+)/', 'rejectgroup'),
+    url(r'^suscription/listsuscriptionpending/', 'listsuscriptionpending'),
 )
 
 urlpatterns += patterns('view.teacher.automatic_correction',

@@ -59,11 +59,11 @@ def newstudent(request, idinning):
 def editstudent(request, idinning, idstudent):
     student = Student.objects.get(pk=idstudent)     
     if (request.method == 'POST'):
-        form = StudentForm(request.POST, instance = student, 
-                           initial = {'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
+        form = StudentForm(request.POST, instance=student,
+                           initial={'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
         
         if (form.is_valid()):
-            if (form.data['passwd']!=''):
+            if (form.data['passwd'] != ''):
                 student.user.set_password(form.data['passwd'])
             student.user.email = form.data['email']
             student.user.first_name = form.data['first_name']
@@ -72,35 +72,52 @@ def editstudent(request, idinning, idstudent):
             form.save()
             return HttpResponseRedirect(PATHOK % str(idinning))
     else:
-        form = StudentForm(instance = student, initial = {'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
+        form = StudentForm(instance=student, initial={'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
     return render(request, 'student/editstudent.html', {'form': form, 'idinning': idinning}, context_instance=RequestContext(request))
 
 @login_required
 def edit_unenrolled_student(request, idstudent):
     student = Student.objects.get(pk=idstudent)     
     if (request.method == 'POST'):
-        form = StudentForm(request.POST, instance = student)
+        form = StudentForm(request.POST, instance=student)
         if (form.is_valid()):
             form.save()
             return HttpResponseRedirect(PATHOKENROLED)
     else:
-        form = StudentForm( instance = student)
+        form = StudentForm(instance=student)
     return render(request, 'student/editstudent.html', {'form': form}, context_instance=RequestContext(request))
 
 @login_required
 def pendingdeliveries(request):
-    course_list = []
+    final_list = []
     courses = Course.objects.all()
+    #TAKE ALL COURSES ACTIVOS
     for course in courses:
-        practice_list = []
-        practices = Practice.objects.all()
+        content_list = []
+        practices = course.get_practices()
+        #RECORRO TOAS LAS PRACITAS DEL CURSO
         for practice in practices:
-            students = Student.objects.exclude(delivery__automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL, delivery__practice=practice)
-            if len(students) > 0:
-                practice_list.append((practice, students))
-        if len(practice_list) > 0:
-            course_list.append((course, practice_list))
-    return render(request, 'student/delivery_pending.html', {'course_list': course_list})
+            innings = Innings.objects.filter(course=course)
+            student_inning_list = []
+            #RECORRO TODOS LOS TURNOS DEL CURSO
+            for inning in innings:
+                #TOMO LOS ESTUDIANTES DEL TURNO
+                students = inning.get_students()
+                for student in students:
+                    #TODO LAS ENTREGAS DEL ESTUDIANTE PARA ESA PRACTICA
+                    deliveries = Delivery.objects.filter(student=student, practice=practice)
+                    appendStudent = True;
+                    #ME FIJO SI ALGUNA TIENE SUCCESSFULL, SI ES ASI NO LA ADJUNTO A LA LISTA
+                    for delivery in deliveries:
+                        if delivery.get_automatic_correction().get_status() == AutomaticCorrection.STATUS_STRINGS[1]:
+                            appendStudent = False;
+                    if (appendStudent):
+                        student_inning_list.append({'student': student, 'inning':inning})
+            if len(student_inning_list) > 0:
+                content_list.append({'practice': practice, 'student_inning_list':student_inning_list})            
+        if (len(content_list) > 0):
+            final_list.append({'course':course, 'data': content_list})
+    return render(request, 'student/delivery_pending.html', {'final_list': final_list})
 
 def list_student(request, idinning):
     inning = Innings.objects.get(pk=idinning)
