@@ -48,3 +48,16 @@ def rejectgroup(request, idinning):
     return render(request, 'suscription/listsuscription.html', 
                   {'suscriptions': suscriptions, 'suscriptionsSolve': suscriptions_solve, 'inning': inning}, 
                   context_instance=RequestContext(request))
+
+@login_required
+def listsuscriptionpending(request):
+    innings = Innings.objects.all()
+    table_suscription_inning = []
+    for inning in innings:
+        suscriptionPending = inning.suscription_set.filter(state='pending')
+        if suscriptionPending:
+            table_suscription_inning.append({'inning':inning, 'suscriptionPending':suscriptionPending})
+    return render(request, 'suscription/listsuscriptionpending.html', 
+                  {'table_suscription_inning': table_suscription_inning}, context_instance=RequestContext(request))    
+        
+        
