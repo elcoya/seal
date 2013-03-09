@@ -19,6 +19,6 @@ Feature: As a user I want to see the student list
           And Student "anibal" exists with password "anibal"
           And student "martin" exists in course "2012-1" and in inning "tarde"
           And student "anibal" exists in course "2012-1" and in inning "tarde"
-         when I am in the modifier page of course "2012-1"
+         when I am in the modify page of course "2012-1"
           And I click in the "List" link
          Then I should see "anibal" before "martin" 

@@ -6,7 +6,7 @@ Feature: As a teacher I want to create a student
           And there are no students      
           And course "2012-1" exists
           And a inning with name "tarde" and description "horario" in the course "2012-1"
-         When I am in the modifier page of course "2012-1"
+         When I am in the modify page of course "2012-1"
           And I click in the "List" link
           And I click in the "New Student" link
           And I fill the newstudent form with default data for inning "tarde"

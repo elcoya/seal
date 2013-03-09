@@ -1,6 +1,6 @@
-Feature: As a teacher I want to modifier a name course
+Feature: As a teacher I want to modify a name course
 
- 	Scenario: Index page follow link to edit course and modifier the course
+ 	Scenario: Index page follow link to edit course and modify the course
         Given Teacher "teacher" exists with password "teacher"
     	  And course "2012-1" exists
           And I log in as "teacher" "teacher"

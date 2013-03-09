@@ -1,6 +1,6 @@
-Feature: As a teacher I want to modifier a student
+Feature: As a teacher I want to modify a student
 
- 	Scenario: Index page follow link to edit course, edit student and modifier the name of the student
+ 	Scenario: Index page follow link to edit course, edit student and modify the name of the student
         Given Teacher "teacher" exists with password "teacher"
           And there are no practices
 	  	  And Student "martin" exists with password "martin"

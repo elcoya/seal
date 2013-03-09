@@ -5,7 +5,7 @@ Feature: As a teacher I want to administrate de suscription
 	     And course "2012-1" exists
     	 And a inning with name "tarde" and description "horario" in the course "2012-1"
     	 And I log in as "teacher" "teacher"
-    	When I am in the modifier page of course "2012-1"
+    	When I am in the modify page of course "2012-1"
     	 And I click in the "List" link 
     	Then I should see link to "Suscription" in the list
 	

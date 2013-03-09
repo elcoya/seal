@@ -1,4 +1,4 @@
-Feature: As a teacher I want to create and modifier innings
+Feature: As a teacher I want to create and modify innings
 
 	 Scenario: Create Inning
 	 	Given Teacher "teacher" exists with password "teacher"
@@ -10,7 +10,7 @@ Feature: As a teacher I want to create and modifier innings
           And I submit the form
 		 Then I should see "tarde"
 
-	 Scenario: Modifier Inning
+	 Scenario: Modify Inning
 	 	Given Teacher "teacher" exists with password "teacher"
           And course "2012-1" exists
           And a inning with name "tarde" and description "horario" in the course "2012-1"

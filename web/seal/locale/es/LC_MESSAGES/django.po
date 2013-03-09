@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-04 11:27-0600\n"
+"POT-Creation-Date: 2013-03-08 15:13-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,65 +19,155 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: templates/admin/base.html:28 templates/teacher/teacher.html:15
-#: templates/undergraduate/undergraduate.html:15
-msgid "Welcome,"
-msgstr "Bienvenido,"
+#, fuzzy
+msgid "Welcome"
+msgstr "Bienvenido"
 
 #: templates/admin/base.html:33
 msgid "Documentation"
 msgstr "Documentacion"
 
-#: templates/admin/base.html:35
+#: templates/admin/base.html:35 templates/undergraduate/undergraduate.html:26
 msgid "Change password"
-msgstr "Cambiar Password"
+msgstr "Cambiar contraseña"
 
 #: templates/admin/base.html:36
 msgid "Log out"
-msgstr "Desconectarse"
+msgstr "Salir"
 
 #: templates/admin/base_site.html:4 templates/admin/base_site.html.py:7
 msgid "ADFS - Automatic Delivery free system"
 msgstr "SEAL - Sistema de Entregas Automatizadas Libre"
 
-#: templates/admin/index.html:18
+#: templates/admin/edit_teacher.html:25 templates/admin/list_teacher.html:47
+#: templates/admin/new_teacher.html:25 templates/course/editcourse.html:78
+#: templates/course/newcourse.html:11
+#: templates/delivery/deliverydetail.html:44
+#: templates/delivery/listdelivery.html:49
+#: templates/delivery/uploaddelivery.html:64
+#: templates/inning/editinning.html:11 templates/inning/newinning.html:11
+#: templates/practice/editPracticeFile.html:16
+#: templates/practice/editpractice.html:12 templates/practice/listFile.html:31
+#: templates/practice/script.html:12 templates/practice/uploadFile.html:46
+#: templates/practice/uploadpractice.html:14
+#: templates/student/editstudent.html:13 templates/student/liststudent.html:48
+#: templates/student/liststudentdeliveries.html:48
+#: templates/student/new-student.html:14
+#: templates/suscription/listsuscription.html:90
+msgid "back"
+msgstr "atrás"
+
+#: templates/admin/index.html:20
 #, python-format
 msgid "Models available in the %(name)s application."
 msgstr "Modelos habilitado en la applicacion %(name)s."
 
-#: templates/admin/index.html:19
+#: templates/admin/index.html:22
 #, python-format
 msgid "%(name)s"
 msgstr "%(name)s"
 
-#: templates/admin/index.html:29
+#: templates/admin/index.html:33
 msgid "Add"
 msgstr "Crear"
 
-#: templates/admin/index.html:35
-#: templates/registration/change_lenguaje.html:28
-#: templates/registration/change_pass.html:28
+#: templates/admin/index.html:39 templates/registration/change_pass.html:28
 msgid "Change"
 msgstr "Modificar"
 
-#: templates/admin/index.html:45
+#: templates/admin/index.html:50
 msgid "You don't have permission to edit anything."
 msgstr "No tienes permisos para editar"
 
-#: templates/admin/index.html:53
+#: templates/admin/index.html:55 templates/teacher/teacher.html:13
+msgid "Teacher"
+msgstr "Docente"
+
+#: templates/admin/index.html:57
+msgid "Add and Modify Teacher"
+msgstr "Crear y Modificar Docente"
+
+#: templates/admin/index.html:66
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: templates/admin/index.html:54
+#: templates/admin/index.html:67
 msgid "My Actions"
 msgstr "Mis Acciones"
 
-#: templates/admin/index.html:58
-msgid "None available"
-msgstr "No habilitado"
-
 #: templates/admin/index.html:72
+msgid "None available"
+msgstr "No disponible"
+
+#: templates/admin/index.html:87
 msgid "Unknown content"
 msgstr "Contenido desconocido"
+
+#: templates/admin/index.html:96
+msgid "Serializers"
+msgstr "Serializadores"
+
+#: templates/admin/index.html:97
+#, fuzzy
+msgid "Actions"
+msgstr "Mis Acciones"
+
+#: templates/admin/index.html:99
+msgid "Mails to send Serializer"
+msgstr "Serializador de mails pendientes"
+
+#: templates/admin/index.html:101
+#, fuzzy
+msgid "Automatic Correction Serializer"
+msgstr "Serializador de Correcciones Automaticas"
+
+#: templates/admin/index.html:103
+#, fuzzy
+msgid "Delivery Serializer"
+msgstr "Serializador de Fecha de Entrega"
+
+#: templates/admin/index.html:105
+#, fuzzy
+msgid "Practice Serializer"
+msgstr "Lista de Practicas"
+
+#: templates/admin/index.html:107
+msgid "Script Serializer"
+msgstr "Serializador de Scripts"
+
+#: templates/admin/list_teacher.html:17
+#, fuzzy
+msgid "List of Teacher"
+msgstr "Docentes"
+
+#: templates/admin/list_teacher.html:19
+#, fuzzy
+msgid "New Teacher"
+msgstr "Nuevo Docente"
+
+#: templates/admin/list_teacher.html:26 templates/course/editcourse.html:18
+#: templates/delivery/deliverydetail.html:14
+#: templates/delivery/listdelivery.html:14
+#: templates/delivery/uploaddelivery.html:29
+#: templates/practice/practiceList.html:11
+#: templates/student/liststudent.html:20
+#: templates/student/liststudentdeliveries.html:14
+#: templates/suscription/listsuscription.html:25
+#: templates/suscription/listsuscription.html:64
+msgid "Uid"
+msgstr "Identificador"
+
+#: templates/admin/list_teacher.html:27
+msgid "First Name"
+msgstr "Nombre"
+
+#: templates/admin/list_teacher.html:28
+msgid "Last Name"
+msgstr "Apellido"
+
+#: templates/admin/list_teacher.html:40
+msgid "There are yet no Teacher"
+msgstr "No hay docentes"
 
 #: templates/course/editcourse.html:6
 #, python-format
@@ -85,87 +175,83 @@ msgid "Course %(coursename)s edit"
 msgstr "Edicion de curso %(coursename)s"
 
 #: templates/course/editcourse.html:9 templates/course/newcourse.html:10
+#: templates/inning/editinning.html:10 templates/inning/newinning.html:10
+#: templates/practice/editPracticeFile.html:13
 #: templates/practice/editpractice.html:11 templates/practice/script.html:11
+#: templates/practice/uploadFile.html:13
 #: templates/practice/uploadpractice.html:11
-#: templates/registration/register.html:38
 #: templates/student/editstudent.html:11 templates/student/new-student.html:11
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/course/editcourse.html:13 templates/teacher/teacher.html:21
+#: templates/course/editcourse.html:13
 msgid "Practices"
-msgstr "Practicas"
+msgstr "Prácticas"
 
 #: templates/course/editcourse.html:14
 msgid "New Practice"
 msgstr "Nueva Practica"
 
-#: templates/course/editcourse.html:18 templates/course/editcourse.html:52
-#: templates/delivery/listdelivery.html:13
-#: templates/delivery/uploaddelivery.html:29
-#: templates/practice/practiceList.html:11
-#: templates/suscription/listsuscription.html:25
-#: templates/suscription/listsuscription.html:64
-msgid "Uid"
-msgstr "Identificador"
-
 #: templates/course/editcourse.html:19 templates/practice/practiceList.html:12
 msgid "Dead Line"
-msgstr "Fecha Entrega"
+msgstr "Vencimiento"
 
-#: templates/course/editcourse.html:20
-msgid "# Deliveries"
-msgstr "# Entregas"
+#: templates/course/editcourse.html:20 templates/practice/practiceList.html:22
+msgid "Files"
+msgstr "Archivos"
 
 #: templates/course/editcourse.html:21
-msgid "Script"
-msgstr "Script"
+msgid "Deliveries"
+msgstr "Entregas"
 
-#: templates/course/editcourse.html:35
+#: templates/course/editcourse.html:22
+msgid "Correction Script"
+msgstr "Script de corrección"
+
+#: templates/course/editcourse.html:32
+msgid "Upload Files"
+msgstr "Subir archivos"
+
+#: templates/course/editcourse.html:41
 msgid "no script"
-msgstr "no hay Script"
+msgstr "no hay script"
 
-#: templates/course/editcourse.html:41 templates/practice/practiceList.html:27
+#: templates/course/editcourse.html:47 templates/practice/practiceList.html:27
 msgid "There are yet no Practices"
 msgstr "No hay practicas cargadas"
 
-#: templates/course/editcourse.html:46 templates/teacher/index.html:14
-#: templates/teacher/teacher.html:20
-msgid "Students"
-msgstr "Estudiantes"
+#: templates/course/editcourse.html:52
+msgid "Innings"
+msgstr "Turnos"
 
-#: templates/course/editcourse.html:47
-msgid "New Student"
-msgstr "Nuevo Estudiante"
+#: templates/course/editcourse.html:53 templates/inning/newinning.html:7
+msgid "New Inning"
+msgstr "Nuevo Turno"
 
-#: templates/course/editcourse.html:48
-#: templates/suscription/suscription.html:6
-#: templates/undergraduate/index.html:29
-msgid "Suscription"
-msgstr "Suscripciones"
-
-#: templates/course/editcourse.html:53
+#: templates/course/editcourse.html:57 templates/practice/listFile.html:12
+#: templates/practice/uploadFile.html:20 templates/student/liststudent.html:21
 msgid "Name"
 msgstr "Nombre"
 
-#: templates/course/editcourse.html:54
-msgid "Email"
-msgstr "Correo Electronico"
+#: templates/course/editcourse.html:58
+msgid "Description"
+msgstr "Descripción"
 
-#: templates/course/editcourse.html:66
-msgid "There are yet no Students"
-msgstr "No hay estudiantes cargados"
+#: templates/course/editcourse.html:59
+msgid "Students"
+msgstr "Estudiantes"
 
-#: templates/course/editcourse.html:71 templates/course/newcourse.html:11
-#: templates/delivery/listdelivery.html:41
-#: templates/delivery/uploaddelivery.html:64
-#: templates/practice/editpractice.html:12 templates/practice/script.html:12
-#: templates/practice/uploadpractice.html:14
-#: templates/registration/change_lenguaje.html:31
-#: templates/student/editstudent.html:12 templates/student/new-student.html:14
-#: templates/suscription/listsuscription.html:90
-msgid "back"
-msgstr "Regresar"
+#: templates/course/editcourse.html:60
+msgid "Students List"
+msgstr "Lista de Estudiantes"
+
+#: templates/course/editcourse.html:70 templates/student/liststudent.html:39
+msgid "List"
+msgstr ""
+
+#: templates/course/editcourse.html:73
+msgid "There are yet no Innings"
+msgstr "No hay turnos cargados"
 
 #: templates/course/index.html:8
 msgid "Courses List"
@@ -173,7 +259,7 @@ msgstr "Lista de Cursos"
 
 #: templates/course/index.html:15
 msgid "0 courses"
-msgstr "0 Cursos"
+msgstr "0 cursos"
 
 #: templates/course/index.html:21 templates/practice/index.html:21
 #: templates/student/index.html:21
@@ -193,53 +279,95 @@ msgstr "siguiente"
 #: templates/course/index.html:31 templates/practice/index.html:31
 #: templates/student/index.html:31
 msgid "last"
-msgstr "ultimo"
+msgstr "último"
 
-#: templates/course/newcourse.html:7 templates/teacher/index.html:10
+#: templates/course/newcourse.html:7 templates/teacher/index.html:6
 msgid "New Course"
 msgstr "Nuevo Curso"
+
+#: templates/delivery/deliverydetail.html:7
+#, python-format
+msgid "Detail of delivery from practice %(practice)s"
+msgstr "Detalle de entregas para la practica %(namepractice)s"
+
+#: templates/delivery/deliverydetail.html:15
+#: templates/delivery/listdelivery.html:15
+#: templates/suscription/listsuscription.html:26
+#: templates/suscription/listsuscription.html:65
+msgid "Student Uid"
+msgstr "Identificador Estudiante"
+
+#: templates/delivery/deliverydetail.html:16
+#: templates/delivery/listdelivery.html:16
+#: templates/suscription/listsuscription.html:27
+#: templates/suscription/listsuscription.html:66
+msgid "Student Name"
+msgstr "Nombre Estudiante"
+
+#: templates/delivery/deliverydetail.html:17
+#: templates/delivery/listdelivery.html:17
+#: templates/student/liststudentdeliveries.html:16
+msgid "Delivery Date"
+msgstr "Fecha de Entrega"
+
+#: templates/delivery/deliverydetail.html:18
+#: templates/delivery/listdelivery.html:18
+#: templates/practice/practiceList.html:23
+#: templates/student/liststudentdeliveries.html:17
+#: templates/teacher/index.html:32
+msgid "Delivery"
+msgstr "Entrega"
+
+#: templates/delivery/deliverydetail.html:19
+#: templates/delivery/listdelivery.html:19
+#: templates/student/liststudentdeliveries.html:18
+#: templates/teacher/index.html:37
+msgid "Correction"
+msgstr "Corrección"
+
+#: templates/delivery/deliverydetail.html:20
+#: templates/delivery/listdelivery.html:20
+#: templates/delivery/uploaddelivery.html:32
+#: templates/student/liststudentdeliveries.html:19
+#: templates/teacher/index.html:38
+msgid "Automatic Correction"
+msgstr "Corrección Automatica"
+
+#: templates/delivery/deliverydetail.html:21
+#: templates/delivery/listdelivery.html:21
+#: templates/student/liststudentdeliveries.html:20
+#: templates/teacher/index.html:39
+msgid "Navigate"
+msgstr "Navegar"
+
+#: templates/delivery/deliverydetail.html:30
+#: templates/delivery/listdelivery.html:31 templates/practice/listFile.html:20
+#: templates/practice/uploadFile.html:29
+#: templates/student/liststudentdeliveries.html:29
+#: templates/teacher/index.html:36 templates/teacher/index.html.py:53
+msgid "Download"
+msgstr "Descargar"
+
+#: templates/delivery/deliverydetail.html:33
+#: templates/delivery/listdelivery.html:34
+#: templates/student/liststudentdeliveries.html:32
+#: templates/teacher/index.html:56
+msgid "Corrected"
+msgstr "Corregido"
+
+#: templates/delivery/deliverydetail.html:35
+#: templates/delivery/listdelivery.html:36
+#: templates/student/liststudentdeliveries.html:34
+#: templates/teacher/index.html:58
+msgid "Pending"
+msgstr "Pendiente"
 
 #: templates/delivery/listdelivery.html:7
 #, python-format
 msgid "Deliveries of practice %(practice)s"
 msgstr "Entregas de la practica %(practice)s"
 
-#: templates/delivery/listdelivery.html:14
-#: templates/suscription/listsuscription.html:26
-#: templates/suscription/listsuscription.html:65
-msgid "Student Uid"
-msgstr "Identificador Estudiante"
-
-#: templates/delivery/listdelivery.html:15
-#: templates/suscription/listsuscription.html:27
-#: templates/suscription/listsuscription.html:66
-msgid "Student Name"
-msgstr "Nombre Estudiante"
-
-#: templates/delivery/listdelivery.html:16
-msgid "Deliver Date"
-msgstr "Fecha de Entrega"
-
-#: templates/delivery/listdelivery.html:17
-#: templates/practice/practiceList.html:23
-msgid "Delivery"
-msgstr "Entrega"
-
-#: templates/delivery/listdelivery.html:19
-#: templates/delivery/uploaddelivery.html:32
-msgid "Automatic Correction"
-msgstr "Correcciones Automaticas"
-
-#: templates/delivery/listdelivery.html:29
-#: templates/practice/practiceList.html:22
-msgid "Download"
-msgstr "Descargar"
-
-#: templates/delivery/listdelivery.html:30
-msgid "Correction"
-msgstr "Corregir"
-
-#: templates/delivery/listdelivery.html:35
+#: templates/delivery/listdelivery.html:43
 msgid "There are yet no deliveries"
 msgstr "No hay entregas cargadas"
 
@@ -257,7 +385,7 @@ msgstr "Subir"
 msgid "Deliveries practice %(namepractice)s"
 msgstr "Entregas de la practica %(namepractice)s"
 
-#: templates/delivery/uploaddelivery.html:30
+#: templates/delivery/uploaddelivery.html:30 templates/teacher/index.html:35
 msgid "Delivery Date"
 msgstr "Fecha de Entrega"
 
@@ -277,6 +405,17 @@ msgstr "Sin corregir"
 msgid "There are yet no deliveries from this practice"
 msgstr "No hay entregas subidas para esta practica"
 
+#: templates/inning/editinning.html:7
+msgid "Edit Inning"
+msgstr ""
+
+#: templates/practice/editPracticeFile.html:14
+#: templates/practice/uploadFile.html:14
+#: templates/practice/uploadpractice.html:12
+#: templates/student/new-student.html:12
+msgid "Reset"
+msgstr "Limpiar"
+
 #: templates/practice/editpractice.html:8
 msgid "Edit Practice"
 msgstr "Editar Practica"
@@ -289,9 +428,19 @@ msgstr "Lista de Practicas"
 msgid "0 practice"
 msgstr "0 Practicas"
 
+#: templates/practice/listFile.html:6
+#, fuzzy, python-format
+msgid " Files of Practice %(practicename)s "
+msgstr "Entregas de la practica %(practice)s"
+
+#: templates/practice/listFile.html:24 templates/practice/uploadFile.html:39
+#, fuzzy
+msgid "There are yet no Files in this Practice"
+msgstr "No hay entregas subidas para esta practica"
+
 #: templates/practice/practiceList.html:6
-#, python-format
-msgid " Practices of Course %(coursename)s "
+#, fuzzy, python-format
+msgid " Practices of Inning %(inning)s "
 msgstr "Practicas del curso %(coursename)s"
 
 #: templates/practice/script.html:8
@@ -302,22 +451,36 @@ msgstr "Subida Script"
 msgid "Script content"
 msgstr "Contenido del Script"
 
+#: templates/practice/uploadFile.html:8
+#, fuzzy, python-format
+msgid "Upload File for practice %(namepractice)s"
+msgstr "Subida de entregas para la practica %(namepractice)s"
+
+#: templates/practice/uploadFile.html:21
+msgid "File"
+msgstr ""
+
+#: templates/practice/uploadFile.html:31
+msgid "Edit"
+msgstr ""
+
+#: templates/practice/uploadFile.html:33
+#, fuzzy
+msgid "Non-editable"
+msgstr "No habilitado"
+
+#: templates/practice/uploadFile.html:35
+msgid "Delete"
+msgstr ""
+
 #: templates/practice/uploadpractice.html:8
 msgid "Upload New Practice"
 msgstr "Subir Nueva Practica"
 
-#: templates/practice/uploadpractice.html:12
-#: templates/registration/register.html:39
-#: templates/student/new-student.html:12
-msgid "Reset"
-msgstr "Limpiar"
-
 #: templates/registration/change-success.html:13
 #: templates/registration/change_pass.html:19
-#: templates/registration/recovery-success.html:13
-#: templates/registration/registration-success.html:13
-#: templates/teacher/teacher.html:19
-#: templates/undergraduate/undergraduate.html:19
+#: templates/teacher/teacher.html:20
+#: templates/undergraduate/undergraduate.html:33
 msgid "Home"
 msgstr "Inicio"
 
@@ -327,119 +490,154 @@ msgstr ""
 "Se ha cambiado correctamente su contraseña! Verifique su correo electronico "
 "para ver la informacion sobre el cambio"
 
-#: templates/registration/change_lenguaje.html:15
-#: templates/registration/login.html:43
-msgid "Change Lenguaje"
-msgstr "Seleccione Idioma"
-
-#: templates/registration/change_lenguaje.html:22
+#: templates/registration/change_lenguaje.html:33
 msgid "Select Lenguaje"
 msgstr "Seleccione Idioma"
 
 #: templates/registration/change_pass.html:15
 #: templates/teacher/teacher.html:15
-#: templates/undergraduate/undergraduate.html:15
 msgid "Change Password"
 msgstr "Cambiar Password"
 
-#: templates/registration/login.html:14
-#: templates/registration/recovery_pass.html:19
-#: templates/registration/register.html:13
-msgid "Login"
-msgstr "Ingresar"
-
-#: templates/registration/login.html:20
-msgid "Your username and password didn't match, please try again."
+#: templates/registration/login.html:23
+#, fuzzy
+msgid "Your username and password didn't match. Please try again."
 msgstr ""
 "Su nombre de usuario y su contraseña no coinciden, por favor intente "
 "nuevamente"
 
-#: templates/registration/login.html:27
-msgid "Username:"
+#: templates/registration/login.html:28
+#, fuzzy
+msgid "User Name"
 msgstr "Nombre de Usuario"
 
 #: templates/registration/login.html:31
-msgid "Password:"
+#, fuzzy
+msgid "Password"
 msgstr "Contraseña"
 
-#: templates/registration/login.html:35
-msgid "login"
-msgstr "Ingresar"
-
-#: templates/registration/login.html:39
-msgid "New to ADFS?"
+#: templates/registration/login.html:42
+#, fuzzy
+msgid "New to SEAL?"
 msgstr "Nuevo en SEAL?"
 
-#: templates/registration/login.html:39
+#: templates/registration/login.html:42
 msgid "Registrate"
 msgstr "Registrate"
 
-#: templates/registration/login.html:41
+#: templates/registration/login.html:45
 msgid "Forgot your Password?"
 msgstr "Perdiste tu contraseña?"
 
-#: templates/registration/login.html:41
+#: templates/registration/login.html:45
 msgid "Recovery"
 msgstr "Recuperala"
 
-#: templates/registration/login.html:43
+#: templates/registration/login.html:48
+msgid "Change Lenguaje"
+msgstr "Seleccione Idioma"
+
+#: templates/registration/login.html:48
 msgid "Click Here"
 msgstr "Click Aqui"
 
-#: templates/registration/recovery-success.html:16
-msgid ""
-"Recovery completed successfully! Check your email to see the recovery info"
+#: templates/registration/recovery-success.html:23
+#, fuzzy
+msgid "Recovery completed successfully!"
 msgstr ""
-"Se ha recuperado correctamente su contraseña! Verifique su correo electronico "
-"para ver la informacion sobre el recupero"
+"Se ha recuperado correctamente su contraseña! Verifique su correo "
+"electronico para ver la informacion sobre el recupero"
 
-#: templates/registration/recovery_pass.html:15
-msgid "Recovery Password"
-msgstr "Recupero de Contraseña"
-
-#: templates/registration/recovery_pass.html:28
-msgid "Recover"
-msgstr "Recuperar"
-
-#: templates/registration/register.html:7
-msgid "Registration"
-msgstr "Registracion"
-
-#: templates/registration/register.html:21
-msgid "Are you human?"
-msgstr "Sos humano?"
-
-#: templates/registration/registration-success.html:16
-msgid ""
-"Registration completed successfully! Check your email to see the "
-"registration info"
+#: templates/registration/recovery-success.html:26
+#, fuzzy
+msgid "Check your email to see the recovery info"
 msgstr ""
-"Se ha regitrado correctamente! Verifique su correo electronico "
-"para ver la informacion sobre el registro"
+"Se ha recuperado correctamente su contraseña! Verifique su correo "
+"electronico para ver la informacion sobre el recupero"
 
-#: templates/registration/registration-success.html:16
+#: templates/registration/recovery-success.html:29
+#: templates/registration/registration-success.html:28
 msgid "Log me in"
 msgstr "Ingresar"
+
+#: templates/registration/registration-success.html:22
+#, fuzzy
+msgid "Registration completed successfully!"
+msgstr ""
+"Se ha regitrado correctamente! Verifique su correo electronico para ver la "
+"informacion sobre el registro"
+
+#: templates/registration/registration-success.html:25
+#, fuzzy
+msgid "Check your email to see the registration info"
+msgstr ""
+"Se ha regitrado correctamente! Verifique su correo electronico para ver la "
+"informacion sobre el registro"
+
+#: templates/student/delivery_pending.html:8 templates/student/index.html:8
+msgid "Students List"
+msgstr "Lista de Estudiantes"
+
+#: templates/student/delivery_pending.html:39 templates/student/index.html:15
+msgid "0 student"
+msgstr "0 Estudiantes"
 
 #: templates/student/editstudent.html:8
 msgid "Edit Student"
 msgstr "Editar Estudiantes"
 
-#: templates/student/index.html:8
-msgid "Students List"
-msgstr "Lista de Estudiantes"
+#: templates/student/liststudent.html:11
+msgid "New Student"
+msgstr "Nuevo Estudiante"
 
-#: templates/student/index.html:15
-msgid "0 student"
-msgstr "0 Estudiantes"
+#: templates/student/liststudent.html:14
+#: templates/suscription/suscription.html:6
+#: templates/undergraduate/index.html:29
+msgid "Suscription"
+msgstr "Suscripciones"
+
+#: templates/student/liststudent.html:22
+msgid "Email"
+msgstr "Correo Electronico"
+
+#: templates/student/liststudent.html:23
+msgid "Corrector"
+msgstr "Corrector"
+
+#: templates/student/liststudent.html:24
+msgid "Deliveries"
+msgstr "Entregas"
+
+#: templates/student/liststudent.html:37
+msgid "no corrector"
+msgstr "sin corrector"
+
+#: templates/student/liststudent.html:43
+msgid "There are yet no Students"
+msgstr "No hay estudiantes cargados"
+
+#: templates/student/liststudentdeliveries.html:7
+msgid "Deliveries of student "
+msgstr ""
+
+#: templates/student/liststudentdeliveries.html:15
+#: templates/teacher/index.html:34
+#, fuzzy
+msgid "Practice"
+msgstr "Practicas"
+
+#: templates/student/liststudentdeliveries.html:42
+#, fuzzy
+msgid "There are yet no deliveries of this student"
+msgstr "No hay entregas subidas para esta practica"
 
 #: templates/student/new-student.html:7
 msgid "New student"
 msgstr "Nuevo Estudiante"
 
 #: templates/suscription/listsuscription.html:18
-#, python-format
-msgid "Pending Suscription of course %(coursename)s"
+#, fuzzy
+msgid "Pending Suscription of inning  "
 msgstr "Suscripciones pendientes para el curso %(coursename)s"
 
 #: templates/suscription/listsuscription.html:28
@@ -460,8 +658,8 @@ msgid "Reject"
 msgstr "Rechazar"
 
 #: templates/suscription/listsuscription.html:57
-#, python-format
-msgid "Suscription solver of course %(coursename)s"
+#, fuzzy
+msgid "Suscription solver of course "
 msgstr "Suscripciones resueltas del curso %(coursename)s"
 
 #: templates/suscription/listsuscription.html:68
@@ -477,17 +675,17 @@ msgstr "Estado"
 msgid "There are yet no suscriptions solve for this course"
 msgstr "No hay suscripciones resueltas para este curso"
 
-#: templates/suscription/suscription.html:11 templates/teacher/index.html:13
-#: templates/teacher/teacher.html:22 templates/undergraduate/index.html:16
-msgid "Courses"
-msgstr "Cursos"
+#: templates/suscription/suscription.html:11
+msgid "Innigns"
+msgstr ""
 
 #: templates/suscription/suscription.html:18
 msgid "Suscribe"
 msgstr "Pedir Suscripcion"
 
 #: templates/suscription/suscription.html:22
-msgid "There are yet no Course to suscribe"
+#, fuzzy
+msgid "There are yet no Innings to suscribe"
 msgstr "No hay cursos para suscribirse"
 
 #: templates/suscription/suscription.html:29
@@ -495,8 +693,8 @@ msgid "List of old Suscription"
 msgstr "Lista de viejas Suscripciones"
 
 #: templates/suscription/suscription.html:34
-msgid "Course"
-msgstr "Curso"
+msgid "Inngin"
+msgstr ""
 
 #: templates/suscription/suscription.html:35
 msgid "Date of Suscription"
@@ -510,28 +708,96 @@ msgstr "Fecha de Resolucion"
 msgid "There are no old suscription"
 msgstr "No hay viejas suscripciones"
 
-#: templates/teacher/index.html:24
+#: templates/teacher/index.html:11
+msgid "Courses"
+msgstr "Cursos"
+
+#: templates/teacher/index.html:12
+msgid "Students"
+msgstr "Estudiantes"
+
+#: templates/teacher/index.html:23
 msgid "There are yet no courses"
 msgstr "No hay cursos cargados"
 
-#: templates/teacher/teacher.html:13
-msgid "Teacher"
-msgstr "Docente"
+#: templates/teacher/index.html:33
+#, fuzzy
+msgid "Student"
+msgstr "Estudiantes"
+
+#: templates/teacher/index.html:44
+#, fuzzy
+msgid "List of my corrections"
+msgstr "Lista de viejas Suscripciones"
+
+#: templates/teacher/index.html:66
+#, fuzzy
+msgid "There are no corrections"
+msgstr "No hay cursos cargados"
 
 #: templates/teacher/teacher.html:15
-#: templates/undergraduate/undergraduate.html:15
 msgid "logout"
 msgstr "Desconectarse"
 
-#: templates/teacher/teacher.html:35
-#: templates/undergraduate/undergraduate.html:32
+#: templates/teacher/teacher.html:32
+#: templates/undergraduate/undergraduate.html:43
 msgid "You are not allowed in this section"
 msgstr "No tienes permismo para entrar en esta seccion"
 
+#: templates/undergraduate/index.html:16
+#, fuzzy
+msgid "Courses - Innings"
+msgstr "Lista de Cursos"
+
 #: templates/undergraduate/index.html:24
-msgid "There are yet no courses in which you are enrolled"
+#, fuzzy
+msgid "There are yet no innings in which you are enrolled"
 msgstr "No hay cursos en los cuales estes inscripto"
 
-#: templates/undergraduate/undergraduate.html:13
+#: templates/undergraduate/undergraduate.html:11
 msgid "Student's view"
 msgstr "Vista Estudiante"
+
+#: templates/undergraduate/undergraduate.html:14
+#, fuzzy
+msgid "My deliveries"
+msgstr "# Entregas"
+
+#: templates/undergraduate/undergraduate.html:16
+#, fuzzy
+msgid "My corrections"
+msgstr "Corregir"
+
+#: templates/undergraduate/undergraduate.html:18
+msgid "Overview"
+msgstr ""
+
+#: templates/undergraduate/undergraduate.html:23
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: templates/undergraduate/undergraduate.html:27
+#, fuzzy
+msgid "Logout"
+msgstr "Desconectarse"
+
+#~ msgid "Login"
+#~ msgstr "Ingresar"
+
+#~ msgid "login"
+#~ msgstr "Ingresar"
+
+#~ msgid "Recovery Password"
+#~ msgstr "Recupero de Contraseña"
+
+#~ msgid "Recover"
+#~ msgstr "Recuperar"
+
+#~ msgid "Registration"
+#~ msgstr "Registracion"
+
+#~ msgid "Are you human?"
+#~ msgstr "Sos humano?"
+
+#~ msgid "Course"
+#~ msgstr "Curso"

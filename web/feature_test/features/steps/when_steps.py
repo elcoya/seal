@@ -122,7 +122,7 @@ def step(context, course1, course2, idelement):
     context.browser.find_element_by_id(idelement).clear()
     form.find_element_by_id(idelement).send_keys(course2)
     
-@when('I am in the modifier page of course "{course}"')
+@when('I am in the modify page of course "{course}"')
 def step(context,course):
     c = Course.objects.get(name=course)
     addres = base_url + 'teacher/course/editcourse/'+str(c.pk)
