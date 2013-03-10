@@ -17,9 +17,9 @@ class Teacher(models.Model):
     
     """
     
-    uid = models.CharField(unique=True, max_length = 32)
+    uid = models.CharField(unique=True, max_length = 32, verbose_name="Legajo")
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    appointment = models.CharField(max_length = 50)
+    appointment = models.CharField(max_length = 50, verbose_name="Cargo")
     
     def __str__(self):
         """Stringify the Teacher"""

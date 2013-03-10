@@ -14,7 +14,7 @@ Feature: As a Administrator I want to create and modify a teacher
     	Given Teacher "teacher" exists with password "teacher"
          When I log in as "seal" "seal"
           And I click in the "Add and Modify Teacher" link
-          And I click in the "teacher" link
+          And I click in the "Change" link
 	  	  And I change "teacher" for "first_name" in element whith id "id_first_name"
 	  	  And I change "teacher" for "last_name" in element whith id "id_last_name"
 	  	  And I submit the form

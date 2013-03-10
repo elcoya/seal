@@ -11,41 +11,55 @@
 
 {% block breadcrumbs %}{% endblock %}
 
+{% block nav-global %}
+<div class="breadcrumbs">
+	<a href="/admin/" style="color:#8080F0">Home</a>
+	&rsaquo; <a href="/admin/model/" style="color:#8080F0">Model</a>
+	&rsaquo; <a href="/listteacher/" style="color:#8080F0">List of Teacher</a>
+	&rsaquo; Edit of Teacher
+</div>
+{% endblock %}
+
+
 {% block content %}
 <body>
 	<div id="content-main">
-		<h2> {% trans "List of Teacher" %}</h2>
+		<h1> {% trans "List of Teacher" %}</h1>
+		<br>
 		<div style="clear: none; text-align: right; float: left;">
-			<a href="/newteacher" >{% trans "New Teacher" %}</a>
+			<a href="/newteacher" class="addlink">{% trans "New Teacher" %}</a>
 		</div>
 		<br>
 		<br>
-		<table style="width: 100%;">
-			<thead style="text-align: center; ">
-				<tr>
-					<td><b>{% trans "Uid" %}</b></td>
-					<td><b>{% trans "First Name" %}</b></td>
-					<td><b>{% trans "Last Name" %}</b></td>
-				</tr>
-			</thead>
-			<tbody>
-				{% for teacher in teachers %}
-				<tr>
-					<td style="text-align: center; "><a href="/editteacher/{{ teacher.pk }}">{{ teacher.uid }}</a></td>
-					<td style="text-align: center; ">{{ teacher.user.first_name }}</td>
-					<td style="text-align: center; ">{{ teacher.user.last_name }}</td>
-				</tr>
-				{% empty %}
-				<tr>
-					<td colspan="4" style="text-align: center; ">{% trans "There are yet no Teacher" %}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		<div class="module">
+			<h2>{% trans 'Teacher' %}</h2>
+			<table style="width: 100%;">
+				<thead style="text-align: center; ">
+					<tr>
+						<td><b>{% trans "Uid" %}</b></td>
+						<td><b>{% trans "First Name" %}</b></td>
+						<td><b>{% trans "Last Name" %}</b></td>
+						<td>&nbsp;</td>
+					</tr>
+
+				</thead>
+				<tbody>
+					{% for teacher in teachers %}
+					<tr>
+						<td style="text-align: center; ">{{ teacher.uid }}</td>
+						<td style="text-align: center; ">{{ teacher.user.first_name }}</td>
+						<td style="text-align: center; ">{{ teacher.user.last_name }}</td>
+						<td ><a href="/editteacher/{{ teacher.pk }}" class="changelink">{% trans 'Change' %}</a></td>
+					</tr>
+					{% empty %}
+					<tr>
+						<td colspan="4" style="text-align: center; ">{% trans "There are yet no Teacher" %}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 		<br>
-		<footer>
-			<a href="/">{% trans "back" %}</a>
-		</footer>
 	</div>
 </body>
 {% endblock %}

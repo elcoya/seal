@@ -2,28 +2,37 @@
 {% load i18n admin_static %}
 
 {% block extrastyle %}{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}"/>
 {% endblock %}
 
-{% block coltype %}colMS{% endblock %}
-
-{% block bodyclass %}dashboard{% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
+{% block nav-global %}
+<div class="breadcrumbs">
+	<a href="/admin/" style="color:#8080F0">Home</a>
+	&rsaquo; <a href="/admin/model/" style="color:#8080F0">Model</a>
+	&rsaquo; <a href="/listteacher/" style="color:#8080F0">List of Teacher</a>
+	&rsaquo; Edit of Teacher
+</div>
+{% endblock %}
 
 {% block content %}
 <body>
-	<div id="content-main">
-		<form action="" method="post">
-			{% csrf_token %}
-			<table>
-				{{ form.as_table }}
-			</table>
-			<input type="submit" value="Save">
-		</form>
-		<footer>
-			<a href="/listteacher/">{% trans "back" %}</a>
-		</footer>
+	<div id="content" class="colM">
+		<h1> {% trans "New Teacher" %}</h1>
+		<div id="content-main">
+			<form action="" method="post">
+				{% csrf_token %}
+				<fieldset class="module aligned ">
+					<table>
+						<b> {{ form.as_table }} </b>
+					</table>
+				</fieldset>
+
+				<div class="submit-row">
+					<input type="submit" value="Save" class="default" name="_save" />
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 {% endblock %}

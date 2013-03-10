@@ -2,6 +2,7 @@ from django import forms
 from seal.model.teacher import Teacher
 from django.contrib.auth.models import User
 from django.forms.models import ModelForm
+from cProfile import label
 
 ERRORNOPASSWD = "A password must be supplied"
 ERRORPASSWDNOTMATCH = "Passwords does not match"
@@ -11,12 +12,12 @@ class TeacherForm(ModelForm):
         model = Teacher
         exclude = ('user',)
         
-    username = forms.CharField(max_length=100) 
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False)
-    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False)
+    username = forms.CharField(max_length=100, label="Usuario") 
+    first_name = forms.CharField(max_length=100, label="Nombre Completo")
+    last_name = forms.CharField(max_length=100, label="Apellido")
+    email = forms.EmailField(label="Email")
+    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False, label="Password")
+    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False, label="Repetir Password")
     
     def clean_passwd(self):
         uid = self.cleaned_data.get('uid', None)
