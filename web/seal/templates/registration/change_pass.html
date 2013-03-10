@@ -8,16 +8,23 @@ Main page to recovery password.
 {% endcomment %}
 {% block addl_styles %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
 <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
 {% endblock %}
+
 {% block head %}
 <title>SEAL | Change Password</title>
 {% endblock %}
+
 {% block subtitle %} {% trans "Change Password" %}{% endblock %}
+{% block nav_opts %}
+<li>
+	<a href="/">{% trans "Home" %}</a>
+</li>
+{% endblock %}
+
 {% block body %}
-<body>
 <div class="content">
 	<h3>{% trans "Change Password" %}</h3>
 	<form method="post">
@@ -25,8 +32,7 @@ Main page to recovery password.
 		<table>
 			{{ form|as_bootstrap  }}
 		</table>
-		<input type="submit" value="{% trans 'Change' %}" style="margin: 5px 0 5px 205px; width: 70px; " />
+		<input type="submit" value="{% trans 'Change' %}" />
 	</form>
 </div>
-</body>
 {% endblock %}
