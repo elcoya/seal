@@ -17,8 +17,8 @@ Feature: As a user I want to see the course list on the home page
          
     Scenario: Index page follow link to edit course
        Given Teacher "teacher" exists with password "teacher"
-         And I log in as "teacher" "teacher"
          And course "2012-1" exists
+         And I log in as "teacher" "teacher"	
          And I am in the index page
         When I click in the "2012-1" link
         Then I should see "Course 2012-1 edit"
@@ -26,7 +26,7 @@ Feature: As a user I want to see the course list on the home page
     
 	Scenario: Index page shows course list empty
        Given Teacher "teacher" exists with password "teacher"
-         And I log in as "teacher" "teacher"
          And there are no courses
+         And I log in as "teacher" "teacher"
          And I am in the index page
         Then I should see "There are yet no courses"

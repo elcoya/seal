@@ -1,4 +1,4 @@
-Feature: As a Student I should be able to upload my deliveries and trigger the automatic correction
+Feature: As a Teacher I should be able to see de automatic correction result
 
     Scenario: Upload a script for a practice
         Given Teacher "teacher" exists with password "teacher"

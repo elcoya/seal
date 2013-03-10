@@ -68,7 +68,7 @@ Feature: As a teacher I want to administrate de suscription
 		When I am in the suscription list page of course "2012-1" inning "tarde"
 		 And I check the suscription of student "martin" for course "2012-1" inning "tarde"
 		 And I click the button "Accept"
-		 And I click in the "logout" link
+		 And I click in the "Logout" link
          And I log in as "martin" "martin"
         Then I should see "There are yet no Practices"
          And I should see "2012-1-tarde"

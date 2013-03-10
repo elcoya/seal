@@ -4,7 +4,8 @@
 	<div class="row" style="margin: 20px 0;">
 		{% blocktrans %}Upload delivery for practice <b>{{namepractice}}</b>{% endblocktrans %}
 	</div>
-	<form class="form-horizontal" method="post">{% csrf_token %}
+	<form class="form-horizontal" method="post" enctype='multipart/form-data'>
+		{% csrf_token %}
         <div class="row">
 	        <div class="span6">
 		        {% for field in form %}

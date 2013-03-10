@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap_toolkit %}
 {% load i18n %}
 {% comment %}
 
@@ -8,25 +9,24 @@ Main page to recovery password.
 {% block addl_styles %}
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
 {% block head %}
 <title>SEAL | Change Password</title>
 {% endblock %}
 {% block subtitle %} {% trans "Change Password" %}{% endblock %}
 {% block body %}
-<nav>
-	<p>
-		<a href="/">{% trans "Home" %}</a>
-	</p>
-</nav>
-<div class="content" >
+<body>
+<div class="content">
+	<h3>{% trans "Change Password" %}</h3>
 	<form method="post">
 		{% csrf_token %}
 		<table>
-			{{ form.as_table }}
+			{{ form|as_bootstrap  }}
 		</table>
 		<input type="submit" value="{% trans 'Change' %}" style="margin: 5px 0 5px 205px; width: 70px; " />
-
 	</form>
 </div>
+</body>
 {% endblock %}

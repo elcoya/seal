@@ -37,7 +37,7 @@ def step(context, loginData):
 
 @when('I logout')
 def step(context):
-    a = context.browser.find_element_by_link_text('logout')
+    a = context.browser.find_element_by_link_text('Logout')
     a.click()
 
 @when('I enter in the course list')
