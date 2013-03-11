@@ -1,21 +1,22 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 <form id='formcorrect' action='' method='post'>
 	{% csrf_token %}
 	<div style="width: 100%; text-align: left; margin: auto;">
-		Correction Practice <b>{{delivery.practice.uid}}</b> - Delivery <b>{{delivery.pk}}</b> - Student <b>{{delivery.student.get_full_name}} ({{delivery.student.uid}})</b>
+		{% trans "Correction practice" %} <b>{{delivery.practice.uid}}</b> - {% trans "Delivery" %} <b>{{delivery.pk}}</b> - {% trans "Student" %} <b>{{delivery.student.get_full_name}} ({{delivery.student.uid}})</b>
 		<br>
 		<br>
-		Corrector - <b>{{corrector}}</b>
+		{% trans "Corrector" %} - <b>{{corrector}}</b>
 		<br>
 		<br>
 	</div>
 	<table>
 		{{ form.as_table }}
 	</table>
-	<input type='submit' value='Submit' />
+	<input type='submit' value='{% trans "Submit" %}' />
 </form>
 <footer>
-	<a href="javascript:history.back()">Back</a>
+	<a href="javascript:history.back()">{% trans "Back" %}</a>
 </footer>
 {% endblock %}

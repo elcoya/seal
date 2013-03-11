@@ -30,7 +30,7 @@ Page to change lengauje
 		<div class="content" >
 			{% csrf_token %}
 			<input name="next" type="hidden" value="/" />
-			<h2 align="center" class="form-signin-heading">{% trans 'Select Lenguaje' %}</h2>
+			<h2 align="center" class="form-signin-heading">{% trans "Select Lenguaje" %}</h2>
 			<select name="language" id="language">
 				{% for lang in LANGUAGES %}
 				<option value="{{ lang.0 }}">{{ lang.1 }}</option>

@@ -1,9 +1,10 @@
 {% extends "teacher/teacher.html" %}
+{% load i18n %}
 {% block content %}
 <body>
 	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 		<div>
-			Delivery <b>{{ delivery.pk }}</b> detail <br><br>
+			{% trans "Delivery" %} <b>{{ delivery.pk }}</b> {% trans "Practice" %} <b> {{ delivery.practice.uid }} </b> {% trans "Student" %}<b> {{ delivery.student.get_full_name }} ({{ delivery.student.uid }}) </b> <br><br>
 		</div>
 		<div >
 			<ul>
@@ -12,11 +13,11 @@
 						<a href="/teacher/delivery/browse/{{ delivery.pk }}/{{ filepath }}" >{{ filepath }}</a>
 					</li>
 				{% empty %}
-					<li>No files where found in this delivery</li>
+					<li>{% trans "No files where found in this delivery" %}</li>
 				{% endfor %}
 			</ul>
 		</div>
-		<div><a href="javascript:history.back()">Back</a></div>
+		<div><a href="javascript:history.back()">{% trans "Back" %}</a></div>
 		{% if file_content %}
 			<div class="file-browser">
 				<pre>{{ file_content }}</pre>

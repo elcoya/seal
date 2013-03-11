@@ -16,7 +16,7 @@ Main page to authenticate users.
 {% block body %}
 <div class="content" >
 	<form class="form-signin" method="post" action=".">
-		<h2 align="center" class="form-signin-heading">Login SEAL</h2>
+		<h2 align="center" class="form-signin-heading">{% trans "Login SEAL" %}</h2>
 		{% csrf_token %}
 		{% if form.errors %}
 		<p align="center" style="color: red" class="error" >
@@ -33,7 +33,7 @@ Main page to authenticate users.
 		<input type="hidden" name="next" value="{{ next }}" />
 		<div align="center">
 			<button  class="btn btn-large btn-primary" type="submit">
-				Log in
+				{% trans "Log in" %}
 			</button>
 		</div>
 	</form>

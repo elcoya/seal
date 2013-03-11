@@ -74,7 +74,7 @@
 					<tr>
 						<td>{{ suscription.pk }}</td>
 						<td>{{ suscription.student.uid }}</td>
-						<td>{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
+						<td>{{ suscription.student.get_full_name }}</td>
 						<td>{{ suscription.suscriptionDate }}</td>
 						<td>{{ suscription.resolveDate }}</td>
 						<td>{{ suscription.state }}</td>

@@ -11,9 +11,9 @@ class Correction(models.Model):
     
     """
     
-    publicComent = models.TextField(max_length=2000)
-    privateComent = models.TextField(max_length=2000)
-    grade = models.FloatField()
+    publicComent = models.TextField(max_length=2000, verbose_name="Comentario Public")
+    privateComent = models.TextField(max_length=2000, verbose_name="Comentario Privado")
+    grade = models.FloatField(verbose_name="Nota")
     delivery = models.ForeignKey(Delivery)
     corrector = models.ForeignKey(Teacher)
     

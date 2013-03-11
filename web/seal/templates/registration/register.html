@@ -1,5 +1,5 @@
 {% load bootstrap_toolkit %}
-{% load i18n admin_static %}
+{% load i18n %}
 
 {% block extrastyle %}
 <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -26,18 +26,18 @@
 	<br>	
 	<div class="content" >
 		<form class="form-signin" style="max-width: 320px" action="" method="post" >
-			<h2 align="center" class="form-signin-heading">Registrate on SEAL</h2>
+			<h2 align="center" class="form-signin-heading">{% trans "Registrate on SEAL" %}</h2>
 			{% csrf_token %}
 			{{ form|as_bootstrap  }}
 			<span class="validation_error">{{ captcha_response }}</span><script type="text/javascript" src="http://api.recaptcha.net/challenge?k={{captcha_publick}}"></script>
 			<noscript>
-				<iframe src="http://api.recaptcha.net/noscript?k={{captcha_publick}}" height="300" width="500" frameborder="0"></iframe>
+				<iframe src="http://api.recaptcha.net/noscript?k={{captcha_publick}}" height="300" width="500" frameborder="0">&nbsp;</iframe>
 				<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
 			</noscript>
 			<br>
 			<div align="center">
 				<button  class="btn btn-large btn-primary" type="submit">
-					Registrate
+					{% trans "Registrate" %}
 				</button>
 			</div>
 		</form>

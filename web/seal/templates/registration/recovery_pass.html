@@ -29,12 +29,12 @@ Main page to recovery password.
 	<br>
 	<div class="content" >
 		<form method="post" class="form-signin">
-			<h2 align="center" class="form-signin-heading">Recover Password</h2>
+			<h2 align="center" class="form-signin-heading">{% trans "Recover Password" %}</h2>
 			{% csrf_token %}
 			{{ form|as_bootstrap }}
 			<div align="center">
 				<button  class="btn btn-large btn-primary" type="submit">
-					Recover
+					{% trans "Recover" %}
 				</button>
 			</div>
 

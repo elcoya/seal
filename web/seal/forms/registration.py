@@ -21,7 +21,7 @@ class RegistrationForm(Form):
     last_name = forms.CharField(max_length=100, label="Apellido")
     uid = forms.CharField(max_length=32, label="Padron")
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Password")
-    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Repeat Password")
+    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Repetir Password")
     email = forms.EmailField()
     inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="No hay Turnos", label="Turno")
     

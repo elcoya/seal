@@ -7,10 +7,10 @@
 			<h3>{% trans "Student with pending delivery" %}</h3>
 		</div>
 		{% for row in final_list %}
-		<td><h4>Course: {{ row.course }}</h4></td>
+		<td><h4>{% trans "Course" %} {{ row.course }}</h4></td>
 		<div>
 			{% for content in row.data %}
-			<td><h5>Practice: {{ content.practice.uid }}</h5></td>
+			<td><h5>{% trans "Practice" %} {{ content.practice.uid }}</h5></td>
 			<table class="table table-striped">
 				<thead style="text-align: center;">
 					<tr>

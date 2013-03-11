@@ -5,13 +5,13 @@
 	<form id='formcorrect' action='' method='post'>
 		{% csrf_token %}
 		<div class="row" style="margin: 20px 0;">
-			Correction practice <b>{{delivery.practice.uid}}</b> - Delivery <b>{{delivery.pk}}</b>
+			{% trans "Correction practice" %} <b>{{delivery.practice.uid}}</b> - {% trans "Delivery" %} <b>{{delivery.pk}}</b>
 		</div>
 		<table class="table table-striped">
 			<thead style="text-align: center; ">
 				<tr>
-					<td><b>Coment</b></td>
-					<td><b>Grade</b></td>
+					<td><b>{% trans "Coment" %}</b></td>
+					<td><b>{% trans "Grade" %}</b></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,7 +22,7 @@
 				</tr>
 				{% empty %}
 				<tr>
-					<td colspan="4" style="text-align: center; ">There is yet no Correction</td>
+					<td colspan="4" style="text-align: center; ">{% trans "There is yet no Correction" %}</td>
 				</tr>
 				{% endfor %}
 			</tbody>

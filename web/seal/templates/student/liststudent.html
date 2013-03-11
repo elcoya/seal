@@ -5,7 +5,7 @@
 <form id='formliststudent' action='' method='post'>
 	{% csrf_token %}
 	<div style="clear: none; width: 50%; float: left;">
-		Students of Inning <b>{{ inning }}</b>
+		{% trans "Students of Inning" %} <b>{{ inning }}</b>
 	</div>
 	<div style="clear: none; text-align: right; width: 25%; float: left;">
 		<a href="/teacher/students/newstudent/{{ inning.pk }}" >{% trans "New Student" %}</a>
