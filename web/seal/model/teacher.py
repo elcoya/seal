@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.encoding import smart_str
 
 MSGEXEPTION = 'Teacher cannot be saved without an authentication register.\
                 Please, give the teacher an associated user so he can login.'
@@ -23,7 +24,7 @@ class Teacher(models.Model):
     
     def __str__(self):
         """Stringify the Teacher"""
-        return self.user.last_name
+        return smart_str(self.user.last_name)
     
     def save(self, force_insert=False, force_update=False, using=None):
         """Extends parent. Checks for the existance of the login user"""

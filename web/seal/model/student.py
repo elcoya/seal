@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from seal.model.teacher import Teacher
 from seal.model.innings import Innings
+from django.utils.encoding import smart_str
 
 class Student(models.Model):
     """
@@ -29,4 +30,4 @@ class Student(models.Model):
         return self.uid
     
     def get_full_name(self):
-        return self.user.first_name + " " + self.user.last_name
+        return smart_str(self.user.first_name + " " + self.user.last_name)

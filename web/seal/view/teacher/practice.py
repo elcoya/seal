@@ -17,6 +17,7 @@ from seal.forms.practiceFile import PracticeFileForm
 from django.http import HttpResponse
 from seal.forms.edit_practice_file import EditPracticeFileForm
 import os
+from django.utils.encoding import smart_str
 
 PATHOK =  "/teacher/course/editcourse/%s"
 PATHFILEOK = "/teacher/practices/practicefile/%s/%s"
@@ -128,14 +129,14 @@ def edit(request, idpracticefile):
     if (request.method == 'POST'):
         form = EditPracticeFileForm(request.POST)
         if (form.is_valid()):
-            edited_file_content = form.data['content']
+            edited_file_content = smart_str(form.data['content'])
             with open(file_path, 'w') as content_file:
                 content_file.write(edited_file_content)
     else:
         file_content = None
         with open(file_path, 'r') as content_file:
             file_content = content_file.read()
-        form = EditPracticeFileForm(initial={'content': file_content})
+        form = EditPracticeFileForm(initial={'content': smart_str(file_content)})
     return render(request, 'practice/editPracticeFile.html',
                   {'form': form, 'practicefile': practicefile, 'file_basename': file_basename, 'edited': edited})
 

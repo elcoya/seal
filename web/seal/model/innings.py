@@ -6,6 +6,7 @@ Created on 06/03/2013
 
 @author: martin
 '''
+from django.utils.encoding import smart_str
 
 class Innings(models.Model):
     '''
@@ -21,7 +22,7 @@ class Innings(models.Model):
     
     def __str__(self):
         """Stringify the Course"""
-        return (self.course.name + "-" + self.name)
+        return smart_str(self.course.name + "-" + self.name)
     
     def get_students(self, uid=None, name=None, email=None):
         partial_query = self.student_set.all()
