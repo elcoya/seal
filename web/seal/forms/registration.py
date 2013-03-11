@@ -8,6 +8,7 @@ from seal.model.student import Student
 from django.forms.forms import Form
 from seal.model.innings import Innings
 from seal.model.teacher import Teacher
+from cProfile import label
 
 ERRORUIDVALIDATION = "User uid is not available"
 ERRORPASSWDNOTMATCH = "Passwords does not match"
@@ -16,13 +17,13 @@ class RegistrationForm(Form):
     """
     Registrtion form for new Student
     """
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    uid = forms.CharField(max_length=32)
-    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True))
-    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True))
+    first_name = forms.CharField(max_length=100, label="Nombre Completo")
+    last_name = forms.CharField(max_length=100, label="Apellido")
+    uid = forms.CharField(max_length=32, label="Padron")
+    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Password")
+    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Repeat Password")
     email = forms.EmailField()
-    inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="No Innings")
+    inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="No hay Turnos", label="Turno")
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']

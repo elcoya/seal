@@ -11,20 +11,20 @@ Undergraduate
 {% endblock %}
 
 {% block content %}
-	<table style="width: 100%;">
+	<table class="table table-striped">
 		<thead style="text-align: center; ">
-			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >{% trans "Courses - Innings" %}</td></tr>
+			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " ><h4>{% trans "Courses - Innings" %}</h4></td></tr>
 		</thead>
 		<tbody>
 		{% for inning in innings %}
 		    <tr>
-		    	<td style="width: 70%; text-indent: 15px; " ><a href="/undergraduate/practice/list/{{inning.course.pk}}">{{ inning }}</a></td>
+		    	<td style="text-indent: 15px; " ><h5><a href="/undergraduate/practice/list/{{inning.course.pk}}">{{ inning }}</a></h5></td>
 		    </tr>
 		{% empty %}
 		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no innings in which you are enrolled" %}</td></tr>
 		{% endfor %}
 		</tbody>
-		
 	</table>
-	<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/undergraduate/suscription/" >{% trans "Suscription" %}</a></div> 
+	<br>
+	<div style="clear: none; alignment-adjust: central;"><h5>{% trans "Subscription on a new course here " %}<a href="/undergraduate/suscription/" >{% trans "Suscription" %}</a></h5></div> 
 {% endblock %}

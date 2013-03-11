@@ -5,15 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
 {% endblock %}
 {% block bodyclass %}dashboard{% endblock %}
+{% block nav_opts %}
+<li>
+	<a href="/">{% trans "Home" %}</a>
+</li>
+{% endblock %}
 {% block body %}
 <div>
 	{% csrf_token %}
-	<nav>	
-		<p>
-			<a href="/">{% trans "Home" %}</a>
-		</p>
-	</nav>
-	<div>{% trans "Change password successfully! Check your email to see the change info" %}</div>
+	<div align="center"><h4>{% trans "Change password successfully! Check your email to see the change info" %}</h4></div>
 	<footer>
 	</footer>
 </div>

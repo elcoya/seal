@@ -6,11 +6,12 @@ Created on 06/12/2012
 from django import forms
 from django.forms.forms import Form
 from django.contrib.auth.models import User
+from cProfile import label
 
 ERRORUIDVALIDATION = "User not exist with this email"
 
 class RecoveryForm(Form):
-    uid = forms.CharField(max_length=32)
+    uid = forms.CharField(max_length=32, label="Padron")
     email = forms.EmailField()
     
     def clean_uid(self):
