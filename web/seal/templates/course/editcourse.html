@@ -3,37 +3,37 @@
 {% block content %}
 <form id='formeditcoruse' action='' method='post'>
 	{% csrf_token %}
-	<div>{% blocktrans with course.name as coursename %}Course {{coursename}} edit{% endblocktrans %}</div>
+	<div><h4>{% blocktrans with course.name as coursename %}Course {{coursename}} edit{% endblocktrans %}</h4></div>
 	<table style="margin: 20px 0;">
 		{{ form.as_table }}
 		<tr><td colspan="2" style="text-align: right; "><input type='submit' value='{% trans "Save" %}' /></td></tr>
 	</table>	
 </form>
 <div style="width: 800px; margin: auto; padding: 15px 0; clear: both;" >
-	<div style="clear: none; width: 50%; float: left;">{% trans "Practices" %}</div>
-	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/practices/newpractice/{{ idcourse }}" >{% trans "New Practice" %}</a></div>
-	<table style="width: 100%;">
+	<h4><div style="clear: none; width: 50%; float: left;">{% trans "Practices" %}</div>
+	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/practices/newpractice/{{ idcourse }}" >{% trans "New Practice" %}</a></div></h4>
+	<table class="table table-striped">
 		<thead style="text-align: center; ">
 			<tr>
-				<td>{% trans "Uid" %}</td>
-				<td>{% trans "Dead Line" %}</td>
-				<td>{% trans "Files" %}</td>	
-				<td># {% trans "Deliveries" %}</td>
-				<td>{% trans "Correction Script" %}</td>
+				<td><b>{% trans "Uid" %}</b></td>
+				<td><b>{% trans "Dead Line" %}</b></td>
+				<td><b>{% trans "Files" %}</b></td>	
+				<td><b># {% trans "Deliveries" %}</b></td>
+				<td><b>{% trans "Correction Script" %}</b></td>
 			</tr>
 		</thead>
 		<tbody>
 		{% for practice in table_contents %}
 		    <tr>
-		    	<td style="text-align: center; " ><a href="/teacher/practices/editpractice/{{ course.pk }}/{{ practice.pk }}">{{ practice.uid }}</a></td>
-		    	<td style="text-align: center; ">{{ practice.deadline }}</td>
-		    	<td style="text-align: center; ">
+		    	<td><a href="/teacher/practices/editpractice/{{ course.pk }}/{{ practice.pk }}">{{ practice.uid }}</a></td>
+		    	<td>{{ practice.deadline }}</td>
+		    	<td>
 		    		<a href="/teacher/practices/practicefile/{{ course.pk }}/{{ practice.pk }}">
 			    		{% trans "Upload Files" %}
 			    	</a>
 		    	</td>
-		    	<td style="text-align: center; "><a href="/teacher/delivery/list/{{practice.pk}}">{{ practice.ndeliveries }}</a></td>
-		    	<td style="text-align: center; ">
+		    	<td><a href="/teacher/delivery/list/{{practice.pk}}">{{ practice.ndeliveries }}</a></td>
+		    	<td>
 		    		<a href="/teacher/practices/script/{{ course.pk }}/{{ practice.pk }}">
 			    		{% if practice.script %}
 			    			{{ practice.script }}
@@ -48,26 +48,25 @@
 		{% endfor %}
 		</tbody>
 	</table>
-	<br><br>
-	<div style="clear: none; width: 50%; float: left;">{% trans "Innings" %}</div>
-	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/innings/newinning/{{ idcourse }}" >{% trans "New Inning" %}</a></div>
-	<table style="width: 100%;">
+	<h4><div style="clear: none; width: 50%; float: left;">{% trans "Innings" %}</div>
+	<div style="clear: none; text-align: right; width: 50%; float: left;"><a href="/teacher/innings/newinning/{{ idcourse }}" >{% trans "New Inning" %}</a></div></h4>
+	<table class="table table-striped">
 		<thead style="text-align: center; ">
 			<tr>
-				<td>{% trans "Name" %}</td>
-				<td>{% trans "Description" %}</td>
-				<td># {% trans "Students" %}</td>
-				<td>{% trans "Students List" %}</td>
+				<td><b>{% trans "Name" %}</b></td>
+				<td><b>{% trans "Description" %}</b></td>
+				<td><b># {% trans "Students" %}</b></td>
+				<td><b>{% trans "Students List" %}</b></td>
 			</tr>
 		</thead>
 		
 		<tbody>
 		{% for inning_row in table_innings %}  
 		    <tr>
-		    	<td style="width: 25%; text-align: center; " ><a href="/teacher/innings/editinning/{{inning_row.inning.pk}}">{{ inning_row.inning.name }}</a></td>
-		    	<td style="width: 25%; text-align: center; ">{{ inning_row.inning.description }}</td>
-		    	<td style="width: 25%; text-align: center; ">{{ inning_row.count }}</td>
-		    	<td style="width: 25%; text-align: center; " ><a href="/teacher/students/list/{{inning_row.inning.pk}}">{% trans "List" %}</a></td>
+		    	<td><a href="/teacher/innings/editinning/{{inning_row.inning.pk}}">{{ inning_row.inning.name }}</a></td>
+		    	<td>{{ inning_row.inning.description }}</td>
+		    	<td>{{ inning_row.count }}</td>
+		    	<td><a href="/teacher/students/list/{{inning_row.inning.pk}}">{% trans "List" %}</a></td>
 		    </tr>
 		{% empty %}
 		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Innings" %}</td></tr>

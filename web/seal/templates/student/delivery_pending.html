@@ -4,14 +4,14 @@
 <body>
 	<div style="width: 800px; text-align: left; margin: auto;">
 		<div style="width: 100%; text-align: left; margin: auto;">
-			<h2>{% trans "Student with pending delivery" %}</h2>
+			<h3>{% trans "Student with pending delivery" %}</h3>
 		</div>
 		{% for row in final_list %}
-		<td><h2>Course: {{ row.course }}</h2></td>
+		<td><h4>Course: {{ row.course }}</h4></td>
 		<div>
 			{% for content in row.data %}
-			<td><h3>Practice: {{ content.practice.uid }}</h3></td>
-			<table style="width: 100%">
+			<td><h5>Practice: {{ content.practice.uid }}</h5></td>
+			<table class="table table-striped">
 				<thead style="text-align: center;">
 					<tr>
 						<td><b>Uid</b></td>
@@ -22,9 +22,9 @@
 				<tbody>
 					{% for student_inning in content.student_inning_list %}
 					<tr>
-						<td style="text-align: center; ">{{ student_inning.student.uid }}</td>
-						<td style="text-align: center; ">{{ student_inning.student.get_full_name }}</td>
-						<td style="text-align: center; ">{{ student_inning.inning.name }}</td>
+						<td>{{ student_inning.student.uid }}</td>
+						<td>{{ student_inning.student.get_full_name }}</td>
+						<td>{{ student_inning.inning.name }}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -32,7 +32,7 @@
 			{% endfor %}
 		</div>
 		{% empty %}
-		<table style="width: 100%;">
+		<table class="table table-striped">
 			<tbody>
 				<tr>
 					<td style="text-align: center;">{% trans "There are no student with pending delivery" %}</td>

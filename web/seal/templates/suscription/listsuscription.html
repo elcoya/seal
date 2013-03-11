@@ -15,17 +15,17 @@
 		{% csrf_token %}
 		<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 			<div style="clear: none; width: 50%; float: left;">
-				{% trans "Pending Suscription of inning  " %}{{ inning }}
+				{% trans "Pending Suscription of inning  " %}<b>{{ inning }}</b>
 				<br>
 				<br>
 			</div>
-			<table style="width: 100%;">
+			<table class="table table-striped">
 				<thead style="text-align: center; ">
 					<tr>
-						<td>{% trans "Uid" %}</td>
-						<td>{% trans "Student Uid" %}</td>
-						<td>{% trans "Student Name" %}</td>
-						<td>{% trans "Suscirption Date" %}</td>
+						<td><b>{% trans "Uid" %}</b></td>
+						<td><b>{% trans "Student Uid" %}</b></td>
+						<td><b>{% trans "Student Name" %}</b></td>
+						<td><b>{% trans "Suscirption Date" %}</b></td>
 						<td>
 							<input name="checkall" type="checkbox" onclick="checkAll(this)"/>
 						</td>
@@ -34,17 +34,17 @@
 				<tbody>
 					{% for suscription in suscriptions %}
 					<tr>
-						<td style="text-align: center; " >{{ suscription.pk }}</td>
-						<td style="text-align: center; ">{{ suscription.student.uid }}</td>
-						<td style="text-align: center; ">{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
-						<td style="text-align: center; ">{{ suscription.suscriptionDate }}</td>
+						<td>{{ suscription.pk }}</td>
+						<td>{{ suscription.student.uid }}</td>
+						<td>{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
+						<td>{{ suscription.suscriptionDate }}</td>
 						<td align="center">
 						<input type="checkbox" id="{{ suscription.pk }}" name="suscription" value="{{ suscription.pk }}">
 						</td>
 					</tr>
 					{% empty %}
 					<tr>
-						<td colspan="4" style="text-align: center; ">{% trans "There are yet no suscriptions for this course" %}</td>
+						<td colspan="5" style="text-align: center; ">{% trans "There are yet no suscriptions for this course" %}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -54,30 +54,30 @@
 			<br>
 			<br>
 			<div style="clear: none; width: 50%; float: left;">
-				{% trans "Suscription solver of course "%}{{ inning }} 
+				{% trans "Suscription solver of course "%}<b>{{ inning }}</b> 
 				<br>
 				<br>
 			</div>
-			<table style="width: 100%;">
+			<table class="table table-striped">
 				<thead style="text-align: center; ">
 					<tr>
-						<td>{% trans "Uid" %}</td>
-						<td>{% trans "Student Uid" %}</td>
-						<td>{% trans "Student Name" %}</td>
-						<td>{% trans "Suscirption Date" %}</td>
-						<td>{% trans "Resolve Date" %}</td>
-						<td>{% trans "State" %}</td>
+						<td><b>{% trans "Uid" %}</b></td>
+						<td><b>{% trans "Student Uid" %}</b></td>
+						<td><b>{% trans "Student Name" %}</b></td>
+						<td><b>{% trans "Suscirption Date" %}</b></td>
+						<td><b>{% trans "Resolve Date" %}</b></td>
+						<td><b>{% trans "State" %}</b></td>
 					</tr>
 				</thead>
 				<tbody>
 					{% for suscription in suscriptionsSolve %}
 					<tr>
-						<td style="text-align: center; ">{{ suscription.pk }}</td>
-						<td style="text-align: center; ">{{ suscription.student.uid }}</td>
-						<td style="text-align: center; ">{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
-						<td style="text-align: center; ">{{ suscription.suscriptionDate }}</td>
-						<td style="text-align: center; ">{{ suscription.resolveDate }}</td>
-						<td style="text-align: center; ">{{ suscription.state }}</td>
+						<td>{{ suscription.pk }}</td>
+						<td>{{ suscription.student.uid }}</td>
+						<td>{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
+						<td>{{ suscription.suscriptionDate }}</td>
+						<td>{{ suscription.resolveDate }}</td>
+						<td>{{ suscription.state }}</td>
 					</tr>
 					{% empty %}
 					<tr>
@@ -87,7 +87,7 @@
 				</tbody>
 			</table>
 		</div>
-		<a href="/teacher/students/list/{{inning.pk}}">{% trans "back" %}</a>
+		<a href="/teacher/students/list/{{inning.pk}}">{% trans "Back" %}</a>
 	</form>
 </body>
 {% endblock %}

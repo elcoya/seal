@@ -3,7 +3,7 @@
 <body>
 	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 		<div>
-			Delivery detail {{ delivery.pk }}
+			Delivery <b>{{ delivery.pk }}</b> detail <br><br>
 		</div>
 		<div >
 			<ul>
@@ -16,7 +16,7 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div><a href="javascript:history.back()">back</a></div>
+		<div><a href="javascript:history.back()">Back</a></div>
 		{% if file_content %}
 			<div class="file-browser">
 				<pre>{{ file_content }}</pre>

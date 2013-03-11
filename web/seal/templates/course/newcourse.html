@@ -4,7 +4,7 @@
 <form id='formnewcoruse' action='' method='post'>
 	{% csrf_token %}
 	<table>
-		{% trans "New Course" %}<br><br>
+		<h3>{% trans "New Course" %}</h3>
 		{{ form.as_table }}
 	</table>
 	<input type='submit' value='{% trans "Save" %}' />
