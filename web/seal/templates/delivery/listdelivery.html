@@ -4,39 +4,39 @@
 <body>
 	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 		<div style="clear: none; width: 50%; float: left;">
-			{% blocktrans with practice.uid as practice %}Deliveries of practice {{ practice }}{% endblocktrans %}
+			{% blocktrans with practice.uid as practice %}Deliveries of practice <b>{{ practice }}</b>{% endblocktrans %}
 			<br>
 			<br>
 		</div>
-		<table style="width: 100%;">
-			<thead style="text-align: center; ">
+		<table style="width: 120%;" class="table table-striped">
+			<thead>
 				<tr>
-					<td>{% trans "Uid" %}</td>
-					<td>{% trans "Student Uid" %}</td>
-					<td>{% trans "Student Name" %}</td>
-					<td>{% trans "Delivery Date" %}</td>
-					<td>{% trans "Delivery" %}</td>
-					<td>{% trans "Correction" %}</td>
-					<td>{% trans "Automatic Correction" %}</td>
-					<td>{% trans "Navigate" %}</td>
+					<td><b>{% trans "Uid" %}</b></td>
+					<td><b>{% trans "Student Uid" %}</b></td>
+					<td><b>{% trans "Student Name" %}</b></td>
+					<td><b>{% trans "Delivery Date" %}</b></td>
+					<td><b>{% trans "Delivery" %}</b></td>
+					<td><b>{% trans "Correction" %}</b></td>
+					<td><b>{% trans "Automatic Correction" %}</b></td>
+					<td><b>{% trans "Navigate" %}</b></td>
 				</tr>
 			</thead>
 			<tbody>
 				{% for delivery_row in table_deliveries %}
 				<tr>
-					<td style="text-align: center; " >{{ delivery_row.delivery.pk }}</td>
-					<td style="text-align: center; ">{{ delivery_row.delivery.student.uid }}</td>
-					<td style="text-align: center; ">{{ delivery_row.delivery.student.user.last_name }}</td>
-					<td style="text-align: center; ">{{ delivery_row.delivery.deliverDate }}</td>
-					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}">{% trans "Download" %}</a></td>
-					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery_row.delivery.pk}}/3"> 
+					<td>{{ delivery_row.delivery.pk }}</td>
+					<td>{{ delivery_row.delivery.student.uid }}</td>
+					<td>{{ delivery_row.delivery.student.user.last_name }}</td>
+					<td>{{ delivery_row.delivery.deliverDate }}</td>
+					<td><a href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}">{% trans "Download" %}</a></td>
+					<td><a href="/teacher/correction/{{ delivery_row.delivery.pk}}/3"> 
 					{% if delivery_row.correction %}
 					{% trans "Corrected" %}
 					{% else %}
 					{% trans "Pending" %}
 					{% endif %} </a></td>
-					<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}">{{ delivery_row.delivery.get_automatic_correction.get_status }}</a></td>
-					<td style="text-align: center; "><a href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
+					<td><a href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}">{{ delivery_row.delivery.get_automatic_correction.get_status }}</a></td>
+					<td><a href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
 				</tr>
 				{% empty %}
 				<tr>
@@ -46,6 +46,6 @@
 			</tbody>
 		</table>
 	</div>
-	<a href="/teacher/course/editcourse/{{practice.course_id}}">{% trans "back" %}</a>
+	<a href="/teacher/course/editcourse/{{practice.course_id}}">{% trans "Back" %}</a>
 </body>
 {% endblock %}

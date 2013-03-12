@@ -1,4 +1,6 @@
 from django.db import models
+from logilab.common.compat import str_encode
+from django.utils.encoding import smart_str
 
 class Course(models.Model):
     """Course class representing a term
@@ -13,7 +15,7 @@ class Course(models.Model):
     
     def __str__(self):
         """Stringify the Course"""
-        return self.name
+        return smart_str(self.name)
     
     class Meta:
         """

@@ -5,7 +5,7 @@
 <form id='formliststudent' action='' method='post'>
 	{% csrf_token %}
 	<div style="clear: none; width: 50%; float: left;">
-		Students of Inning {{ inning }}
+		{% trans "Students of Inning" %} <b>{{ inning }}</b>
 	</div>
 	<div style="clear: none; text-align: right; width: 25%; float: left;">
 		<a href="/teacher/students/newstudent/{{ inning.pk }}" >{% trans "New Student" %}</a>
@@ -13,30 +13,30 @@
 	<div style="clear: none; text-align: right; width: 25%; float: left;">
 		<a href="/teacher/suscription/list/{{ inning.pk }}" >{% trans "Suscription" %}</a>
 	</div>
-	<br>
-	<table style="width: 100%;">
+	<br><br>
+	<table class="table table-striped">
 		<thead style="text-align: center; ">
 			<tr>
-				<td>{% trans "Uid" %}</td>
-				<td>{% trans "Name" %}</td>
-				<td>{% trans "Email" %}</td>
-				<td>{% trans "Corrector" %}</td>
-				<td>{% trans "Deliveries" %}</td>
+				<td><b>{% trans "Uid" %}</b></td>
+				<td><b>{% trans "Name" %}</b></td>
+				<td><b>{% trans "Email" %}</b></td>
+				<td><b>{% trans "Corrector" %}</b></td>
+				<td><b>{% trans "Deliveries" %}</b></td>
 			</tr>
 		</thead>
 
 		<tbody>
 			{% for student in students %}
 			<tr>
-				<td style="width: 25%; text-align: center; " ><a href="/teacher/students/editstudent/{{ inning.pk }}/{{student.pk}}">{{ student.uid }}</a></td>
-				<td style="width: 25%; text-align: center; ">{{ student.user.last_name }}</td>
-				<td style="width: 25%; text-align: center; ">{{ student.user.email }}</td>
-				<td style="width: 25%; text-align: center; "> {% if student.corrector %}
+				<td><a href="/teacher/students/editstudent/{{ inning.pk }}/{{student.pk}}">{{ student.uid }}</a></td>
+				<td>{{ student.get_full_name }}</td>
+				<td>{{ student.user.email }}</td>
+				<td> {% if student.corrector %}
 				{{ student.corrector.user.last_name }}
 				{% else %}
 				{% trans "no corrector" %}
 				{% endif %} </td>
-				<td style="width: 25%; text-align: center; " ><a href="/teacher/students/listdeliveries/{{student.pk}}/{{ inning.pk }}">{% trans "List" %}</a></td>
+				<td><a href="/teacher/students/listdeliveries/{{student.pk}}/{{ inning.pk }}">{% trans "List" %}</a></td>
 			</tr>
 			{% empty %}
 			<tr>
@@ -45,7 +45,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	<div><a href="/teacher/course/editcourse/{{ inning.course.pk  }}">{% trans "back" %}</a></div>
+	<div><a href="/teacher/course/editcourse/{{ inning.course.pk  }}">{% trans "Back" %}</a></div>
 </form>
 
 {% endblock %}

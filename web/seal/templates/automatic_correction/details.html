@@ -6,10 +6,10 @@
 
 <div>
 	<div>
-		<div>
-			<p>Automatic check result: 
+		<div class="row" style="margin: 20px 0;">
+			<p>{% trans "Automatic check result:" %}
 				<span style="font-weight: bold; color: 
-				{% if automatic_correction.status == 1 %}
+				{% if automatic_correction.status > 0 %}
 					green
 				{% else %}
 					red
@@ -19,7 +19,7 @@
 				</span>
 			</p>
 		</div>
-		<div style="padding: 20px 0 5px;">Autorun output</div>
+		<div style="padding: 10px 0 5px;"><b>{% trans "Autorun output" %}</b></div>
 		<div class="output-container" >
 			<pre>{{ automatic_correction.captured_stdout }}</pre>
 		</div>
@@ -30,5 +30,5 @@
 		<p>This automatic check is still pending.</p>
 	</div>
 {% endif %}
-<div><a href="javascript:history.back()">back</a></div>
+<div><a href="javascript:history.back()">Back</a></div>
 {% endblock %}

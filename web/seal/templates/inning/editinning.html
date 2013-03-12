@@ -4,10 +4,11 @@
 <form id='formnewinning' action='' method='post'>
 	{% csrf_token %}
 	<table>
-		{% trans "Edit Inning" %}<br><br>
+		<h4>{% trans "Edit Inning" %}</h4>
 		{{ form.as_table }}
 	</table>
 	<input type='submit' value='{% trans "Save" %}' />
-	<footer><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "back" %}</a></footer>
+	<br><br>
+	<footer><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "Back" %}</a></footer>
 </form>
 {% endblock %}

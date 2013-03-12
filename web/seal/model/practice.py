@@ -9,7 +9,7 @@ class Practice(models.Model):
     Students to do in order to pass the Course.
     
     """
-    uid = models.CharField(max_length=32)
+    uid = models.CharField(max_length=32,verbose_name="Name")
     course = models.ForeignKey(Course)
     #file = models.FileField(upload_to=managepath.get_instance().get_practice_path())
     deadline = models.DateField()

@@ -11,10 +11,10 @@ ERRORUIDVALIDATION = "User or password not exist"
 ERRORPASSWDNOTMATCH = "Passwords does not match"
 
 class ChangePasswForm(Form):
-    uid = forms.CharField(max_length=32)
-    oldpasswd = forms.CharField(widget=forms.PasswordInput(render_value=True))
-    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True))
-    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True))
+    uid = forms.CharField(max_length=32, label="Padron")
+    oldpasswd = forms.CharField(widget=forms.PasswordInput(render_value=True), label="Password Anterior")
+    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), label="Nuevo Password")
+    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), label="Repetir Nuevo Password")
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']

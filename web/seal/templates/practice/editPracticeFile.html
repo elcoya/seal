@@ -3,15 +3,14 @@
 {% block content %}
 <form id='form-edit-practice' action='' method='post' >
 	{% csrf_token %}
-	<div>Edit File: {{ file_basename }}</div>
+	<div>Edit File: <b>{{ file_basename }}</b></div><br>
 	{% if edited %}
-		<div>Edited successfully</div>
+		<div><b>{% trans "Edited successfully" %}</b></div><br>
 	{% endif %}
 	<table>
 		{{ form.as_table }}
 	</table>
 	<input type='submit' value='{% trans "Save" %}' />
-	<input type='reset' value='{% trans "Reset" %}' /> 
 </form>
-<footer><a href="/teacher/practices/practicefile/{{ practicefile.practice.pk }}/{{ practicefile.practice.pk }}/">{% trans "back" %}</a></footer>
+<footer><a href="/teacher/practices/practicefile/{{ practicefile.practice.pk }}/{{ practicefile.practice.pk }}/">{% trans "Back" %}</a></footer>
 {% endblock %}

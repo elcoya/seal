@@ -6,8 +6,8 @@
 
 <div>
 	<div>
-		<div>
-			<p>Automatic check result: 
+		<div class="row" style="margin: 20px 0;">
+			<p>{% trans "Automatic check result:" %} 
 				<span style="font-weight: bold; color: 
 				{% if automatic_correction.status > 0 %}
 					green
@@ -19,17 +19,16 @@
 				</span>
 			</p>
 		</div>
-		<div style="padding: 20px 0 5px;">{% trans 'Automatic correction output' %}</div>
+		<div style="padding: 10px 0 5px;"><b>{% trans "Autorun output" %}</b></div>
 		<div class="output-container" >
 			<pre class="output-container" >{{ automatic_correction.captured_stdout }}</pre>
 		</div>
 	</div>
 </div>
 {% else %}
-	<div>
-		<p>This automatic check is still pending.</p>
+	<div align="center">
+		<p><h5>{% trans "This automatic check is still pending" %}</h5></p>
 	</div>
 {% endif %}
-	<div class="row" style="margin-top: 10px;"><div class="span0"><a href="/undergraduate/delivery/upload/{{ practice.pk }}">{% trans 'back' %}</a></div></div>
-
+	<div class="row" style="margin-top: 10px;"><div class="span0"><a href="/undergraduate/delivery/upload/{{ practice.pk }}">{% trans 'Back' %}</a></div></div>
 {% endblock %}
