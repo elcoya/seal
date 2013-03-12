@@ -397,7 +397,7 @@ def step(context, practice_name, practice_file_id):
     practice_path = managepath.get_instance().get_practice_path()
     if not os.path.exists(practice_path):
         os.makedirs(name=practice_path)
-    practice_filename = "practice_not_text_file.pdf"
+    practice_filename = "practice_no_text_file.pdf"
     practice_filepath = os.path.join(practice_path, practice_filename)
     with open(practice_filepath, 'w') as test_file:
         lines = ["first line\n",
