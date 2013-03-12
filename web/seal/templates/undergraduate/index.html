@@ -1,30 +1,25 @@
 {% extends "undergraduate/undergraduate.html" %}
 {% load i18n %}
 {% comment %}
-
-Main page of the Undergraduate's portal.
-
+	Main page of the Undergraduate's portal.
 {% endcomment %}
 
-{% block title %}
-Undergraduate
-{% endblock %}
-
+{% block title %}Undergraduate{% endblock %}
 {% block content %}
-	<table style="width: 100%;">
-		<thead style="text-align: center; ">
-			<tr><td style="width: 70%; text-indent: 15px; text-align: left; " >{% trans "Courses - Innings" %}</td></tr>
-		</thead>
+	<div class="row" style="margin: 20px 0;">
+		<h5>{% trans "Courses - Innings" %}</h5>
+	</div>
+
+	<table class="table table-striped">
+		<thead><tr><th>{% trans "Name" %}</th></tr></thead>
 		<tbody>
 		{% for inning in innings %}
 		    <tr>
-		    	<td style="width: 70%; text-indent: 15px; " ><a href="/undergraduate/practice/list/{{inning.course.pk}}">{{ inning }}</a></td>
+		    	<td><a href="/undergraduate/practice/list/{{inning.course.pk}}">{{ inning }}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="2" style="text-align: center; ">{% trans "There are yet no innings in which you are enrolled" %}</td></tr>
+		    <tr><td>{% trans "There are yet no innings in which you are enrolled" %}</td></tr>
 		{% endfor %}
 		</tbody>
-		
 	</table>
-	<div style="clear: none; width: 50%; alignment-adjust: central;"><a href="/undergraduate/suscription/" >{% trans "Suscription" %}</a></div> 
-{% endblock %}
+	<div class="row" style="text-align: right; padding-right: 20px;"><a href="/undergraduate/suscription/" >{% trans "Suscription" %}</a></div>{% endblock %}
