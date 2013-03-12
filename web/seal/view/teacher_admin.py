@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import permission_required
-from seal.forms.teacher import TeacherForm
+from seal.forms.teacher import TeacherForm, TeacherModifForm
 from seal.model.teacher import Teacher
 from django.contrib.auth.models import User
 from django.template.context import RequestContext
@@ -17,7 +17,7 @@ def listteacher(request):
 def editteacher(request, idteacher):
     teacher = Teacher.objects.get(pk=idteacher)
     if request.method == 'POST':
-        form = TeacherForm(request.POST, instance=teacher,
+        form = TeacherModifForm(request.POST, instance=teacher,
                            initial={'username': teacher.user.username,
                                        'email': teacher.user.email,
                                        'first_name': teacher.user.first_name,
@@ -25,7 +25,8 @@ def editteacher(request, idteacher):
         if form.is_valid():
             if (form.data['passwd'] != ''):
                 teacher.user.set_password(form.data['passwd'])
-            teacher.user.username = form.data['username']
+            if (not User.objects.filter(username = form.data['username']).exists()):
+                teacher.user.username = form.data['username']
             teacher.user.email = form.data['email']
             teacher.user.first_name = form.data['first_name']
             teacher.user.last_name = form.data['last_name']
@@ -33,7 +34,7 @@ def editteacher(request, idteacher):
             form.save()   
             return HttpResponseRedirect('/listteacher')
     else:
-        form = TeacherForm(instance=teacher,
+        form = TeacherModifForm(instance=teacher,
                             initial={'username': teacher.user.username,
                                        'email': teacher.user.email,
                                        'first_name': teacher.user.first_name,
