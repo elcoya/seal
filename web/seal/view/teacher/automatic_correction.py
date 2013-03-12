@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template.context import RequestContext
 from seal.model.delivery import Delivery
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 #from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
 
 #@login_required

@@ -17,7 +17,7 @@ from seal.forms.practiceFile import PracticeFileForm
 from django.http import HttpResponse
 from seal.forms.edit_practice_file import EditPracticeFileForm
 import os
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 from django.utils.encoding import smart_str
 
 PATHOK =  "/teacher/course/editcourse/%s"

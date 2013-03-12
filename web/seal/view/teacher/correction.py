@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from seal.model.mail import Mail
 from seal.model.teacher import Teacher
 from seal.model.innings import Innings
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s"
 #PATHOK = "/teacher/delivery/list/%s"

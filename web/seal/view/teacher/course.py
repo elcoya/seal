@@ -12,7 +12,7 @@ from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 import os
 from seal.model.innings import Innings
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHOKNEWCOURSE = "/"
 MAXPAGINATOR = 25

@@ -8,7 +8,7 @@ import os
 from seal.model.student import Student
 from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.correction import Correction
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 TYPEZIP = "application/zip"
 

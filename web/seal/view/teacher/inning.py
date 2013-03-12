@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from seal.model.course import Course
 from seal.forms.inning import InningForm
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHOKNEWCOURSE = "/teacher/course/editcourse/%s"
 

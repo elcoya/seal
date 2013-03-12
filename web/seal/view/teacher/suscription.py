@@ -4,7 +4,7 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.template.context import RequestContext
 from seal.model.innings import Innings
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
 def listsuscription(request, idinning):

@@ -6,7 +6,7 @@ from seal.model.teacher import Teacher
 from seal.model.student import Student
 from seal.model.delivery import Delivery
 from seal.model.correction import Correction
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
 def index(request):

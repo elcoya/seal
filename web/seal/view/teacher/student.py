@@ -16,7 +16,7 @@ from seal.model.innings import Innings
 from seal.model.delivery import Delivery
 from seal.model.correction import Correction
 from django.contrib.auth.decorators import login_required
-from seal.settings import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHOK = "/teacher/students/list/%s"
 PATHOKENROLED = "/teacher/students/"

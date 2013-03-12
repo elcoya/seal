@@ -1,6 +1,5 @@
 # Django settings for seal project.
 # -*- coding: utf-8 -*-
-from rest_framework.status import HTTP_401_UNAUTHORIZED
 from django.http import HttpResponse
 
 #FOR APACHE###
@@ -31,11 +30,6 @@ DELIVERY_FILE_PATH = WORKSPACE_PATH + "delivery_files/"
 PRACTICE_FILE_PATH = WORKSPACE_PATH + "practice_files/"
 SCRIPT_FILE_PATH = WORKSPACE_PATH + "automatic_correction_scripts/"
 ###############################################################################
-
-#expected http responses#######################################################
-HTTP_401_UNAUTHORIZED_RESPONSE = HttpResponse('You are not authorized here.', 401)
-###############################################################################
-
 
 #user and password for database create
 USER="seal"
