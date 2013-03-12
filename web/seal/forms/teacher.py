@@ -6,6 +6,7 @@ from cProfile import label
 
 ERRORNOPASSWD = "A password must be supplied"
 ERRORPASSWDNOTMATCH = "Passwords does not match"
+ERRORUSERDVALIDATION = "Username is not available"
 
 class TeacherForm(ModelForm):
     class Meta:
@@ -18,6 +19,12 @@ class TeacherForm(ModelForm):
     email = forms.EmailField(label="Email")
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False, label="Password")
     passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), required=False, label="Repetir Password")
+    
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if(User.objects.filter(username=username)):
+            raise forms.ValidationError(ERRORUSERDVALIDATION)
     
     def clean_passwd(self):
         uid = self.cleaned_data.get('uid', None)

@@ -1,1 +1,15 @@
-ERROR 500
+{% extends "base.html" %}
+{% load i18n %}
+{% block extrastyle %}
+{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
+{% endblock %}
+{% block bodyclass %}dashboard{% endblock %}
+{% block body %}
+<div>
+	{% csrf_token %}
+	<div align="center"><h4>{% trans "Error HTTP 500: Internal server error" %}</h4></div>
+	<footer>
+	</footer>
+</div>
+{% endblock %}
