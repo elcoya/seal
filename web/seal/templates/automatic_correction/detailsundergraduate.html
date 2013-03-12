@@ -6,7 +6,7 @@
 
 <div>
 	<div>
-		<div class="row" style="margin: 20px 0;">
+		<div class="row" style="margin: 0;">
 			<p>{% trans "Automatic check result:" %} 
 				<span style="font-weight: bold; color: 
 				{% if automatic_correction.status > 0 %}
@@ -19,7 +19,7 @@
 				</span>
 			</p>
 		</div>
-		<div style="padding: 10px 0 5px;"><b>{% trans "Autorun output" %}</b></div>
+		<div style="padding: 10px 0 5px;">{% trans "Autorun output" %} - {% trans 'Delivery' %} <b>{{ automatic_correction.delivery.pk }}</b> - {% trans 'Practice' %} <b>{{ automatic_correction.delivery.practice.uid }}</b></div>
 		<div class="output-container" >
 			<pre class="output-container" >{{ automatic_correction.captured_stdout }}</pre>
 		</div>
