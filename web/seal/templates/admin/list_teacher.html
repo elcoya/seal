@@ -39,6 +39,7 @@
 						<td><b>{% trans "Uid" %}</b></td>
 						<td><b>{% trans "First Name" %}</b></td>
 						<td><b>{% trans "Last Name" %}</b></td>
+						<td><b>{% trans "User Name" %}</b></td>
 						<td>&nbsp;</td>
 					</tr>
 
@@ -49,6 +50,7 @@
 						<td style="text-align: center; ">{{ teacher.uid }}</td>
 						<td style="text-align: center; ">{{ teacher.user.first_name }}</td>
 						<td style="text-align: center; ">{{ teacher.user.last_name }}</td>
+						<td style="text-align: center; ">{{ teacher.user.username }}</td>	
 						<td ><a href="/editteacher/{{ teacher.pk }}" class="changelink">{% trans 'Change' %}</a></td>
 					</tr>
 					{% empty %}
