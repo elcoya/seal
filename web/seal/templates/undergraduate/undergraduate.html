@@ -11,32 +11,34 @@
 {% block title_view %}{% trans "Student's view" %}{% endblock %}
 
 {% block nav_opts %}
-   	<li><a href="/undergraduate">{% trans "Home" %}</a></li>	       
-   	<li class="divider-vertical">&nbsp;</li>  
+   	<li><a href="/undergraduate">{% trans "Home" %}</a></li>
+<!--
+   	<li class="divider-vertical"></li>
     <li><a href="#">{% trans "My deliveries" %}</a></li>
-  	<li class="divider-vertical">&nbsp;</li>
+  	<li class="divider-vertical"></li>
     <li><a href="#">{% trans "My corrections" %}</a></li>
-  	<li class="divider-vertical">&nbsp;</li>
+  	<li class="divider-vertical"></li>
     <li><a href="#">{% trans "Overview" %}</a></li>
+-->
 {% endblock %}
 
 {% block body %}
-{% block welcome %}
-	<div class="container" style="margin: 20px 0;">
-		<div class="row">
-			<div class="span6"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
-			<div class="span0"><a href="/changepassw/">{% trans "Change Password" %}</a></div>
-			<div class="span0"><a href="/logout/">{% trans "Logout" %}</a></div>
-		</div>
-	</div>
-{% endblock %}
-	<div class="container">
-		{% if user.student_set.all %}
+	{% if user.student_set.all %}
+		{% block welcome %}
+			<div class="container" style="margin: 20px 0;">
+				<div class="row">
+					<div class="span9"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
+					<div class="span0"><a href="/changepassw/">{% trans "Change Password" %}</a></div>
+					<div class="span0"><a href="/logout/">{% trans "Logout" %}</a></div>
+				</div>
+			</div>
+		{% endblock %}
+		<div class="container">
 	    	{% block content %}{% endblock %}
-		{% else %}
-			<div class="main-content" >
-		    	<p style="color: #A44; font-weight: bold; text-align: center; ">{% trans "You are not allowed in this section" %}</p>
-		    </div>
-		{% endif %}
-	</div>
+		</div>
+	{% else %}
+		<div class="container" >
+	    	<p style="color: #A44; font-weight: bold; text-align: center; ">{% trans "You are not allowed in this section" %}</p>
+	    </div>
+	{% endif %}
 {% endblock %}

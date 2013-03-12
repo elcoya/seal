@@ -1,18 +1,19 @@
 {% extends "undergraduate/undergraduate.html" %}
+{% load i18n %}
 {% block content %}
 <body>
 	<form id='formcorrect' action='' method='post'>
 		{% csrf_token %}
-		<div style="width: 100%; text-align: left; margin: auto;">
-			CORRECTION OF PRACTICE {{delivery.practice.uid}} - DELIVERY {{delivery.pk}}
-			<br>
-			<br>
+		<div class="row">
+			<div class="span0" style="margin-top: 20px; margin-bottom: 10px;" >
+				Correction of practice <b>{{delivery.practice.uid}}</b> - delivery <b>{{delivery.pk}}</b>
+			</div>
 		</div>
-		<table style="width: 100%;">
-			<thead style="text-align: center; ">
+		<table class="table table-striped">
+			<thead>
 				<tr>
-					<td>Coment</td>
-					<td>Grade</td>
+					<th>Coment</th>
+					<th>Grade</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,14 +24,14 @@
 				</tr>
 				{% empty %}
 				<tr>
-					<td colspan="4" style="text-align: center; ">There is yet no Correction</td>
+					<td colspan="2" style="text-align: center; ">{% trans 'There is yet no Correction' %}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</form>
 	<footer>
-		<a href="/undergraduate/delivery/upload/{{delivery.practice.pk}}">back</a>
+		<a href="/undergraduate/delivery/upload/{{delivery.practice.pk}}">{% trans 'back' %}</a>
 	</footer>
 </body>
 {% endblock %}

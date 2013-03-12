@@ -1,4 +1,5 @@
 {% extends "undergraduate/index.html" %}
+{% load i18n %}
 {% block content %}
 
 {% if automatic_correction.status %}
@@ -18,9 +19,9 @@
 				</span>
 			</p>
 		</div>
-		<div style="padding: 20px 0 5px;">Autorun output</div>
+		<div style="padding: 20px 0 5px;">{% trans 'Automatic correction output' %}</div>
 		<div class="output-container" >
-			<pre>{{ automatic_correction.captured_stdout }}</pre>
+			<pre class="output-container" >{{ automatic_correction.captured_stdout }}</pre>
 		</div>
 	</div>
 </div>
@@ -29,6 +30,6 @@
 		<p>This automatic check is still pending.</p>
 	</div>
 {% endif %}
-	<div><a href="/undergraduate/delivery/upload/{{ practice.pk }}">back</a></div>
+	<div class="row" style="margin-top: 10px;"><div class="span0"><a href="/undergraduate/delivery/upload/{{ practice.pk }}">{% trans 'back' %}</a></div></div>
 
 {% endblock %}

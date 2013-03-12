@@ -13,20 +13,9 @@
 
 {% block body %}
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="/">SEAL</a>
-					<div class="nav-collapse collapse">
-						{% block nav %}{% endblock %}
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
-	<br>	
-	<div class="content" >
-		<form class="form-signin" style="max-width: 320px" action="" method="post" >
-			<h2 align="center" class="form-signin-heading">Registrate on SEAL</h2>
+    <div class="container">
+		<form class="form-horizontal" action="" method="post" >
+			<h3>Registrate on SEAL</h3>
 			{% csrf_token %}
 			{{ form|as_bootstrap  }}
 			<span class="validation_error">{{ captcha_response }}</span><script type="text/javascript" src="http://api.recaptcha.net/challenge?k={{captcha_publick}}"></script>

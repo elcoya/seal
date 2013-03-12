@@ -5,47 +5,33 @@ This is the main template for all teacher pages.
 {% endcomment %}
 
 {% block head %}
-<title>SEAL</title>
+	<title>SEAL</title>
 {% endblock %}
 
 {% block subtitle %}{% trans "Teacher" %}{% endblock %}
 
 {% if user.teacher_set.all %}
-{% block nav_opts %}
-<li><a href="/teacher">{% trans "Home" %}</a></li>	       
-<li class="divider-vertical">&nbsp;</li>     
-<li><a href="/teacher/suscription/listsuscriptionpending/">Pending Subscriptions</a></li>
-<li class="divider-vertical">&nbsp;</li>
-<li><a href="/teacher/students/pendingdelivery/">Students without deliveries Successfull</a></li>
-{% endblock %}
-
-{% block body %}
-<body>
-	{% block welcome %}
-	<div class="container" style="margin: 20px 0;">
-		<div class="row">
-			<div class="span6">
-				<h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4>
+	{% block nav_opts %}
+		<li><a href="/teacher">{% trans "Home" %}</a></li>	       
+		<li class="divider-vertical"></li>     
+		<li><a href="/teacher/suscription/listsuscriptionpending/">Pending Subscriptions</a></li>
+		<li class="divider-vertical"></li>
+		<li><a href="/teacher/students/pendingdelivery/">Students without deliveries Successfull</a></li>
+	{% endblock %}
+	{% block body %}
+		{% block welcome %}
+			<div class="container" style="margin: 20px 0;">
+				<div class="row">
+					<div class="span6"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
+					<div class="span0"><a href="/changepassw/">{% trans "Change Password" %}</a></div>
+					<div class="span0"><a href="/logout/">{% trans "Logout" %}</a></div>
+				</div>
 			</div>
-			<div class="span0">
-				<a href="/changepassw/">{% trans "Change Password" %}</a>
-			</div>
-			<div class="span0">
-				<a href="/logout/">{% trans "Logout" %}</a>
-			</div>
-		</div>
-	</div>
-</body>
-{% endblock %}
-
-<div class="main-content" >
-	{% block content %}{% endblock %}
-</div>
-{% endblock %}
+		{% endblock %}
+		{% block content %}{% endblock %}
+	{% endblock %}
 {% else %}
-<div class="main-content" >
-	<p style="color: #A44; font-weight: bold; text-align: center;">
-		{% trans "You are not allowed in this section" %}
-	</p>
-</div>
+	<div class="container" >
+		<p style="color: #A44; font-weight: bold; text-align: center;">{% trans "You are not allowed in this section" %}</p>
+	</div>
 {% endif %}

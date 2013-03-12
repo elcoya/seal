@@ -8,7 +8,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And I log in as "teacher" "teacher"
 	 	 When I click in the "2012-1" link
 	 	  And I click in the "Upload Files" link
-	 	 Then I should see "There are yet no Files in this Practice"
+	 	 Then I should see "There are yet no deliveries uploaded to this practice"
 
 	 Scenario: Upload file
 		Given course "2012-1" exists 
@@ -33,7 +33,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And I fill the upload file form with name "enunciado"
 	 	  And I submit the form
 	 	  And I click in the "Delete" link
-	 	 Then I should see "There are yet no Files in this Practice"
+	 	 Then I should see "There are yet no deliveries uploaded to this practice"
 	
 	Scenario: See the option edit when i upload a text file
 		Given course "2012-1" exists 

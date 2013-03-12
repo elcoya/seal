@@ -434,9 +434,8 @@ msgid " Files of Practice %(practicename)s "
 msgstr "Entregas de la practica %(practice)s"
 
 #: templates/practice/listFile.html:24 templates/practice/uploadFile.html:39
-#, fuzzy
-msgid "There are yet no Files in this Practice"
-msgstr "No hay entregas subidas para esta practica"
+msgid "There are no files bounded to this practice"
+msgstr "No hay archivos asociados a esta practica"
 
 #: templates/practice/practiceList.html:6
 #, fuzzy, python-format

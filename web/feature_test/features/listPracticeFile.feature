@@ -8,7 +8,7 @@ Feature: As a student I want to see the practice file list
           And student "martin" exists in course "2012-1" and in inning "tarde"
           And I log in as "martin" "martin"
     	 When I click in the "Download" link
-    	 Then I should see "There are yet no Files in this Practice"
+    	 Then I should see "There are no files bounded to this practice"
     	 
    	Scenario: List file
    		Given Student "martin" exists with password "martin"
