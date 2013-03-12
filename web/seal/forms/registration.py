@@ -9,8 +9,9 @@ from django.forms.forms import Form
 from seal.model.innings import Innings
 from seal.model.teacher import Teacher
 from cProfile import label
+from django.contrib.auth.models import User
 
-ERRORUIDVALIDATION = "User uid is not available"
+ERRORUIDVALIDATION = "Padron is not available"
 ERRORPASSWDNOTMATCH = "Passwords does not match"
 
 class RegistrationForm(Form):
@@ -27,7 +28,7 @@ class RegistrationForm(Form):
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']
-        if(Student.objects.filter(uid=uid) or Teacher.objects.filter(uid=uid)):
+        if(User.objects.filter(username=uid)):
             raise forms.ValidationError(ERRORUIDVALIDATION)
     
     def clean_passwd_again(self):
