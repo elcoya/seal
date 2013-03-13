@@ -102,6 +102,6 @@ Feature: As a student I want to aplicate to a course
 		 And a inning with name "tarde" and description "horario" in the course "2012-1"
 		 And student "martin" exists in course "2012-1" and in inning "tarde"
 		 And I log in as "martin" "martin" 
-		When I click in the "Home" link
+		When I click in the "Courses" link
 		 And I click in the "Suscription" link
 		Then I should see "There are yet no Innings to suscribe" 
