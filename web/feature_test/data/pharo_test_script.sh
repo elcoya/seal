@@ -17,22 +17,33 @@ command="cp $pharo_changes.bkup $pharo_changes"
 echo $command
 $command
 
-st_files="tema1.st"
-
 # Relocate the delivered .st file to where it should be
-st_to_be_tested=`ls|grep '\.st$'`
+files_list=`ls | grep ^[0-9]\\\+.st$`
+delivery_file=`echo $files_list | cut -d" " -f1`
 
-echo "st files found: $st_to_be_tested"
+command="cp $delivery_file $pharo_image_dir"
+echo $command
+$command
 
-delivery_files=""
-for file in $st_to_be_tested; do
-	cp $file $pharo_image_dir
-	delivery_files="$delivery_files $file"
-	st_files="$file $st_files"
-done
+echo "st files found: $files_list"
+echo "file used: $delivery_file"
+
+digit=${delivery_file:4:1}
+echo "ultimo digito del padron: $digit"
+
+case $digit in
+    [012] )
+        tema_file="tema1.st";;
+    [345] )
+        tema_file="tema2.st";;
+    [67] )
+		tema_file="tema3.st";;
+	[89] )
+		tema_file="tema4.st";;
+esac
 
 # I build the command
-command="$pharo_path -vm-display-null $pharo_image $st_files"
+command="$pharo_path -vm-display-null $pharo_image $delivery_file $tema_file"
 echo $command
 $command
 
@@ -40,13 +51,9 @@ $command
 exit_value=$?
 
 # Cleanup
-#cd $pharo_image_dir
-#if [ "$delivery_files" != '' ]
-#	then
-#		command="rm $delivery_files"
-#		echo $command
-#		$command
-#fi
+command="rm $pharo_image_dir$delivery_file"
+echo $command
+$command
 
 # Finally exit with the returned value
 exit $exit_value
