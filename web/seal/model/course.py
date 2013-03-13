@@ -1,5 +1,4 @@
 from django.db import models
-from logilab.common.compat import str_encode
 from django.utils.encoding import smart_str
 
 class Course(models.Model):

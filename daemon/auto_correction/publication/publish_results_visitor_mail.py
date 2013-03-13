@@ -7,6 +7,7 @@ from auto_correction.publication.publish_results_visitor import PublishResultsVi
 from auto_correction.log.logger_manager import LoggerManager
 from auto_correction.selection.rest_api_helper import RestApiHelper
 from mail_service.util.mail import Mail
+from django.utils.encoding import smart_str
 
 class PublishResultsVisitorMail(PublishResultsVisitor):
     """
@@ -34,17 +35,17 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
     def build_mail(self, result):
         self.log.debug("building mail...")
         mail = Mail()
-        mail.subject = "Automatic correction results"
+        mail.subject = "Resultado de la correccion automatica"
         mail.recipient = result.automatic_correction.user_mail
         exit_value = result.exit_value
         captured_stdout = result.captured_stdout
         status = 1 + (-2 * result.exit_value)
-        mail.body = "The automatic correction for your delivery has been run.\n\n"
-        mail.body += "Exit status: " + self.get_status(status) + "\n"
-        mail.body += "Exit value : " + str(exit_value) + "\n\n"
-        mail.body += "The correction process emmited the following output:\n\n"
+        mail.body = "La correccion automatica de tu entrega ha corrido.\n\n"
+        mail.body += "Estatus de salida: " + self.get_status(status) + "\n"
+        mail.body += "Valor de la salida : " + str(exit_value) + "\n\n"
+        mail.body += "La correccion proporciono la siguiente salida:\n\n"
         mail.body += captured_stdout
-        mail.body += "\n\nRemember you can access this results through the website.\n\n"
+        mail.body += "\n\nRecuerda que puedes ver esta salida en la pagina web.\n\n"
         mail.body += "SEAL"
         return mail
     

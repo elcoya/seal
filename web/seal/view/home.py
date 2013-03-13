@@ -28,14 +28,23 @@ REDIRECTINDEX = "index.html"
 REDIRECTLOGOUT = "/"
 ERRORCAPTCHA = "You Must Be a Robot"
 
-SUBJECTMAIL = "Registration SEAL Successful"
-BODYMAIL = "You have been registered in SEAL with username: %s and password: %s"
+#SUBJECTMAIL = "Registration SEAL Successful"
+#BODYMAIL = "You have been registered in SEAL with username: %s and password: %s"
+#
+#SUBJECTMAILRECOVERY = "Recovery SEAL Successful"
+#BODYMAILRECOVERY = "You have requested a password recovery for SEAL. Your new login information is username: %s and new password: %s"
+#
+#SUBJECTMAILCHANGE = "Change SEAL password Successful"
+#BODYMAILCHANGE = "You have requested a password change for SEAL. Your new login information is username: %s and new password: %s"
 
-SUBJECTMAILRECOVERY = "Recovery SEAL Successful"
-BODYMAILRECOVERY = "You have requested a password recovery for SEAL. Your new login information is username: %s and new password: %s"
+SUBJECTMAIL = "Registracion en SEAL realizada con exito"
+BODYMAIL = "Te registraste en SEAL con estos datos - Padron: %s and Password: %s"
 
-SUBJECTMAILCHANGE = "Change SEAL password Successful"
-BODYMAILCHANGE = "You have requested a password change for SEAL. Your new login information is username: %s and new password: %s"
+SUBJECTMAILRECOVERY = "Recupero de password de SEAL"
+BODYMAILRECOVERY = "Has pedido un recupero de password en SEAL. Tu nueva informacion de ingreso es Padron: %s y Password: %s"
+
+SUBJECTMAILCHANGE = "Cambio de password en SEAL"
+BODYMAILCHANGE = "Has cambiado la password en SEAL. Tu informacion de ingreso es Padron: %s y Password: %s"
 
 
 @login_required

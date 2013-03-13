@@ -21,7 +21,6 @@ install:
   - pip install -q djangorestframework
   - pip install -q requests
   - pip install -q django-bootstrap-toolkit
-  - pip install -q logilab-common
 
 # command to run tests, e.g. python setup.py test
 script: fab runtravis
