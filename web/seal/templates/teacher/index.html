@@ -2,22 +2,22 @@
 {% load i18n %}
 {% block title %}Teacher{% endblock %}
 {% block content %}
-<div style="width: 100%; text-align: left; margin: auto;">
-	<h3>{% trans "Courses List" %}</h3>
+<div class="row" style="margin: 0;">
+	<h4>{% trans "Courses List" %}</h4>
 	<div align="right"><a href="/teacher/course/newcourse">{% trans "New Course" %}</a></div>
 </div>
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<td><b>{% trans "Courses" %}</b></td>
-			<td><b># {% trans "Students" %}</b></td>
+			<th>{% trans "Courses" %}</th>
+			<th># {% trans "Students" %}</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for dict in table_contents %}
 		<tr>
-			<td><h5><a href="/teacher/course/editcourse/{{dict.pk}}">{{ dict.name }}</a></h5></td>
-			<td><h5>{{ dict.count }}</h5></td>
+			<td><a href="/teacher/course/editcourse/{{dict.pk}}">{{ dict.name }}</a></td>
+			<td>{{ dict.count }}</td>
 		</tr>
 		{% empty %}
 		<tr>
@@ -26,23 +26,23 @@
 		{% endfor %}
 	</tbody>
 </table>
-<table style="width: 110%;" class="table table-striped">
+<div class="row" style="margin: 0;">
+	<h4>{% trans "List of my corrections" %}</h4>
+</div>
+<table class="table table-striped">
 	<thead>
 		<tr>
-			<td><b>{% trans "Delivery" %}</b></td>
-			<td><b>{% trans "Student" %}</b></td>
-			<td><b>{% trans "Practice" %}</b></td>
-			<td><b>{% trans "Delivery Date" %}</b></td>
-			<td><b>{% trans "Download" %}</b></td>
-			<td><b>{% trans "Correction" %}</b></td>
-			<td><b>{% trans "Automatic Correction" %}</b></td>
-			<td><b>{% trans "Navigate" %}</b></td>
+			<th>{% trans "Delivery" %}</th>
+			<th>{% trans "Student" %}</th>
+			<th>{% trans "Practice" %}</th>
+			<th>{% trans "Delivery Date" %}</th>
+			<th>{% trans "Download" %}</th>
+			<th>{% trans "Correction" %}</th>
+			<th>{% trans "Automatic Correction" %}</th>
+			<th>{% trans "Navigate" %}</th>
 		</tr>
 	</thead>
 	<tbody>
-		<div style="clear: none; width: 50%; float: left;">
-			<h3>{% trans "List of my corrections" %}</h3>
-		</div>
 		{% for delivery_row in table_deliveries %}
 		<tr>
 			<td>{{ delivery_row.delivery.pk }}</td>

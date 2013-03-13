@@ -1,22 +1,23 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<body>
-	<div style="width: 800px; text-align: left; margin: auto;">
-		<div style="width: 100%; text-align: left; margin: auto;">
-			<h3>{% trans "Student with pending delivery" %}</h3>
+	<div class="container">
+		<div class="row" style="margin: auto;">
+			<h4>{% trans "Students without deliveries Successfull" %}</h4>
 		</div>
 		{% for row in final_list %}
-		<td><h4>{% trans "Course" %} {{ row.course }}</h4></td>
+		<div class="row" style="margin: auto;">
+			<h5>{% trans "Course" %} {{ row.course }}</h5>
+		</div>
 		<div>
 			{% for content in row.data %}
-			<td><h5>{% trans "Practice" %} {{ content.practice.uid }}</h5></td>
+			<span style="text-decoration: underline;">{% trans "Practice" %} {{ content.practice.uid }}</span>
 			<table class="table table-striped">
 				<thead style="text-align: center;">
 					<tr>
-						<td><b>Uid</b></td>
-						<td><b>Name</b></td>
-						<td><b>Inning</b></td>
+						<th>Uid</th>
+						<th>Name</th>
+						<th>Inning</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,6 +32,7 @@
 			</table>
 			{% endfor %}
 		</div>
+		<hr />
 		{% empty %}
 		<table class="table table-striped">
 			<tbody>
@@ -41,5 +43,4 @@
 		</table>
 		{% endfor %}
 	</div>
-</body>
 {% endblock %}

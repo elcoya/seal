@@ -1,43 +1,35 @@
 {% extends "teacher/index.html" %}
 {% load i18n %}
 {% block content %}
-<body>
-	<div style="width: 100%; text-align: left; margin: auto;">
-		<h3>{% trans "Suscription Pending" %}</h3>
+	<div class="row" style="margin: auto;">
+		<h4>{% trans "Suscription Pending" %}</h4>
 	</div>
-	<tbody>
+	<div class="container">
 		{% for inning_row in table_suscription_inning %}
-		<thead>
-			<tr>
-				<td><h4>{% trans "Inning "%} {{ inning_row.inning }}</h4></td>
-			</tr>
-		</thead>
-		<table class="table table-striped">
-			<thead style="text-align: center; ">
-				<tr>
-					<td><b>{% trans "Student" %}</b></td>
-					<td><b>{% trans "Date of Suscription" %}</b></td>
-				</tr>
-			</thead>
-			<tbody>
-				{% for suscription in inning_row.suscriptionPending %}
-				<tr>
-					<td>{{ suscription.student.get_full_name }} ({{ suscription.student.uid }})</td>
-					<td>{{ suscription.suscriptionDate}}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<h5 align="right"><a href="/teacher/suscription/list/{{ inning_row.inning.pk}}">{% trans "Resolve" %}</a></h5>
+			<div class="row" style="margin: auto;">
+				<h5>{% trans "Inning "%} {{ inning_row.inning }}</h5>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>{% trans "Student" %}</th>
+						<th>{% trans "Date of Suscription" %}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for suscription in inning_row.suscriptionPending %}
+					<tr>
+						<td>{{ suscription.student.get_full_name }} ({{ suscription.student.uid }})</td>
+						<td>{{ suscription.suscriptionDate}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<h5 align="right"><a href="/teacher/suscription/list/{{ inning_row.inning.pk}}">{% trans "Resolve" %}</a></h5>
+			<hr style="margin: 10px 0;" />
 		{% empty %}
-		<table class="table table-striped">
-			<tbody>
-				<tr>
-					<td style="text-align: center;">{% trans "There are no suscription pending" %}</td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="row" style="margin: 20px auto; text-align: center;">{% trans "There are no suscription pending" %}</div>
 		{% endfor %}
-	</tbody>
-</body>
+	</div>
+
 {% endblock %}

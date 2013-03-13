@@ -1,23 +1,20 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<body>
-	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
-		<div style="clear: none; float: left;">
+	<div class="container" >
+		<div class="row" style="margin: auto; padding: 15px 0;">
 			{% trans "Deliveries of student "%}<b>{{ student.get_full_name}} ({{ student.uid }})</b>	
-			<br>
-			<br>
 		</div>
 		<table class="table table-striped">
-			<thead style="text-align: center; ">
+			<thead>
 				<tr>
-					<td><b>{% trans "Uid" %}</b></td>
-					<td><b>{% trans "Practice" %}</b></td>
-					<td><b>{% trans "Delivery Date" %}</b></td>
-					<td><b>{% trans "Delivery" %}</b></td>
-					<td><b>{% trans "Correction" %}</b></td>
-					<td><b>{% trans "Automatic Correction" %}</b></td>
-					<td><b>{% trans "Navigate" %}</b></td>
+					<th>{% trans "Uid" %}</th>
+					<th>{% trans "Practice" %}</th>
+					<th>{% trans "Delivery Date" %}</th>
+					<th>{% trans "Delivery" %}</th>
+					<th>{% trans "Correction" %}</th>
+					<th>{% trans "Automatic Correction" %}</th>
+					<th>{% trans "Navigate" %}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,9 +26,9 @@
 					<td><a href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}">{% trans "Download" %}</a></td>
 					<td><a href="/teacher/correction/{{ delivery_row.delivery.pk}}/4">
 					{% if delivery_row.correction %}
-			    	{% trans "Corrected" %}
+			    		{% trans "Corrected" %}
 			    	{% else %}
-			    	{% trans "Pending" %}
+			    		{% trans "Pending" %}
 			    	{% endif %}	
 					</a></td>
 					<td><a href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}">{{ delivery_row.delivery.get_automatic_correction.get_status }}</a></td>
@@ -44,7 +41,6 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<div><a href="/teacher/students/list/{{inning.pk}}">{% trans "Back" %}</a></div>
 	</div>
-	<a href="/teacher/students/list/{{inning.pk}}">{% trans "Back" %}</a>
-</body>
 {% endblock %}

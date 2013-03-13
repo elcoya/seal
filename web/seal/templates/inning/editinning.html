@@ -7,8 +7,7 @@
 		<h4>{% trans "Edit Inning" %}</h4>
 		{{ form.as_table }}
 	</table>
-	<input type='submit' value='{% trans "Save" %}' />
-	<br><br>
-	<footer><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "Back" %}</a></footer>
+	<button type='submit' class="btn btn-primary" >{% trans "Save" %}</button>
 </form>
+<div><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "Back" %}</a></div>
 {% endblock %}

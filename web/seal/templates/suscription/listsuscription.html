@@ -10,25 +10,22 @@
 	}
 </script>
 
-<body>
 	<form method="post" action="">
 		{% csrf_token %}
-		<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
-			<div style="clear: none; width: 50%; float: left;">
+		<div class="container" >
+			<div style="padding-bottom: 10px;">
 				{% trans "Pending Suscription of inning  " %}<b>{{ inning }}</b>
-				<br>
-				<br>
 			</div>
 			<table class="table table-striped">
-				<thead style="text-align: center; ">
+				<thead>
 					<tr>
-						<td><b>{% trans "Uid" %}</b></td>
-						<td><b>{% trans "Student Uid" %}</b></td>
-						<td><b>{% trans "Student Name" %}</b></td>
-						<td><b>{% trans "Suscirption Date" %}</b></td>
-						<td>
+						<th>{% trans "Uid" %}</th>
+						<th>{% trans "Student Uid" %}</th>
+						<th>{% trans "Student Name" %}</th>
+						<th>{% trans "Suscirption Date" %}</th>
+						<th>
 							<input name="checkall" type="checkbox" onclick="checkAll(this)"/>
-						</td>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +36,7 @@
 						<td>{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
 						<td>{{ suscription.suscriptionDate }}</td>
 						<td align="center">
-						<input type="checkbox" id="{{ suscription.pk }}" name="suscription" value="{{ suscription.pk }}">
+							<input type="checkbox" id="{{ suscription.pk }}" name="suscription" value="{{ suscription.pk }}">
 						</td>
 					</tr>
 					{% empty %}
@@ -49,24 +46,25 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<input style="float: right" name="Accept" type="button" value="{% trans 'Accept' %}" onclick="this.form.action='/teacher/suscription/acceptGroup/{{inning.id}}/';this.form.submit();" />
-			<input style="float: right" name="Reject" type="button" value="{% trans 'Reject' %}" onclick="this.form.action='/teacher/suscription/rejectGroup/{{inning.id}}/';this.form.submit();"/>
-			<br>
-			<br>
-			<div style="clear: none; width: 50%; float: left;">
+			<div class="row">
+				<div class="span3 offset9" style="text-align: right; ">
+					<button class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{inning.id}}/';this.form.submit();" >{% trans 'Reject' %}</button> 
+					<button class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{inning.id}}/';this.form.submit();" >{% trans 'Accept' %}</button>
+				</div>
+			</div>
+			<hr />
+			<div style="padding-bottom: 10px;">
 				{% trans "Suscription solver of course "%}<b>{{ inning }}</b> 
-				<br>
-				<br>
 			</div>
 			<table class="table table-striped">
-				<thead style="text-align: center; ">
+				<thead>
 					<tr>
-						<td><b>{% trans "Uid" %}</b></td>
-						<td><b>{% trans "Student Uid" %}</b></td>
-						<td><b>{% trans "Student Name" %}</b></td>
-						<td><b>{% trans "Suscirption Date" %}</b></td>
-						<td><b>{% trans "Resolve Date" %}</b></td>
-						<td><b>{% trans "State" %}</b></td>
+						<th>{% trans "Uid" %}</th>
+						<th>{% trans "Student Uid" %}</th>
+						<th>{% trans "Student Name" %}</th>
+						<th>{% trans "Suscirption Date" %}</th>
+						<th>{% trans "Resolve Date" %}</th>
+						<th>{% trans "State" %}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -89,5 +87,4 @@
 		</div>
 		<a href="/teacher/students/list/{{inning.pk}}">{% trans "Back" %}</a>
 	</form>
-</body>
 {% endblock %}

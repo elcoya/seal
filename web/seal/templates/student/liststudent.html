@@ -2,29 +2,23 @@
 {% load i18n %}
 {% block content %}
 
-<form id='formliststudent' action='' method='post'>
-	{% csrf_token %}
-	<div style="clear: none; width: 50%; float: left;">
-		{% trans "Students of Inning" %} <b>{{ inning }}</b>
+	<div class="row" style="margin-top: 30px; margin-bottom: 10px; ">
+		<div class="span8">{% trans "Students of Inning" %} <b>{{ inning }}</b></div>
+		<div class="span4" style="text-align: right;">
+			<a href="/teacher/students/newstudent/{{ inning.pk }}" >{% trans "New Student" %}</a>&nbsp;&nbsp;&nbsp;
+			<a href="/teacher/suscription/list/{{ inning.pk }}" >{% trans "Suscription" %}</a>
+		</div>
 	</div>
-	<div style="clear: none; text-align: right; width: 25%; float: left;">
-		<a href="/teacher/students/newstudent/{{ inning.pk }}" >{% trans "New Student" %}</a>
-	</div>
-	<div style="clear: none; text-align: right; width: 25%; float: left;">
-		<a href="/teacher/suscription/list/{{ inning.pk }}" >{% trans "Suscription" %}</a>
-	</div>
-	<br><br>
 	<table class="table table-striped">
-		<thead style="text-align: center; ">
+		<thead>
 			<tr>
-				<td><b>{% trans "Uid" %}</b></td>
-				<td><b>{% trans "Name" %}</b></td>
-				<td><b>{% trans "Email" %}</b></td>
-				<td><b>{% trans "Corrector" %}</b></td>
-				<td><b>{% trans "Deliveries" %}</b></td>
+				<th>{% trans "Uid" %}</th>
+				<th>{% trans "Name" %}</th>
+				<th>{% trans "Email" %}</th>
+				<th>{% trans "Corrector" %}</th>
+				<th>{% trans "Deliveries" %}</th>
 			</tr>
 		</thead>
-
 		<tbody>
 			{% for student in students %}
 			<tr>
@@ -46,6 +40,4 @@
 		</tbody>
 	</table>
 	<div><a href="/teacher/course/editcourse/{{ inning.course.pk  }}">{% trans "Back" %}</a></div>
-</form>
-
 {% endblock %}

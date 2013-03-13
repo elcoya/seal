@@ -477,7 +477,7 @@ msgstr "Subir Entrega"
 
 #: templates/practice/script.html:8
 msgid "Upload Script"
-msgstr "Descargar Script"
+msgstr "Cargar Script"
 
 #: templates/practice/script.html:15
 msgid "Script content"
@@ -614,7 +614,7 @@ msgstr "Revise su correo para ver la informacion sobre la registracion"
 
 #: templates/student/delivery_pending.html:7
 msgid "Student with pending delivery"
-msgstr "Studiantes con entregas penientes"
+msgstr "Estudiantes con entregas penientes"
 
 #: templates/student/delivery_pending.html:10
 msgid "Course"
@@ -782,7 +782,7 @@ msgstr "No hay Cursos"
 
 #: templates/teacher/index.html:44
 msgid "List of my corrections"
-msgstr "Lista de mis correccionse"
+msgstr "Lista de mis correcciones"
 
 #: templates/teacher/index.html:63
 msgid "There are no corrections"

@@ -1,51 +1,48 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<body>
 	<div class="row" style="margin: 20px 0;" >
 		{% blocktrans %}Upload File for practice <b>{{ namepractice }}</b>{% endblocktrans %}
 	</div>
 	<form id='formuploadfile' action='' method='post' enctype='multipart/form-data'>
 		{% csrf_token %}
-		<table>
+		<table style="margin-bottom: 10px;">
 			{{ form.as_table }}
 		</table>
-		<input type='submit' value='{% trans "Save" %}' />
-		<br>
-		<br>
-		<div class="row" style="margin: 20px 0;" >
-			{% blocktrans %}List file practice <b>{{ namepractice }}</b>{% endblocktrans %}
-		</div>
+		<button class="btn btn-primary" type='submit' >{% trans "Save" %}</button>
+	</form>
+		
+	<div class="row" style="margin: 20px 0;" >
+		{% blocktrans %}List file practice <b>{{ namepractice }}</b>{% endblocktrans %}
+	</div>
 		<table class="table table-striped">
-			<thead style="text-align: center; ">
+			<thead>
 				<tr>
-					<td><b>{% trans "Name" %}</b></td>
-					<td><b>{% trans "File" %}</b></td>
+					<th>{% trans "Name" %}</th>
+					<th>{% trans "File" %}</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for file in practiceFiles %}
-				<tr>
-					<td>{{ file.name }}</td>
-					<td>{{ file.file }}</td>
-					<td><a href="/teacher/practices/downloadfile/{{ file.pk }}"> {% trans "Download" %} </a></td>
+					<tr>
+						<td>{{ file.name }}</td>
+						<td>{{ file.file }}</td>
+						<td><a href="/teacher/practices/downloadfile/{{ file.pk }}"> {% trans "Download" %} </a></td>
 					{% if file.isEditable %}
-					<td><a href="/teacher/practices/editfile/{{ file.pk }}"> {% trans "Edit" %} </a></td>
+						<td><a href="/teacher/practices/editfile/{{ file.pk }}"> {% trans "Edit" %} </a></td>
 					{% else %}
-					<td> {% trans "Non-editable"  %}</td>
+						<td> {% trans "Non-editable"  %}</td>
 					{% endif %}
-					<td><a href="/teacher/practices/deletefile/{{ file.pk }}"> {% trans "Delete" %} </a></td>
-				</tr>
+						<td><a href="/teacher/practices/deletefile/{{ file.pk }}"> {% trans "Delete" %} </a></td>
+					</tr>
 				{% empty %}
 				<tr>
-					<td colspan="4" style="text-align: center; ">{% trans "There are yet no deliveries uploaded to this practice" %}</td>
+					<td colspan="5" style="text-align: center; ">{% trans "There are yet no deliveries uploaded to this practice" %}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-		<footer>
+		<div>
 			<a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "Back" %}</a>
-		</footer>
-	</form>
-</body>
+		</div>
 {% endblock %}

@@ -2,19 +2,21 @@
 {% load i18n %}
 {% block content %}
 
-<form id='formpracticescript' action='' method='post' enctype="multipart/form-data">
-	{% csrf_token %}
-	<table>
-		<h4>{% trans "Upload Script" %}</h4>
-		{{ form.as_table }}
-	</table>
-	<input type='submit' value='{% trans "Save" %}' /><br><br>
+<div class="container">
+	<h4>{% trans "Upload Script" %}</h4>
+	<form id='formpracticescript' action='' method='post' enctype="multipart/form-data">
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<button class="btn btn-primary" type='submit' >{% trans "Save" %}</button>
+	</form>	
 	<div><a href="/teacher/course/editcourse/{{ idcourse }}">{% trans "Back" %}</a></div>
-</form>	
-{% if practice.script_set.all %}
-	<div style="padding: 20px 0 5px;"><h5>{% trans "Script content" %}</h5></div>
-	<div class="script-container" >
-		<pre>{{ script_text }}</pre>
-	</div>
-{% endif %}
+	{% if practice.script_set.all %}
+		<div style="padding: 20px 0 5px;"><h5>{% trans "Script content" %}</h5></div>
+		<div class="script-container" >
+			<pre>{{ script_text }}</pre>
+		</div>
+	{% endif %}
+</div>
 {% endblock %}

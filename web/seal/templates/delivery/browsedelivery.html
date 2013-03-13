@@ -1,12 +1,11 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<body>
-	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
-		<div>
+	<div class="container" >
+		<div class="row" style="margin: 20px 0 0;">
 			{% trans "Delivery" %} <b>{{ delivery.pk }}</b> {% trans "Practice" %} <b> {{ delivery.practice.uid }} </b> {% trans "Student" %}<b> {{ delivery.student.get_full_name }} ({{ delivery.student.uid }}) </b> <br><br>
 		</div>
-		<div >
+		<div>
 			<ul>
 				{% for filepath in files_list %}
 					<li>
@@ -19,10 +18,7 @@
 		</div>
 		<div><a href="javascript:history.back()">{% trans "Back" %}</a></div>
 		{% if file_content %}
-			<div class="file-browser">
-				<pre>{{ file_content }}</pre>
-			</div>
+			<pre style="margin-top: 20px;">{{ file_content }}</pre>
 		{% endif %}
 	</div>
-</body>
 {% endblock %}

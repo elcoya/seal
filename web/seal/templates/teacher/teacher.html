@@ -12,7 +12,7 @@ This is the main template for all teacher pages.
 
 {% if user.teacher_set.all %}
 	{% block nav_opts %}
-		<li><a href="/teacher">{% trans "Home" %}</a></li>	       
+		<li><a href="/">{% trans "Home" %}</a></li>	       
 		<li class="divider-vertical"></li>     
 		<li><a href="/teacher/suscription/listsuscriptionpending/">{% trans "Pending Subscriptions" %}</a></li>
 		<li class="divider-vertical"></li>
@@ -22,9 +22,11 @@ This is the main template for all teacher pages.
 		{% block welcome %}
 			<div class="container" style="margin: 20px 0;">
 				<div class="row">
-					<div class="span6"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
-					<div class="span0"><a href="/changepassw/">{% trans "Change Password" %}</a></div>
-					<div class="span0"><a href="/logout/">{% trans "Logout" %}</a></div>
+					<div class="span8"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
+					<div class="span4" style="text-align: right;">
+						<a href="/changepassw/">{% trans "Change Password" %}</a> | 
+						<a href="/logout/">{% trans "Logout" %}</a>
+					</div>
 				</div>
 			</div>
 		{% endblock %}
