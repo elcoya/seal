@@ -1,24 +1,21 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<body>
-	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
-		<div style="clear: none; width: 50%; float: left;">
+	<div class="container" >
+		<div class="row" style="margin: 20px 0 10px;">
 			{% blocktrans with practice.uid as practice %}Deliveries of practice <b>{{ practice }}</b>{% endblocktrans %}
-			<br>
-			<br>
 		</div>
-		<table style="width: 120%;" class="table table-striped">
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<td><b>{% trans "Uid" %}</b></td>
-					<td><b>{% trans "Student Uid" %}</b></td>
-					<td><b>{% trans "Student Name" %}</b></td>
-					<td><b>{% trans "Delivery Date" %}</b></td>
-					<td><b>{% trans "Delivery" %}</b></td>
-					<td><b>{% trans "Correction" %}</b></td>
-					<td><b>{% trans "Automatic Correction" %}</b></td>
-					<td><b>{% trans "Navigate" %}</b></td>
+					<th>{% trans "Uid" %}</th>
+					<th>{% trans "Student Uid" %}</th>
+					<th>{% trans "Student Name" %}</th>
+					<th>{% trans "Delivery Date" %}</th>
+					<th>{% trans "Delivery" %}</th>
+					<th>{% trans "Correction" %}</th>
+					<th>{% trans "Automatic Correction" %}</th>
+					<th>{% trans "Navigate" %}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,7 +42,6 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<div><a href="/teacher/course/editcourse/{{practice.course_id}}">{% trans "Back" %}</a></div>
 	</div>
-	<a href="/teacher/course/editcourse/{{practice.course_id}}">{% trans "Back" %}</a>
-</body>
 {% endblock %}

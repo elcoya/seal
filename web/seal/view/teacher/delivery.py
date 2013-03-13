@@ -9,6 +9,7 @@ from seal.model.student import Student
 from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.correction import Correction
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
+import shutil
 
 TYPEZIP = "application/zip"
 
@@ -79,6 +80,7 @@ def browse(request, iddelivery, file_to_browse=None):
 @login_required
 def explore(request, iddelivery):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        shutil.rmtree(os.path.join(managepath.get_instance().get_temporary_files_path(), str(iddelivery)))
         return browse(request, iddelivery)
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
