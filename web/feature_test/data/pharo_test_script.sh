@@ -31,6 +31,8 @@ echo "file used: $delivery_file"
 digit=${delivery_file:4:1}
 echo "ultimo digito del padron: $digit"
 
+tema_file="tema1.st"
+
 case $digit in
     [012] )
         tema_file="tema1.st";;
@@ -40,6 +42,9 @@ case $digit in
 		tema_file="tema3.st";;
 	[89] )
 		tema_file="tema4.st";;
+	*)
+		echo "nombre del archivo inesperado $delivery_file"
+		exit 1
 esac
 
 # I build the command
