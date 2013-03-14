@@ -38,11 +38,12 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
         mail.subject = "Resultado de la correccion automatica"
         mail.recipient = result.automatic_correction.user_mail
         exit_value = result.exit_value
-        status = 1 + (-2 * result.exit_value)
-        mail.body = "La correccion automatica de tu entrega ha corrido.\n\n"
-        mail.body += "Estatus de salida: " + self.get_status(status) + "\n"
-        mail.body += "Valor de la salida : " + str(exit_value) + "\n\n"
-        mail.body += "Recuerda que puedes ver esta salida en la pagina web.\n\n"
+        mail.body = "La correccion de tu entrega ha "
+        if(exit_value==0):
+            mail.body += "sido exitosa"
+        else:
+            mail.body += "fallado"
+        mail.body += ".\n\n"
         return mail
     
     def visit(self, visitable):

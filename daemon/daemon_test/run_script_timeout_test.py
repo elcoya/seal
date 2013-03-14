@@ -28,14 +28,14 @@ class TestProcessTimeout(unittest.TestCase):
         
         timer.cancel.assert_called()
     
-    def testKillProcShouldInvokeKillOnTheTimeoutedProcess(self):
-        process = Mock()
-        timer = Mock()
-        process_timeout = ProcessTimeout(process, 1000)
-        process_timeout.timer = timer
-        
-        process_timeout.kill_proc()
-        
-        process.kill.assert_called()
+#    def testKillProcShouldInvokeKillOnTheTimeoutedProcess(self):
+#        process = Mock()
+#        timer = Mock()
+#        process_timeout = ProcessTimeout(process, 1000)
+#        process_timeout.timer = timer
+#        
+#        process_timeout.kill_proc()
+#        
+#        process.kill.assert_called()
 
 

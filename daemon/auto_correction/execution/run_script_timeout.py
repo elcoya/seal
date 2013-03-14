@@ -5,6 +5,8 @@
 """
 from threading import Timer
 from auto_correction.log.logger_manager import LoggerManager
+import os
+import psutil
 
 class ProcessTimeout:
     """
@@ -19,9 +21,17 @@ class ProcessTimeout:
         self.timer = Timer(self.timeout, self.kill_proc)
         self.logger = LoggerManager().get_new_logger("process timeout")
     
+    def killtree(self):    
+        parent = psutil.Process(self.process.pid)
+        for child in parent.get_children(recursive=True):
+            self.logger.debug("killing process %d", child.pid)
+            child.kill()
+        self.logger.debug("killing process %d", parent.pid)
+        parent.kill()
+    
     def kill_proc(self):
         self.logger.debug("timer expired, killing process...")
-        self.process.kill()
+        self.killtree()
         self.logger.debug("process terminate invoked.")
         self.ran = True
     

@@ -21,6 +21,9 @@ install:
   - pip install -q djangorestframework
   - pip install -q requests
   - pip install -q django-bootstrap-toolkit
+  
+  - apt-get install python2.7-dev
+  - sudo pip install psutil
 
 # command to run tests, e.g. python setup.py test
 script: fab runtravis

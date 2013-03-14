@@ -38,10 +38,8 @@ case $digit in
         tema_file="tema1.st";;
     [345] )
         tema_file="tema2.st";;
-    [67] )
-		tema_file="tema3.st";;
-	[89] )
-		tema_file="tema4.st";;
+    [6789] )
+        tema_file="tema3.st";;
 	*)
 		echo "nombre del archivo inesperado $delivery_file"
 		exit 1
