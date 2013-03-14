@@ -43,7 +43,6 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
         mail.body += "Estatus de salida: " + self.get_status(status) + "\n"
         mail.body += "Valor de la salida : " + str(exit_value) + "\n\n"
         mail.body += "Recuerda que puedes ver esta salida en la pagina web.\n\n"
-        mail.body += "SEAL"
         return mail
     
     def visit(self, visitable):
