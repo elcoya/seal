@@ -40,7 +40,7 @@ msgstr "Cambiar Contraseña"
 
 #: templates/admin/base.html:36
 msgid "Log out"
-msgstr "Desconectarse"
+msgstr "Terminar sesión"
 
 #: templates/admin/base_site.html:4 templates/admin/base_site.html.py:7
 msgid "SEAL - Automatic Delivery free system"
@@ -97,7 +97,7 @@ msgstr "No habilitado"
 
 #: templates/admin/index.html:87
 msgid "Unknown content"
-msgstr "Contexto Desconocido"
+msgstr "Contenido Desconocido"
 
 #: templates/admin/index.html:96
 msgid "Serializers"
@@ -149,7 +149,7 @@ msgstr "Identificador"
 
 #: templates/admin/list_teacher.html:40
 msgid "First Name"
-msgstr "Nombres"
+msgstr "Nombre"
 
 #: templates/admin/list_teacher.html:41
 msgid "Last Name"
@@ -166,12 +166,12 @@ msgstr "No hay Docentes"
 #: templates/automatic_correction/details.html:9
 #: templates/automatic_correction/detailsundergraduate.html:9
 msgid "Automatic check result:"
-msgstr "Resultado de la Correccion Automatica:"
+msgstr "Resultado de la corrección automatica:"
 
 #: templates/automatic_correction/details.html:21
 #: templates/automatic_correction/detailsundergraduate.html:21
 msgid "Autorun output"
-msgstr "Salida de la Corrida Automatica"
+msgstr "Salida de la correción automatica"
 
 #: templates/automatic_correction/details.html:21
 #: templates/automatic_correction/detailsundergraduate.html:21
@@ -196,7 +196,7 @@ msgstr "Practica"
 #: templates/automatic_correction/details.html:29
 #: templates/automatic_correction/detailsundergraduate.html:29
 msgid "This automatic check is still pending"
-msgstr "Esta correccion automatica todavia esta pendiente"
+msgstr "Esta corrección automatica todavia esta pendiente"
 
 #: templates/automatic_correction/detailsundergraduate.html:32
 #: templates/correction/consult.html:32 templates/correction/index.html:19
@@ -466,7 +466,7 @@ msgstr "Entregas de la practica <b>%(namepractice)s</b>"
 
 #: templates/delivery/uploaddelivery.html:47
 msgid "Status"
-msgstr "Estatus"
+msgstr "Estado"
 
 #: templates/delivery/uploaddelivery.html:59
 msgid "corrected"
@@ -582,7 +582,7 @@ msgstr "Cambiar Contraseña"
 
 #: templates/registration/login.html:19
 msgid "Login SEAL"
-msgstr "Ingreso SEAL"
+msgstr "Algo3Fiuba"
 
 #: templates/registration/login.html:23
 msgid "Your username and password didn't match. Please try again."
@@ -599,11 +599,11 @@ msgstr "Contraseña"
 
 #: templates/registration/login.html:36
 msgid "Log in"
-msgstr "Ingresar"
+msgstr "Iniciar sesión"
 
 #: templates/registration/login.html:42
 msgid "New to SEAL?"
-msgstr "Nuevo en SEAL?"
+msgstr "¿Nuevo en Algo3?"
 
 #: templates/registration/login.html:42
 #: templates/registration/register.html:40
@@ -612,7 +612,7 @@ msgstr "Registrate"
 
 #: templates/registration/login.html:45
 msgid "Forgot your Password?"
-msgstr "Perdio su contraseña?"
+msgstr "¿Perdió su contraseña?"
 
 #: templates/registration/login.html:45
 msgid "Recovery"
@@ -624,11 +624,11 @@ msgstr "Cambiar Lenguaje"
 
 #: templates/registration/login.html:48
 msgid "Click Here"
-msgstr "Click Aqui"
+msgstr "Clic aquí"
 
 #: templates/registration/recovery-success.html:23
 msgid "Recovery completed successfully!"
-msgstr "Recupero satisfactorio!"
+msgstr "¡Recupero satisfactorio!"
 
 #: templates/registration/recovery-success.html:26
 msgid "Check your email to see the recovery info"
@@ -637,7 +637,7 @@ msgstr "Revise su correo para ver la informacion sobre el recupero"
 #: templates/registration/recovery-success.html:29
 #: templates/registration/registration-success.html:28
 msgid "Log me in"
-msgstr "Ingresar"
+msgstr "Iniciar sesión"
 
 #: templates/registration/recovery_pass.html:32
 msgid "Recover Password"
@@ -649,7 +649,7 @@ msgstr "Recuperar"
 
 #: templates/registration/register.html:29
 msgid "Registrate on SEAL"
-msgstr "Registrate en SEAL"
+msgstr "Registrate en Algo3"
 
 #: templates/registration/registration-success.html:22
 msgid "Registration completed successfully!"
