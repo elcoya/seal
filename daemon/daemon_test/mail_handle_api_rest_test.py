@@ -10,9 +10,11 @@ from mock import Mock
 
 
 class TestMailFetchFromRESTAPI(TestCase):
-
+    
+    HTTP_SERIALIZER_URL = "http://localhost:8000/mailserializer/"
+    
     def testGetMailsMustCallAnHttpRequestUsingGetMethod(self):
-        http_serializer="http://localhost:8000/mailserializer/"
+        http_serializer=TestMailFetchFromRESTAPI.HTTP_SERIALIZER_URL
         auth_user='user'
         auth_pass='pass'
         
@@ -28,7 +30,7 @@ class TestMailFetchFromRESTAPI(TestCase):
         json_translator_mock.get_mails_list.assert_called()
 
     def testDeleteMailsMustCallAnHttpRequestUsingDeleteMethod(self):
-        http_serializer="http://localhost:8000/mailserializer/"
+        http_serializer=TestMailFetchFromRESTAPI.HTTP_SERIALIZER_URL
         auth_user='user'
         auth_pass='pass'
         

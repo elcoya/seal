@@ -41,7 +41,7 @@ class RunScriptCommand():
         self.log.debug("script dir : %s", automatic_correction_tmp_dir)
         
         os.chdir(automatic_correction_tmp_dir)
-        process = subprocess.Popen([self.script], shell=True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen([self.script], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
         os.chdir(current_dir)
         # fin FIXME!!!
         

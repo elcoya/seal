@@ -43,7 +43,7 @@ class AutomaticCorrectionRunner():
         for pending_automatic_correction in pending_automatic_corrections:
             
             self.setup_enviroment.run(pending_automatic_correction, AutomaticCorrectionRunner.TMP_DIR)
-            self.run_script_command.set_script(AutomaticCorrectionRunner.TMP_DIR + "/" + os.path.basename(pending_automatic_correction.script))
+            self.run_script_command.set_script(os.path.join(AutomaticCorrectionRunner.TMP_DIR, os.path.basename(pending_automatic_correction.script)))
             script_result = self.run_script_command.execute()
             script_result.automatic_correction = pending_automatic_correction
             for visitor in self.publish_result_visitors:
