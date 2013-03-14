@@ -24,7 +24,7 @@ class RegistrationForm(Form):
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Password")
     passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Repetir Password")
     email = forms.EmailField()
-    inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="No hay Turnos", label="Turno")
+    inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="Seleccione Turno", label="Turno")
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']
