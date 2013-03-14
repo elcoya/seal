@@ -234,7 +234,12 @@ def syncdb(contest = None):
     with lcd("web"):
         local("python seal/manage.py syncdb")
     print("syncdb complete")
- 
+
+def compile_messages(contest = None):
+    with lcd("web/seal"):
+        local("python manage.py compilemessages")
+    print("compile messages complete")
+
 # Running test
 def run_tests(context = None):
     """Runs the application tests for the Django app"""
@@ -310,6 +315,8 @@ def runtravis():
 
 def start():
     print("[fabric] launching server instance.")
+    print("[fabric] Compiling Messages.")
+    compile_messages()
     set_pythonpath()
     server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open("output.txt", 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
