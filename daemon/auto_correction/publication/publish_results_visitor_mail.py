@@ -27,7 +27,7 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
         """Returns a status raw value as a human readable value"""
         self.log.debug("translating status %d", status)
         try:
-            status_string = PublishResultsVisitorMail.STATUS_STRINGS[self.status]
+            status_string = PublishResultsVisitorMail.STATUS_STRINGS[status]
         except:
             status_string = PublishResultsVisitorMail.STATUS_UNKNOWN
         return status_string
@@ -38,14 +38,11 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
         mail.subject = "Resultado de la correccion automatica"
         mail.recipient = result.automatic_correction.user_mail
         exit_value = result.exit_value
-        captured_stdout = result.captured_stdout
         status = 1 + (-2 * result.exit_value)
         mail.body = "La correccion automatica de tu entrega ha corrido.\n\n"
         mail.body += "Estatus de salida: " + self.get_status(status) + "\n"
         mail.body += "Valor de la salida : " + str(exit_value) + "\n\n"
-        mail.body += "La correccion proporciono la siguiente salida:\n\n"
-        mail.body += captured_stdout
-        mail.body += "\n\nRecuerda que puedes ver esta salida en la pagina web.\n\n"
+        mail.body += "Recuerda que puedes ver esta salida en la pagina web.\n\n"
         mail.body += "SEAL"
         return mail
     
