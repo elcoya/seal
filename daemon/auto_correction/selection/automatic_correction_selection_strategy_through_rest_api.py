@@ -6,13 +6,14 @@
 from auto_correction.selection.automatic_correction_selection_strategy import AutomaticCorrectionSelectionStrategy
 from auto_correction.log.logger_manager import LoggerManager
 from auto_correction.selection.rest_api_helper import RestApiHelper
+from auto_correction.settings import REST_BASE_URL
 
 class AutomaticCorrectionSelectionStrategyThroughRestApi(AutomaticCorrectionSelectionStrategy):
     """
     Implementation of the selection strategy that brings the automatic correction information from the rest api
     """
     
-    HTTP_AUTOMATIC_CORRECTION_SERIALIZER = 'http://localhost:8000/richautomaticcorrectionserializer/'
+    HTTP_AUTOMATIC_CORRECTION_SERIALIZER = REST_BASE_URL + '/richautomaticcorrectionserializer/'
     
     def __init__(self, auth_user, auth_pass):
         """

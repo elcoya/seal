@@ -1,6 +1,7 @@
 from auto_correction.publication.publish_results_visitor import PublishResultsVisitor
 from auto_correction.log.logger_manager import LoggerManager
 from auto_correction.selection.rest_api_helper import RestApiHelper
+from auto_correction.settings import REST_BASE_URL
 
 
 class PublishResultsVisitorWeb(PublishResultsVisitor):
@@ -10,7 +11,7 @@ class PublishResultsVisitorWeb(PublishResultsVisitor):
     
     """
     
-    HTTP_MAIL_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
+    HTTP_MAIL_SERIALIZER = REST_BASE_URL + '/automaticcorrectionserializer/'
     
     def __init__(self, auth_user, auth_pass):
         self.log = LoggerManager().get_new_logger("result publication")

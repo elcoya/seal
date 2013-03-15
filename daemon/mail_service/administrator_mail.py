@@ -10,8 +10,9 @@ import requests, json
 from mail_service.fetching.mail_handle_rest_api_strategy import MailHandleRESTAPIStrategy
 from mail_service.preparation.mail_session_helper import MailSessionHelper
 from mail_service import settings
+from auto_correction.settings import REST_BASE_URL
 
-HTTP_SERIALIZER = 'http://localhost:8000/mailserializer/'
+HTTP_SERIALIZER = REST_BASE_URL + '/mailserializer/'
 
 class AdministratorMail(object):
 

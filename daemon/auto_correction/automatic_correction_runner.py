@@ -6,8 +6,9 @@ from auto_correction.utils import managepath
 from auto_correction.selection.automatic_correction_selection_strategy_through_rest_api import AutomaticCorrectionSelectionStrategyThroughRestApi
 from auto_correction.publication.publish_results_visitor_mail import PublishResultsVisitorMail
 import os
+from auto_correction.settings import REST_BASE_URL
 
-HTTP_SERIALIZER = 'http://localhost:8000/automaticcorrectionserializer/'
+HTTP_SERIALIZER = REST_BASE_URL + '/automaticcorrectionserializer/'
 SERIALIZER_AUTH_USER = 'seal'
 SERIALIZER_AUTH_PASS = 'seal'
 

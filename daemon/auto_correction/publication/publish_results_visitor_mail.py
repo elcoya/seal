@@ -8,13 +8,14 @@ from auto_correction.log.logger_manager import LoggerManager
 from auto_correction.selection.rest_api_helper import RestApiHelper
 from mail_service.util.mail import Mail
 from django.utils.encoding import smart_str
+from auto_correction.settings import REST_BASE_URL
 
 class PublishResultsVisitorMail(PublishResultsVisitor):
     """
     Implementation of the publishing visitor which posts a mail through the web interface to await sending
     """
     
-    HTTP_MAIL_SERIALIZER = 'http://localhost:8000/mailserializer/'
+    HTTP_MAIL_SERIALIZER = REST_BASE_URL + '/mailserializer/'
     STATUS_STRINGS = {-1:"failed", 0:"pending", 1:"successfull"}
     STATUS_UNKNOWN = 'unknown status'
     

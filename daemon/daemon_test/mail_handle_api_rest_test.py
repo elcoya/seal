@@ -7,11 +7,12 @@ import unittest
 from unittest.case import TestCase
 from mail_service.fetching.mail_handle_rest_api_strategy import MailHandleRESTAPIStrategy
 from mock import Mock
+from auto_correction.settings import REST_BASE_URL
 
 
 class TestMailFetchFromRESTAPI(TestCase):
     
-    HTTP_SERIALIZER_URL = "http://localhost:8000/mailserializer/"
+    HTTP_SERIALIZER_URL = REST_BASE_URL + '/mailserializer/'
     
     def testGetMailsMustCallAnHttpRequestUsingGetMethod(self):
         http_serializer=TestMailFetchFromRESTAPI.HTTP_SERIALIZER_URL

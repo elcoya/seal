@@ -12,6 +12,7 @@ from fabric.context_managers import lcd
 from subprocess import Popen
 import ConfigParser, os, sys, time
 from fileinput import close
+from fabric.state import env
 
 project_base_path = os.path.realpath(os.path.dirname(__file__))
 WEB_PATH = project_base_path + "/web/"
@@ -26,6 +27,7 @@ os.environ['PROJECT_PATH'] = project_base_path + "/"
 import seal.settings
 USER = seal.settings.USER
 PASSWORD = seal.settings.PASSWORD
+
 
 class FabricContext:
     """
@@ -325,8 +327,17 @@ def start():
 
 def start_ip(ip):
     print("[fabric] launching server instance.")
+    compile_messages()
     set_pythonpath()
     server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", str(ip) + ":8000", "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
+    local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
+    print("[fabric] server online... pid: " + str(server_process.pid))
+
+def start_web(host='localhost', port='8000'):
+    print("[fabric] launching server instance.")
+    compile_messages()
+    set_pythonpath()
+    server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", host + ":" + port, "--noreload"], stdout = open(os.devnull, 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
     print("[fabric] server online... pid: " + str(server_process.pid))
 
@@ -337,14 +348,16 @@ def stop():
     file.close()
     os.remove("/tmp/seal_server.pid")
 
-def start_daemon():
+def start_daemon(host='localhost', port='8000'):
     set_pythonpath()
     with lcd("daemon/auto_correction"):
+        os.environ['REST_API_BASE_URL'] = "http://" + host + ":" + port
         local("python daemon_control.py start")
 
 def stop_daemon():
     set_pythonpath()
     with lcd("daemon/auto_correction"):
+        os.environ['REST_API_BASE_URL'] = ''
         local("python daemon_control.py stop")
 
 def start_daemon_dbg():
