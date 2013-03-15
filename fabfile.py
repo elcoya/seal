@@ -369,6 +369,7 @@ def start_daemon_dbg():
 def test(app_name=''):
     set_pythonpath()
     with lcd("web/seal"):
+        os.environ['REST_API_BASE_URL'] = "http://" + host + ":" + port
         local("python manage.py test " + app_name)
 
 def behave():
