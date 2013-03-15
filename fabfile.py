@@ -366,7 +366,7 @@ def start_daemon_dbg():
         pdb.set_trace()
         local("python daemon_control.py start")
 
-def test(app_name=''):
+def test(app_name='', host='localhost', port='8000'):
     set_pythonpath()
     with lcd("web/seal"):
         os.environ['REST_API_BASE_URL'] = "http://" + host + ":" + port
