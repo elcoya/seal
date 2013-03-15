@@ -39,11 +39,11 @@ class PublishResultsVisitorMail(PublishResultsVisitor):
         mail.subject = "Resultado de la correccion automatica"
         mail.recipient = result.automatic_correction.user_mail
         exit_value = result.exit_value
-        mail.body = "La correccion de tu entrega ha "
+        mail.body = "Ejecucion "
         if(exit_value==0):
-            mail.body += "sido exitosa"
+            mail.body += "exitosa, trabajo aprobado"
         else:
-            mail.body += "fallado"
+            mail.body += "fallida, trabajo no aprobado. Puede corregirlo y volver a intentarlo"
         mail.body += ".\n\n"
         return mail
     

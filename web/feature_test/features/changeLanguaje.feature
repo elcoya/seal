@@ -11,7 +11,7 @@ Feature: As a user I can change lenguaje
 	 	 When I click in the "Click Here" link
 	 	  And I select lenguaje "Español"
 	 	  And I submit the form
-	 	  And I click in the "Click Aqui" link
+	 	  And I click in the "Clic aquí" link
 	 	  And I select lenguaje "English"
 	 	  And I submit the form
 	 	 Then I should see "Login" 	 

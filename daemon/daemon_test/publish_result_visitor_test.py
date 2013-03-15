@@ -94,7 +94,7 @@ class PublishResultVisitorTest(TestCase):
         
         self.assertEquals("Resultado de la correccion automatica", mail.subject)
         self.assertEquals(result.automatic_correction.user_mail, mail.recipient)
-        self.assertEquals("La correccion de tu entrega ha sido exitosa.\n\n", mail.body)
+        self.assertEquals("Ejecucion exitosa, trabajo aprobado.\n\n", mail.body)
         
     def testTheVisitorShouldBuildTheFailureMailToSendProperly(self):
         result = Mock()
@@ -109,5 +109,5 @@ class PublishResultVisitorTest(TestCase):
         
         self.assertEquals("Resultado de la correccion automatica", mail.subject)
         self.assertEquals(result.automatic_correction.user_mail, mail.recipient)
-        self.assertEquals("La correccion de tu entrega ha fallado.\n\n", mail.body)
+        self.assertEquals("Ejecucion fallida, trabajo no aprobado. Puede corregirlo y volver a intentarlo.\n\n", mail.body)
         
