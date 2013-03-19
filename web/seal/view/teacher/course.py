@@ -11,7 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 import os
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHOKNEWCOURSE = "/"
@@ -75,14 +75,14 @@ def editcourse(request, idcourse):
                 else:
                     table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
                                            'ndeliveries':  ndeliveries})
-            table_innings = []
-            innings = Innings.objects.filter(course=course)
-            for inning in innings:
-                count = inning.get_students_count()
-                table_innings.append({'inning': inning, 'count': count})
+            table_shifts = []
+            shifts = Shift.objects.filter(course=course)
+            for shift in shifts:
+                count = shift.get_students_count()
+                table_shifts.append({'shift': shift, 'count': count})
                 
         return render(request, 'course/editcourse.html',
-                      {'form': form, 'table_contents': table_contents, 'table_innings': table_innings, 
+                      {'form': form, 'table_contents': table_contents, 'table_shifts': table_shifts, 
                        'course': course, 'idcourse': course.pk }, 
                       context_instance=RequestContext(request))
     else:

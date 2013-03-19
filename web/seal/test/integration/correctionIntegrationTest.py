@@ -7,12 +7,12 @@ from seal.model.student import Student
 from seal.model.suscription import Suscription
 from django.contrib.auth.models import User
 from seal.model.teacher import Teacher
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 
 class CorrectionIntegrationTest(TestCase):
     
     course_name = "course_name"
-    inning_name = "tarde"
+    shift_name = "tarde"
     student_name = "student"
     teacher_name = "teacher"
     teacher_appointment = "teacher"
@@ -51,16 +51,16 @@ class CorrectionIntegrationTest(TestCase):
         student.uid = self.student_name
         student.user = self.get_user_for_student()
         student.save() 
-        student.innings.add(Innings.objects.get(name=self.inning_name))
+        student.shifts.add(Shift.objects.get(name=self.shift_name))
         student.save()
     
-    def create_a_inning(self):
-        inning = Innings()
-        inning.name = self.inning_name
-        inning.description = self.inning_name
-        inning.course = Course.objects.get(name=self.course_name)
-        inning.save()
-        return inning
+    def create_a_shift(self):
+        shift = Shift()
+        shift.name = self.shift_name
+        shift.description = self.shift_name
+        shift.course = Course.objects.get(name=self.course_name)
+        shift.save()
+        return shift
 
     
     def create_a_teacher(self):
@@ -89,7 +89,7 @@ class CorrectionIntegrationTest(TestCase):
         Teacher.objects.all().delete()
         
         self.create_a_course()
-        self.create_a_inning()
+        self.create_a_shift()
         self.create_a_practice()
         self.create_a_student()
         self.create_a_delivery()

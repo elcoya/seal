@@ -9,4 +9,4 @@ from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.script import Script
 from seal.model.mail import Mail
 from seal.model.practice_file import PracticeFile
-from seal.model.innings import Innings
+from seal.model.shift import Shift

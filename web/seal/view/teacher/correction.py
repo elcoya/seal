@@ -7,7 +7,6 @@ from seal.model import Correction
 from django.contrib.auth.decorators import login_required
 from seal.model.mail import Mail
 from seal.model.teacher import Teacher
-from seal.model.innings import Innings
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s"
@@ -43,8 +42,8 @@ def index(request, iddelivery, previus):
                     elif (previus == str(3)):
                         PATHOK = "/teacher/delivery/list/%s" % (str(correction.delivery.practice.pk))
                     elif (previus == str(4)):
-                        inning = correction.delivery.student.innings.filter(course=correction.delivery.practice.course)[0]
-                        PATHOK = "/teacher/students/listdeliveries/%s/%s/" % (str(correction.delivery.student.pk), inning.pk)
+                        shift = correction.delivery.student.shifts.filter(course=correction.delivery.practice.course)[0]
+                        PATHOK = "/teacher/students/listdeliveries/%s/%s/" % (str(correction.delivery.student.pk), shift.pk)
                     return HttpResponseRedirect(PATHOK)
     
             else:
@@ -76,8 +75,8 @@ def editcorrection(request, idcorrection,previus):
                 elif (previus == str(3)):
                     PATHOK = "/teacher/delivery/list/%s" % (str(correction.delivery.practice.pk))
                 elif (previus == str(4)):
-                    inning = correction.delivery.student.innings.filter(course=correction.delivery.practice.course)[0]
-                    PATHOK = "/teacher/students/listdeliveries/%s/%s/" % (str(correction.delivery.student.pk), inning.pk)
+                    shift = correction.delivery.student.shifts.filter(course=correction.delivery.practice.course)[0]
+                    PATHOK = "/teacher/students/listdeliveries/%s/%s/" % (str(correction.delivery.student.pk), shift.pk)
                 return HttpResponseRedirect(PATHOK)
     
         else:    

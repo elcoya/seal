@@ -20,9 +20,9 @@ def practicelist(request, idcourse):
     user = request.user
     course = Course.objects.get(pk=idcourse)
     practices = course.get_practices().order_by('deadline')
-    inning = Student.objects.get(user=user).innings.filter(course = course)[0]
+    shift = Student.objects.get(user=user).shifts.filter(course = course)[0]
     return render(request, 'practice/practiceList.html', 
-                  {'practices': practices, 'inning': inning}, 
+                  {'practices': practices, 'shift': shift}, 
                   context_instance=RequestContext(request))
 
 @login_required

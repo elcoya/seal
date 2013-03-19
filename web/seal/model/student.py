@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from seal.model.teacher import Teacher
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 from django.utils.encoding import smart_str
 
 class Student(models.Model):
@@ -21,7 +21,7 @@ class Student(models.Model):
     """
     
     uid = models.CharField(unique=True, max_length = 32,verbose_name="Padron")
-    innings = models.ManyToManyField(Innings, blank=True)
+    shifts = models.ManyToManyField(Shift, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     corrector = models.ForeignKey(Teacher, null=True, blank=True)
     

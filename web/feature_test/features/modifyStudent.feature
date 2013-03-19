@@ -5,8 +5,8 @@ Feature: As a teacher I want to modify a student
           And there are no practices
 	  	  And Student "martin" exists with password "martin"
     	  And course "2012-1" exists
-    	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-          And student "martin" exists in course "2012-1" and in inning "tarde"
+    	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+          And student "martin" exists in course "2012-1" and in shift "tarde"
           And I log in as "teacher" "teacher"
          When I click in the "2012-1" link
           And I click in the "List" link 

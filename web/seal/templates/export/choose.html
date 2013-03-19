@@ -1,0 +1,19 @@
+{% extends "teacher/teacher.html" %}
+{% load i18n %}
+{% block content %}
+	<div class="container" >
+		<div class="row" style="margin: 20px 0 0;">
+			{% trans "choose_a_course" %}
+		</div>
+		<div>
+			<ul>
+				{% for course in courses %}
+					<li><a href="/teacher/export/download/{{ course.pk }}" >{{ course.name }}</a></li>
+				{% empty %}
+					<li>{% trans "empty_course_list" %}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div><a href="javascript:history.back()">{% trans "back" %}</a></div>
+	</div>
+{% endblock %}

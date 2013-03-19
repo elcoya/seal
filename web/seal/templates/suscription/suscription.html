@@ -12,14 +12,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for inning in innings %}
+			{% for shift in shifts %}
 			<tr>
-				<td style="text-align: center; " >{{ inning }}</td>
-				<td style="text-align: center; "><a href="/undergraduate/suscription/suscribe/{{ inning.pk}}">{% trans "Suscribe" %}</a></td>
+				<td style="text-align: center; " >{{ shift }}</td>
+				<td style="text-align: center; "><a href="/undergraduate/suscription/suscribe/{{ shift.pk}}">{% trans "Suscribe" %}</a></td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "There are yet no Innings to suscribe" %}</td>
+				<td colspan="4" style="text-align: center; ">{% trans "There are yet no Shifts to suscribe" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -39,7 +39,7 @@
 		<tbody>
 			{% for suscription in suscriptions %}
 			<tr>
-				<td>{{ suscription.inning }}</td>
+				<td>{{ suscription.shift }}</td>
 				<td>{{ suscription.suscriptionDate}}</td>
 				<td>{{ suscription.resolveDate}}</td>
 				<td>{{ suscription.state }}</td>

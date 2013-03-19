@@ -2,7 +2,6 @@ from django.test import TestCase
 from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
-from seal.model.innings import Innings
 
 class CourseIntegrationTest(TestCase):
     def testCourseUniqueName(self):

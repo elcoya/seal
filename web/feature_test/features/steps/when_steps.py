@@ -7,7 +7,7 @@ import ConfigParser
 from seal.model.automatic_correction import AutomaticCorrection
 import time
 from seal.utils import managepath
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 
 pathproject = managepath.get_instance().get_web_path()
 filePath = pathproject + "feature_test/data/pdftest.pdf"
@@ -57,14 +57,14 @@ def step(context):
     form.find_element_by_name('passwd').send_keys('dummy')
     form.find_element_by_name('passwd_again').send_keys('dummy')    
 
-@when('I fill the newstudent form with default data for inning "{inningename}"')
-def step(context, inningename):
+@when('I fill the newstudent form with default data for shift "{shiftname}"')
+def step(context, shiftname):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('first_name').send_keys('Dummy Student')
     form.find_element_by_name('last_name').send_keys('Dummy Student')
     form.find_element_by_name('uid').send_keys('dummy')
     form.find_element_by_name('email').send_keys('dummy@foo.foo')
-    form.find_element_by_name('innings').send_keys(inningename)
+    form.find_element_by_name('shifts').send_keys(shiftname)
     form.find_element_by_name('passwd').send_keys('dummy')
     form.find_element_by_name('passwd_again').send_keys('dummy')
 
@@ -128,10 +128,10 @@ def step(context,course):
     addres = base_url + 'teacher/course/editcourse/'+str(c.pk)
     context.browser.get(addres)
 
-@when('I am in the suscription list page of course "{course}" inning "{inning}"')
-def step(context,course, inning):
+@when('I am in the suscription list page of course "{course}" shift "{shift}"')
+def step(context,course, shift):
     c = Course.objects.get(name=course)
-    i = Innings.objects.get(name=inning, course=c)
+    i = Shift.objects.get(name=shift, course=c)
     addres = base_url + 'teacher/suscription/list/'+str(i.pk)
     context.browser.get(addres)
 
@@ -205,12 +205,12 @@ def step(context,student,practice):
     addres = base_url + 'undergraduate/correction/consult/'+str(d.pk)
     context.browser.get(addres)
 
-@when('I check the suscription of student "{student}" for course "{course}" inning "{inning}"')
-def step(context,student,course,inning):
+@when('I check the suscription of student "{student}" for course "{course}" shift "{shift}"')
+def step(context,student,course,shift):
     s = Student.objects.get(uid=student)
     c = Course.objects.get(name=course)
-    i = Innings.objects.get(name=inning, course=c)
-    s = Suscription.objects.get(student=s, inning=i)
+    i = Shift.objects.get(name=shift, course=c)
+    s = Suscription.objects.get(student=s, shift=i)
     checkbox = context.browser.find_elements(By.ID, str(s.pk))
     checkbox[0].click()
     
@@ -276,8 +276,8 @@ def step(context):
     textarea = context.browser.find_element_by_tag_name('textarea')
     textarea.send_keys("only line")
 
-@when(u'I fill the inning form with name "{inning_name}" and description "{inning_desc}"')
-def step(context, inning_name, inning_desc):
+@when(u'I fill the shift form with name "{shift_name}" and description "{shift_desc}"')
+def step(context, shift_name, shift_desc):
     form = context.browser.find_element_by_tag_name('form')
-    form.find_element_by_name('name').send_keys(inning_name)
-    form.find_element_by_name('description').send_keys(inning_desc)
+    form.find_element_by_name('name').send_keys(shift_name)
+    form.find_element_by_name('description').send_keys(shift_desc)

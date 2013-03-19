@@ -14,7 +14,7 @@
 		{% csrf_token %}
 		<div class="container" >
 			<div style="padding-bottom: 10px;">
-				{% trans "Pending Suscription of inning  " %}<b>{{ inning }}</b>
+				{% trans "Pending Suscription of shift  " %}<b>{{ shift }}</b>
 			</div>
 			<table class="table table-striped">
 				<thead>
@@ -48,13 +48,13 @@
 			</table>
 			<div class="row">
 				<div class="span3 offset9" style="text-align: right; ">
-					<button name="Reject" class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{inning.id}}/';this.form.submit();" >{% trans 'Reject' %}</button> 
-					<button name="Accept" class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{inning.id}}/';this.form.submit();" >{% trans 'Accept' %}</button>
+					<button name="Reject" class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{shift.id}}/';this.form.submit();" >{% trans 'Reject' %}</button> 
+					<button name="Accept" class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{shift.id}}/';this.form.submit();" >{% trans 'Accept' %}</button>
 				</div>
 			</div>
 			<hr />
 			<div style="padding-bottom: 10px;">
-				{% trans "Suscription solver of course "%}<b>{{ inning }}</b> 
+				{% trans "Suscription solver of course "%}<b>{{ shift }}</b> 
 			</div>
 			<table class="table table-striped">
 				<thead>
@@ -85,6 +85,6 @@
 				</tbody>
 			</table>
 		</div>
-		<a href="/teacher/students/list/{{inning.pk}}">{% trans "Back" %}</a>
+		<a href="/teacher/students/list/{{shift.pk}}">{% trans "Back" %}</a>
 	</form>
 {% endblock %}

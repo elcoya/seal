@@ -18,16 +18,16 @@ urlpatterns += patterns('view.teacher.practice',
 urlpatterns += patterns('view.teacher.student',
     url(r'^students/?$', 'index'),
     url(r'^students/pendingdelivery/$', 'pendingdeliveries'),
-    url(r'^students/newstudent/(?P<idinning>\d+)$', 'newstudent'),
-    url(r'^students/editstudent/(?P<idinning>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
+    url(r'^students/newstudent/(?P<idshift>\d+)$', 'newstudent'),
+    url(r'^students/editstudent/(?P<idshift>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
     url(r'^students/editstudent/(?P<idstudent>\d+)/$', 'edit_unenrolled_student'),
-    url(r'^students/list/(?P<idinning>\d+)/$', 'list_student'),
-    url(r'^students/listdeliveries/(?P<idstudent>\d+)/(?P<idinning>\d+)/$', 'list_student_deliveries'),
+    url(r'^students/list/(?P<idshift>\d+)/$', 'list_student'),
+    url(r'^students/listdeliveries/(?P<idstudent>\d+)/(?P<idshift>\d+)/$', 'list_student_deliveries'),
 )
 
-urlpatterns += patterns('view.teacher.inning',
-    url(r'^innings/newinning/(?P<idcourse>\d+)/?$', 'newinning'),
-    url(r'^innings/editinning/(?P<idinning>\d+)/?$', 'editinning'),
+urlpatterns += patterns('view.teacher.shift',
+    url(r'^shifts/newshift/(?P<idcourse>\d+)/?$', 'newshift'),
+    url(r'^shifts/editshift/(?P<idshift>\d+)/?$', 'editshift'),
 )
 
 urlpatterns += patterns('view.teacher.course',
@@ -50,9 +50,9 @@ urlpatterns += patterns('view.teacher.correction',
 )
 
 urlpatterns += patterns('view.teacher.suscription',
-    url(r'^suscription/list/(?P<idinning>\d+)/$', 'listsuscription'),
-    url(r'^suscription/acceptGroup/(?P<idinning>\d+)/', 'acceptgroup'),
-    url(r'^suscription/rejectGroup/(?P<idinning>\d+)/', 'rejectgroup'),
+    url(r'^suscription/list/(?P<idshift>\d+)/$', 'listsuscription'),
+    url(r'^suscription/acceptGroup/(?P<idshift>\d+)/', 'acceptgroup'),
+    url(r'^suscription/rejectGroup/(?P<idshift>\d+)/', 'rejectgroup'),
     url(r'^suscription/listsuscriptionpending/', 'listsuscriptionpending'),
 )
 
@@ -60,3 +60,8 @@ urlpatterns += patterns('view.teacher.automatic_correction',
     #url(r'^runautomatic_correction', 'run_automatic_correction_subprocess'),
     url(r'^automatic_correction/(?P<iddelivery>\d+)/$', 'details'),
 )
+
+urlpatterns += patterns('view.teacher.export',
+    url(r'^export/$', 'choose'),
+)
+

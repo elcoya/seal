@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.course import Course
 from seal.model.practice import Practice
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 from seal.model.delivery import Delivery
 from seal.model.correction import Correction
 from django.contrib.auth.decorators import login_required
@@ -41,7 +41,7 @@ def index(request):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def newstudent(request, idinning):
+def newstudent(request, idshift):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         if (request.method == 'POST'):
             form = StudentForm(request.POST)
@@ -55,15 +55,15 @@ def newstudent(request, idinning):
                 user.save()
                 form.instance.user = user
                 form.save()
-                return HttpResponseRedirect(PATHOK % str(idinning))
+                return HttpResponseRedirect(PATHOK % str(idshift))
         else:
-            form = StudentForm(initial={'innings': [idinning]})
-        return render(request, 'student/new-student.html', {'form': form, 'idinning': idinning}, context_instance=RequestContext(request))
+            form = StudentForm(initial={'shifts': [idshift]})
+        return render(request, 'student/new-student.html', {'form': form, 'idshift': idshift}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def editstudent(request, idinning, idstudent):
+def editstudent(request, idshift, idstudent):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         student = Student.objects.get(pk=idstudent)     
         if (request.method == 'POST'):
@@ -78,10 +78,10 @@ def editstudent(request, idinning, idstudent):
                 student.user.last_name = form.data['last_name']
                 student.user.save()
                 form.save()
-                return HttpResponseRedirect(PATHOK % str(idinning))
+                return HttpResponseRedirect(PATHOK % str(idshift))
         else:
             form = StudentForm(instance=student, initial={'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
-        return render(request, 'student/editstudent.html', {'form': form, 'idinning': idinning}, context_instance=RequestContext(request))
+        return render(request, 'student/editstudent.html', {'form': form, 'idshift': idshift}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
@@ -111,12 +111,12 @@ def pendingdeliveries(request):
             practices = course.get_practices()
             #RECORRO TOAS LAS PRACITAS DEL CURSO
             for practice in practices:
-                innings = Innings.objects.filter(course=course)
-                student_inning_list = []
+                shifts = Shift.objects.filter(course=course)
+                student_shift_list = []
                 #RECORRO TODOS LOS TURNOS DEL CURSO
-                for inning in innings:
+                for shift in shifts:
                     #TOMO LOS ESTUDIANTES DEL TURNO
-                    students = inning.get_students()
+                    students = shift.get_students()
                     for student in students:
                         #TODO LAS ENTREGAS DEL ESTUDIANTE PARA ESA PRACTICA
                         deliveries = Delivery.objects.filter(student=student, practice=practice)
@@ -126,32 +126,32 @@ def pendingdeliveries(request):
                             if delivery.get_automatic_correction().get_status() == AutomaticCorrection.STATUS_STRINGS[1]:
                                 appendStudent = False;
                         if (appendStudent):
-                            student_inning_list.append({'student': student, 'inning':inning})
-                if len(student_inning_list) > 0:
-                    content_list.append({'practice': practice, 'student_inning_list':student_inning_list})            
+                            student_shift_list.append({'student': student, 'shift':shift})
+                if len(student_shift_list) > 0:
+                    content_list.append({'practice': practice, 'student_shift_list':student_shift_list})            
             if (len(content_list) > 0):
                 final_list.append({'course':course, 'data': content_list})
         return render(request, 'student/delivery_pending.html', {'final_list': final_list})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
-def list_student(request, idinning):
+def list_student(request, idshift):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
-        inning = Innings.objects.get(pk=idinning)
-        students = inning.get_students().order_by('uid')
-        return render(request, 'student/liststudent.html', {'students': students, 'inning':inning}, context_instance=RequestContext(request))
+        shift = Shift.objects.get(pk=idshift)
+        students = shift.get_students().order_by('uid')
+        return render(request, 'student/liststudent.html', {'students': students, 'shift':shift}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
-def list_student_deliveries(request, idstudent, idinning):
+def list_student_deliveries(request, idstudent, idshift):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         student = Student.objects.get(pk=idstudent)
-        inning = Innings.objects.get(pk=idinning)
+        shift = Shift.objects.get(pk=idshift)
         deliveries = Delivery.objects.filter(student=student).order_by('deliverDate')
         table_deliveries = []
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)
             table_deliveries.append({'delivery': delivery, 'correction':correction})
-        return render(request, 'student/liststudentdeliveries.html', {'table_deliveries': table_deliveries, 'student':student, 'inning':inning}, context_instance=RequestContext(request))
+        return render(request, 'student/liststudentdeliveries.html', {'table_deliveries': table_deliveries, 'student':student, 'shift':shift}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE

@@ -55,8 +55,8 @@
 	</table>
 	
 	<div class="row">
-		<div class="span8"><h4>{% trans "Innings" %}</h4></div>
-		<div class="span4" style="text-align: right;"><h5><a href="/teacher/innings/newinning/{{ idcourse }}" >{% trans "New Inning" %}</a></h5></div>
+		<div class="span8"><h4>{% trans "Shifts" %}</h4></div>
+		<div class="span4" style="text-align: right;"><h5><a href="/teacher/shifts/newshift/{{ idcourse }}" >{% trans "New Shift" %}</a></h5></div>
 	</div>
 
 	<table class="table table-striped">
@@ -70,15 +70,15 @@
 		</thead>
 		
 		<tbody>
-		{% for inning_row in table_innings %}  
+		{% for shift_row in table_shifts %}  
 		    <tr>
-		    	<td><a href="/teacher/innings/editinning/{{inning_row.inning.pk}}">{{ inning_row.inning.name }}</a></td>
-		    	<td>{{ inning_row.inning.description }}</td>
-		    	<td>{{ inning_row.count }}</td>
-		    	<td><a href="/teacher/students/list/{{inning_row.inning.pk}}">{% trans "List" %}</a></td>
+		    	<td><a href="/teacher/shifts/editshift/{{shift_row.shift.pk}}">{{ shift_row.shift.name }}</a></td>
+		    	<td>{{ shift_row.shift.description }}</td>
+		    	<td>{{ shift_row.count }}</td>
+		    	<td><a href="/teacher/students/list/{{shift_row.shift.pk}}">{% trans "List" %}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Innings" %}</td></tr>
+		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Shifts" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>

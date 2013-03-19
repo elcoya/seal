@@ -16,7 +16,7 @@ from seal.utils import managepath
 import os
 from shutil import copyfile
 from os import makedirs
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 
 base_url = 'http://localhost:8000/'
 
@@ -117,9 +117,9 @@ def step(context):
 def step(context):
     Course.objects.all().delete()
 
-@given('there are no innings')
+@given('there are no shifts')
 def step(context):
-    Innings.objects.all().delete()
+    Shift.objects.all().delete()
 
 @given('there are no practices')
 def step(context):
@@ -145,48 +145,48 @@ def step(context):
 def step(context,course):
     c = Course.objects.get_or_create(name=course)
 
-@given('student "{uid}" exists in course "{course1}" inning "{inning1}" and in course "{course2}" inning "{inning2}"')
-def step(context,uid, course1, inning1, course2, inning2):
+@given('student "{uid}" exists in course "{course1}" shift "{shift1}" and in course "{course2}" shift "{shift2}"')
+def step(context,uid, course1, shift1, course2, shift2):
     course1 = Course.objects.get(name=course1)
     course2 = Course.objects.get(name=course2)
-    inning1 = Innings.objects.get(name=inning1, course = course1)
-    inning2 = Innings.objects.get(name=inning2, course = course2)
+    shift1 = Shift.objects.get(name=shift1, course = course1)
+    shift2 = Shift.objects.get(name=shift2, course = course2)
     student = Student.objects.get(uid=uid)
-    student.innings.add(inning1)
-    student.innings.add(inning2)
+    student.shifts.add(shift1)
+    student.shifts.add(shift2)
 
-@given('a inning with name "{name_inning}" and description "{descrip}" in the course "{course}"')
-def step(context, name_inning, descrip, course):
+@given('a shift with name "{name_shift}" and description "{descrip}" in the course "{course}"')
+def step(context, name_shift, descrip, course):
     course = Course.objects.get(name=course)
-    inning = Innings()
-    inning.name = name_inning
-    inning.description = descrip
-    inning.course = course
-    inning.save()
+    shift = Shift()
+    shift.name = name_shift
+    shift.description = descrip
+    shift.course = course
+    shift.save()
     
-@given('student "{uid}" exists in course "{course}" and in inning "{inning_name}"')
-def step(context,uid, course, inning_name):
+@given('student "{uid}" exists in course "{course}" and in shift "{shift_name}"')
+def step(context,uid, course, shift_name):
     course = Course.objects.get(name=course)
-    inning = Innings.objects.get(name=inning_name, course=course) 
+    shift = Shift.objects.get(name=shift_name, course=course) 
     student = Student.objects.get(uid=uid)
-    student.innings.add(inning)
+    student.shifts.add(shift)
 
-@given('student "{uid}" does not exist in course "{course_name}" and in inning "{inning_name}"')
-def step(context,uid, course_name, inning_name):
+@given('student "{uid}" does not exist in course "{course_name}" and in shift "{shift_name}"')
+def step(context,uid, course_name, shift_name):
     course = Course.objects.get(name=course_name)
-    inning = Innings.objects.get(name=inning_name, course=course)
-    if(inning.get_students(uid=uid).exists()):
-        inning.get_students().remove(uid=uid)
+    shift = Shift.objects.get(name=shift_name, course=course)
+    if(shift.get_students(uid=uid).exists()):
+        shift.get_students().remove(uid=uid)
 
 @given('student "{uid}" exists without course')
 def step(context,uid):
     student = Student.objects.get(uid=uid)
-    student.innings.clear()
+    student.shifts.clear()
 
-@given('there are no student in course "{course}" inning "{inning}"')
-def step(context, course, inning):
+@given('there are no student in course "{course}" shift "{shift}"')
+def step(context, course, shift):
     c = Course.objects.get(name=course)
-    i = Innings.objects.get(name=inning, course=c)
+    i = Shift.objects.get(name=shift, course=c)
     students = i.get_students()
     for student in students:
         student.delete()
@@ -255,12 +255,12 @@ def step(context,practice,student,coment1,coment2,grade,corrector):
     t = Teacher.objects.get(uid=corrector)
     Correction.objects.get_or_create(publicComent=coment1,privateComent=coment2,grade=grade,delivery_id=d.pk,corrector_id=t.pk)
 
-@given('existe suscrition of student "{student}" for course "{course}" inning "{inning}" with suscription date "{suscriptionDate}" and state "{state}"')
-def step(context,student,course, inning, suscriptionDate,state):
+@given('existe suscrition of student "{student}" for course "{course}" shift "{shift}" with suscription date "{suscriptionDate}" and state "{state}"')
+def step(context,student,course, shift, suscriptionDate,state):
     s = Student.objects.get(uid=student)
     c = Course.objects.get(name=course)
-    i = Innings.objects.get(name=inning, course = c)
-    Suscription.objects.get_or_create(student_id=s.pk, inning_id=i.pk, state=state, suscriptionDate=suscriptionDate)
+    i = Shift.objects.get(name=shift, course = c)
+    Suscription.objects.get_or_create(student_id=s.pk, shift_id=i.pk, state=state, suscriptionDate=suscriptionDate)
 
 @given('I am at the upload script form for practice "{practice_uid}" and course "{course_name}"')
 def step(context, practice_uid, course_name):

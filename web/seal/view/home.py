@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from seal.model.mail import Mail
 from seal.forms.changepass import ChangePasswForm
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 
 LENGTHPASSWORD = 8
 REDIRECTADMIN = "/admin"
@@ -56,8 +56,8 @@ def index(request):
         return HttpResponseRedirect(REDIRECTTEACHER)
     elif(Student.objects.filter(user_id=user.id).exists()):
         student = Student.objects.get(user_id=user.id)
-        if (student.innings.all().count() == 1):
-            return HttpResponseRedirect(REDIRECTCOURSE % student.innings.all()[0].course.pk)
+        if (student.shifts.all().count() == 1):
+            return HttpResponseRedirect(REDIRECTCOURSE % student.shifts.all()[0].course.pk)
         else:
             return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
@@ -72,8 +72,8 @@ def redirect(request):
         return HttpResponseRedirect(REDIRECTTEACHER)
     elif(Student.objects.filter(user_id=user.id).exists()):
         student = Student.objects.get(user_id=user.id)
-        if (student.innings.all().count() == 1):
-            return HttpResponseRedirect(REDIRECTCOURSE % student.innings.all()[0].pk)
+        if (student.shifts.all().count() == 1):
+            return HttpResponseRedirect(REDIRECTCOURSE % student.shifts.all()[0].pk)
         else:
             return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
@@ -98,9 +98,9 @@ def register(request):
                 student.user = user
                 student.uid = form.data['uid']
                 student.save()
-                if (Innings.objects.all().count() > 0):
-                    inning = Innings.objects.get(pk=form.data['inning']);
-                    student.innings.add(inning)
+                if (Shift.objects.all().count() > 0):
+                    shift = Shift.objects.get(pk=form.data['shift']);
+                    student.shifts.add(shift)
                     student.save()
                 
                 mail = Mail()

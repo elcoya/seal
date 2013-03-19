@@ -204,7 +204,7 @@ msgstr "Esta corrección automatica todavia esta pendiente"
 #: templates/delivery/deliverydetail.html:44
 #: templates/delivery/listdelivery.html:49
 #: templates/delivery/uploaddelivery.html:79
-#: templates/inning/editinning.html:12 templates/inning/newinning.html:12
+#: templates/shift/editshift.html:12 templates/shift/newshift.html:12
 #: templates/practice/editPracticeFile.html:16
 #: templates/practice/editpractice.html:13 templates/practice/listFile.html:28
 #: templates/practice/script.html:14 templates/practice/uploadFile.html:46
@@ -253,7 +253,7 @@ msgid "Course %(coursename)s edit"
 msgstr "Edicion de curso %(coursename)s"
 
 #: templates/course/editcourse.html:9 templates/course/newcourse.html:12
-#: templates/inning/editinning.html:10 templates/inning/newinning.html:10
+#: templates/shift/editshift.html:10 templates/shift/newshift.html:10
 #: templates/practice/editPracticeFile.html:14
 #: templates/practice/editpractice.html:11 templates/practice/script.html:12
 #: templates/practice/uploadFile.html:12
@@ -304,11 +304,11 @@ msgid "There are yet no Practices"
 msgstr "No hay Practicas"
 
 #: templates/course/editcourse.html:58
-msgid "Innings"
+msgid "Shifts"
 msgstr "Turnos"
 
-#: templates/course/editcourse.html:59 templates/inning/newinning.html:7
-msgid "New Inning"
+#: templates/course/editcourse.html:59 templates/shift/newshift.html:7
+msgid "New Shift"
 msgstr "Nuevo Turno"
 
 #: templates/course/editcourse.html:65 templates/practice/listFile.html:10
@@ -334,7 +334,7 @@ msgid "List"
 msgstr "Lista"
 
 #: templates/course/editcourse.html:81
-msgid "There are yet no Innings"
+msgid "There are yet no Shifts"
 msgstr "No hay Turnos"
 
 #: templates/course/index.html:7 templates/teacher/index.html:6
@@ -480,8 +480,8 @@ msgstr "No corregido"
 msgid "There are yet no deliveries from this practice"
 msgstr "No hay entregas para esta practica"
 
-#: templates/inning/editinning.html:7
-msgid "Edit Inning"
+#: templates/shift/editshift.html:7
+msgid "Edit Shift"
 msgstr "Edicion de Turnos"
 
 #: templates/practice/editPracticeFile.html:9
@@ -511,8 +511,8 @@ msgstr "No hay archivos asociados a esta practica"
 
 #: templates/practice/practiceList.html:5
 #, python-format
-msgid " Practices of Inning <b>%(inning)s</b> "
-msgstr " Practicas del turno <b>%(inning)s</b> "
+msgid " Practices of Shift <b>%(shift)s</b> "
+msgstr " Practicas del turno <b>%(shift)s</b> "
 
 #: templates/practice/practiceList.html:22
 msgid "Make Delivery"
@@ -680,7 +680,7 @@ msgid "0 student"
 msgstr "0 estudiantes"
 
 #: templates/student/liststudent.html:6
-msgid "Students of Inning"
+msgid "Students of Shift"
 msgstr "Estudiantes del turno"
 
 #: templates/student/liststudent.html:8
@@ -718,7 +718,7 @@ msgid "New student"
 msgstr "Nuevo Estudiante"
 
 #: templates/suscription/listsuscription.html:17
-msgid "Pending Suscription of inning  "
+msgid "Pending Suscription of shift  "
 msgstr "Suscripciones pendientes del turno "
 
 #: templates/suscription/listsuscription.html:25
@@ -760,7 +760,7 @@ msgid "Suscription Pending"
 msgstr "Suscripciones Pendientes"
 
 #: templates/suscription/listsuscriptionpending.html:10
-msgid "Inning "
+msgid "Shift "
 msgstr "Turno "
 
 #: templates/suscription/listsuscriptionpending.html:16
@@ -785,7 +785,7 @@ msgid "Suscribe"
 msgstr "Suscribirse"
 
 #: templates/suscription/suscription.html:22
-msgid "There are yet no Innings to suscribe"
+msgid "There are yet no Shifts to suscribe"
 msgstr "No hay turnos para suscribirse"
 
 #: templates/suscription/suscription.html:28
@@ -841,11 +841,11 @@ msgid "You are not allowed in this section"
 msgstr "No esta permitido que acceda a esta seccion"
 
 #: templates/undergraduate/index.html:10
-msgid "Courses - Innings"
+msgid "Courses - Shifts"
 msgstr "Curso - Turno"
 
 #: templates/undergraduate/index.html:21
-msgid "There are yet no innings in which you are enrolled"
+msgid "There are yet no shifts in which you are enrolled"
 msgstr "No hay tunos para suscribirse"
 
 #: templates/undergraduate/index.html:25

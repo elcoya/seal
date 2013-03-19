@@ -34,10 +34,10 @@ class Course(models.Model):
         return partial_query
     
     def get_student_count(self):
-        innings = self.innings_set.all()
+        shifts = self.shift_set.all()
         total = 0;
-        for inning in innings:
-            total = total + inning.student_set.count()
+        for shift in shifts:
+            total = total + shift.student_set.count()
         return total
     
     def add_student(self, student):

@@ -8,7 +8,7 @@ Created on 06/03/2013
 '''
 from django.utils.encoding import smart_str
 
-class Innings(models.Model):
+class Shift(models.Model):
     '''
     classdocs
     '''

@@ -17,15 +17,15 @@
 					<tr>
 						<th>Uid</th>
 						<th>Name</th>
-						<th>Inning</th>
+						<th>Shift</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for student_inning in content.student_inning_list %}
+					{% for student_shift in content.student_shift_list %}
 					<tr>
-						<td>{{ student_inning.student.uid }}</td>
-						<td>{{ student_inning.student.get_full_name }}</td>
-						<td>{{ student_inning.inning.name }}</td>
+						<td>{{ student_shift.student.uid }}</td>
+						<td>{{ student_shift.student.get_full_name }}</td>
+						<td>{{ student_shift.shift.name }}</td>
 					</tr>
 					{% endfor %}
 				</tbody>

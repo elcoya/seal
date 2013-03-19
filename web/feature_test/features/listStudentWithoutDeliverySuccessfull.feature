@@ -10,8 +10,8 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 		Given Student "martin" exists with email "martin@foo.foo"
 		  And Teacher "teacher" exists with password "teacher"
 	 	  And course "2012-1" exists
-	 	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+	 	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And I log in as "teacher" "teacher"
  		 When I click in the "Students without deliveries Successfull" link
@@ -21,8 +21,8 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 		Given Student "martin" exists with email "martin@foo.foo"
 		  And Teacher "teacher" exists with password "teacher"
 	 	  And course "2012-1" exists
-	 	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+	 	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "failed"
@@ -34,8 +34,8 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 		Given Student "martin" exists with email "martin@foo.foo"
 		  And Teacher "teacher" exists with password "teacher"
 	 	  And course "2012-1" exists
-	 	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+	 	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "successfull"
@@ -48,9 +48,9 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 		  And Student "anibal" exists with email "anibal@foo.foo"
 		  And Teacher "teacher" exists with password "teacher"
 	 	  And course "2012-1" exists
-	 	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
-	 	  And student "anibal" exists in course "2012-1" and in inning "tarde"
+	 	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
+	 	  And student "anibal" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "successfull"

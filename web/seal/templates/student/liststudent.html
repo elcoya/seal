@@ -3,10 +3,10 @@
 {% block content %}
 
 	<div class="row" style="margin-top: 30px; margin-bottom: 10px; ">
-		<div class="span8">{% trans "Students of Inning" %} <b>{{ inning }}</b></div>
+		<div class="span8">{% trans "Students of Shift" %} <b>{{ shift }}</b></div>
 		<div class="span4" style="text-align: right;">
-			<a href="/teacher/students/newstudent/{{ inning.pk }}" >{% trans "New Student" %}</a>&nbsp;&nbsp;&nbsp;
-			<a href="/teacher/suscription/list/{{ inning.pk }}" >{% trans "Suscription" %}</a>
+			<a href="/teacher/students/newstudent/{{ shift.pk }}" >{% trans "New Student" %}</a>&nbsp;&nbsp;&nbsp;
+			<a href="/teacher/suscription/list/{{ shift.pk }}" >{% trans "Suscription" %}</a>
 		</div>
 	</div>
 	<table class="table table-striped">
@@ -22,7 +22,7 @@
 		<tbody>
 			{% for student in students %}
 			<tr>
-				<td><a href="/teacher/students/editstudent/{{ inning.pk }}/{{student.pk}}">{{ student.uid }}</a></td>
+				<td><a href="/teacher/students/editstudent/{{ shift.pk }}/{{student.pk}}">{{ student.uid }}</a></td>
 				<td>{{ student.get_full_name }}</td>
 				<td>{{ student.user.email }}</td>
 				<td> {% if student.corrector %}
@@ -30,7 +30,7 @@
 				{% else %}
 				{% trans "no corrector" %}
 				{% endif %} </td>
-				<td><a href="/teacher/students/listdeliveries/{{student.pk}}/{{ inning.pk }}">{% trans "List" %}</a></td>
+				<td><a href="/teacher/students/listdeliveries/{{student.pk}}/{{ shift.pk }}">{% trans "List" %}</a></td>
 			</tr>
 			{% empty %}
 			<tr>
@@ -39,5 +39,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	<div><a href="/teacher/course/editcourse/{{ inning.course.pk  }}">{% trans "Back" %}</a></div>
+	<div><a href="/teacher/course/editcourse/{{ shift.course.pk  }}">{% trans "Back" %}</a></div>
 {% endblock %}

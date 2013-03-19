@@ -6,7 +6,7 @@ Created on 04/11/2012
 from django import forms
 from seal.model.student import Student
 from django.forms.forms import Form
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 from seal.model.teacher import Teacher
 from cProfile import label
 from django.contrib.auth.models import User
@@ -24,7 +24,7 @@ class RegistrationForm(Form):
     passwd = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Password")
     passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True),label="Repetir Password")
     email = forms.EmailField()
-    inning = forms.ModelChoiceField(queryset=Innings.objects.all() , empty_label="Seleccione Turno", label="Turno")
+    shifts = forms.ModelChoiceField(queryset=Shift.objects.all() , empty_label="Seleccione Turno", label="Turno")
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']

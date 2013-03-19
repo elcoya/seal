@@ -1,6 +1,6 @@
 from django.db import models
 from seal.model import Student
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 
 class Suscription(models.Model):
     """
@@ -12,7 +12,7 @@ class Suscription(models.Model):
     
     """
     
-    inning = models.ForeignKey(Innings)
+    shift = models.ForeignKey(Shift)
     student = models.ForeignKey(Student)
     state = models.CharField(max_length = 32)
     suscriptionDate = models.DateField()

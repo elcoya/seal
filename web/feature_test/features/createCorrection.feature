@@ -5,8 +5,8 @@ Feature: As a teacher I want to make a correction of a delivery
     	  And Teacher "teacher" exists with password "teacher"
     	  And I log in as "teacher" "teacher"
     	  And course "2012-1" exists
-    	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+    	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
 	 	  And there are no corrections
@@ -22,8 +22,8 @@ Feature: As a teacher I want to make a correction of a delivery
     	  And Teacher "teacher" exists with password "teacher"
     	  And I log in as "teacher" "teacher"
     	  And course "2012-1" exists
-    	  And a inning with name "tarde" and description "horario" in the course "2012-1"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+    	  And a shift with name "tarde" and description "horario" in the course "2012-1"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
 	 	  And exist correction of delivery of "martin" for "TP Intro" with "Coment1" "Coment2" "4.0" and corrector "teacher"

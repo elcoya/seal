@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from datetime import date
 from django.template.context import RequestContext
-from seal.model.innings import Innings
+from seal.model.shift import Shift
 
 REDIRECTOKNEWSUSCRIPTION = "/undergraduate/suscription"
 
@@ -18,35 +18,35 @@ def index(request):
     student = request.user.student_set.get(uid=request.user.username)
     suscriptions = Suscription.objects.filter(student = student).order_by('suscriptionDate')
     
-    innings = Innings.objects.all()
+    shifts = Shift.objects.all()
     
-    student_innings = student.innings.all()
+    student_shifts = student.shifts.all()
     suscript_pending = suscriptions.filter(state = "Pending")
     
-    innings_same_course = []
-    for inning in student_innings:
-        course = inning.course
-        innigns_course = Innings.objects.filter(course=course)
-        for inning_same in innigns_course:
-            innings_same_course.append(inning_same)
+    shifts_same_course = []
+    for shift in student_shifts:
+        course = shift.course
+        innigns_course = Shift.objects.filter(course=course)
+        for shift_same in innigns_course:
+            shifts_same_course.append(shift_same)
     
-    innings_student_pending = []
+    shifts_student_pending = []
     for sus_pen in suscript_pending:
-        course = sus_pen.inning.course
-        innigns_course_pend = Innings.objects.filter(course=course)
-        for inning_same_pend in innigns_course_pend:
-            innings_student_pending.append(inning_same_pend)
+        course = sus_pen.shift.course
+        innigns_course_pend = Shift.objects.filter(course=course)
+        for shift_same_pend in innigns_course_pend:
+            shifts_student_pending.append(shift_same_pend)
             
-    innings_to_suscript = list(set(innings) - set(innings_same_course) - set(innings_student_pending))    
+    shifts_to_suscript = list(set(shifts) - set(shifts_same_course) - set(shifts_student_pending))    
     
     return render(request, 'suscription/suscription.html', 
-                  {'innings': innings_to_suscript , 'suscriptions':suscriptions}, 
+                  {'shifts': shifts_to_suscript , 'suscriptions':suscriptions}, 
                   context_instance=RequestContext(request))
 
 @login_required
-def newsuscription(request, idinning):
+def newsuscription(request, idshift):
     student = request.user.student_set.get(uid=request.user.username)
-    innign = Innings.objects.get(pk=idinning)
-    suscription = Suscription(student = student, inning = innign, state = "Pending", suscriptionDate=date.today())
+    innign = Shift.objects.get(pk=idshift)
+    suscription = Suscription(student = student, shift = innign, state = "Pending", suscriptionDate=date.today())
     suscription.save()
     return HttpResponseRedirect(REDIRECTOKNEWSUSCRIPTION)

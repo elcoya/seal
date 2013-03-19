@@ -1,7 +1,6 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<body>
 	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
 		<div style="clear: none; width: 50%; float: left;">
 			{% blocktrans with delivery.practice.uid as practice %}Detail of delivery from practice {{ practice }}{% endblocktrans %}
@@ -42,5 +41,4 @@
 		</table>
 	</div>
 	<a href="/teacher">{% trans "Back" %}</a>
-</body>
 {% endblock %}

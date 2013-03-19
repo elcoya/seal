@@ -7,18 +7,18 @@
 {% block title %}Undergraduate{% endblock %}
 {% block content %}
 	<div class="row" style="margin: 0;">
-		<h4>{% trans "Courses - Innings" %}</h4>
+		<h4>{% trans "Courses - Shifts" %}</h4>
 	</div>
 
 	<table class="table table-striped">
 		<thead><tr><th>{% trans "Name" %}</th></tr></thead>
 		<tbody>
-		{% for inning in innings %}
+		{% for shift in shifts %}
 		    <tr>
-		    	<td><a href="/undergraduate/practice/list/{{inning.course.pk}}">{{ inning }}</a></td>
+		    	<td><a href="/undergraduate/practice/list/{{shift.course.pk}}">{{ shift }}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td>{% trans "There are yet no innings in which you are enrolled" %}</td></tr>
+		    <tr><td>{% trans "There are yet no shifts in which you are enrolled" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>

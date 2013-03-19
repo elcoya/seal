@@ -2,10 +2,10 @@ Feature: As a teacher I want to assing a correction of another teacher
 
 	Scenario: No assing correction
 	 	Given course "2012-1" exists 
-		  And a inning with name "tarde" and description "horario" in the course "2012-1"
+		  And a shift with name "tarde" and description "horario" in the course "2012-1"
 		  And Teacher "teacher" exists with password "teacher"	
 	 	  And Student "martin" exists with password "martin"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
 	 	 When I log in as "teacher" "teacher"
@@ -13,10 +13,10 @@ Feature: As a teacher I want to assing a correction of another teacher
 	 	 
 	Scenario: Assing correction of delivery susccesfull
 	 	Given course "2012-1" exists 
-	 	  And a inning with name "tarde" and description "horario" in the course "2012-1"
+	 	  And a shift with name "tarde" and description "horario" in the course "2012-1"
 		  And Teacher "teacher" exists with password "teacher"	
 	 	  And Student "martin" exists with password "martin"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "successfull"
@@ -31,10 +31,10 @@ Feature: As a teacher I want to assing a correction of another teacher
 
 	Scenario: Assing correction of delivery susccesfull, delivery fail and pending
 	 	Given course "2012-1" exists 
-	 	  And a inning with name "tarde" and description "horario" in the course "2012-1"
+	 	  And a shift with name "tarde" and description "horario" in the course "2012-1"
 		  And Teacher "teacher" exists with password "teacher"	
 	 	  And Student "martin" exists with password "martin"
-	 	  And student "martin" exists in course "2012-1" and in inning "tarde"
+	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "2"

@@ -3,12 +3,12 @@ from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.delivery import Delivery
 from seal.test.integration.utils import clean_up_database_tables, create_a_student, \
 create_a_course, create_a_practice, create_a_delivery, create_an_automatic_correction,\
-    create_a_inning
+    create_a_shift
 
 class AutomaticCorrectionIntegrationTest(TestCase):
     
     course_name = "2012-2"
-    inning_name = "TARDE"
+    shift_name = "TARDE"
     student_name = "student"
     student_email = "student@foo.foo"
     practice_deadline = '2012-12-31'
@@ -23,8 +23,8 @@ class AutomaticCorrectionIntegrationTest(TestCase):
     def setUp(self):
         clean_up_database_tables()
         create_a_course(self.course_name)
-        create_a_inning(self.inning_name, self.course_name)
-        create_a_student(self.student_name, self.inning_name)
+        create_a_shift(self.shift_name, self.course_name)
+        create_a_student(self.student_name, self.shift_name)
         create_a_practice(self.course_name, self.practice_deadline, self.practice_filepath, self.practice_uid)
         create_a_delivery(self.delivery_filepath, self.student_name, self.course_name, self.practice_uid, self.delivery_date)
         create_an_automatic_correction(self.delivery_filepath, self.stdout, self.exit_value, self.status)

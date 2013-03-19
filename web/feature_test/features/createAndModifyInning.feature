@@ -1,19 +1,19 @@
-Feature: As a teacher I want to create and modify innings
+Feature: As a teacher I want to create and modify shifts
 
-	 Scenario: Create Inning
+	 Scenario: Create Shift
 	 	Given Teacher "teacher" exists with password "teacher"
           And course "2012-1" exists
           And I log in as "teacher" "teacher" 
          When I click in the "2012-1" link
-          And I click in the "New Inning" link
-          And I fill the inning form with name "tarde" and description "horario"
+          And I click in the "New Shift" link
+          And I fill the shift form with name "tarde" and description "horario"
           And I submit the form
 		 Then I should see "tarde"
 
-	 Scenario: Modify Inning
+	 Scenario: Modify Shift
 	 	Given Teacher "teacher" exists with password "teacher"
           And course "2012-1" exists
-          And a inning with name "tarde" and description "horario" in the course "2012-1"
+          And a shift with name "tarde" and description "horario" in the course "2012-1"
           And I log in as "teacher" "teacher" 
          When I click in the "2012-1" link
           And I click in the "tarde" link
