@@ -14,7 +14,7 @@ PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s"
 #SUBJECTEMAIL = "You have a correction to see on SEAL"
 #BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s. Coment: %s. Grade: %s"
 
-SUBJECTEMAIL = "Tienes una correccion para ver en SEAL"
+SUBJECTEMAIL = "Tienes una correccion para ver en ALGO3"
 BODYEMAIL = "Tienes una correccion para ver en la entrega: %s de la practica: %s. Comentario: %s. Nota: %s"
 
 

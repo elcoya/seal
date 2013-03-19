@@ -37,14 +37,14 @@ ERRORCAPTCHA = "You Must Be a Robot"
 #SUBJECTMAILCHANGE = "Change SEAL password Successful"
 #BODYMAILCHANGE = "You have requested a password change for SEAL. Your new login information is username: %s and new password: %s"
 
-SUBJECTMAIL = "Registracion en SEAL realizada con exito"
-BODYMAIL = "Te registraste en SEAL con estos datos - Padron: %s and Password: %s"
+SUBJECTMAIL = "Registracion en ALGO3 realizada con exito"
+BODYMAIL = "Te registraste en ALGO3 con estos datos - Padron: %s and Password: %s"
 
-SUBJECTMAILRECOVERY = "Recupero de password de SEAL"
-BODYMAILRECOVERY = "Has pedido un recupero de password en SEAL. Tu nueva informacion de ingreso es Padron: %s y Password: %s"
+SUBJECTMAILRECOVERY = "Recupero de password de ALGO3"
+BODYMAILRECOVERY = "Has pedido un recupero de password en ALGO3. Tu nueva informacion de ingreso es Padron: %s y Password: %s"
 
-SUBJECTMAILCHANGE = "Cambio de password en SEAL"
-BODYMAILCHANGE = "Has cambiado la password en SEAL. Tu informacion de ingreso es Padron: %s y Password: %s"
+SUBJECTMAILCHANGE = "Cambio de password en ALGO3"
+BODYMAILCHANGE = "Has cambiado la password en ALGO3. Tu informacion de ingreso es Padron: %s y Password: %s"
 
 
 @login_required

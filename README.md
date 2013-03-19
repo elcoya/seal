@@ -20,11 +20,6 @@ Stoty Mapping docente --> https://sealdocente.toolsforagile.com/workspace/accoun
 Username: anibal
 Password: seal
 
-###Correos de prueba
-Teacher --> Username: sealteacher - Password: sealtpprof
-
-Student  --> Username: sealstudent - Password: sealtpprof
-
 ###Repositorio Git-Hub
 https://github.com/elcoyaman/seal.git
 
