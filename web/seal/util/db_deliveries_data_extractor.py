@@ -8,7 +8,6 @@ from seal.model.automatic_correction import AutomaticCorrection
 from django.db.models import F
 from django.db.models import Q
 from seal.model.course import Course
-from django.db.models.aggregates import Max
 
 class DbDeliveriesExtractor:
     
