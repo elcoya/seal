@@ -46,7 +46,8 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
             self.json_translator.json = auto_correction_data
             return self.json_translator.get_automatic_corrections()
         else:
-            raise auto_correction_request.status_code
+            self.log.debug("request content recived: %s", str(auto_correction_request.status_code))
+            return []
     
     def get_delivery(self, pk):
         self.log.debug("Retrieving delivery for id: %d", pk)
