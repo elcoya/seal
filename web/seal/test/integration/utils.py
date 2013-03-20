@@ -48,6 +48,19 @@ def create_a_practice(course_name, practice_deadline, practice_filepath, practic
     practice.save()
     return practice
 
+
+def get_user_for_teacher(teacher_name):
+    user = User.objects.get_or_create(username=teacher_name)[0]
+    user.set_password(teacher_name)
+    user.save()
+    return user
+
+def create_a_teacher(teacher_name):
+    teacher = Teacher()
+    teacher.user = get_user_for_teacher(teacher_name)
+    teacher.save()
+    return teacher
+
 def get_user_for_student(student_name):
     user = User.objects.get_or_create(username=student_name)[0]
     user.set_password(student_name)

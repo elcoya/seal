@@ -38,4 +38,7 @@ from daemon_test.publish_result_visitor_test import PublishResultVisitorTest
 from daemon_test.run_script_command_test import TestRunScriptCommand
 from daemon_test.run_script_timeout_test import TestProcessTimeout
 from daemon_test.setup_enviroment_test import TestSetupEnviroment
+from seal.test.unit.csv_tuple_printer_test import CsvTuplePrinterTest
+from seal.test.unit.db_deliveries_data_extractor import DbDeliveriesDataExtractorUnitTest
+from seal.test.integration.db_deliveries_data_extractor import DbDeliveriesDataExtractorIntegrationTest
 
