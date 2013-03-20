@@ -810,3 +810,7 @@ msgstr ""
 #: templates/undergraduate/undergraduate.html:20
 msgid "Overview"
 msgstr ""
+
+msgid "data_export"
+msgstr "Data export"
+
