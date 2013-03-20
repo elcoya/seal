@@ -141,6 +141,12 @@ def step(context):
 def step(context):
     Suscription.objects.all().delete()
 
+@given('course "{course}" with pk "{pk}" exists')
+def step(context,course,pk):
+    c = Course.objects.get_or_create(pk=pk)[0]
+    c.name=course
+    c.save()
+
 @given('course "{course}" exists')
 def step(context,course):
     c = Course.objects.get_or_create(name=course)

@@ -867,6 +867,9 @@ msgstr ""
 msgid "data_export"
 msgstr "Exportación de datos"
 
+msgid "empty_course_list"
+msgstr "No hay cursos"
+
 #~ msgid "Student with pending delivery"
 #~ msgstr "Estudiantes con entregas penientes"
 
