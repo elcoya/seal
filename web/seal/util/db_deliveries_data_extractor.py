@@ -7,6 +7,8 @@ from seal.model.delivery import Delivery
 from seal.model.automatic_correction import AutomaticCorrection
 from django.db.models import F
 from django.db.models import Q
+from seal.model.course import Course
+from django.db.models.aggregates import Max
 
 class DbDeliveriesExtractor:
     
@@ -14,14 +16,18 @@ class DbDeliveriesExtractor:
     
     def __init__(self):
         self.objects = Delivery.objects
+        try:
+            self.course = Course.objects.all().latest("name") #aggregate(Max("name"))["name__max"]
+        except:
+            self.course = None
     
     def get_data(self):
         # Django magic... don't touch unless you fully understand it
         successfull = self.objects.filter(automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL,
-                                          student__pk=F('student__pk'), pk__gte=F('pk'))
+                                          student__pk=F('student__pk'), pk__gte=F('pk'), practice__course=self.course)
         failed = self.objects.filter((~Q(student__delivery__automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL)),
                                      automaticcorrection__status=AutomaticCorrection.STATUS_FAILED,
-                                     student__pk=F('student__pk'), pk__gte=F('pk'),
+                                     student__pk=F('student__pk'), pk__gte=F('pk'), practice__course=self.course
                                     )
         result = []
         for delivery in successfull:

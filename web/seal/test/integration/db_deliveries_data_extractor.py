@@ -49,7 +49,7 @@ class DbDeliveriesDataExtractorIntegrationTest(TestCase):
         teacher.user.last_name = self.teacher_last_name
         teacher.user.save()
         
-        course = utils.create_a_course(self.course_name)
+        self.course = utils.create_a_course(self.course_name)
         shift = utils.create_a_shift(self.shift_name, self.course_name)
         practice = utils.create_a_practice(self.course_name, self.practice_deadline, self.practice_filepath, self.practice_uid)
         
@@ -84,6 +84,7 @@ class DbDeliveriesDataExtractorIntegrationTest(TestCase):
     
     def testDataExtractorMustReturnAListOfTuplesContainingTheDataToBeExported(self):
         db_deliveries_extractor = DbDeliveriesExtractor()
+        db_deliveries_extractor.course = self.course
         
         result_list = db_deliveries_extractor.get_data()
         

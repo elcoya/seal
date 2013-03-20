@@ -63,5 +63,6 @@ urlpatterns += patterns('view.teacher.automatic_correction',
 
 urlpatterns += patterns('view.teacher.export',
     url(r'^export/$', 'choose'),
+    url(r'^export/download/(?P<idcourse>\d+)/$', 'download'),
 )
 

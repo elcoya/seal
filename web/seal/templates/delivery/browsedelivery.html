@@ -16,7 +16,7 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div><a href="javascript:history.back()">{% trans "Back" %}</a></div>
+		<div><a href="/teacher/delivery/list/{{ delivery.practice.uid }}/">{% trans "Back" %}</a></div>
 		{% if file_content %}
 			<pre style="margin-top: 20px;">{{ file_content }}</pre>
 		{% endif %}
