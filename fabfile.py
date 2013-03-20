@@ -137,7 +137,7 @@ def populate_database():
     from seal.model.delivery import Delivery
     from seal.model.automatic_correction import AutomaticCorrection
     from seal.model.suscription import Suscription
-    from seal.model.innings import Innings
+    from seal.model.shift import Shift
 
     try:
         admin_user = User.objects.get_by_natural_key('seal')
@@ -180,8 +180,8 @@ def populate_database():
     student_user.save()
     student = Student.objects.get_or_create(user=student_user, uid="student", corrector=teacher)[0]
     course = Course.objects.get_or_create(name="2013-1C")[0]
-    inning = Innings.objects.get_or_create(name="Noche", description="Horario", course=course)[0] 
-    student.innings.add(inning)
+    shift = Shift.objects.get_or_create(name="Noche", description="Horario", course=course)[0] 
+    student.shifts.add(shift)
     student.save()
     
     practice_1 = Practice.objects.get_or_create(uid="TP Auto 1", course=course, deadline="2013-04-01")[0]
