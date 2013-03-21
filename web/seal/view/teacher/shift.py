@@ -11,7 +11,7 @@ from seal.model.course import Course
 from seal.forms.shift import ShiftForm
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
-PATHOKNEWCOURSE = "/teacher/course/editcourse/%s"
+PATHOKNEWCOURSE = "/teacher/course/detailcourse/%s"
 
 @login_required
 def editshift(request, idshift):
@@ -42,6 +42,18 @@ def newshift(request, idcourse):
         else:
             form = ShiftForm(initial={'course':course})
         return render(request, 'shift/newshift.html', {'form': form, 'idcourse':idcourse})
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+@login_required
+def deleteshift(request, idshift):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        shift = Shift.objects.get(pk=idshift)     
+        list_student = shift.get_students()
+        if (list_student):
+            return HTTP_401_UNAUTHORIZED_RESPONSE
+        shift.delete()    
+        return HttpResponseRedirect(PATHOKNEWCOURSE % str(shift.course.pk))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
     

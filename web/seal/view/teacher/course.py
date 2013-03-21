@@ -38,14 +38,14 @@ def index(request):
 @login_required
 def newcourse(request):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
-        if (request.method=='POST'):
+        if (request.method == 'POST'):
             form = CourseForm(request.POST)
             if (form.is_valid()):
                 form.save()
                 return HttpResponseRedirect('/')
         else:
             form = CourseForm()
-        return render(request, 'course/newcourse.html', {'form': form,})
+        return render(request, 'course/newcourse.html', {'form': form, })
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
@@ -54,36 +54,48 @@ def editcourse(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         course = Course.objects.get(pk=idcourse)     
         if (request.method == 'POST'):
-            form = CourseForm(request.POST, instance = course)
+            form = CourseForm(request.POST, instance=course)
             if (form.is_valid()):
                 form_edit = form.save(commit=False)
                 form_edit.save()
                 return HttpResponseRedirect(PATHOKNEWCOURSE)
         else:
-            form = CourseForm( instance = course)
-            practices = course.get_practices().order_by('deadline')
-            table_contents = []
-            for practice in practices:
-                ndeliveries = Delivery.objects.filter(practice=practice.pk).count()
-                if (practice.get_script()):
-                    script = practice.get_script()
-                    table_contents.append({'pk': practice.pk, 
-                                           'uid': practice.uid, 
-                                           'deadline': practice.deadline, 
-                                           'ndeliveries':  ndeliveries, 
-                                           'script': os.path.basename(script.file.name)})
-                else:
-                    table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline, 
-                                           'ndeliveries':  ndeliveries})
-            table_shifts = []
-            shifts = Shift.objects.filter(course=course)
-            for shift in shifts:
-                count = shift.get_students_count()
-                table_shifts.append({'shift': shift, 'count': count})
-                
+            form = CourseForm(instance=course)
         return render(request, 'course/editcourse.html',
-                      {'form': form, 'table_contents': table_contents, 'table_shifts': table_shifts, 
-                       'course': course, 'idcourse': course.pk }, 
+                      {'form': form, 'course': course},
+                      context_instance=RequestContext(request))
+    
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+
+@login_required
+def detailcourse(request, idcourse):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        course = Course.objects.get(pk=idcourse)     
+        practices = course.get_practices().order_by('deadline')
+        table_contents = []
+        for practice in practices:
+            ndeliveries = Delivery.objects.filter(practice=practice.pk).count()
+            if (practice.get_script()):
+                script = practice.get_script()
+                table_contents.append({'pk': practice.pk,
+                                        'uid': practice.uid,
+                                        'deadline': practice.deadline,
+                                        'ndeliveries':  ndeliveries,
+                                        'script': os.path.basename(script.file.name)})
+            else:
+                table_contents.append({'pk': practice.pk, 'uid': practice.uid, 'deadline': practice.deadline,
+                                           'ndeliveries':  ndeliveries})
+        table_shifts = []
+        shifts = Shift.objects.filter(course=course)
+        for shift in shifts:
+            count = shift.get_students_count()
+            table_shifts.append({'shift': shift, 'count': count})
+                
+        return render(request, 'course/detailcourse.html',
+                      {'table_contents': table_contents, 'table_shifts': table_shifts,
+                       'course': course},
                       context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE

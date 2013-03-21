@@ -8,6 +8,7 @@ Feature: As a Teacher I should be able to see de automatic correction result
           And I am at the upload script form for practice "TP Intro" and course "2012-1"
          When I fill in the upload script form with the file "successfull_test_script.sh"
           And I submit the form
+          And I click the button "uploadsriptTP Intro"
          Then I should see pattern "successfull_test_script(_[0-9]+)?.sh"
    
     Scenario: As a teacher browse the results of an automatic check

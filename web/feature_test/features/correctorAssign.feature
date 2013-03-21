@@ -21,8 +21,8 @@ Feature: As a teacher I want to assing a correction of another teacher
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "successfull"
 	 	 When I log in as "teacher" "teacher"
-		  And I click in the "2012-1" link
-		  And I click in the "List" link
+		  And I click the button "detail2012-1"
+		  And I click the button "studentlisttarde"
 		  And I click in the "martin" link
 		  And I select the corrector "teacher"
 		  And I submit the form
@@ -43,8 +43,8 @@ Feature: As a teacher I want to assing a correction of another teacher
 	 	  And the automatic correction of delivery with id "2" is "failed"
 	 	  And the automatic correction of delivery with id "3" is "pending"
 	 	 When I log in as "teacher" "teacher"
-		  And I click in the "2012-1" link
-		  And I click in the "List" link
+		  And I click the button "detail2012-1"
+		  And I click the button "studentlisttarde"
 		  And I click in the "martin" link
 		  And I select the corrector "teacher"
 		  And I submit the form

@@ -11,13 +11,18 @@
 		<tr>
 			<th>{% trans "Courses" %}</th>
 			<th># {% trans "Students" %}</th>
+			<th>{% trans "Actions" %}</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for dict in table_contents %}
 		<tr>
-			<td><a href="/teacher/course/editcourse/{{dict.pk}}">{{ dict.name }}</a></td>
-			<td>{{ dict.count }}</td>
+			<td>{{ dict.name }}</td>
+			<td><span class="badge badge-inverse">{{ dict.count }}</span></td>
+			<td>
+				<a name="edit{{dict.name}}" title="{% trans 'Edit' %}" class="btn btn-mini" href="/teacher/course/editcourse/{{dict.pk}}"><i class="icon-edit"></i></a>
+		    	<a name="detail{{dict.name}}" title="{% trans 'Detail' %}" class="btn btn-mini" href="/teacher/course/detailcourse/{{dict.pk}}"><i class="icon-share"></i></a>
+		    </td>	
 		</tr>
 		{% empty %}
 		<tr>
@@ -36,10 +41,9 @@
 			<th>{% trans "Student" %}</th>
 			<th>{% trans "Practice" %}</th>
 			<th>{% trans "Delivery Date" %}</th>
-			<th>{% trans "Download" %}</th>
 			<th>{% trans "Correction" %}</th>
 			<th>{% trans "Automatic Correction" %}</th>
-			<th>{% trans "Navigate" %}</th>
+			<th>{% trans "Actions" %}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -49,14 +53,23 @@
 			<td>{{ delivery_row.delivery.student.uid }}</td>
 			<td>{{ delivery_row.delivery.practice.uid }}</td>
 			<td>{{ delivery_row.delivery.deliverDate }}</td>
-			<td><a href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}">{% trans "Download" %}</a></td>
-			<td><a href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"> {% if delivery_row.correction %}
-			{% trans "Corrected" %}
+			<td>{% if delivery_row.correction %}
+			   	<span class="label label-success">{% trans "Corrected" %}</span>
 			{% else %}
-			{% trans "Pending" %}
-			{% endif %} </a></td>
-			<td><a href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}">{{ delivery_row.delivery.get_automatic_correction.get_status }} </a></td>
-			<td><a href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
+				<span class="label label-warning">{% trans "Pending" %}</span>
+			{% endif %}
+			</td>
+			<td>
+				<span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+			</td>	
+			<td>
+				<a title="{% trans 'Download' %}" class="btn btn-mini" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"><i class="icon-download"></i></a>
+		    	<a title="{% trans 'Automatic Correction' %}" class="btn btn-mini" href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}"><i class="icon-certificate"></i></a>
+		    	<a title="{% trans 'Navigate' %}" class="btn btn-mini" href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><i class="icon-folder-open"></i></a>
+		    	<a title="{% trans 'Correct' %}" class="btn btn-mini" href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"><i class="icon-pencil"></i></a>
+		    </td>	
+	
+	
 		</tr>
 		{% empty %}
 		<tr>
