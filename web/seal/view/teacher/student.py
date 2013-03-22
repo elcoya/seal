@@ -18,6 +18,8 @@ from seal.model.correction import Correction
 from django.contrib.auth.decorators import login_required
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 from seal.model.mail import Mail
+from seal.forms.studentSearch import StudentSearchForm
+from django.db.models import Q
 
 PATHOK = "/teacher/students/list/%s"
 PATHOKENROLED = "/teacher/students/"
@@ -143,6 +145,7 @@ def pendingdeliveries(request):
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
+@login_required
 def list_student(request, idshift):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         shift = Shift.objects.get(pk=idshift)
@@ -151,6 +154,7 @@ def list_student(request, idshift):
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
+@login_required
 def list_student_deliveries(request, idstudent, idshift):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         student = Student.objects.get(pk=idstudent)
@@ -161,5 +165,25 @@ def list_student_deliveries(request, idstudent, idshift):
             correction = Correction.objects.filter(delivery=delivery)
             table_deliveries.append({'delivery': delivery, 'correction':correction})
         return render(request, 'student/liststudentdeliveries.html', {'table_deliveries': table_deliveries, 'student':student, 'shift':shift}, context_instance=RequestContext(request))
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+@login_required
+def studentsearch(request):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        form = StudentSearchForm()
+        students = []
+        if (request.method == 'POST'):
+            form = StudentSearchForm(request.POST)
+            criteria = form.data['criteria_search']
+            data = form.data['data_search']
+            if (criteria == "uid"):
+                students = Student.objects.filter(uid=data)
+            if (criteria == "name"):
+                students = Student.objects.filter(Q(user__first_name__contains = data) | 
+                                                  Q(user__last_name__contains = data))
+        else:
+            form = StudentSearchForm()
+        return render(request,'student/studentsearch.html', {'form':form, 'students': students})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE

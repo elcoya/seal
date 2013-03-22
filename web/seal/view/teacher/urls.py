@@ -25,6 +25,7 @@ urlpatterns += patterns('view.teacher.student',
     url(r'^students/editstudent/(?P<idstudent>\d+)/$', 'edit_unenrolled_student'),
     url(r'^students/list/(?P<idshift>\d+)/$', 'list_student'),
     url(r'^students/listdeliveries/(?P<idstudent>\d+)/(?P<idshift>\d+)/$', 'list_student_deliveries'),
+    url(r'^students/search/$', 'studentsearch'),
 )
 
 urlpatterns += patterns('view.teacher.shift',
