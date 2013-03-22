@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
+from seal.model.mail import Mail
+
+SUBJECTMAILCREATE = "Creacion de usuario en ALGO3"
+BODYMAILCREATE = "Se creo un usuario en ALGO3 para ti. Tu informacion de ingreso es Padron: %s y Password: %s"
 
 @permission_required('my_custom_perm')
 def listteacher(request):
@@ -63,6 +67,9 @@ def newteacher(request):
             teacher.uid = form.data['uid']
             teacher.appointment = form.data['appointment']
             teacher.save()
+            
+            mail = Mail()
+            mail.save_mail(SUBJECTMAILCREATE, BODYMAILCREATE % (user.username, form.data['passwd']), user.email)
             return HttpResponseRedirect('/listteacher')
     else:
         form = TeacherForm()

@@ -17,10 +17,15 @@ from seal.model.delivery import Delivery
 from seal.model.correction import Correction
 from django.contrib.auth.decorators import login_required
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
+from seal.model.mail import Mail
 
 PATHOK = "/teacher/students/list/%s"
 PATHOKENROLED = "/teacher/students/"
 MAXPAGINATOR = 10
+
+SUBJECTMAILCREATE = "Creacion de usuario en ALGO3"
+BODYMAILCREATE = "Se creo un usuario en ALGO3 para ti. Tu informacion de ingreso es Padron: %s y Password: %s"
+
 
 @login_required
 def index(request):
@@ -55,6 +60,9 @@ def newstudent(request, idshift):
                 user.save()
                 form.instance.user = user
                 form.save()
+                
+                mail = Mail()
+                mail.save_mail(SUBJECTMAILCREATE, BODYMAILCREATE % (user.username, form.data['passwd']), user.email)
                 return HttpResponseRedirect(PATHOK % str(idshift))
         else:
             form = StudentForm(initial={'shifts': [idshift]})
