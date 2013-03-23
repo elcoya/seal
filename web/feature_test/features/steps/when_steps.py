@@ -128,6 +128,12 @@ def step(context,course):
     addres = base_url + 'teacher/course/editcourse/'+str(c.pk)
     context.browser.get(addres)
 
+@when('I am in the detail page of course "{course}"')
+def step(context,course):
+    c = Course.objects.get(name=course)
+    addres = base_url + 'teacher/course/detailcourse/'+str(c.pk)
+    context.browser.get(addres)
+    
 @when('I am in the suscription list page of course "{course}" shift "{shift}"')
 def step(context,course, shift):
     c = Course.objects.get(name=course)
@@ -281,3 +287,20 @@ def step(context, shift_name, shift_desc):
     form = context.browser.find_element_by_tag_name('form')
     form.find_element_by_name('name').send_keys(shift_name)
     form.find_element_by_name('description').send_keys(shift_desc)
+
+@when('I am in the search page')
+def step(context):
+    address = base_url + 'teacher/students/search/'
+    context.browser.get(address)
+
+@when('I fill the search form with criteria "{criteria}" and data "{data}"')
+def step(context, criteria, data):
+    form = context.browser.find_element_by_tag_name('form')
+    form.find_element_by_name('data_search').send_keys(data)
+    if (criteria == "uid"):
+        select = form.find_element_by_id('id_criteria_search_0')
+    if (criteria == "name"):
+        select = form.find_element_by_id('id_criteria_search_1')
+    select.click()
+    
+    

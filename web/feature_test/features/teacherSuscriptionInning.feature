@@ -5,8 +5,8 @@ Feature: As a teacher I want to administrate de suscription
 	     And course "2012-1" exists
     	 And a shift with name "tarde" and description "horario" in the course "2012-1"
     	 And I log in as "teacher" "teacher"
-    	When I am in the modify page of course "2012-1"
-    	 And I click in the "List" link 
+    	When I am in the detail page of course "2012-1"
+    	 And I click the button "studentlisttarde" 
     	Then I should see link to "Suscription" in the list
 	
 	Scenario: See the list of suscription empty

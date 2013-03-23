@@ -8,8 +8,8 @@ Feature: As a teacher I want to modify a student
     	  And a shift with name "tarde" and description "horario" in the course "2012-1"
           And student "martin" exists in course "2012-1" and in shift "tarde"
           And I log in as "teacher" "teacher"
-         When I click in the "2012-1" link
-          And I click in the "List" link 
+         When I click the button "detail2012-1"
+          And I click the button "studentlisttarde" 
           And I click in the "martin" link 
           And I change "martin" for "Martin Mauro" in element whith id "id_last_name"
           And I submit the form

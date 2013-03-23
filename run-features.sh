@@ -2,7 +2,6 @@
 
 fab feature:autocheck > /dev/null; echo "autocheck:$?"
 fab feature:browseDelivery > /dev/null; echo "browseDelivery:$?"
-fab feature:changeLanguaje > /dev/null; echo "changeLanguaje:$?"
 fab feature:changePassword > /dev/null; echo "changePassword:$?"
 fab feature:correctorAssign > /dev/null; echo "correctorAssign:$?"
 fab feature:createAndModifyInning > /dev/null; echo "createAndModifyInning:$?"

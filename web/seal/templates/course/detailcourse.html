@@ -1,0 +1,78 @@
+{% extends "teacher/teacher.html" %}
+{% load i18n %}
+{% block content %}
+<div><h4>{% blocktrans with course.name as coursename %}Course {{coursename}} Detail{% endblocktrans %}</h4></div>
+<div class="container" >
+	<div class="row">
+		<div class="span8"><h4>{% trans "Practices" %}</h4></div>
+		<div class="span4" style="text-align: right;"><h5><a href="/teacher/practices/newpractice/{{ course.pk }}" >{% trans "New Practice" %}</a></h5></div>
+	</div>
+		
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th style="width: 25%">{% trans "Name Practice" %}</th>
+				<th style="width: 25%">{% trans "Dead Line" %}</th>
+				<th style="width: 25%"># {% trans "Deliveries" %}</th>
+				<th style="width: 25%">{% trans "Actions" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for practice in table_contents %}
+		    <tr>
+		    	<td style="width: 25%">{{ practice.uid }}</td>
+		    	<td style="width: 25%">{{ practice.deadline }}</td>
+		    	<td style="width: 25%"><span class="badge badge-inverse">{{ practice.ndeliveries }}</span></td>
+		    	<td style="width: 25%">
+		    		<a title="{% trans 'Edit' %}" class="btn btn-mini" href="/teacher/practices/editpractice/{{ course.pk }}/{{ practice.pk }}"><i class="icon-edit"></i></a>
+		    		<a name="uploadfile{{practice.uid}}" title="{% trans 'Upload Files' %}" class="btn btn-mini" href="/teacher/practices/practicefile/{{ course.pk }}/{{ practice.pk }}"><i class="icon-upload"></i></a>
+		    		<a title="{% trans 'Deliveries List' %}" class="btn btn-mini" href="/teacher/delivery/list/{{practice.pk}}"><i class="icon-inbox"></i></a>
+		    		<a name="uploadsript{{practice.uid}}" title="{% trans 'Upload Correction Script' %}" class="btn btn-mini" href="/teacher/practices/script/{{ course.pk }}/{{ practice.pk }}"><i class="icon-circle-arrow-up"></i></a>
+		    		{% if practice.ndeliveries == 0 %}
+		    			<a name="delete{{practice.uid}}" title="{% trans 'Delete' %}" class="btn btn-mini" href="/teacher/practices/deletepractice/{{ practice.pk }}"><i class="icon-trash"></i></a>
+		    		{% endif %}
+		    	</td>
+		    </tr>
+		{% empty %}
+		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Practices" %}</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	
+	<div class="row">
+		<div class="span8"><h4>{% trans "Shifts" %}</h4></div>
+		<div class="span4" style="text-align: right;"><h5><a href="/teacher/shifts/newshift/{{ course.pk }}" >{% trans "New Shift" %}</a></h5></div>
+	</div>
+
+	<table class="table table-striped">
+		<thead style="text-align: center; ">
+			<tr>
+				<th style="width: 25%">{% trans "Name" %}</th>
+				<th style="width: 25%">{% trans "Description" %}</th>
+				<th style="width: 25%"># {% trans "Students" %}</th>
+				<th style="width: 25%">{% trans "Actions" %}</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		{% for shift_row in table_shifts %}  
+		    <tr>
+		    	<td style="width: 25%">{{ shift_row.shift.name }}</td>
+		    	<td style="width: 25%">{{ shift_row.shift.description }}</td>
+		    	<td style="width: 25%"><span class="badge badge-inverse">{{ shift_row.count }}</span></td>
+		    	<td style="width: 25%">
+		    		<a name="edit{{shift_row.shift.name}}" title="{% trans 'Edit' %}" class="btn btn-mini" href="/teacher/shifts/editshift/{{shift_row.shift.pk}}"><i class="icon-edit"></i></a>
+		    		<a name="studentlist{{shift_row.shift.name}}" title="{% trans 'Student List' %}" class="btn btn-mini" href="/teacher/students/list/{{shift_row.shift.pk}}"><i class="icon-list-alt"></i></a>
+		    		{% if shift_row.count == 0 %}
+		    			<a name="delete{{shift_row.shift.name}}" title="{% trans 'Delete' %}" class="btn btn-mini" href="/teacher/shifts/deleteshift/{{ shift_row.shift.pk }}"><i class="icon-trash"></i></a>
+		    		{% endif %}
+		    	</td>
+		    </tr>
+		{% empty %}
+		    <tr><td colspan="4" style="text-align: center; ">{% trans "There are yet no Shifts" %}</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

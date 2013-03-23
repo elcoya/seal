@@ -5,6 +5,7 @@ from seal.model import Student, Practice, Delivery
 import time
 import re
 from seal.model.course import Course
+from numpy.ma.testutils import assert_equal
 
 base_url = 'http://localhost:8000/'
 
@@ -48,7 +49,21 @@ def step(context, link_text):
 def step(context, text):
     a = context.browser.find_element_by_link_text(text)
     assert text in a.text
-    
+
+@then('I should see the button "{name}"')
+def step(context, name):
+    button = context.browser.find_elements(By.NAME, name)
+    assert True
+
+@then('I should not see the button "{name}"')
+def step(context, name):
+    try: 
+        button = context.browser.find_elements(By.NAME, name)
+        assert False
+    except Exception, e:
+        assert True
+
+
 @then('I should see pattern "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')

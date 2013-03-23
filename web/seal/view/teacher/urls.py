@@ -13,6 +13,8 @@ urlpatterns += patterns('view.teacher.practice',
     url(r'^practices/downloadfile/(?P<idpracticefile>\d+)/$', 'download'),
     url(r'^practices/deletefile/(?P<idpracticefile>\d+)/$', 'delete'),
     url(r'^practices/editfile/(?P<idpracticefile>\d+)/$', 'edit'),
+    url(r'^practices/deletepractice/(?P<idpractice>\d+)/$', 'deletepractice'),
+
 )
 
 urlpatterns += patterns('view.teacher.student',
@@ -23,17 +25,20 @@ urlpatterns += patterns('view.teacher.student',
     url(r'^students/editstudent/(?P<idstudent>\d+)/$', 'edit_unenrolled_student'),
     url(r'^students/list/(?P<idshift>\d+)/$', 'list_student'),
     url(r'^students/listdeliveries/(?P<idstudent>\d+)/(?P<idshift>\d+)/$', 'list_student_deliveries'),
+    url(r'^students/search/$', 'studentsearch'),
 )
 
 urlpatterns += patterns('view.teacher.shift',
     url(r'^shifts/newshift/(?P<idcourse>\d+)/?$', 'newshift'),
     url(r'^shifts/editshift/(?P<idshift>\d+)/?$', 'editshift'),
+    url(r'^shifts/deleteshift/(?P<idshift>\d+)/?$', 'deleteshift'),
 )
 
 urlpatterns += patterns('view.teacher.course',
     url(r'^course/?$', 'index'),
     url(r'^course/newcourse/?$', 'newcourse'),
     url(r'^course/editcourse/(?P<idcourse>\d+)$', 'editcourse'),
+    url(r'^course/detailcourse/(?P<idcourse>\d+)$', 'detailcourse'),
 )
 
 urlpatterns += patterns('view.teacher.delivery',

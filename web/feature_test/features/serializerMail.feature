@@ -46,3 +46,31 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 	 	 Then I should see "Cambio de password en ALGO3"
 	 	  And I am in the index page
 	 	  And I logout
+	 	  
+	 Scenario: Create a student and see the page of serializer of mail pending to send from the creation
+		Given Teacher "teacher" exists with password "teacher"
+          And I log in as "teacher" "teacher"
+          And there are no students      
+          And course "2012-1" exists
+          And a shift with name "tarde" and description "horario" in the course "2012-1"
+         When I am in the detail page of course "2012-1"
+          And I click the button "studentlisttarde"
+          And I click in the "New Student" link
+          And I fill the newstudent form with default data for shift "tarde"
+	  	  And I submit the form
+		  And I logout
+  	      And I log in as "seal" "seal"
+	 	  And I click in the "Mails to send Serializer" link
+	 	 Then I should see "Creacion de usuario en ALGO3"
+
+	 Scenario: Create a teacher and see the page of serializer of mail pending to send from the creation
+		 When I log in as "seal" "seal"
+          And I click in the "Add and Modify Teacher" link
+          And I click in the "New Teacher" link
+	  	  And I fill the teacher form with default data
+	  	  And I submit the form
+		  And I am in the index page
+	 	  And I click in the "Mails to send Serializer" link
+	 	 Then I should see "Creacion de usuario en ALGO3"
+	 	  
+

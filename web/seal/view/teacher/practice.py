@@ -19,8 +19,9 @@ from seal.forms.edit_practice_file import EditPracticeFileForm
 import os
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 from django.utils.encoding import smart_str
+from seal.model.delivery import Delivery
 
-PATHOK =  "/teacher/course/editcourse/%s"
+PATHOK =  "/teacher/course/detailcourse/%s"
 PATHFILEOK = "/teacher/practices/practicefile/%s/%s"
 MAXPAGINATOR = 10
 
@@ -162,6 +163,19 @@ def edit(request, idpracticefile):
             form = EditPracticeFileForm(initial={'content': smart_str(file_content)})
         return render(request, 'practice/editPracticeFile.html',
                       {'form': form, 'practicefile': practicefile, 'file_basename': file_basename, 'edited': edited})
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+
+@login_required
+def deletepractice(request, idpractice):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        practice = Practice.objects.get(pk=idpractice)
+        delivery_list = Delivery.objects.filter(practice = practice)
+        if (delivery_list):
+            return HTTP_401_UNAUTHORIZED_RESPONSE
+        practice.delete()
+        return HttpResponseRedirect(PATHOK % str(practice.course.pk))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
