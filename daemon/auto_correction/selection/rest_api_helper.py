@@ -6,15 +6,17 @@
 from auto_correction.selection.automatic_correction_selection_strategy import AutomaticCorrectionSelectionStrategy
 from auto_correction.log.logger_manager import LoggerManager
 import requests
-from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT
+from rest_framework.status import HTTP_200_OK
 from auto_correction.selection.json_to_auto_correction_translator import JSONToAutoCorrectionTranslator
+from auto_correction import settings
 
 class RestApiHelper(AutomaticCorrectionSelectionStrategy):
     """
     Implementation of the selection strategy to perform the search from the web interface
     """
     
-
+    application_key = settings.SECRET_KEY
+    
     def __init__(self, auth_user, auth_pass, 
                  http_automatic_correction_serializer=None, 
                  http_delivery_serializer=None,
@@ -39,33 +41,34 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
     
     def get_automatic_corrections(self):
         self.log.info("Request pending automatic corrections list")
-        auto_correction_request = self.requests.get(self.http_automatic_correction_serializer, auth=(self.auth_user, self.auth_pass))
+        auto_correction_request = self.requests.get(self.http_automatic_correction_serializer, headers={"KEY": self.application_key})
         if (auto_correction_request.status_code == HTTP_200_OK):
             auto_correction_data = auto_correction_request.content
             self.log.debug("request content recived: %s", str(auto_correction_data))
             self.json_translator.json = auto_correction_data
             return self.json_translator.get_automatic_corrections()
         else:
-            self.log.debug("request content recived: %s", str(auto_correction_request.status_code))
+            self.log.warn("request response recived: %d", auto_correction_request.status_code)
+            self.log.warn("request content recived: %s", str(auto_correction_request))
             return []
     
     def get_delivery(self, pk):
         self.log.debug("Retrieving delivery for id: %d", pk)
-        delivery_request = self.requests.get(self.http_delivery_serializer + str(pk), auth=(self.auth_user, self.auth_pass))
+        delivery_request = self.requests.get(self.http_delivery_serializer + str(pk), headers={"KEY": self.application_key})
         if (delivery_request.status_code == HTTP_200_OK):
             self.log.debug("request content recived: %s", str(delivery_request.content))
             return delivery_request.content
     
     def get_practice(self, pk):
         self.log.debug("Retrieving delivery for id: %d", pk)
-        practice_request = self.requests.get(self.http_practice_serializer + str(pk), auth=(self.auth_user, self.auth_pass))
+        practice_request = self.requests.get(self.http_practice_serializer + str(pk), headers={"KEY": self.application_key})
         if (practice_request.status_code == HTTP_200_OK):
             self.log.debug("request content recived: %s", str(practice_request.content))
             return practice_request.content
     
     def get_script(self, pk):
         self.log.debug("Retrieving delivery for id: %d", pk)
-        script_request = self.requests.get(self.http_script_serializer + str(pk), auth=(self.auth_user, self.auth_pass))
+        script_request = self.requests.get(self.http_script_serializer + str(pk), headers={"KEY": self.application_key})
         if (script_request.status_code == HTTP_200_OK):
             self.log.debug("request content recived: %s", str(script_request.content))
             return script_request.content
@@ -80,7 +83,7 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
         self.log.debug("putting request to url: %s", self.http_automatic_correction_serializer)
         self.log.debug("saving data: %s", data)
         response = self.requests.put(self.http_automatic_correction_serializer + str(automatic_correction.pk), data, 
-                                 auth=(self.auth_user, self.auth_pass))
+                                     headers={"KEY": self.application_key})
         self.log.debug(response)
         self.log.debug(response.content)
         return response
@@ -91,7 +94,7 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
                 "subject" : mail.subject,
                 "body" : mail.body}
         self.log.debug("Mail data: %s", str(data))
-        response = self.requests.post(self.http_mail_serializer, data, auth=(self.auth_user, self.auth_pass))
+        response = self.requests.post(self.http_mail_serializer, data, headers={"KEY": self.application_key})
         self.log.debug(response.content)
         return response
     

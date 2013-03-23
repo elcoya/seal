@@ -108,7 +108,7 @@ STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_PERMISSION_CLASSES': ('seal.auth.rest_api_permissions.ApplicationKeyPermission',),
     'PAGINATE_BY': 10
 }
 
@@ -133,6 +133,7 @@ LOGIN_URL = '/login/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')q&!5_ig&s8h3w#l@2i#yn*=@6lhct+za(zpcb+%6p&@&^q-lv'
+#SECRET_KEY = 'clavecaca'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
