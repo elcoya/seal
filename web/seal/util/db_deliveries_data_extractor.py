@@ -22,12 +22,15 @@ class DbDeliveriesExtractor:
     
     def get_data(self):
         # Django magic... don't touch unless you fully understand it
-        successfull = self.objects.filter(automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL,
-                                          student__pk=F('student__pk'), pk__gte=F('pk'), practice__course=self.course)
+        successfull = self.objects.filter(automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL, practice__course=self.course)
+        successfull = successfull.order_by('-pk')
+        
         failed = self.objects.filter((~Q(student__delivery__automaticcorrection__status=AutomaticCorrection.STATUS_SUCCESSFULL)),
-                                     automaticcorrection__status=AutomaticCorrection.STATUS_FAILED,
-                                     student__pk=F('student__pk'), pk__gte=F('pk'), practice__course=self.course
+                                     automaticcorrection__status=AutomaticCorrection.STATUS_FAILED, practice__course=self.course
                                     )
+        failed = failed.order_by('-pk')
+        
+        uid_set = []
         result = []
         for delivery in successfull:
             correction = delivery.get_correction()
@@ -35,9 +38,11 @@ class DbDeliveriesExtractor:
                 grade = correction.grade
             else:
                 grade = None
-            result.append((delivery.practice.uid, delivery.student.uid, delivery.student.user.first_name, delivery.student.user.last_name, 
-                           DbDeliveriesExtractor.STATUS_TRANSLATION_DICTIONARY[delivery.get_automatic_correction().status],
-                           grade))
+            if delivery.student.uid not in uid_set:
+                result.append((delivery.practice.uid, delivery.student.uid, delivery.student.user.first_name, delivery.student.user.last_name, 
+                               DbDeliveriesExtractor.STATUS_TRANSLATION_DICTIONARY[delivery.get_automatic_correction().status],
+                               grade))
+                uid_set.append(delivery.student.uid)
         
         for delivery in failed:
             correction = delivery.get_correction()
@@ -45,9 +50,11 @@ class DbDeliveriesExtractor:
                 grade = correction.grade
             else:
                 grade = None
-            result.append((delivery.practice.uid, delivery.student.uid, delivery.student.user.first_name, delivery.student.user.last_name, 
-                           DbDeliveriesExtractor.STATUS_TRANSLATION_DICTIONARY[delivery.get_automatic_correction().status],
-                           grade))
+            if delivery.student.uid not in uid_set:
+                result.append((delivery.practice.uid, delivery.student.uid, delivery.student.user.first_name, delivery.student.user.last_name, 
+                               DbDeliveriesExtractor.STATUS_TRANSLATION_DICTIONARY[delivery.get_automatic_correction().status],
+                               grade))
+                uid_set.append(delivery.student.uid)
         
         return result
 

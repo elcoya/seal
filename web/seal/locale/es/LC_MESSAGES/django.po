@@ -912,6 +912,10 @@ msgstr "Mis Correciones"
 msgid "Overview"
 msgstr ""
 
+msgid "choose_a_course"
+msgstr "Seleccione el curso"
+
+
 #~ msgid "no script"
 #~ msgstr "No hay script"
 

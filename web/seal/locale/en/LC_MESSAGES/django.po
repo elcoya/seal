@@ -816,3 +816,6 @@ msgstr "Data export"
 
 msgid "empty_course_list"
 msgstr "There are yet no courses"
+
+msgid "choose_a_course"
+msgstr "Choose a course"
