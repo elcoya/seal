@@ -99,7 +99,7 @@ def register(request):
                 student.uid = form.data['uid']
                 student.save()
                 if (Shift.objects.all().count() > 0):
-                    shift = Shift.objects.get(pk=form.data['shift']);
+                    shift = Shift.objects.get(pk=form.data['shifts']);
                     student.shifts.add(shift)
                     student.save()
                 
