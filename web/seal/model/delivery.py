@@ -15,6 +15,7 @@ class Delivery(models.Model):
     student = models.ForeignKey(Student)
     practice = models.ForeignKey(Practice)
     deliverDate = models.DateField()
+    deliverTime = models.TimeField(auto_now=True)
     corrector = models.ForeignKey(Teacher, null=True, blank=True)
     
     def __str__(self):

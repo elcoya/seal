@@ -15,7 +15,7 @@ LOG_PATH = WORKSPACE_PATH + "log/"
 
 #rest information###############################################################
 REST_BASE_URL = os.environ['REST_API_BASE_URL']
-SECRET_KEY = ')q&!5_ig&s8h3w#l@2i#yn*=@6lhct+za(zpcb+%6p&@&^q-lv'
+DAEMON_KEY = 'seal-daemon-authentication-key'
 ################################################################################
 
 

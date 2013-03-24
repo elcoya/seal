@@ -16,7 +16,7 @@ class MailHandleRESTAPIStrategy(MailFetchStrategy):
     Implementation of the fetching strategy for mails waiting to be sent through the REST API
     """
 
-    application_key = settings.SECRET_KEY
+    application_key = settings.DAEMON_KEY
     
     HTTP_OK_RESPONSE = 200
 

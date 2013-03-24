@@ -133,7 +133,9 @@ LOGIN_URL = '/login/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')q&!5_ig&s8h3w#l@2i#yn*=@6lhct+za(zpcb+%6p&@&^q-lv'
-#SECRET_KEY = 'clavecaca'
+
+# Make this unique and don't share it. It must concur with the one setted for the daemon
+DAEMON_KEY = 'seal-daemon-authentication-key'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

@@ -12,7 +12,7 @@ class ApplicationKeyPermission(permissions.BasePermission):
     Authorizes requests if they provide the expected key
     """
     
-    application_key = settings.SECRET_KEY
+    application_key = settings.DAEMON_KEY
     admin_permission = rest_framework.permissions.IsAdminUser()
     
     def has_permission(self, request, view, obj):

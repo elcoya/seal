@@ -15,7 +15,7 @@ class RestApiHelper(AutomaticCorrectionSelectionStrategy):
     Implementation of the selection strategy to perform the search from the web interface
     """
     
-    application_key = settings.SECRET_KEY
+    application_key = settings.DAEMON_KEY
     
     def __init__(self, auth_user, auth_pass, 
                  http_automatic_correction_serializer=None, 
