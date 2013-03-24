@@ -3,6 +3,7 @@
 @author: anibal
 
 """
+from django.utils.encoding import smart_str
 
 class CsvTuplePrinter:
     """
@@ -23,7 +24,7 @@ class CsvTuplePrinter:
         self.output_file = open(output_file_name, "w")
     
     def put(self, tuple_to_write):
-        stringified_tuple = ",".join(str(field) for field in tuple_to_write)
+        stringified_tuple = ",".join(smart_str(field) for field in tuple_to_write)
         self.output_file.write(stringified_tuple + "\n")
     
     def close(self):
