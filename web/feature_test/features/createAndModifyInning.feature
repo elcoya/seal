@@ -5,7 +5,7 @@ Feature: As a teacher I want to create and modify shifts
           And course "2012-1" exists
           And I log in as "teacher" "teacher" 
          When I click the button "detail2012-1"		  
-          And I click in the "New Shift" link
+          And I click the button "newshift"
           And I fill the shift form with name "tarde" and description "horario"
           And I submit the form
 		 Then I should see "tarde"

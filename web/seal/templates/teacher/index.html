@@ -4,7 +4,6 @@
 {% block content %}
 <div class="row" style="margin: 0;">
 	<h4>{% trans "Courses List" %}</h4>
-	<div align="right"><a href="/teacher/course/newcourse">{% trans "New Course" %}</a></div>
 </div>
 <table class="table table-striped">
 	<thead>
@@ -20,8 +19,8 @@
 			<td>{{ dict.name }}</td>
 			<td><span class="badge badge-inverse">{{ dict.count }}</span></td>
 			<td>
-				<a name="edit{{dict.name}}" title="{% trans 'Edit' %}" class="btn btn-mini" href="/teacher/course/editcourse/{{dict.pk}}"><i class="icon-edit"></i></a>
-		    	<a name="detail{{dict.name}}" title="{% trans 'Detail' %}" class="btn btn-mini" href="/teacher/course/detailcourse/{{dict.pk}}"><i class="icon-share"></i></a>
+				<a name="edit{{dict.name}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/course/editcourse/{{dict.pk}}"></a>
+		    	<a name="detail{{dict.name}}" title="{% trans 'Detail' %}" class="icon-share" href="/teacher/course/detailcourse/{{dict.pk}}"></a>
 		    </td>	
 		</tr>
 		{% empty %}
@@ -31,6 +30,7 @@
 		{% endfor %}
 	</tbody>
 </table>
+<div align="left" style="margin-bottom: 15px"><a href="/teacher/course/newcourse" class="btn btn-primary">+ {% trans "New Course" %}</a></div>
 <div class="row" style="margin: 0;">
 	<h4>{% trans "List of my corrections" %}</h4>
 </div>
@@ -63,10 +63,10 @@
 				<span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
 			</td>	
 			<td>
-				<a title="{% trans 'Download' %}" class="btn btn-mini" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"><i class="icon-download"></i></a>
-		    	<a title="{% trans 'Automatic Correction' %}" class="btn btn-mini" href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}"><i class="icon-certificate"></i></a>
-		    	<a title="{% trans 'Navigate' %}" class="btn btn-mini" href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><i class="icon-folder-open"></i></a>
-		    	<a title="{% trans 'Correct' %}" class="btn btn-mini" href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"><i class="icon-pencil"></i></a>
+				<a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+		    	<a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}"></a>
+		    	<a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"></a>
+		    	<a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"></a>
 		    </td>	
 	
 	

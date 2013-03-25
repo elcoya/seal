@@ -188,8 +188,8 @@ def populate_database():
     student.shifts.add(shift)
     student.save()
     
-    practice_1 = Practice.objects.get_or_create(uid="TP Auto 1", course=course, deadline="2013-04-01")[0]
-    practice_2 = Practice.objects.get_or_create(uid="TP Auto 2", course=course, deadline="2013-04-20")[0]
+    practice_1 = Practice.objects.get_or_create(uid="TP Auto 1", course=course, deadline="2013-04-01", blocker=False)[0]
+    practice_2 = Practice.objects.get_or_create(uid="TP Auto 2", course=course, deadline="2013-04-20", blocker=False)[0]
     delivery_1_1 = Delivery.objects.get_or_create(deliverDate="2013-03-21", file=os.path.join(DELIVERY_FILE_PATH,"delivery.zip"), practice=practice_1, student=student)[0]
     delivery_1_2 = Delivery.objects.get_or_create(deliverDate="2013-03-25", file=os.path.join(DELIVERY_FILE_PATH,"delivery-2.zip"), practice=practice_1, student=student)[0]
     delivery_2_1 = Delivery.objects.get_or_create(deliverDate="2013-04-10", file=os.path.join(DELIVERY_FILE_PATH,"delivery.zip"), practice=practice_2, student=student)[0]

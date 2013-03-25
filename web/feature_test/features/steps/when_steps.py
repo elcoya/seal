@@ -293,14 +293,8 @@ def step(context):
     address = base_url + 'teacher/students/search/'
     context.browser.get(address)
 
-@when('I fill the search form with criteria "{criteria}" and data "{data}"')
-def step(context, criteria, data):
+@when('I fill the search form with data "{data}"')
+def step(context, data):
     form = context.browser.find_element_by_tag_name('form')
-    form.find_element_by_name('data_search').send_keys(data)
-    if (criteria == "uid"):
-        select = form.find_element_by_id('id_criteria_search_0')
-    if (criteria == "name"):
-        select = form.find_element_by_id('id_criteria_search_1')
-    select.click()
-    
+    form.find_element_by_name('data_search').send_keys(data)   
     

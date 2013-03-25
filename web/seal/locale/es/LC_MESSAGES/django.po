@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-22 14:35-0500\n"
+"POT-Creation-Date: 2013-03-25 15:40-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,10 @@ msgstr "Error HTTP 404: Archivo no encontrado"
 #: templates/500.html:11
 msgid "Error HTTP 500: Internal server error"
 msgstr "Error HTTP 500: Error interno del servidor"
+
+#: templates/base.html:18
+msgid "title"
+msgstr ""
 
 #: templates/admin/base.html:28
 msgid "Welcome,"
@@ -103,9 +107,9 @@ msgstr "Contenido Desconocido"
 msgid "Serializers"
 msgstr "Serializador"
 
-#: templates/admin/index.html:97 templates/course/detailcourse.html:18
-#: templates/course/detailcourse.html:54 templates/practice/listFile.html:11
-#: templates/practice/practiceList.html:13 templates/teacher/index.html:14
+#: templates/admin/index.html:97 templates/course/detailcourse.html:15
+#: templates/course/detailcourse.html:50 templates/practice/listFile.html:11
+#: templates/practice/practiceList.html:13 templates/teacher/index.html:13
 #: templates/teacher/index.html.py:46
 msgid "Actions"
 msgstr "Acciones"
@@ -144,6 +148,7 @@ msgstr "Nuevo Docente"
 #: templates/delivery/uploaddelivery.html:45
 #: templates/student/liststudent.html:15
 #: templates/student/liststudentdeliveries.html:11
+#: templates/student/studentsearch.html:21
 #: templates/suscription/listsuscription.html:22
 #: templates/suscription/listsuscription.html:62
 msgid "Uid"
@@ -241,6 +246,7 @@ msgid "Student"
 msgstr "Estudiante"
 
 #: templates/correction/index.html:9 templates/student/liststudent.html:18
+#: templates/student/studentsearch.html:24
 msgid "Corrector"
 msgstr "Corrector"
 
@@ -250,7 +256,6 @@ msgid "Submit"
 msgstr "Subir"
 
 #: templates/course/detailcourse.html:4
-#, fuzzy, python-format
 msgid "Course %(coursename)s Detail"
 msgstr "Edicion de curso %(coursename)s"
 
@@ -258,84 +263,83 @@ msgstr "Edicion de curso %(coursename)s"
 msgid "Practices"
 msgstr "Practicas"
 
-#: templates/course/detailcourse.html:8
-#: templates/practice/uploadpractice.html:8
-msgid "New Practice"
-msgstr "Nueva Practica"
-
-#: templates/course/detailcourse.html:15
+#: templates/course/detailcourse.html:12
 #: templates/practice/practiceList.html:10
 msgid "Name Practice"
 msgstr "Nombre de la Practica"
 
-#: templates/course/detailcourse.html:16
+#: templates/course/detailcourse.html:13
 #: templates/practice/practiceList.html:11
 msgid "Dead Line"
 msgstr "Fecha de Entrega"
 
-#: templates/course/detailcourse.html:17 templates/student/liststudent.html:19
+#: templates/course/detailcourse.html:14 templates/student/liststudent.html:19
+#: templates/student/studentsearch.html:25
 msgid "Deliveries"
 msgstr "Entregas"
 
-#: templates/course/detailcourse.html:28 templates/course/detailcourse.html:65
-#: templates/practice/uploadFile.html:32 templates/teacher/index.html:23
+#: templates/course/detailcourse.html:25 templates/course/detailcourse.html:61
+#: templates/practice/uploadFile.html:32 templates/teacher/index.html:22
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/course/detailcourse.html:29
+#: templates/course/detailcourse.html:26
 msgid "Upload Files"
 msgstr "Subir Archivos"
 
-#: templates/course/detailcourse.html:30
-#, fuzzy
+#: templates/course/detailcourse.html:27
 msgid "Deliveries List"
-msgstr "Entregas"
+msgstr "Listado de Entregas"
 
-#: templates/course/detailcourse.html:31
-#, fuzzy
+#: templates/course/detailcourse.html:28
 msgid "Upload Correction Script"
-msgstr "Script Corrector"
+msgstr "Cargar Script Corrector"
 
-#: templates/course/detailcourse.html:33 templates/course/detailcourse.html:68
+#: templates/course/detailcourse.html:30 templates/course/detailcourse.html:64
 #: templates/practice/uploadFile.html:36
 msgid "Delete"
 msgstr "Eliminar"
 
-#: templates/course/detailcourse.html:38
-#: templates/practice/practiceList.html:26
+#: templates/course/detailcourse.html:35
+#: templates/practice/practiceList.html:32
 msgid "There are yet no Practices"
 msgstr "No hay Practicas"
 
-#: templates/course/detailcourse.html:44
+#: templates/course/detailcourse.html:39
+#: templates/practice/uploadpractice.html:8
+msgid "New Practice"
+msgstr "Nueva Practica"
+
+#: templates/course/detailcourse.html:41
 msgid "Shifts"
 msgstr "Turnos"
 
-#: templates/course/detailcourse.html:45 templates/shift/newshift.html:7
-msgid "New Shift"
-msgstr "Nuevo Turno"
-
-#: templates/course/detailcourse.html:51 templates/practice/listFile.html:10
+#: templates/course/detailcourse.html:47 templates/practice/listFile.html:10
 #: templates/practice/uploadFile.html:21 templates/student/liststudent.html:16
+#: templates/student/studentsearch.html:22
 #: templates/undergraduate/index.html:14
 msgid "Name"
 msgstr "Nombre"
 
-#: templates/course/detailcourse.html:52
+#: templates/course/detailcourse.html:48
 msgid "Description"
 msgstr "Descripcion"
 
-#: templates/course/detailcourse.html:53 templates/teacher/index.html:13
+#: templates/course/detailcourse.html:49 templates/teacher/index.html:12
 msgid "Students"
 msgstr "Estudiantes"
 
-#: templates/course/detailcourse.html:66
-#, fuzzy
+#: templates/course/detailcourse.html:62
 msgid "Student List"
-msgstr "Lista de Estudiantes"
+msgstr "Listado de Estudiantes"
 
-#: templates/course/detailcourse.html:73
+#: templates/course/detailcourse.html:69
 msgid "There are yet no Shifts"
 msgstr "No hay Turnos"
+
+#: templates/course/detailcourse.html:73 templates/shift/newshift.html:7
+msgid "New Shift"
+msgstr "Nuevo Turno"
 
 #: templates/course/editcourse.html:6
 #, python-format
@@ -380,7 +384,7 @@ msgstr "siguiente"
 msgid "last"
 msgstr "ultimo"
 
-#: templates/course/newcourse.html:5 templates/teacher/index.html:7
+#: templates/course/newcourse.html:5 templates/teacher/index.html:33
 msgid "New Course"
 msgstr "Nuevo Curso"
 
@@ -497,7 +501,7 @@ msgstr "No hay entregas para esta practica"
 
 #: templates/export/choose.html:6
 msgid "choose_a_course"
-msgstr ""
+msgstr "Seleccione el curso"
 
 #: templates/export/choose.html:13
 msgid "empty_course_list"
@@ -541,7 +545,11 @@ msgstr " Practicas del turno <b>%(shift)s</b> "
 msgid "Files"
 msgstr "Archivos"
 
-#: templates/practice/practiceList.html:22
+#: templates/practice/practiceList.html:24
+msgid "Practice expired"
+msgstr "Practica vencida"
+
+#: templates/practice/practiceList.html:26
 msgid "Make Delivery"
 msgstr "Subir Entrega"
 
@@ -721,14 +729,17 @@ msgid "Suscription"
 msgstr "Suscripciones"
 
 #: templates/student/liststudent.html:17
+#: templates/student/studentsearch.html:23
 msgid "Email"
 msgstr "Email"
 
 #: templates/student/liststudent.html:31
+#: templates/student/studentsearch.html:37
 msgid "no corrector"
 msgstr "No hay Corrector"
 
 #: templates/student/liststudent.html:33
+#: templates/student/studentsearch.html:39
 msgid "List"
 msgstr "Lista"
 
@@ -747,6 +758,18 @@ msgstr "No hay entregas para este estudiante"
 #: templates/student/new-student.html:5
 msgid "New student"
 msgstr "Nuevo Estudiante"
+
+#: templates/student/studentsearch.html:6
+msgid "Student Search"
+msgstr "Buscador de Estudiantes"
+
+#: templates/student/studentsearch.html:14
+msgid "Search"
+msgstr ""
+
+#: templates/student/studentsearch.html:43
+msgid "There are no result"
+msgstr "No hay correciones"
 
 #: templates/suscription/listsuscription.html:17
 msgid "Pending Suscription of shift  "
@@ -835,16 +858,16 @@ msgstr "Fecha de resolucion"
 msgid "There are no old suscription"
 msgstr "No hay viejas suscripciones"
 
-#: templates/teacher/index.html:12
+#: templates/teacher/index.html:11
 #: templates/undergraduate/undergraduate.html:16
 msgid "Courses"
 msgstr "Cursos"
 
-#: templates/teacher/index.html:24
+#: templates/teacher/index.html:23
 msgid "Detail"
 msgstr ""
 
-#: templates/teacher/index.html:29
+#: templates/teacher/index.html:28
 msgid "There are yet no courses"
 msgstr "No hay Cursos"
 
@@ -853,7 +876,6 @@ msgid "List of my corrections"
 msgstr "Lista de mis correcciones"
 
 #: templates/teacher/index.html:69
-#, fuzzy
 msgid "Correct"
 msgstr "Corrector"
 
@@ -911,10 +933,6 @@ msgstr "Mis Correciones"
 #: templates/undergraduate/undergraduate.html:21
 msgid "Overview"
 msgstr ""
-
-msgid "choose_a_course"
-msgstr "Seleccione el curso"
-
 
 #~ msgid "no script"
 #~ msgstr "No hay script"

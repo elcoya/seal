@@ -214,6 +214,18 @@ def step (context, practice_uid, course_name, dead_line):
     practice.deadline = dead_line
     practice.course = c
     practice.save()
+    
+@given('practice "{practice_uid}" exists in course "{course_name}" with blocker deadline "{dead_line}"')
+def step (context, practice_uid, course_name, dead_line):
+    c = Course.objects.get(name=course_name)
+    if(Practice.objects.filter(uid=practice_uid).exists()):
+        Practice.objects.get(uid=practice_uid).delete()
+    practice = Practice()
+    practice.uid = practice_uid
+    practice.deadline = dead_line
+    practice.course = c
+    practice.blocker = True
+    practice.save()
 
 @given('I am at the new practice form for course "{namecourse}"')
 def step(context,namecourse):

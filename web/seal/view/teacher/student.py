@@ -175,12 +175,8 @@ def studentsearch(request):
         students = []
         if (request.method == 'POST'):
             form = StudentSearchForm(request.POST)
-            criteria = form.data['criteria_search']
             data = form.data['data_search']
-            if (criteria == "uid"):
-                students = Student.objects.filter(uid=data)
-            if (criteria == "name"):
-                students = Student.objects.filter(Q(user__first_name__contains = data) | 
+            students = Student.objects.filter(Q(uid = data) | Q(user__first_name__contains = data) | 
                                                   Q(user__last_name__contains = data))
         else:
             form = StudentSearchForm()

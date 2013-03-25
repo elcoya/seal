@@ -1,6 +1,6 @@
 from django.db import models
 from seal.model.course import Course
-#from seal.utils import managepath
+from datetime import date
 
 class Practice(models.Model):
     """Assignment.
@@ -11,9 +11,9 @@ class Practice(models.Model):
     """
     uid = models.CharField(max_length=32,verbose_name="Name")
     course = models.ForeignKey(Course)
-    #file = models.FileField(upload_to=managepath.get_instance().get_practice_path())
     deadline = models.DateField()
-    
+    blocker = models.BooleanField()
+
     class Meta:
         """Metadata class indicating how this objects must be unique"""
         unique_together = (("uid", "course"),)
@@ -38,3 +38,8 @@ class Practice(models.Model):
     def delete_practice_file(self):
         self.practicefile_set.all().delete()
     
+    def isExpired(self):
+        if ((self.deadline < date.today()) and self.blocker):
+            return True
+        else:
+            return False

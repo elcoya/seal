@@ -19,7 +19,13 @@
 				<td>{{ practice.uid }}</td>
 				<td>{{ practice.deadline }}</td>
 				<td><a href="/undergraduate/practice/practiceFile/{{ practice.pk}}">{% trans "Download" %}</a></td>
-				<td><a href="/undergraduate/delivery/upload/{{ practice.pk}}">{% trans "Make Delivery" %}</a></td>
+				<td>
+					{% if practice.isExpired %}
+						{% trans "Practice expired" %}
+					{% else %}
+						<a href="/undergraduate/delivery/upload/{{ practice.pk}}">{% trans "Make Delivery" %}</a>
+					{% endif %}
+				</td>
 			</tr>
 			{% empty %}
 			<tr>
