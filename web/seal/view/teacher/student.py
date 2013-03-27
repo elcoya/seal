@@ -155,16 +155,15 @@ def list_student(request, idshift):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def list_student_deliveries(request, idstudent, idshift):
+def list_student_deliveries(request, idstudent):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         student = Student.objects.get(pk=idstudent)
-        shift = Shift.objects.get(pk=idshift)
         deliveries = Delivery.objects.filter(student=student).order_by('deliverDate')
         table_deliveries = []
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)
             table_deliveries.append({'delivery': delivery, 'correction':correction})
-        return render(request, 'student/liststudentdeliveries.html', {'table_deliveries': table_deliveries, 'student':student, 'shift':shift}, context_instance=RequestContext(request))
+        return render(request, 'student/liststudentdeliveries.html', {'table_deliveries': table_deliveries, 'student':student}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
@@ -179,6 +178,14 @@ def studentsearch(request):
             students = Student.objects.filter(Q(uid__icontains = data) | Q(user__first_name__icontains = data) | 
                                                   Q(user__last_name__icontains = data))
         return render(request,'student/studentsearch.html', {'query':data, 'students': students})
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+@login_required
+def studentdetail(request, idstudent):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        student = Student.objects.get(pk=idstudent)
+        return render(request, 'student/detail.html', {'student':student}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
     

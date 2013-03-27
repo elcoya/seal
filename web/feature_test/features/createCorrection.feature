@@ -8,12 +8,12 @@ Feature: As a teacher I want to make a correction of a delivery
     	  And a shift with name "tarde" and description "horario" in the course "2012-1"
 	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
-	 	  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
+	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And there are no corrections
 	 	 when I am in the correction delivery page of student "martin" and practice "TP Intro"
 	 	  And I fill the form with "Coment1" "Coment2" "4.0"
 	 	  And I submit the form
-		  And I click in the "Corrected" link
+		  And I click the button "correct1"
 		 Then I should have the edit form for correction with "Coment1" "Coment2" "4.0" data in it	
 		 
 		 
@@ -25,11 +25,11 @@ Feature: As a teacher I want to make a correction of a delivery
     	  And a shift with name "tarde" and description "horario" in the course "2012-1"
 	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
-	 	  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
+	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And exist correction of delivery of "martin" for "TP Intro" with "Coment1" "Coment2" "4.0" and corrector "teacher"
 	 	 When I am in the correction delivery page of student "martin" and practice "TP Intro"
 	 	  And I change "Coment1" for "New coment 1" in element whith id "id_publicComent"
 	 	  And I submit the form
-	 	  And I click in the "Corrected" link	
+	 	  And I click the button "correct1"
 	 	 Then I should have the edit form for correction with "New coment 1" "Coment2" "4.0" data in it	
 		 

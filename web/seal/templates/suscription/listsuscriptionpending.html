@@ -25,8 +25,7 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<h5 align="right"><a href="/teacher/suscription/list/{{ shift_row.shift.pk}}">{% trans "Resolve" %}</a></h5>
-			<hr style="margin: 10px 0;" />
+			<div align="right"><a href="/teacher/suscription/list/{{ shift_row.shift.pk}}" class="btn btn-primary">{% trans "Resolve" %}</a></div>
 		{% empty %}
 			<div class="row" style="margin: 20px auto; text-align: center;">{% trans "There are no suscription pending" %}</div>
 		{% endfor %}

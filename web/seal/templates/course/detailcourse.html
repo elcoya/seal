@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block content %}
 <div><h4>{% blocktrans with course.name as coursename %}Course {{coursename}} Detail{% endblocktrans %}</h4></div>
-<div class="container" >
+<div class="container">
 	<div class="row">
 		<div class="span8"><h4>{% trans "Practices" %}</h4></div>
 	</div>	
@@ -22,9 +22,9 @@
 		    	<td style="width: 25%">{{ practice.deadline }}</td>
 		    	<td style="width: 25%"><span class="badge badge-inverse">{{ practice.ndeliveries }}</span></td>
 		    	<td style="width: 25%">
-		    		<a title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/practices/editpractice/{{ course.pk }}/{{ practice.pk }}"></a>
+		    		<a name="edit{{practice.uid}}" title="{% trans 'Edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editpractice/{{ course.pk }}/{{ practice.pk }}"></a>
 		    		<a name="uploadfile{{practice.uid}}" title="{% trans 'Upload Files' %}" class="icon-upload" href="/teacher/practices/practicefile/{{ course.pk }}/{{ practice.pk }}"></a>
-		    		<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/delivery/list/{{practice.pk}}"></a>
+		    		<a name="deliverylist{{practice.uid}}" title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/delivery/list/{{practice.pk}}"></a>
 		    		<a name="uploadsript{{practice.uid}}" title="{% trans 'Upload Correction Script' %}" class="icon-circle-arrow-up" href="/teacher/practices/script/{{ course.pk }}/{{ practice.pk }}"></a>
 		    		{% if practice.ndeliveries == 0 %}
 		    			<a name="delete{{practice.uid}}" title="{% trans 'Delete' %}" class="icon-trash" href="/teacher/practices/deletepractice/{{ practice.pk }}"></a>

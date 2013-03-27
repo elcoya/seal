@@ -17,13 +17,13 @@ Feature: As a Teacher I should be able to see de automatic correction result
     	  And course "2012-1" exists
     	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
           And script "successfull_test_script.sh" is set for practice "TP Intro" for course "2012-1"
-          And a delivery exists for practice "TP Intro" and course "2012-1" from Student "student"
+          And a delivery exists for practice "TP Intro" and course "2012-1" from Student "student" with id "1"
           And automatic_correction for all deliveries has status "successfull"
           And automatic_correction for all deliveries has stdout "this is the successfull bash script"
           And automatic_correction for all deliveries has exit_value "0"
           And I log in as "teacher" "teacher"
          When I am in the list page of delivery from "TP Intro"
-          And I click in the "successfull" link
+          And I click the button "autocorrection1"
          Then I should see "this is the successfull bash script"
           And I should see "Automatic check result: successfull"
 

@@ -4,10 +4,6 @@
 
 	<div class="row" style="margin-top: 30px; margin-bottom: 10px; ">
 		<div class="span8">{% trans "Students of Shift" %} <b>{{ shift }}</b></div>
-		<div class="span4" style="text-align: right;">
-			<a href="/teacher/students/newstudent/{{ shift.pk }}" >{% trans "New Student" %}</a>&nbsp;&nbsp;&nbsp;
-			<a href="/teacher/suscription/list/{{ shift.pk }}" >{% trans "Suscription" %}</a>
-		</div>
 	</div>
 	<table class="table table-striped">
 		<thead>
@@ -16,13 +12,13 @@
 				<th>{% trans "Name" %}</th>
 				<th>{% trans "Email" %}</th>
 				<th>{% trans "Corrector" %}</th>
-				<th>{% trans "Deliveries" %}</th>
+				<th>{% trans "Actions" %}</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for student in students %}
 			<tr>
-				<td><a href="/teacher/students/editstudent/{{ shift.pk }}/{{student.pk}}">{{ student.uid }}</a></td>
+				<td>{{ student.uid }}</td>
 				<td>{{ student.get_full_name }}</td>
 				<td>{{ student.user.email }}</td>
 				<td> {% if student.corrector %}
@@ -30,7 +26,11 @@
 				{% else %}
 				{% trans "no corrector" %}
 				{% endif %} </td>
-				<td><a href="/teacher/students/listdeliveries/{{student.pk}}/{{ shift.pk }}">{% trans "List" %}</a></td>
+				<td>
+					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{student.pk}}"></a>
+					<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ shift.pk }}/{{student.pk}}"></a>
+					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{student.pk}}"></a>	
+				</td>
 			</tr>
 			{% empty %}
 			<tr>
@@ -39,5 +39,9 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
+		<div class="span8"><a name="newstudent" href="/teacher/students/newstudent/{{ shift.pk }}" class="btn btn-primary">+ {% trans "New Student" %}</a></div>
+		<div class="span4" style="text-align: right;"><a name="suscription" href="/teacher/suscription/list/{{ shift.pk }}" class="btn btn-info">{% trans "Suscription" %}</a></div>
+	</div>
 	<div><a href="/teacher/course/detailcourse/{{ shift.course.pk  }}">{% trans "Back" %}</a></div>
 {% endblock %}

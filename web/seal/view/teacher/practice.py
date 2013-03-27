@@ -107,7 +107,6 @@ def practicefilelist(request, idcourse, idpractice):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         practice = Practice.objects.get(pk = idpractice)
         practiceFiles = practice.get_practice_file()
-        form = PracticeScriptForm()
         if (request.method == 'POST'):
             practice_file_instance = PracticeFile(practice=practice)
             form = PracticeFileForm(request.POST, request.FILES, instance=practice_file_instance)

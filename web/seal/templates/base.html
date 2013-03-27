@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		{% block addl_styles %}
-			<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
-			<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" />
-			<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
-			<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" />
+		<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		{% endblock %}
-        {% block head %}{% endblock %}
+		{% block head %}{% endblock %}
 	</head>
-    <body style="padding-top: 0;">
+	<body style="padding-top: 0;">
 		{% load i18n %}
-        <div class="container">
+		<div class="container">
 			<div class="masthead">
 				<div class="row">
-					<div class="span3"><h3 class="muted">ALGO3FIUBA</h3></div>
-				</div>
-				{% block welcome %}
-					<div class="container" style="margin: 5px 0;">
-						<div class="row">
-							<div class="span8"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
-							<div class="span4" style="text-align: right;">
-								<a href="/changepassw/">{% trans "Change Password" %}</a> | 
-								<a href="/logout/">{% trans "Logout" %}</a>
-							</div>
+					<div class="span3">
+						<h3 class="muted">ALGO3FIUBA</h3>
+					</div>
+					{% block welcome %}
+					<div class="row">
+						<div style="text-align: right;">
+							<h4 style="margin-top: 20px;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4>
 						</div>
 					</div>
-				{% endblock %}
+					{% endblock %}
+				</div>
 				<div class="navbar">
 					<div class="navbar-inner">
 						<div class="container">
@@ -39,11 +37,13 @@
 				</div><!-- /.navbar -->
 			</div>
 			{% block body %}{% endblock %}
-	    	<div id="footer" style="padding-top: 20px;">
-	    		<div class="container">
-			        <p class="muted credit">© FIUBA 2012 - ALGO3 <i>beta</i>
-	    		</div>
-		    </div>
-    	</div> <!-- /container -->
-    </body>
+			<div id="footer" style="padding-top: 20px;">
+				<div class="container">
+					<p class="muted credit">
+						© FIUBA 2012 - ALGO3 <i>beta</i>
+				</div>
+			</div>
+		</div>
+		<!-- /container -->
+	</body>
 </html>

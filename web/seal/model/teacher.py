@@ -31,3 +31,6 @@ class Teacher(models.Model):
         if(self.user is None):
             raise Exception(msg=MSGEXEPTION)
         models.Model.save(self, force_insert=force_insert, force_update=force_update, using=using)
+        
+    def get_full_name(self):
+        return smart_str(self.user.first_name + " " + self.user.last_name)

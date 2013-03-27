@@ -10,7 +10,7 @@ Feature: As a teacher I want to modify a student
           And I log in as "teacher" "teacher"
          When I click the button "detail2012-1"
           And I click the button "studentlisttarde" 
-          And I click in the "martin" link 
+          And I click the button "editmartin"
           And I change "martin" for "Martin Mauro" in element whith id "id_last_name"
           And I submit the form
          Then I should see "Martin Mauro"

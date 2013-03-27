@@ -1,0 +1,13 @@
+{% extends "teacher/teacher.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+	<h4>{% trans "Detail of Student " %} {{ student.get_full_name }}({{student.uid}})</h4>
+		<div>{% trans "Name: "%}  <b>{{student.get_full_name}}</b></div>
+		<div>{% trans "Uid: "%}  <b>{{student.uid}}</b></div>
+		<div>{% trans "E-mail: "%}  <b>{{student.user.email}}</b></div>
+		<div>{% trans "Corrector: "%}  <b>{{student.corrector.get_full_name}}</b></div>
+		
+	<div style="margin-top: 20px"><a href="javascript:history.back()">{% trans "Back" %}</a></div>
+</div>
+{% endblock %}

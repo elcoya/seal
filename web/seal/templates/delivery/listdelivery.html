@@ -1,47 +1,47 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="container" >
-		<div class="row" style="margin: 20px 0 10px;">
-			{% blocktrans with practice.uid as practice %}Deliveries of practice <b>{{ practice }}</b>{% endblocktrans %}
-		</div>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>{% trans "Uid" %}</th>
-					<th>{% trans "Student Uid" %}</th>
-					<th>{% trans "Student Name" %}</th>
-					<th>{% trans "Delivery Date" %}</th>
-					<th>{% trans "Delivery" %}</th>
-					<th>{% trans "Correction" %}</th>
-					<th>{% trans "Automatic Correction" %}</th>
-					<th>{% trans "Navigate" %}</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for delivery_row in table_deliveries %}
-				<tr>
-					<td>{{ delivery_row.delivery.pk }}</td>
-					<td>{{ delivery_row.delivery.student.uid }}</td>
-					<td>{{ delivery_row.delivery.student.user.last_name }}</td>
-					<td>{{ delivery_row.delivery.deliverDate }}</td>
-					<td><a href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}">{% trans "Download" %}</a></td>
-					<td><a href="/teacher/correction/{{ delivery_row.delivery.pk}}/3"> 
-					{% if delivery_row.correction %}
-					{% trans "Corrected" %}
-					{% else %}
-					{% trans "Pending" %}
-					{% endif %} </a></td>
-					<td><a href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}">{{ delivery_row.delivery.get_automatic_correction.get_status }}</a></td>
-					<td><a href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
-				</tr>
-				{% empty %}
-				<tr>
-					<td colspan="8" style="text-align: center; ">{% trans "There are yet no deliveries" %}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<div><a href="/teacher/course/detailcourse/{{practice.course_id}}">{% trans "Back" %}</a></div>
+<div class="container" >
+	<div class="row" style="margin: 20px 0 10px;">
+		{% blocktrans with practice.uid as practice %}Deliveries of practice <b>{{ practice }}</b>{% endblocktrans %}
 	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>{% trans "Delivery" %}</th>
+				<th>{% trans "Student" %}</th>
+				<th>{% trans "Practice" %}</th>
+				<th>{% trans "Delivery Date" %}</th>
+				<th>{% trans "Correction" %}</th>
+				<th>{% trans "Automatic Correction" %}</th>
+				<th>{% trans "Actions" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for delivery_row in table_deliveries %}
+			<tr>
+				<td>{{ delivery_row.delivery.pk }}</td>
+				<td>{{ delivery_row.delivery.student.uid }}</td>
+				<td>{{ delivery_row.delivery.practice.uid }}</td>
+				<td>{{ delivery_row.delivery.deliverDate }}</td>
+				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "Corrected" %}</span> {% else %} <span class="label label-warning">{% trans "Pending" %}</span> {% endif %} </td>
+				<td><span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span></td>
+				<td>
+					<a name="download{{delivery_row.delivery.pk}}" title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+					<a name="autocorrection{{delivery_row.delivery.pk}}" title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}"></a>
+					<a name="navigate{{delivery_row.delivery.pk}}" title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"></a>
+					<a name="correct{{delivery_row.delivery.pk}}" title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"></a>
+				</td>
+			</tr>
+			{% empty %}
+			<tr>
+				<td colspan="8" style="text-align: center; ">{% trans "There are yet no deliveries" %}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div>
+		<a href="/teacher/course/detailcourse/{{practice.course_id}}">{% trans "Back" %}</a>
+	</div>
+</div>
 {% endblock %}

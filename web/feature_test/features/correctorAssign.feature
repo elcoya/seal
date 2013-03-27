@@ -23,7 +23,7 @@ Feature: As a teacher I want to assing a correction of another teacher
 	 	 When I log in as "teacher" "teacher"
 		  And I click the button "detail2012-1"
 		  And I click the button "studentlisttarde"
-		  And I click in the "martin" link
+		  And I click the button "editmartin"
 		  And I select the corrector "teacher"
 		  And I submit the form
 		  And I am in the index page
@@ -45,7 +45,7 @@ Feature: As a teacher I want to assing a correction of another teacher
 	 	 When I log in as "teacher" "teacher"
 		  And I click the button "detail2012-1"
 		  And I click the button "studentlisttarde"
-		  And I click in the "martin" link
+		  And I click the button "editmartin"
 		  And I select the corrector "teacher"
 		  And I submit the form
 		  And I am in the index page
