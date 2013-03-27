@@ -55,7 +55,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
           And a shift with name "tarde" and description "horario" in the course "2012-1"
          When I am in the detail page of course "2012-1"
           And I click the button "studentlisttarde"
-          And I click in the "New Student" link
+          And I click the button "newstudent"
           And I fill the newstudent form with default data for shift "tarde"
 	  	  And I submit the form
 		  And I logout
