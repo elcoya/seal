@@ -24,17 +24,6 @@
 
 {% block body %}
 	{% if user.student_set.all %}
-		{% block welcome %}
-			<div class="container" style="margin: 20px 0;">
-				<div class="row">
-					<div class="span8"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
-					<div class="span4" style="text-align: right;">
-						<a href="/changepassw/">{% trans "Change Password" %}</a> | 
-						<a href="/logout/">{% trans "Logout" %}</a>
-					</div>
-				</div>
-			</div>
-		{% endblock %}
 		<div class="container">
 	    	{% block content %}{% endblock %}
 		</div>
