@@ -761,12 +761,12 @@ msgid "There are no corrections"
 msgstr ""
 
 #: templates/teacher/teacher.html:17
-msgid "Pending Subscriptions"
-msgstr ""
+msgid "subscriptions"
+msgstr "Subscriptions"
 
 #: templates/teacher/teacher.html:19
-msgid "Students without deliveries Successfull"
-msgstr ""
+msgid "pending_deliveries"
+msgstr "Pending deliveries"
 
 #: templates/teacher/teacher.html:28
 #: templates/undergraduate/undergraduate.html:27

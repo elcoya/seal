@@ -14,26 +14,26 @@ This is the main template for all teacher pages.
 	{% block nav_opts %}
 		<li><a href="/">{% trans "Home" %}</a></li>	       
 		<li class="divider-vertical"></li>
-		<li><a href="/teacher/suscription/listsuscriptionpending/">{% trans "Pending Subscriptions" %}</a></li>
+		<li><a href="/teacher/suscription/listsuscriptionpending/">{% trans "subscriptions" %}</a></li>
 		<li class="divider-vertical"></li>
-		<li><a href="/teacher/students/pendingdelivery/">{% trans "Students without deliveries Successfull" %}</a></li>
+		<li><a href="/teacher/students/pendingdelivery/">{% trans "pending_deliveries" %}</a></li>
 		<li class="divider-vertical"></li>
 		<li><a href="/teacher/export/">{% trans "data_export" %}</a></li>
 		<li class="divider-vertical"></li>
-		<li><a href="/teacher/students/search">{% trans "student_search" %}</a></li>
+		<li style="padding-left: 90px;">
+			<form id='form-search-student' action='/teacher/students/search/' method='post' style="margin: 0; padding: 2px 0" >
+				{% csrf_token %}
+				<table>
+					<tr>
+						<td style="padding: 2px 0;" ><input type="text" name="data_search" maxlength="100" style="margin: 0; width: 150px;" value="{{ query }}" /></td>
+						<td style="padding: 2px 0;" ><button  class="btn" type="submit" style="margin: 0;" ><img style="height: 20px;" src="{{ STATIC_URL }}img/glyphicons_search.png" alt="{% trans 'Search' %}" /></button></td>
+					</tr>
+				</table>
+			</form>
+			<!-- <a href="/teacher/students/search">{% trans "student_search" %}</a> -->
+		</li>
 	{% endblock %}
 	{% block body %}
-		{% block welcome %}
-			<div class="container" style="margin: 20px 0;">
-				<div class="row">
-					<div class="span8"><h4 style="margin: 0;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4></div>
-					<div class="span4" style="text-align: right;">
-						<a href="/changepassw/">{% trans "Change Password" %}</a> | 
-						<a href="/logout/">{% trans "Logout" %}</a>
-					</div>
-				</div>
-			</div>
-		{% endblock %}
 		{% block content %}{% endblock %}
 	{% endblock %}
 {% else %}

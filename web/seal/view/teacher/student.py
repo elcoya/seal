@@ -176,10 +176,9 @@ def studentsearch(request):
         if (request.method == 'POST'):
             form = StudentSearchForm(request.POST)
             data = form.data['data_search']
-            students = Student.objects.filter(Q(uid = data) | Q(user__first_name__contains = data) | 
-                                                  Q(user__last_name__contains = data))
-        else:
-            form = StudentSearchForm()
-        return render(request,'student/studentsearch.html', {'form':form, 'students': students})
+            students = Student.objects.filter(Q(uid__icontains = data) | Q(user__first_name__icontains = data) | 
+                                                  Q(user__last_name__icontains = data))
+        return render(request,'student/studentsearch.html', {'query':data, 'students': students})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
+    

@@ -3,7 +3,7 @@ Feature: As a teacher I want to see the suscription pending list with link in na
 	Scenario: No suscription pending
 	 	Given Teacher "teacher" exists with password "teacher"
           And I log in as "teacher" "teacher" 
-         When I click in the "Pending Subscriptions" link
+         When I click in the "Subscriptions" link
 		 Then I should see "There are no suscription pending"
 
 	Scenario: List Suscription pending
@@ -14,7 +14,7 @@ Feature: As a teacher I want to see the suscription pending list with link in na
 		 And there are no suscription
 		 And existe suscrition of student "martin" for course "2012-1" shift "tarde" with suscription date "2012-11-01" and state "Pending"
 		 And I log in as "teacher" "teacher"
-	    When I click in the "Pending Subscriptions" link
+	    When I click in the "Subscriptions" link
 		Then I should see "Nov. 1, 2012"
         
 	Scenario: Resolve Suscription and desapear in the list		
@@ -25,10 +25,10 @@ Feature: As a teacher I want to see the suscription pending list with link in na
 		 And there are no suscription
 		 And existe suscrition of student "martin" for course "2012-1" shift "tarde" with suscription date "2012-11-01" and state "Pending"
 		 And I log in as "teacher" "teacher"
-	    When I click in the "Pending Subscriptions" link
+	    When I click in the "Subscriptions" link
 		 And I click in the "Resolve" link
 		 And I check the suscription of student "martin" for course "2012-1" shift "tarde"
 		 And I click the button "Accept"
-		 And I click in the "Pending Subscriptions" link
+		 And I click in the "Subscriptions" link
 		Then I should see "There are no suscription pending"
         

@@ -691,8 +691,8 @@ msgid "Edit Shift"
 msgstr "Edicion de Turnos"
 
 #: templates/student/delivery_pending.html:6 templates/teacher/teacher.html:19
-msgid "Students without deliveries Successfull"
-msgstr "Estudiantes sin entregas satisfactorias"
+msgid "pending_deliveries"
+msgstr "Entregas pendientes"
 
 #: templates/student/delivery_pending.html:10
 msgid "Course"
@@ -884,8 +884,8 @@ msgid "There are no corrections"
 msgstr "No hay correciones"
 
 #: templates/teacher/teacher.html:17
-msgid "Pending Subscriptions"
-msgstr "Suscripciones Pendientes"
+msgid "subscriptions"
+msgstr "Suscripciones"
 
 #: templates/teacher/teacher.html:21
 msgid "data_export"
