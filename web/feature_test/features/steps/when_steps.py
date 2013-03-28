@@ -16,20 +16,27 @@ scriptPath = pathproject + "feature_test/data/"
 
 base_url = 'http://localhost:8000/'
 
+def get_last_form_in_the_page(context):
+    forms = context.browser.find_elements_by_tag_name('form')
+    if len(forms) > 1:
+        return forms[1]
+    else:
+        return forms[0]
+
 @when('I am in the index page')
 def step(context):
     context.browser.get(base_url)
 
 @when('I log in as "{usr}" "{passwd}"')
 def step(context, usr, passwd):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('username').send_keys(usr)
     form.find_element_by_name('password').send_keys(passwd)
     form.submit()
 
 @when('I input login data "{loginData}"')
 def step(context, loginData):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     splitted = loginData.split('|')
     form.find_element_by_name('username').send_keys(splitted[0])
     form.find_element_by_name('password').send_keys(splitted[1])
@@ -47,7 +54,7 @@ def step(context):
 
 @when('I fill the teacher form with default data')
 def step(context):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('username').send_keys('teacher')
     form.find_element_by_name('first_name').send_keys('First Teacher')
     form.find_element_by_name('last_name').send_keys('Last Teacher')
@@ -59,7 +66,7 @@ def step(context):
 
 @when('I fill the newstudent form with default data for shift "{shiftname}"')
 def step(context, shiftname):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('first_name').send_keys('Dummy Student')
     form.find_element_by_name('last_name').send_keys('Dummy Student')
     form.find_element_by_name('uid').send_keys('dummy')
@@ -70,13 +77,13 @@ def step(context, shiftname):
 
 @when('I fill the upload file form with name "{namefile}"')
 def step(context, namefile):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('name').send_keys(namefile)
     form.find_element_by_name('file').send_keys(filePath)
     
 @when('I submit the form')
 def step(context):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.submit()
 
 @when('I click the link to "{link_text}"')
@@ -100,14 +107,14 @@ def step(context):
 
 @when(u'I fill the practice form with uid "{practice_uid}" and default data for course "{course_name}"')
 def step(context, practice_uid, course_name):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('uid').send_keys(practice_uid)
     form.find_element_by_name('course').send_keys(course_name)
     form.find_element_by_name('deadline').send_keys('2012-11-25')
 
 @when('I fill the delivery form with default data')
 def step(context):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('file').send_keys(deliveryPath)
 
 @when('I am in the upload page of practice "{practice}"')
@@ -118,7 +125,7 @@ def step(context,practice):
       
 @when('I change "{course1}" for "{course2}" in element whith id "{idelement}"')
 def step(context, course1, course2, idelement):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     context.browser.find_element_by_id(idelement).clear()
     form.find_element_by_id(idelement).send_keys(course2)
     
@@ -143,7 +150,7 @@ def step(context,course, shift):
 
 @when('I fill in the registration form with user "{uid}"')
 def step(context, uid):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('first_name').send_keys(uid)
     form.find_element_by_name('last_name').send_keys(uid) 
     form.find_element_by_name('uid').send_keys(uid)
@@ -153,13 +160,13 @@ def step(context, uid):
 
 @when('I fill the recovery form with user "{uid}" and email "{email}"')
 def step(context, uid, email):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('uid').send_keys(uid)
     form.find_element_by_name('email').send_keys(email)
 
 @when('I fill the change password form with user "{uid}", oldpass "{oldpass}", newpass "{newpass}", newpassagin "{newpassagain}"')
 def step(context, uid, oldpass, newpass, newpassagain):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('uid').send_keys(uid)
     form.find_element_by_name('oldpasswd').send_keys(oldpass)
     form.find_element_by_name('passwd').send_keys(newpass)
@@ -198,7 +205,7 @@ def step(context, id_delivery, file_path):
 
 @when('I fill the form with "{coment1}" "{coment2}" "{grade}"')
 def step(context, coment1, coment2, grade):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_id('id_publicComent').send_keys(coment1)
     form.find_element_by_id('id_privateComent').send_keys(coment2)
     form.find_element_by_name('grade').send_keys(grade)
@@ -222,8 +229,8 @@ def step(context,student,course,shift):
     
 @when('I click the button "{name}"')
 def step(context, name):
-    button = context.browser.find_elements(By.NAME, name)
-    button[0].click()
+    button = context.browser.find_element(By.NAME, name)
+    button.click()
     
 @when('I click in the checkAll')
 def step(context):
@@ -232,7 +239,7 @@ def step(context):
 
 @when('I fill in the upload script form with the file "{script_name}"')
 def step(context, script_name):
-    form = context.browser.find_element_by_tag_name('form')
+    form = context.browser.find_elements_by_tag_name('form')[1]
     form.find_element_by_name('file').send_keys(scriptPath + script_name)
 
 @when(u'I create a new delivery for practice "{practice_uid}" and course "{course_name}" from Student "{student_uid}"')
@@ -252,12 +259,12 @@ def step(context, practice_uid, course_name, student_uid):
 
 @when('I select lenguaje "{lenguaje}"')
 def step(context, lenguaje):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('language').send_keys(lenguaje)
 
 @when('I select the corrector "{corrector}"')
 def step(context, corrector):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('corrector').send_keys(corrector)
 
 @when("I wait")
@@ -284,7 +291,7 @@ def step(context):
 
 @when(u'I fill the shift form with name "{shift_name}" and description "{shift_desc}"')
 def step(context, shift_name, shift_desc):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('name').send_keys(shift_name)
     form.find_element_by_name('description').send_keys(shift_desc)
 
@@ -295,6 +302,6 @@ def step(context):
 
 @when('I fill the search form with data "{data}"')
 def step(context, data):
-    form = context.browser.find_element_by_tag_name('form')
+    form = get_last_form_in_the_page(context)
     form.find_element_by_name('data_search').send_keys(data)   
     

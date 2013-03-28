@@ -4,11 +4,11 @@ Feature: As a Teacher I should be able to see de automatic correction result
         Given Teacher "teacher" exists with password "teacher"
           And I log in as "teacher" "teacher"
           And course "2012-1" exists
-          And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
-          And I am at the upload script form for practice "TP Intro" and course "2012-1"
+          And practice "TP_Intro" exists in course "2012-1" with deadline "2012-12-01"
+          And I am at the upload script form for practice "TP_Intro" and course "2012-1"
          When I fill in the upload script form with the file "successfull_test_script.sh"
           And I submit the form
-          And I click the button "uploadsriptTP Intro"
+          And I click the button "uploadscriptTP_Intro"
          Then I should see pattern "successfull_test_script(_[0-9]+)?.sh"
    
     Scenario: As a teacher browse the results of an automatic check
