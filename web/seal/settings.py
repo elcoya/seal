@@ -62,7 +62,7 @@ TIME_ZONE = 'America/Chicago'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 # To run the features test LANGUAGE_CODE = 'en-en'
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'en-en'
 
 SITE_ID = 1
 
