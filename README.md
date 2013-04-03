@@ -45,7 +45,7 @@ https://docs.google.com/document/d/1bLaPKvRCEnlsRhZggzhcn506nSL6jFi1z3fM7C6Nbeo/
 https://travis-ci.org/#!/elcoyaman/seal
 
 ###URL ambiente de testing
-http://ixion-tech.com.ar:8000/
+http://ixion-tech.com.ar:9000/
 
 ###URL Ultimo analisis de cobertura
 http://ixion-tech.com.ar/seal/coverage/
