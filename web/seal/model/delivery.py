@@ -33,3 +33,6 @@ class Delivery(models.Model):
             return self.automaticcorrection_set.all()[0]
         else:
             return None
+    
+    class Meta:
+        ordering = ('-deliverDate', '-deliverTime')

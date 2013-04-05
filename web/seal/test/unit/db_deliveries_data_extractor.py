@@ -17,8 +17,21 @@ class DbDeliveriesDataExtractorUnitTest(TestCase):
         objects.filter.return_value = filter_return_value
         delivery_mock.get_automatic_correction.return_value = filter_return_value
         filter_return_value.order_by.return_value = [delivery_mock,]
+        
+        practices = Mock()
+        practice_mock = Mock()
+        practices.all.return_value = [practice_mock,]
+        
+        students = Mock()
+        student_all_return_value = Mock()
+        student_mock = Mock()
+        student_all_return_value.order_by.return_value = [student_mock,]
+        students.all.return_value = student_all_return_value
+        
         db_deliveries_extractor = DbDeliveriesExtractor()
         db_deliveries_extractor.objects = objects
+        db_deliveries_extractor.students = students
+        db_deliveries_extractor.practices = practices
         
         db_deliveries_extractor.get_data()
         
@@ -32,12 +45,28 @@ class DbDeliveriesDataExtractorUnitTest(TestCase):
         objects.filter.return_value = filter_return_value
         delivery_mock.get_automatic_correction.return_value = filter_return_value
         filter_return_value.order_by.return_value = [delivery_mock,]
+        
+        practices = Mock()
+        practice_mock = Mock()
+        practices.all.return_value = [practice_mock,]
+        
+        students = Mock()
+        student_all_return_value = Mock()
+        student_mock = Mock()
+        student_all_return_value.order_by.return_value = [student_mock,]
+        students.all.return_value = student_all_return_value
+        
         db_deliveries_extractor = DbDeliveriesExtractor()
         db_deliveries_extractor.objects = objects
+        db_deliveries_extractor.students = students
+        db_deliveries_extractor.practices = practices
+        
         
         result_value = db_deliveries_extractor.get_data()
         
-        unique_expected = (delivery_mock.practice.uid, delivery_mock.student.uid, delivery_mock.student.user.first_name, delivery_mock.student.user.last_name, 
+        first_expected = (practice_mock.uid, student_mock.uid, student_mock.user.first_name, student_mock.user.last_name, 
+                          "pendiente", None)
+        second_expected = (delivery_mock.practice.uid, delivery_mock.student.uid, delivery_mock.student.user.first_name, delivery_mock.student.user.last_name, 
                           "aprobado", delivery_mock.get_correction.return_value.grade)
-        expected_value = [unique_expected, ]
+        expected_value = [first_expected, second_expected,]
         self.assertEquals(result_value, expected_value)
