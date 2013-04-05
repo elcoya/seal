@@ -10,7 +10,7 @@ Main page to authenticate users.
 {% endblock %}
 
 {% block head %}
-<title>SEAL | Login</title>
+<title>ESTO TAMBIEN ESTE QUE ESTAR LOCALIZADO</title>
 {% endblock %}
 
 {% block body %}
@@ -20,7 +20,7 @@ Main page to authenticate users.
 		{% csrf_token %}
 		{% if form.errors %}
 		<p    style="color: red" class="error" >
-			{% trans "Your username and password didn't match. Please try again." %}
+			{% trans "wrongCredentials" %}
 		</p>
 		{% endif %}
 
@@ -40,7 +40,7 @@ Main page to authenticate users.
 		</div>
 		<hr />
 		<div class="row"  >
-			{% trans "New to SEAL?" %} <a href="/registration">{% trans "registration" %}</a>!
+			{% trans "New to SEAL?" %} <a href="/registration">{% trans "registration" %}</a>
 		</div>
 		<div class="row"  >
 			{% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "passwordRecovery" %}</a>

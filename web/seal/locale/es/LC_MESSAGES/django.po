@@ -612,7 +612,7 @@ msgid "Login SEAL"
 msgstr "Algo3Fiuba"
 
 #: templates/registration/login.html:23
-msgid "Your username and password didn't match. Please try again."
+msgid "wrongCredentials"
 msgstr ""
 "Su nombre de usuario y contraseña no concuerdan. Por favor, trate nuevamente"
 
