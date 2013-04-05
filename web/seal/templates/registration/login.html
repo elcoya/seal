@@ -24,13 +24,13 @@ Main page to authenticate users.
 		</p>
 		{% endif %}
 
-		<div class="row" style="margin: auto;">
+		<div class="row">
 			<label for="id_username" >{% trans "Padron" %}</label>{{ form.username }}
 		</div>
-		<div class="row" style="margin: auto;">
+		<div class="row"  >
 			<label for="id_password">{% trans "Password" %}</label>{{ form.password }}
 		</div>
-		<div class="row" style="margin: auto;">
+		<div class="row"  >
 			<input type="hidden" name="next" value="{{ next }}" />
 		</div>
 		<div align="center">
@@ -39,13 +39,13 @@ Main page to authenticate users.
 			</button>
 		</div>
 		<hr />
-		<div class="row" style="margin: auto;">
+		<div class="row"  >
 			{% trans "New to SEAL?" %} <a href="/registration">{% trans "Registrate" %}</a>!
 		</div>
-		<div class="row" style="margin: auto;">
+		<div class="row"  >
 			{% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "Recovery" %}</a>
 		</div>
-<!-- 	<div class="row" style="margin: auto;">
+<!-- 	<div class="row"  >
 			{% trans "Change Lenguaje" %} <a href="/changelenguaje">{% trans "Click Here" %}</a>
 		</div> -->
 	</form>
