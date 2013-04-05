@@ -73,8 +73,7 @@ class DbDeliveriesExtractor:
                     entity_set.append(entity_id)
         
         # Data sorting
-        result.sort(key=lambda delivery: delivery[1])
-        result.sort(key=lambda delivery: delivery[0], reverse=True)
+        result.sort(key=lambda delivery: (delivery[0], delivery[1]))
         
         return result
 
