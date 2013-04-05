@@ -16,10 +16,10 @@ Main page to authenticate users.
 {% block body %}
 <div class="container" >
 	<form class="form-signin" method="post" action=".">
-		<h2 align="center" class="form-signin-heading">{% trans "Login SEAL" %}</h2>
+		<h2    class="form-signin-heading">{% trans "Login SEAL" %}</h2>
 		{% csrf_token %}
 		{% if form.errors %}
-		<p align="center" style="color: red" class="error" >
+		<p    style="color: red" class="error" >
 			{% trans "Your username and password didn't match. Please try again." %}
 		</p>
 		{% endif %}
@@ -33,7 +33,7 @@ Main page to authenticate users.
 		<div class="row"  >
 			<input type="hidden" name="next" value="{{ next }}" />
 		</div>
-		<div align="center">
+		<div>
 			<button  class="btn btn-large btn-primary" type="submit">
 				{% trans "logIn" %}
 			</button>
