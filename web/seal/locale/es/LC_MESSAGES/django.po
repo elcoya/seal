@@ -617,15 +617,15 @@ msgstr ""
 "Su nombre de usuario y contraseña no concuerdan. Por favor, trate nuevamente"
 
 #: templates/registration/login.html:28
-msgid "Padron"
+msgid "username"
 msgstr "Padron"
 
 #: templates/registration/login.html:31
-msgid "Password"
+msgid "password"
 msgstr "Contraseña"
 
 #: templates/registration/login.html:38
-msgid "Log in"
+msgid "logIn"
 msgstr "Iniciar sesión"
 
 #: templates/registration/login.html:43
@@ -634,7 +634,7 @@ msgstr "¿Nuevo en Algo3?"
 
 #: templates/registration/login.html:43
 #: templates/registration/register.html:40
-msgid "Registrate"
+msgid "registration"
 msgstr "Registrate"
 
 #: templates/registration/login.html:46
@@ -642,7 +642,7 @@ msgid "Forgot your Password?"
 msgstr "¿Perdió su contraseña?"
 
 #: templates/registration/login.html:46
-msgid "Recovery"
+msgid "passwordRecovery"
 msgstr "Recuperar"
 
 #: templates/registration/login.html:49

@@ -25,25 +25,25 @@ Main page to authenticate users.
 		{% endif %}
 
 		<div class="row">
-			<label for="id_username" >{% trans "Padron" %}</label>{{ form.username }}
+			<label for="id_username" >{% trans "username" %}</label>{{ form.username }}
 		</div>
 		<div class="row"  >
-			<label for="id_password">{% trans "Password" %}</label>{{ form.password }}
+			<label for="id_password">{% trans "password" %}</label>{{ form.password }}
 		</div>
 		<div class="row"  >
 			<input type="hidden" name="next" value="{{ next }}" />
 		</div>
 		<div align="center">
 			<button  class="btn btn-large btn-primary" type="submit">
-				{% trans "Log in" %}
+				{% trans "logIn" %}
 			</button>
 		</div>
 		<hr />
 		<div class="row"  >
-			{% trans "New to SEAL?" %} <a href="/registration">{% trans "Registrate" %}</a>!
+			{% trans "New to SEAL?" %} <a href="/registration">{% trans "registration" %}</a>!
 		</div>
 		<div class="row"  >
-			{% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "Recovery" %}</a>
+			{% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "passwordRecovery" %}</a>
 		</div>
 
 	</form>
