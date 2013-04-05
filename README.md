@@ -1,6 +1,8 @@
 SEAL - Sistema de Entregas Automatizadas Libre
 ====
 
+[![Build Status](https://travis-ci.org/elcoyaman/seal.png?branch=master)](https://travis-ci.org/elcoyaman/seal)
+
 Sistema de Entregas Automatizado Libre
 
 Índice de Proyecto
