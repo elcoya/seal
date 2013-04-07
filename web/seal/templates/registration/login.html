@@ -10,13 +10,13 @@ Main page to authenticate users.
 {% endblock %}
 
 {% block head %}
-<title>ESTO TAMBIEN ESTE QUE ESTAR LOCALIZADO</title>
+<title>Algo3Fiuba</title><!--ESTO TAMBIEN ESTE QUE ESTAR LOCALIZADO--><br />
 {% endblock %}
 
 {% block body %}
 <div class="container" >
 	<form class="form-signin" method="post" action=".">
-		<h2    class="form-signin-heading">{% trans "Login SEAL" %}</h2>
+		<h2 class="form-signin-heading">{% trans "Login SEAL" %}</h2>
 		{% csrf_token %}
 		{% if form.errors %}
 		<p    style="color: red" class="error" >
@@ -25,25 +25,35 @@ Main page to authenticate users.
 		{% endif %}
 
 		<div class="row">
-			<label for="id_username" >{% trans "username" %}</label>{{ form.username }}
+			<div class="span0">
+				<label for="id_username" >{% trans "username" %}</label>{{ form.username }}
+			</div>
 		</div>
 		<div class="row"  >
-			<label for="id_password">{% trans "password" %}</label>{{ form.password }}
+			<div class="span0">
+				<label for="id_password">{% trans "password" %}</label>{{ form.password }}
+			</div>
 		</div>
-		<div class="row"  >
+		<div class="row" >
 			<input type="hidden" name="next" value="{{ next }}" />
 		</div>
-		<div>
-			<button  class="btn btn-large btn-primary" type="submit">
-				{% trans "logIn" %}
-			</button>
+		<div class="row">
+			<div class="span3 text-center">
+				<button  class="btn btn-large btn-primary" type="submit">
+					{% trans "logIn" %}
+				</button>
+			</div>
 		</div>
 		<hr />
-		<div class="row"  >
-			{% trans "New to SEAL?" %} <a href="/registration">{% trans "registration" %}</a>
+		<div class="row" >
+			<div class="span3">
+				{% trans "New to SEAL?" %} <a href="/registration">{% trans "registration" %}</a>
+			</div>
 		</div>
-		<div class="row"  >
-			{% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "passwordRecovery" %}</a>
+		<div class="row" >
+			<div class="span3">
+				{% trans "Forgot your Password?" %} <a href="/recoverypass"> {% trans "passwordRecovery" %}</a>
+			</div>
 		</div>
 
 	</form>
