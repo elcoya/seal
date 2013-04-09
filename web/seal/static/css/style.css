@@ -2,6 +2,14 @@ body {
 	background-color: #f5f5f5;
 }
 
+.main-container {
+	width: 960px;
+}
+
+ul {
+	margin: 0;
+}
+
 div.script-container {
 	background: #E0E0E0;
 	margin: auto;

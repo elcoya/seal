@@ -4,19 +4,38 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		{% block addl_styles %}
 		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" />
 		<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
-		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		{% endblock %}
+		{% block addl_script %}
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-dropdown.js"></script>
 		{% endblock %}
 		{% block head %}{% endblock %}
 	</head>
 	<body style="padding-top: 0;">
 		{% load i18n %}
-		<div class="container">
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<span class="brand muted">{% trans 'brand' %}</span>
+					<ul class="nav">
+						<li class="divider-vertical"></li>
+						{% block nav_opts %}{% endblock %}
+					</ul>
+					<ul class="nav pull-right">
+						{% block action_opts %}{% endblock %}
+					</ul>
+				</div>
+			</div>
+		</div><!-- /.navbar -->
+		
+		<div class="container main-container">
 			<div class="masthead">
 				<div class="row">
 					<div class="span3">
-						<h3 class="muted">ALGO3FIUBA</h3>
 					</div>
 					{% block welcome %}
 					<div class="row">
@@ -26,15 +45,6 @@
 					</div>
 					{% endblock %}
 				</div>
-				<div class="navbar">
-					<div class="navbar-inner">
-						<div class="container">
-							<ul class="nav">
-								{% block nav_opts %}{% endblock %}
-							</ul>
-						</div>
-					</div>
-				</div><!-- /.navbar -->
 			</div>
 			{% block body %}{% endblock %}
 			<div id="footer" style="padding-top: 20px;">

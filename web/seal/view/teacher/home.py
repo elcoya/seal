@@ -9,9 +9,11 @@ from seal.model.correction import Correction
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def index(request):
+def index(request, current_course=None):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
+        if current_course is None:
+            current_course = courses.latest('pk')
         table_contents = []
         for course in courses:
             table_contents.append({'pk': course.pk, 'name': course.name, 'count': course.get_student_count()})
@@ -25,6 +27,11 @@ def index(request):
                 status = delivery.get_automatic_correction().get_status()
                 if (status == "successfull"):
                     table_deliveries.append({'delivery': delivery, 'correction':correction})
-        return render_to_response('teacher/index.html', {'table_contents': table_contents, 'table_deliveries': table_deliveries}, context_instance=RequestContext(request))
+        return render_to_response('teacher/index.html', 
+                                  {'current_course' : current_course,
+                                   'courses' : courses,
+                                   'table_contents': table_contents, 
+                                   'table_deliveries': table_deliveries}, 
+                                  context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
