@@ -17,6 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "brand"
+msgstr "SEAL"
+
 #: templates/admin/base.html:28
 msgid "Welcome,"
 msgstr ""
@@ -819,3 +822,15 @@ msgstr "There are yet no courses"
 
 msgid "choose_a_course"
 msgstr "Choose a course"
+
+#: registration form field labels
+msgid "names"
+msgstr "Names"
+msgid "last_name"
+msgstr "Last Name"
+msgid "uid"
+msgstr "ID"
+msgid "password"
+msgstr "Password"
+msgid "repeat_password"
+msgstr "Repeat Password"

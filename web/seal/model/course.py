@@ -16,12 +16,12 @@ class Course(models.Model):
         """Stringify the Course"""
         return smart_str(self.name)
     
-    class Meta:
-        """
-        Meta class to indicate the expected ordering of this objects when 
-        querying on this class.
-        """
-        ordering = ('-name',)
+    def student_count(self):
+        shifts_query_set = self.shift_set.all()
+        count = 0
+        for shift in shifts_query_set:
+            count += shift.student_set.all().count()
+        return count
     
     def get_students(self, uid=None, name=None, email=None):
         partial_query = self.student_set.all()
@@ -48,3 +48,10 @@ class Course(models.Model):
     
     def get_practices(self):
         return self.practice_set.all()
+    
+    class Meta:
+        """
+        Meta class to indicate the expected ordering of this objects when 
+        querying on this class.
+        """
+        ordering = ('-name',)

@@ -10,6 +10,46 @@ ul {
 	margin: 0;
 }
 
+.container .shaded-container {
+	background-color: #444444;
+}
+
+.container .box {
+	padding: 10px 0;
+	width: 96px;
+	border-radius: 10px;
+}
+
+hr.thin {
+	margin: 2px 0;
+}
+
+hr.thick {
+	margin: 10px 0;
+}
+
+.alignment-margin {
+	margin: 3px 0px;
+}
+
+.space-before {
+	margin-top: 15px;
+}
+
+.small-padding {
+	padding: 5px;
+}
+
+.side-btn {
+	text-align: left;
+	margin-left: 0px;
+	margin-top: 3px;
+}
+
+.pulled-margin {
+	margin-right: 5px;
+}
+
 div.script-container {
 	background: #E0E0E0;
 	margin: auto;

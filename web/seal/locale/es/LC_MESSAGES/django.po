@@ -18,6 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
+msgid "brand"
+msgstr "SEAL"
+
 #: templates/404.html:11
 msgid "Error HTTP 404: File not Found"
 msgstr "Error HTTP 404: Archivo no encontrado"
@@ -942,3 +945,15 @@ msgstr ""
 
 #~ msgid "My deliveries"
 #~ msgstr "Mis Entregas"
+
+#: registration form field labels
+msgid "names"
+msgstr "Nombres"
+msgid "last_name"
+msgstr "Apellido"
+msgid "uid"
+msgstr "padron"
+msgid "password"
+msgstr "Contraseña"
+msgid "repeat_password"
+msgstr "Repetir contraseña"
