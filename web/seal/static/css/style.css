@@ -2,6 +2,77 @@ body {
 	background-color: #f5f5f5;
 }
 
+.main-container {
+	width: 960px;
+}
+
+ul {
+	margin: 0;
+}
+
+.shaded-container {
+    background-color: #DDDDFF;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.practice-stat {
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    height: 53px;
+    padding: 15px 5px;
+}
+
+.narrow {
+	height: 25px;
+	margin: 10px 0 10px;
+}
+
+.center-icon{
+	margin: 4px;	
+}
+
+.container .box {
+	padding: 10px 0;
+	width: 96px;
+	border-radius: 10px;
+}
+
+hr.margin-bottom {
+	margin: 0 0 5px;
+}
+
+hr.thin {
+	margin: 2px 0;
+}
+
+hr.thick {
+	margin: 10px 0;
+}
+
+.alignment-margin {
+	margin: 3px 0px;
+}
+
+.space-before {
+	margin-top: 15px;
+}
+
+.small-padding {
+	padding: 5px;
+}
+
+.side-btn {
+	text-align: left;
+	margin-left: 0px;
+	margin-top: 3px;
+}
+
+.pulled-margin {
+	margin-right: 5px;
+}
+
 div.script-container {
 	background: #E0E0E0;
 	margin: auto;

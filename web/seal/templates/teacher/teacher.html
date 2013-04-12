@@ -12,30 +12,40 @@ This is the main template for all teacher pages.
 
 {% if user.teacher_set.all %}
 	{% block nav_opts %}
-		<li><a href="/">{% trans "Home" %}</a></li>	       
-		<li class="divider-vertical"></li>
-		<li><a href="/teacher/suscription/listsuscriptionpending/">{% trans "subscriptions" %}</a></li>
-		<li class="divider-vertical"></li>
-		<li><a href="/teacher/students/pendingdelivery/">{% trans "pending_deliveries" %}</a></li>
-		<li class="divider-vertical"></li>
-		<li><a href="/teacher/export/">{% trans "data_export" %}</a></li>
-		<li class="divider-vertical"></li>
+		<li>
+		    <div class="btn-group">
+			    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">{{ current_course.name }} <span class="caret"></span></a>
+			    <ul class="dropdown-menu">
+			    	{% for course in courses %}
+						<li><a tabindex="-1" href="#">{{ course }}</a></li>
+					{% endfor %}
+					<li class="divider"></li>
+					<li><a tabindex="-1" href="/teacher/course/newcourse" ><span class="icon-plus-sign"></span> {% trans "New Course" %}</a></li>
+			    </ul>
+		    </div>
+		</li>
+		<li><a href="/" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
+		<li><a href="/teacher/suscription/listsuscriptionpending/" title="{% trans 'subscriptions' %}"><span class="icon-user"></span></a></li>
+		<li><a href="/teacher/students/pendingdelivery/" title="{% trans 'pending_deliveries' %}"><span class="icon-warning-sign"></span></a></li>
+		<li><a href="/teacher/export/" title="{% trans 'data_export' %}"><span class="icon-download"></span></a></li>
+	{% endblock %}
+	{% block action_opts %}
 		<li>
 			<form id='form-search-student' action='/teacher/students/search/' method='post' style="margin: 0; padding: 2px 0px" >
 				{% csrf_token %}
 				<table>
 					<tr>
-						<td style="padding: 2px 0;" ><input type="text" name="data_search" maxlength="100" placeholder="search" style="margin: 0; width: 150px;" value="{{ query }}" /></td>
-						<td style="padding: 2px 0;" ><button  class="btn" type="submit" style="margin: 0;" ><img style="height: 20px;" src="{{ STATIC_URL }}img/glyphicons_search.png" alt="{% trans 'Search' %}" /></button></td>
+						<td style="padding: 2px 0;" >
+							<input class="search-query" type="text" name="data_search" maxlength="100" placeholder="search" style="margin: 0; width: 150px;" value="{{ query }}" />
+							<!-- this way we get a ubmittable form with no button --><input type="submit" style="display:none"/>
+						</td>
 					</tr>
 				</table>
 			</form>
 		</li>
 		<li class="divider-vertical"></li>
-		<li><a href="/changepassw/">{% trans "Change Password" %}</a></li>
-		<li class="divider-vertical"></li>
-		<li><a href="/logout/">{% trans "Logout" %}</a></li>
-		<li class="divider-vertical"></li>
+		<li><a href="/changepassw/" title="{% trans 'Change Password' %}" ><span class="icon-lock"></span></a></li>
+		<li><a href="/logout/" title="{% trans 'Logout' %}"><span class="icon-off" style="width: 24px; height: 24px;"></span></a></li>
 	{% endblock %}
 	{% block body %}
 		{% block content %}{% endblock %}

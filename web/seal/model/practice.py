@@ -1,6 +1,8 @@
 from django.db import models
 from seal.model.course import Course
 from datetime import date
+from seal.model.student import Student
+from django.db.models import Q
 
 class Practice(models.Model):
     """Assignment.
@@ -9,11 +11,14 @@ class Practice(models.Model):
     Students to do in order to pass the Course.
     
     """
+    
+    STATUS_SUCCESSFULL = 0
+    
     uid = models.CharField(max_length=32,verbose_name="Name")
     course = models.ForeignKey(Course)
     deadline = models.DateField()
     blocker = models.BooleanField()
-
+    
     class Meta:
         """Metadata class indicating how this objects must be unique"""
         unique_together = (("uid", "course"),)
@@ -37,9 +42,34 @@ class Practice(models.Model):
 
     def delete_practice_file(self):
         self.practicefile_set.all().delete()
-    
+
     def isExpired(self):
         if ((self.deadline < date.today()) and self.blocker):
             return True
         else:
             return False
+
+    def get_successfull_deliveries_count(self):
+        return self.delivery_set.filter(automaticcorrection__status = 1, practice = self).count()
+
+    def get_failed_deliveries_count(self):
+        return self.delivery_set.filter(~Q(automaticcorrection__status = 1), practice = self).count()
+
+    def get_students_pending_deliveries_count(self):
+        return Student.objects.exclude(delivery__practice = self).count()
+
+    # for the dashboard view
+    def get_completion_percentage(self):
+        deliveries_queryset = self.delivery_set.filter(automaticcorrection__status = 1, practice = self).all()
+        students = []
+        for delivery in deliveries_queryset:
+            if delivery.student not in students:
+                students.append(delivery.student)
+        shifts = self.course.shift_set.all()
+        total_students = 0
+        for shift in shifts:
+            total_students += shift.student_set.all().count()
+        return 100 * len(students) / total_students
+        
+    def get_remaining_percentage(self):
+        return 100 - self.get_completion_percentage()
