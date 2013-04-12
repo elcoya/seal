@@ -834,3 +834,30 @@ msgid "password"
 msgstr "Password"
 msgid "repeat_password"
 msgstr "Repeat Password"
+
+msgid "students"
+msgstr "Students"
+
+msgid "practices_stats"
+msgstr "Practice Statistics"
+
+msgid "total_deliveries"
+msgstr "Total deliveries"
+
+
+msgid "successfull"
+msgstr "Successfull"
+
+msgid "failed"
+msgstr "Failed"
+
+#unused
+msgid "successfull_deliveries"
+msgstr "Successfull deliveries"
+
+#unused
+msgid "failed_deliveries"
+msgstr "Failed deliveries"
+
+msgid "pending_of_delivery"
+msgstr "Pending of delivery"

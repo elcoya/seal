@@ -10,14 +10,37 @@ ul {
 	margin: 0;
 }
 
-.container .shaded-container {
-	background-color: #444444;
+.shaded-container {
+    background-color: #DDDDFF;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.practice-stat {
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    height: 53px;
+    padding: 15px 5px;
+}
+
+.narrow {
+	height: 25px;
+	margin: 10px 0 10px;
+}
+
+.center-icon{
+	margin: 4px;	
 }
 
 .container .box {
 	padding: 10px 0;
 	width: 96px;
 	border-radius: 10px;
+}
+
+hr.margin-bottom {
+	margin: 0 0 5px;
 }
 
 hr.thin {

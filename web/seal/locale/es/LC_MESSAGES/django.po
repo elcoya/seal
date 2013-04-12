@@ -953,7 +953,34 @@ msgid "last_name"
 msgstr "Apellido"
 msgid "uid"
 msgstr "padron"
-msgid "password"
-msgstr "Contraseña"
+# already defined
+#msgid "password"
+#msgstr "Contraseña"
 msgid "repeat_password"
 msgstr "Repetir contraseña"
+
+msgid "students"
+msgstr "Students"
+
+msgid "practices_stats"
+msgstr "Estadísticas de Prácticas"
+
+msgid "total_deliveries"
+msgstr "Total de entregas"
+
+msgid "successfull"
+msgstr "Exitosas"
+
+msgid "failed"
+msgstr "Fallidas"
+
+#unused
+msgid "successfull_deliveries"
+msgstr "Entregas satisfactorias"
+
+#unused
+msgid "failed_deliveries"
+msgstr "Entregas fallidas"
+
+msgid "pending_of_delivery"
+msgstr "Pendientes de entrega"
