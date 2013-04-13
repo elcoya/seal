@@ -8,6 +8,7 @@ from seal.model.automatic_correction import AutomaticCorrection
 import time
 from seal.utils import managepath
 from seal.model.shift import Shift
+from datetime import date
 
 pathproject = managepath.get_instance().get_web_path()
 filePath = pathproject + "feature_test/data/pdftest.pdf"
@@ -110,13 +111,33 @@ def step(context, practice_uid, course_name):
     form = get_last_form_in_the_page(context)
     form.find_element_by_name('uid').send_keys(practice_uid)
     form.find_element_by_name('course').send_keys(course_name)
-    form.find_element_by_name('deadline').send_keys('2012-11-25')
+    form.find_element_by_name('deadline').send_keys('2020-11-25')
+    
+@when('I will the form with name "{practice_uid}"')
+def step(context, practice_uid):
+    form = get_last_form_in_the_page(context)
+    form.find_element_by_name('uid').send_keys(practice_uid)
+
+@when('Deadline "{datetoput}"')
+def stop(context, datetoput):
+    form = get_last_form_in_the_page(context)
+    dateform = datetoput
+    if (dateform == "yesterday"):
+        dateform = str(date(date.today().year, date.today().month, date.today().day - 1))
+    if (dateform == "tomorrow"):
+        dateform = str(date(date.today().year, date.today().month, date.today().day + 1))
+    form.find_element_by_name('deadline').send_keys(dateform)
 
 @when('I fill the delivery form with default data')
 def step(context):
     form = get_last_form_in_the_page(context)
     form.find_element_by_name('file').send_keys(deliveryPath)
-
+    
+@when('I will the form with blank name')
+def step(context):
+    form = get_last_form_in_the_page(context)
+    form.find_element_by_name('uid').send_keys()
+    
 @when('I am in the upload page of practice "{practice}"')
 def step(context,practice):
     p = Practice.objects.get(uid=practice)

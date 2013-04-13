@@ -18,6 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
+msgid "Name cannot be blank"
+msgstr "El nombre no puede estar en blanco"
+
+msgid "Invalid date, date should be in format yyyy-mm-dd"
+msgstr "Fecha no valida, el formato de la fecha es aaaa-mm-dd"
+
+msgid "The deadline should be in the future"
+msgstr "La fecha limite tiene que ser futura"
+
 msgid "brand"
 msgstr "SEAL"
 
@@ -260,7 +269,7 @@ msgstr "Subir"
 
 #: templates/course/detailcourse.html:4
 msgid "Course %(coursename)s Detail"
-msgstr "Edicion de curso %(coursename)s"
+msgstr "Detalle del curso %(coursename)s"
 
 #: templates/course/detailcourse.html:7
 msgid "Practices"

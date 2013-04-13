@@ -9,6 +9,12 @@ from numpy.ma.testutils import assert_equal
 
 base_url = 'http://localhost:8000/'
 
+@then("I should be in the practice list page")
+def step(context):
+    text = "Practices"
+    body = context.browser.find_element_by_tag_name('body')
+    assert text in body.text
+    
 @then('I should see "{text1}" before "{text2}"')
 def step(context, text1, text2):
     trs = context.browser.find_elements(By.TAG_NAME, "tr")
