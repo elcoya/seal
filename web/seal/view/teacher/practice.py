@@ -20,6 +20,7 @@ import os
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 from django.utils.encoding import smart_str
 from seal.model.delivery import Delivery
+from seal.model.course import Course
 
 PATHOK =  "/teacher/course/detailcourse/%s"
 PATHFILEOK = "/teacher/practices/practicefile/%s/%s"
@@ -47,12 +48,14 @@ def index(request):
 def newpractice(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         if (request.method == 'POST'):
-            form = PracticeForm(request.POST, request.FILES)
+            course = Course.objects.get(pk = idcourse)
+            practice = Practice(course = course)
+            form = PracticeForm(request.POST, instance = practice)
             if (form.is_valid()):
-                form.save()
+                practice.save()
                 return HttpResponseRedirect(PATHOK % str(idcourse))
         else:
-            form = PracticeForm(initial={'course': idcourse})
+            form = PracticeForm()
         return render(request, 'practice/uploadpractice.html', {'form': form, 'idcourse':idcourse})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
