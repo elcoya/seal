@@ -56,7 +56,7 @@ class Practice(models.Model):
         return self.delivery_set.filter(~Q(automaticcorrection__status = 1), practice = self).count()
 
     def get_students_pending_deliveries_count(self):
-        return Student.objects.exclude(delivery__practice = self).count()
+        return Student.objects.exclude(delivery__practice = self).filter(shifts__course = self.course).count()
 
     # for the dashboard view
     def get_completion_percentage(self):
@@ -69,6 +69,8 @@ class Practice(models.Model):
         total_students = 0
         for shift in shifts:
             total_students += shift.student_set.all().count()
+        if total_students == 0:
+            return 0
         return 100 * len(students) / total_students
         
     def get_remaining_percentage(self):

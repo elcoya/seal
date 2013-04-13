@@ -3,19 +3,6 @@
 {% block title %}Teacher{% endblock %}
 {% block content %}
 
-<!--
-<div class="container">
-	<div class="row">&nbsp;</div>
-	<div class="row">
-		<div class="offset2 span2">
-			<div class="box btn btn-info" onclick="location='/teacher/students/list/{{ current_course.pk }}'">
-				<h5 class="text-center">students</h5>
-				<h3 class="text-center">{{ current_course.student_count }}</h3>
-			</div>
-		</div>
-	</div>
-</div>
--->
     <div class="container-fluid space-before">
 	    <div class="row-fluid">
 		    <div class="span3">
@@ -59,14 +46,22 @@
 						<div class="span12">
 							<div class="shaded-container">
 								<div class="row-fluid">
-									<div class="span12"><h5>{{ practice.uid }}</h5></div>
+									<div class="span10"><h5 class="no-margin">{{ practice.uid }}</h5></div>
+									<div class="span2">
+							    		<a name="edit{{practice.uid}}" title="{% trans 'Edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editpractice/{{ current_course.pk }}/{{ practice.pk }}"></a>
+							    		<a name="uploadfile{{practice.uid}}" title="{% trans 'Upload Files' %}" class="icon-upload" href="/teacher/practices/practicefile/{{ current_course.pk }}/{{ practice.pk }}"></a>
+							    		<a name="deliverylist{{practice.uid}}" title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/delivery/list/{{practice.pk}}"></a>
+							    		<a name="uploadscript{{practice.uid}}" title="{% trans 'Upload Correction Script' %}" class="icon-circle-arrow-up" href="/teacher/practices/script/{{ current_course.pk }}/{{ practice.pk }}"></a>
+							    		{% if practice.ndeliveries == 0 %}
+							    			<a name="delete{{practice.uid}}" title="{% trans 'Delete' %}" class="icon-trash" href="/teacher/practices/deletepractice/{{ practice.pk }}"></a>
+							    		{% endif %}
+									</div>
 								</div>
 								<hr class="margin-bottom" />
 								<div class="row-fluid narrow">
 							    	<span class="icon-user pull-left center-icon"></span>
 								    <div class="progress">
 										<div class="bar bar-success" style="width: {{ practice.get_completion_percentage }}%;"></div>
-										<div class="bar bar-danger" style="width: {{ practice.get_remaining_percentage }}%;"></div>
 									</div>
 								</div>
 								<div class="row-fluid">
@@ -83,9 +78,19 @@
 										<span class="pull-right pulled-margin"><b>{{ practice.get_failed_deliveries_count }}</b></span> 
 									</div>
 									<div class="span3 badge-inverse practice-stat">
-										<span>{% trans "pending_of_delivery" %}</span>
+										<span>{% trans "Pending" %}</span>
 										<span class="pull-right pulled-margin"><b>{{ practice.get_students_pending_deliveries_count }}</b></span> 
 									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% empty %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="shaded-container">
+								<div class="row-fluid">
+									<div class="span12"><h6 class="center">{% trans 'There are yet no Practices' %}</h6></div>
 								</div>
 							</div>
 						</div>

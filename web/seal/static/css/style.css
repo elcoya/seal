@@ -39,6 +39,15 @@ ul {
 	border-radius: 10px;
 }
 
+h5.no-margin {
+	margin: 0;
+}
+
+.center {
+	text-align: center;
+	width: 100%;
+}
+
 hr.margin-bottom {
 	margin: 0 0 5px;
 }

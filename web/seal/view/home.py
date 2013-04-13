@@ -78,6 +78,7 @@ def redirect(request):
             return HttpResponseRedirect(REDIRECTUNDERGRADUATE)
     else:
         return render_to_response(REDIRECTINDEX)
+
 def register(request):
     if (request.method == 'POST'):
         form = RegistrationForm(request.POST)
