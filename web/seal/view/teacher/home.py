@@ -9,11 +9,13 @@ from seal.model.correction import Correction
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def index(request, current_course=None):
+def index(request, idcourse=None):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
-        if current_course is None:
+        if idcourse is None:
             current_course = courses.latest('pk')
+        else:
+            current_course = courses.get(pk=idcourse)
         table_contents = []
         for course in courses:
             table_contents.append({'pk': course.pk, 'name': course.name, 'count': course.get_student_count()})
