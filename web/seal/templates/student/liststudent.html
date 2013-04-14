@@ -3,7 +3,7 @@
 {% block content %}
 
 	<div class="row" style="margin-top: 30px; margin-bottom: 10px; ">
-		<div class="span8">{% trans "Students of Shift" %} <b>{{ shift }}</b></div>
+		<div class="span12">{% trans "Students in course: " %} <b>{{ current_course }}</b></div>
 	</div>
 	<table class="table table-striped">
 		<thead>
@@ -11,6 +11,7 @@
 				<th>{% trans "Uid" %}</th>
 				<th>{% trans "Name" %}</th>
 				<th>{% trans "Email" %}</th>
+				<th>{% trans "Shift" %}</th>
 				<th>{% trans "Corrector" %}</th>
 				<th>{% trans "Actions" %}</th>
 			</tr>
@@ -19,17 +20,20 @@
 			{% for student in students %}
 			<tr>
 				<td>{{ student.uid }}</td>
-				<td>{{ student.get_full_name }}</td>
-				<td>{{ student.user.email }}</td>
-				<td> {% if student.corrector %}
-				{{ student.corrector.user.last_name }}
-				{% else %}
-				{% trans "no corrector" %}
-				{% endif %} </td>
+				<td>{{ student.full_name }}</td>
+				<td>{{ student.email }}</td>
+				<td>{{ student.shift.name }}</td>
+				<td> 
+					{% if student.corrector %}
+						{{ student.corrector }}
+					{% else %}
+						{% trans "no corrector" %}
+					{% endif %} 
+				</td>
 				<td>
 					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{student.pk}}"></a>
-					<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ shift.pk }}/{{student.pk}}"></a>
-					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{student.pk}}"></a>	
+					<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ student.shift.pk }}/{{student.pk}}"></a>
+					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{ current_course.pk }}/{{student.pk}}"></a>	
 				</td>
 			</tr>
 			{% empty %}

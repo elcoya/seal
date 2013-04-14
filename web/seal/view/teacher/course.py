@@ -72,7 +72,10 @@ def editcourse(request, idcourse):
 @login_required
 def detailcourse(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
-        course = Course.objects.get(pk=idcourse)     
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
+        course = Course.objects.get(pk=idcourse)
         practices = course.get_practices().order_by('deadline')
         table_contents = []
         for practice in practices:
@@ -94,7 +97,9 @@ def detailcourse(request, idcourse):
             table_shifts.append({'shift': shift, 'count': count})
                 
         return render(request, 'course/detailcourse.html',
-                      {'table_contents': table_contents, 'table_shifts': table_shifts,
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'table_contents': table_contents, 'table_shifts': table_shifts,
                        'course': course},
                       context_instance=RequestContext(request))
     else:

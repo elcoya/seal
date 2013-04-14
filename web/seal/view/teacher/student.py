@@ -111,59 +111,81 @@ def edit_unenrolled_student(request, idstudent):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def pendingdeliveries(request):
+def pendingdeliveries(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
-        final_list = []
         courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
+        final_list = []
         #TAKE ALL COURSES ACTIVOS
-        for course in courses:
-            content_list = []
-            practices = course.get_practices()
-            #RECORRO TOAS LAS PRACITAS DEL CURSO
-            for practice in practices:
-                shifts = Shift.objects.filter(course=course)
-                student_shift_list = []
-                #RECORRO TODOS LOS TURNOS DEL CURSO
-                for shift in shifts:
-                    #TOMO LOS ESTUDIANTES DEL TURNO
-                    students = shift.get_students()
-                    for student in students:
-                        #TODO LAS ENTREGAS DEL ESTUDIANTE PARA ESA PRACTICA
-                        deliveries = Delivery.objects.filter(student=student, practice=practice)
-                        appendStudent = True;
-                        #ME FIJO SI ALGUNA TIENE SUCCESSFULL, SI ES ASI NO LA ADJUNTO A LA LISTA
-                        for delivery in deliveries:
-                            if delivery.get_automatic_correction().get_status() == AutomaticCorrection.STATUS_STRINGS[1]:
-                                appendStudent = False;
-                        if (appendStudent):
-                            student_shift_list.append({'student': student, 'shift':shift})
-                if len(student_shift_list) > 0:
-                    content_list.append({'practice': practice, 'student_shift_list':student_shift_list})            
-            if (len(content_list) > 0):
-                final_list.append({'course':course, 'data': content_list})
-        return render(request, 'student/delivery_pending.html', {'final_list': final_list})
+        practices = current_course.get_practices()
+        #RECORRO TOAS LAS PRACITAS DEL CURSO
+        for practice in practices:
+            shifts = Shift.objects.filter(course=current_course)
+            student_shift_list = []
+            #RECORRO TODOS LOS TURNOS DEL CURSO
+            for shift in shifts:
+                #TOMO LOS ESTUDIANTES DEL TURNO
+                students = shift.get_students()
+                for student in students:
+                    #TODO LAS ENTREGAS DEL ESTUDIANTE PARA ESA PRACTICA
+                    deliveries = Delivery.objects.filter(student=student, practice=practice)
+                    appendStudent = True;
+                    #ME FIJO SI ALGUNA TIENE SUCCESSFULL, SI ES ASI NO LA ADJUNTO A LA LISTA
+                    for delivery in deliveries:
+                        if delivery.get_automatic_correction().get_status() == AutomaticCorrection.STATUS_STRINGS[1]:
+                            appendStudent = False;
+                    if (appendStudent):
+                        student_shift_list.append({'student': student, 'shift':shift})
+            if len(student_shift_list) > 0:
+                final_list.append({'practice': practice, 'student_shift_list':student_shift_list})            
+        return render(request, 'student/delivery_pending.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'final_list': final_list})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def list_student(request, idshift):
+def list_student(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
-        shift = Shift.objects.get(pk=idshift)
-        students = shift.get_students().order_by('uid')
-        return render(request, 'student/liststudent.html', {'students': students, 'shift':shift}, context_instance=RequestContext(request))
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+
+        students = Student.objects.filter(shifts__course = current_course).order_by('uid')
+        listable_students = []
+        for student in students:
+            student_dict = {'pk' : student.pk,
+                            'uid' : student.uid,
+                            'full_name' : student.get_full_name(),
+                            'email' : student.user.email,
+                            'shift' : student.get_shift(current_course),}
+            if student.corrector is not None:
+                student_dict.update({'corrector' : student.corrector.user.last_name})
+            listable_students.append(student_dict)
+        return render(request, 'student/liststudent.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses, 
+                       'students': listable_students}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def list_student_deliveries(request, idstudent):
+def list_student_deliveries(request, idcourse, idstudent):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+
         student = Student.objects.get(pk=idstudent)
-        deliveries = Delivery.objects.filter(student=student).order_by('deliverDate')
+        deliveries = Delivery.objects.filter(student=student, practice__course=current_course).order_by('deliverDate')
         table_deliveries = []
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)
             table_deliveries.append({'delivery': delivery, 'correction':correction})
-        return render(request, 'student/liststudentdeliveries.html', {'table_deliveries': table_deliveries, 'student':student}, context_instance=RequestContext(request))
+        return render(request, 'student/liststudentdeliveries.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses, 
+                       'table_deliveries': table_deliveries, 'student':student}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 

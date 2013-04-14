@@ -23,6 +23,7 @@ from seal.model.delivery import Delivery
 from seal.model.course import Course
 
 PATHOK =  "/teacher/course/detailcourse/%s"
+PATH_DASHBOARD = "/teacher/%s"
 PATHFILEOK = "/teacher/practices/practicefile/%s/%s"
 MAXPAGINATOR = 10
 
@@ -47,38 +48,53 @@ def index(request):
 @login_required
 def newpractice(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         if (request.method == 'POST'):
             course = Course.objects.get(pk = idcourse)
             practice = Practice(course = course)
             form = PracticeForm(request.POST, instance = practice)
             if (form.is_valid()):
                 practice.save()
-                return HttpResponseRedirect(PATHOK % str(idcourse))
+                return HttpResponseRedirect(PATH_DASHBOARD % str(idcourse))
         else:
             form = PracticeForm()
-        return render(request, 'practice/uploadpractice.html', {'form': form, 'idcourse':idcourse})
+        return render(request, 'practice/uploadpractice.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'idcourse':idcourse})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
 def editpractice(request, idcourse , idpractice):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         practice = Practice.objects.get(pk=idpractice)     
         if (request.method == 'POST'):
             form = PracticeForm(request.POST, request.FILES, instance=practice)
             if (form.is_valid()):
                 form_edit = form.save(commit=False)
                 form_edit.save()
-                return HttpResponseRedirect(PATHOK % str(idcourse))
+                return HttpResponseRedirect(PATH_DASHBOARD % str(idcourse))
         else:
             form = PracticeForm(instance=practice)
-        return render(request, 'practice/editpractice.html', {'form': form, 'idcourse': idcourse,}, context_instance=RequestContext(request))
+        return render(request, 'practice/editpractice.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'idcourse': idcourse,}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
 def script(request, idcourse , idpractice):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         practice = Practice.objects.get(pk=idpractice)
         script_text = ''
         if (request.method == 'POST'):
@@ -90,7 +106,7 @@ def script(request, idcourse , idpractice):
             if (form.is_valid()):
                 form_edit = form.save(commit=False)
                 form_edit.save()
-                return HttpResponseRedirect(PATHOK % str(idcourse))
+                return HttpResponseRedirect(PATH_DASHBOARD % str(idcourse))
         else:
             if(practice.get_script()):
                 form = PracticeScriptForm(instance=practice.get_script())
@@ -100,7 +116,9 @@ def script(request, idcourse , idpractice):
             else:
                 form = PracticeScriptForm()
         return render(request, 'practice/script.html', 
-                      {'form': form, 'practice': practice, 'idcourse': idcourse, 'script_text': script_text}, 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'practice': practice, 'idcourse': idcourse, 'script_text': script_text}, 
                       context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
@@ -177,7 +195,7 @@ def deletepractice(request, idpractice):
         if (delivery_list):
             return HTTP_401_UNAUTHORIZED_RESPONSE
         practice.delete()
-        return HttpResponseRedirect(PATHOK % str(practice.course.pk))
+        return HttpResponseRedirect(PATH_DASHBOARD % str(practice.course.pk))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 

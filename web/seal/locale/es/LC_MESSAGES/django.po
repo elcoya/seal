@@ -793,7 +793,7 @@ msgid "Suscirption Date"
 msgstr "Fecha de suscripcion"
 
 #: templates/suscription/listsuscription.html:44
-msgid "There are yet no suscriptions for this course"
+msgid "There are yet no suscriptions awaiting confirmation"
 msgstr "No hay suscripciones para este curso"
 
 #: templates/suscription/listsuscription.html:51
@@ -993,3 +993,6 @@ msgstr "Entregas fallidas"
 
 msgid "pending_of_delivery"
 msgstr "Pendientes de entrega"
+
+msgid "data_export_download_message"
+msgstr "Descargar la información correspondiente al curso seleccionado"

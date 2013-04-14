@@ -1,34 +1,105 @@
-{% extends "teacher/index.html" %}
+{% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="row" style="margin: auto;">
-		<h4>{% trans "Suscription Pending" %}</h4>
-	</div>
-	<div class="container">
-		{% for shift_row in table_suscription_shift %}
-			<div class="row" style="margin: auto;">
-				<h5>{% trans "Shift "%} {{ shift_row.shift }}</h5>
+<script type="text/javascript">
+	function checkAll(source) {
+		checkboxes = document.getElementsByName('suscription');
+		for (var i in checkboxes)
+			checkboxes[i].checked = source.checked;
+	}
+</script>
+
+	<div class="container-fluid" >
+		<div class="row-fluid" style="margin: auto;">
+			<div class="span12">
+				<h4>{% trans "Suscriptions" %}</h4>
 			</div>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>{% trans "Student" %}</th>
-						<th>{% trans "Date of Suscription" %}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for suscription in shift_row.suscriptionPending %}
-					<tr>
-						<td>{{ suscription.student.get_full_name }} ({{ suscription.student.uid }})</td>
-						<td>{{ suscription.suscriptionDate}}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<div align="right"><a href="/teacher/suscription/list/{{ shift_row.shift.pk}}" class="btn btn-primary">{% trans "Resolve" %}</a></div>
-		{% empty %}
-			<div class="row" style="margin: 20px auto; text-align: center;">{% trans "There are no suscription pending" %}</div>
-		{% endfor %}
+		</div>
+
+		<!-- Pending suscriptions -->
+	<div class="row-fluid" style="margin: auto;">
+			<div class="span12">
+				<form method="post" action="">
+				{% csrf_token %}
+					<div style="padding-bottom: 10px;">
+						{% trans "Pending Suscriptions for course" %}  <b>{{ current_course }}</b>
+					</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>{% trans "Uid" %}</th>
+								<th>{% trans "Student Uid" %}</th>
+								<th>{% trans "Student Name" %}</th>
+								<th>{% trans "Suscirption Date" %}</th>
+								<th>
+									<input name="checkall" type="checkbox" onclick="checkAll(this)"/>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for suscription in suscriptions %}
+							<tr>
+								<td>{{ suscription.pk }}</td>
+								<td>{{ suscription.student.uid }}</td>
+								<td>{{ suscription.student.user.first_name }} {{suscription.student.user.last_name  }}</td>
+								<td>{{ suscription.suscriptionDate }}</td>
+								<td align="center">
+									<input type="checkbox" id="{{ suscription.pk }}" name="suscription" value="{{ suscription.pk }}">
+								</td>
+							</tr>
+							{% empty %}
+							<tr>
+								<td colspan="5" style="text-align: center; ">{% trans "There are yet no suscriptions awaiting confirmation" %}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div class="row-fluid">
+						<div class="span3 offset9" style="text-align: right; ">
+							<button name="Reject" class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{ current_course.pk }}/';this.form.submit();" >{% trans 'Reject' %}</button> 
+							<button name="Accept" class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{ current_course.pk }}/';this.form.submit();" >{% trans 'Accept' %}</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+			
+		<hr />
+		
+		<!-- Solved Suscriptions -->
+		<div style="padding-bottom: 10px;">
+			{% trans "Suscription solver of course "%}<b>{{ shift }}</b> 
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>{% trans "Uid" %}</th>
+					<th>{% trans "Student Uid" %}</th>
+					<th>{% trans "Student Name" %}</th>
+					<th>{% trans "Suscirption Date" %}</th>
+					<th>{% trans "Resolve Date" %}</th>
+					<th>{% trans "State" %}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for suscription in suscriptionsSolve %}
+				<tr>
+					<td>{{ suscription.pk }}</td>
+					<td>{{ suscription.student.uid }}</td>
+					<td>{{ suscription.student.get_full_name }}</td>
+					<td>{{ suscription.suscriptionDate }}</td>
+					<td>{{ suscription.resolveDate }}</td>
+					<td>{{ suscription.state }}</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="6" style="text-align: center; ">{% trans "There are yet no suscriptions solve for this course" %}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
+		<a href="javascript:history.back()">{% trans "Back" %}</a>
 
 {% endblock %}

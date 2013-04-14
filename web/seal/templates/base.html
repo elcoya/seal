@@ -15,11 +15,11 @@
 		{% endblock %}
 		{% block head %}{% endblock %}
 	</head>
-	<body style="padding-top: 0;">
+	<body>
 		{% load i18n %}
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<div class="container">
+				<div class="container-fluid">
 					<span class="brand muted">{% trans 'brand' %}</span>
 					<ul class="nav">
 						<li class="divider-vertical"></li>
@@ -38,17 +38,12 @@
 					<div class="span3">
 					</div>
 					{% block welcome %}
-					<div class="row">
-						<div style="text-align: right;">
-							<h4 style="margin-top: 20px;">{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}</h4>
-						</div>
-					</div>
 					{% endblock %}
 				</div>
 			</div>
 			{% block body %}{% endblock %}
 			<div id="footer" style="padding-top: 20px;">
-				<div class="container">
+				<div class="container-fluid">
 					<p class="muted credit">
 						© FIUBA 2012 - ALGO3 <i>beta</i>
 				</div>

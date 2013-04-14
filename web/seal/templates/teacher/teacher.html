@@ -17,17 +17,30 @@ This is the main template for all teacher pages.
 			    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">{{ current_course.name }} <span class="caret"></span></a>
 			    <ul class="dropdown-menu">
 			    	{% for course in courses %}
-						<li><a tabindex="-1" href="#">{{ course }}</a></li>
+						<li>
+							<div class="row-fluid">
+								<a tabindex="-1" href="/teacher/{{ course.pk }}">
+									<div class="span8">
+										{{ course.name }}
+									</div>
+								</a>
+								<a name="edit{{ course.name }}" title="{% trans 'Edit' %}" href="/teacher/course/editcourse/{{ course.pk }}">
+									<div class="span4">
+										<span class="icon-edit" ></span>
+									</div>
+								</a>
+							</div>
+						</li>
 					{% endfor %}
 					<li class="divider"></li>
 					<li><a tabindex="-1" href="/teacher/course/newcourse" ><span class="icon-plus-sign"></span> {% trans "New Course" %}</a></li>
 			    </ul>
 		    </div>
 		</li>
-		<li><a href="/" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
-		<li><a href="/teacher/suscription/listsuscriptionpending/" title="{% trans 'subscriptions' %}"><span class="icon-user"></span></a></li>
-		<li><a href="/teacher/students/pendingdelivery/" title="{% trans 'pending_deliveries' %}"><span class="icon-warning-sign"></span></a></li>
-		<li><a href="/teacher/export/" title="{% trans 'data_export' %}"><span class="icon-download"></span></a></li>
+		<li><a href="/teacher/{{ current_course.pk }}" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
+		<li><a href="/teacher/suscription/listsuscriptionpending/{{ current_course.pk }}" title="{% trans 'subscriptions' %}"><span class="icon-user"></span></a></li>
+		<li><a href="/teacher/students/pendingdelivery/{{ current_course.pk }}" title="{% trans 'pending_deliveries' %}"><span class="icon-warning-sign"></span></a></li>
+		<li><a href="/teacher/export/{{ current_course.pk }}" title="{% trans 'data_export' %}"><span class="icon-download"></span></a></li>
 	{% endblock %}
 	{% block action_opts %}
 		<li>
@@ -37,13 +50,18 @@ This is the main template for all teacher pages.
 					<tr>
 						<td style="padding: 2px 0;" >
 							<input class="search-query" type="text" name="data_search" maxlength="100" placeholder="search" style="margin: 0; width: 150px;" value="{{ query }}" />
-							<!-- this way we get a ubmittable form with no button --><input type="submit" style="display:none"/>
+							<!-- this way we get a submittable form with no button --><input type="submit" style="display:none"/>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</li>
 		<li class="divider-vertical"></li>
+		<li><div class="row-fluid">
+			<div class="span12 welcome">
+				{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}
+			</div>
+		</div></li>
 		<li><a href="/changepassw/" title="{% trans 'Change Password' %}" ><span class="icon-lock"></span></a></li>
 		<li><a href="/logout/" title="{% trans 'Logout' %}"><span class="icon-off" style="width: 24px; height: 24px;"></span></a></li>
 	{% endblock %}

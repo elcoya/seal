@@ -2,8 +2,8 @@
 {% load i18n %}
 {% block content %}
 <div><h4>{% blocktrans with course.name as coursename %}Course {{coursename}} Detail{% endblocktrans %}</h4></div>
-<div class="container">
-	<div class="row">
+<div class="container-fluid">
+	<div class="row-fluid">
 		<div class="span8"><h4>{% trans "Practices" %}</h4></div>
 	</div>	
 	<table class="table table-striped">
@@ -37,8 +37,8 @@
 		</tbody>
 	</table>
 	<div align="left" style="margin-bottom: 15px"><a href="/teacher/practices/newpractice/{{ course.pk }}" class="btn btn-primary">+ {% trans "New Practice" %}</a></div>
-	<div class="row">
-		<div class="span8"><h4>{% trans "Shifts" %}</h4></div>
+	<div class="row-fluid">
+		<div class="span12"><h4>{% trans "Shifts" %}</h4></div>
 	</div>
 
 	<table class="table table-striped">

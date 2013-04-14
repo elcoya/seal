@@ -10,6 +10,11 @@ ul {
 	margin: 0;
 }
 
+.welcome {
+    margin: 7px 0;
+    padding: 5px 0;
+}
+
 .shaded-container {
     background-color: #DDDDFF;
     border-radius: 5px 5px 5px 5px;

@@ -31,3 +31,8 @@ class Student(models.Model):
     
     def get_full_name(self):
         return smart_str(self.user.first_name + " " + self.user.last_name)
+    
+    def get_shift(self, course):
+        for shift in self.shifts.all():
+            if shift.course == course:
+                return shift

@@ -16,7 +16,7 @@ Feature: As a teacher I want to administrate de suscription
     	 And there are no suscription
 		 And I log in as "teacher" "teacher"
 		When I am in the suscription list page of course "2012-1" shift "tarde"
-        Then I should see "There are yet no suscriptions for this course"
+        Then I should see "There are yet no suscriptions awaiting confirmation"
          And I should see "There are yet no suscriptions solve for this course"  
 
 	Scenario: See the list of old suscription order by suscription date

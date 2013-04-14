@@ -1,21 +1,19 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="container" >
-		<div class="row" style="margin: 0;">
-			<h4>{% trans "data_export" %}</h4>
+	<div class="container-fluid" >
+		<div class="row-fluid">
+			<div class="span12">
+				<h4>{% trans "data_export" %}</h4>
+			</div>
 		</div>
-		<div class="row" style="margin: 0;">
-			<h5>{% trans "choose_a_course" %}</h5>
-		</div>
-		<div>
-			<ul>
-				{% for course in courses %}
-					<li><a href="/teacher/export/download/{{ course.pk }}" >{{ course.name }}</a></li>
-				{% empty %}
-					<li>{% trans "empty_course_list" %}</li>
-				{% endfor %}
-			</ul>
+		<div class="row-fluid">
+			<div class="span6">
+				<span class="">{% trans 'data_export_download_message' %}</a>
+			</div>
+			<div class="span4">
+				<a class="btn btn-primary" href="/teacher/export/download/{{ course.pk }}" >{% trans 'Download' %}</a>
+			</div>
 		</div>
 		<div><a href="javascript:history.back()">{% trans "back" %}</a></div>
 	</div>

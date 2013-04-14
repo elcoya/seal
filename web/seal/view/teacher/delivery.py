@@ -10,19 +10,26 @@ from seal.model.automatic_correction import AutomaticCorrection
 from seal.model.correction import Correction
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 import shutil
+from seal.model.course import Course
 
 TYPEZIP = "application/zip"
 
 @login_required
-def listdelivery(request, idpractice):
+def listdelivery(request, idcourse, idpractice):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         practice = Practice.objects.get(pk=idpractice)
         table_deliveries = []
         deliveries = Delivery.objects.filter(practice=practice).order_by('deliverDate')
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)
             table_deliveries.append({'delivery': delivery, 'correction':correction})
-        return render(request, 'delivery/listdelivery.html', {'table_deliveries': table_deliveries , 'practice': practice,})
+        return render(request, 'delivery/listdelivery.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'table_deliveries': table_deliveries , 'practice': practice,})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
@@ -55,8 +62,11 @@ def walk_directory(files_list, path, relative_path):
             walk_directory(files_list, os.path.join(path, directory), os.path.join(relative_path, directory))
 
 @login_required
-def browse(request, iddelivery, file_to_browse=None):
+def browse(request, idcourse, iddelivery, file_to_browse=None):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         delivery = Delivery.objects.get(pk=iddelivery);
         extraction_dir = os.path.join(managepath.get_instance().get_temporary_files_path(), str(delivery.pk))
         if (not os.path.exists(extraction_dir)):
@@ -73,25 +83,34 @@ def browse(request, iddelivery, file_to_browse=None):
             with open(file_path, 'r') as content_file:
                 file_content = content_file.read()
         return render(request, 'delivery/browsedelivery.html', 
-                      {'delivery': delivery, 'files_list': files_list, 'file_content': file_content})
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'delivery': delivery, 'files_list': files_list, 'file_content': file_content})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def explore(request, iddelivery):
+def explore(request, idcourse, iddelivery):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        
         if(os.path.exists(os.path.join(managepath.get_instance().get_temporary_files_path(), str(iddelivery)))):
             shutil.rmtree(os.path.join(managepath.get_instance().get_temporary_files_path(), str(iddelivery)))
-        return browse(request, iddelivery)
+        return browse(request, idcourse, iddelivery)
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def detail(request, iddelivery):
+def detail(request, idcourse, iddelivery):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         delivery = Delivery.objects.get(pk=iddelivery);
         correction = Correction.objects.filter(delivery=delivery)
-        return render(request, 'delivery/deliverydetail.html', {'delivery': delivery, 'correction':correction})
+        return render(request, 'delivery/deliverydetail.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'delivery': delivery, 'correction':correction})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 

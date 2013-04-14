@@ -15,10 +15,14 @@ from seal.utils.managepath import Managepath
 import os
 
 @login_required
-def choose(request):
+def choose(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
-        return render_to_response('export/choose.html', {'courses': courses, }, context_instance=RequestContext(request))
+        current_course = courses.get(pk=idcourse)
+
+        return render_to_response('export/choose.html', 
+                                  {'current_course' : current_course,
+                                   'courses': courses, }, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 

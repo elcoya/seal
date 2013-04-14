@@ -75,3 +75,6 @@ class Practice(models.Model):
         
     def get_remaining_percentage(self):
         return 100 - self.get_completion_percentage()
+    
+    def count_deliveries(self):
+        return self.delivery_set.count()

@@ -1,14 +1,11 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="container">
-		<div class="row" style="margin: auto;">
+	<div class="container-fluid">
+		<div class="row-fluid" style="margin: auto;">
 			<h4>{% trans "pending_deliveries" %}</h4>
 		</div>
 		{% for row in final_list %}
-		<div class="row" style="margin: auto;">
-			<h5>{% trans "Course" %} {{ row.course }}</h5>
-		</div>
 		<div>
 			{% for content in row.data %}
 			<span style="text-decoration: underline;">{% trans "Practice" %} {{ content.practice.uid }}</span>
