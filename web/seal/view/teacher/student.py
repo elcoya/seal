@@ -22,6 +22,8 @@ from seal.forms.studentSearch import StudentSearchForm
 from django.db.models import Q
 
 PATHOK = "/teacher/students/list/%s"
+PATH_COURSE_LIST = "/teacher/students/list/%s/"
+PATH_SHIFT_LIST = "/teacher/students/listshift/%s/%s/"
 PATHOKENROLED = "/teacher/students/"
 MAXPAGINATOR = 10
 
@@ -48,8 +50,10 @@ def index(request):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def newstudent(request, idshift):
+def newstudent(request, idcourse, idshift=None):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
         if (request.method == 'POST'):
             form = StudentForm(request.POST)
             if (form.is_valid()):
@@ -65,16 +69,25 @@ def newstudent(request, idshift):
                 
                 mail = Mail()
                 mail.save_mail(SUBJECTMAILCREATE, BODYMAILCREATE % (user.username, form.data['passwd']), user.email)
-                return HttpResponseRedirect(PATHOK % str(idshift))
+                if idshift is None:
+                    return HttpResponseRedirect(PATH_COURSE_LIST % idcourse)
+                else:
+                    return HttpResponseRedirect(PATH_SHIFT_LIST % (idcourse, idshift))
         else:
             form = StudentForm(initial={'shifts': [idshift]})
-        return render(request, 'student/new-student.html', {'form': form, 'idshift': idshift}, context_instance=RequestContext(request))
+        return render(request, 'student/new-student.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'idshift': idshift}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def editstudent(request, idshift, idstudent):
+def editstudent(request, idcourse, idshift, idstudent):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         student = Student.objects.get(pk=idstudent)     
         if (request.method == 'POST'):
             form = StudentForm(request.POST, instance=student,
@@ -88,10 +101,16 @@ def editstudent(request, idshift, idstudent):
                 student.user.last_name = form.data['last_name']
                 student.user.save()
                 form.save()
-                return HttpResponseRedirect(PATHOK % str(idshift))
+                if idshift is None:
+                    return HttpResponseRedirect(PATH_COURSE_LIST % idcourse)
+                else:
+                    return HttpResponseRedirect(PATH_SHIFT_LIST % (idcourse, idshift))
         else:
             form = StudentForm(instance=student, initial={'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
-        return render(request, 'student/editstudent.html', {'form': form, 'idshift': idshift}, context_instance=RequestContext(request))
+        return render(request, 'student/editstudent.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'idshift': idshift}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
@@ -171,6 +190,32 @@ def list_student(request, idcourse):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
+def list_shift_students(request, idcourse, idshift):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+
+        shift = Shift.objects.get(pk = idshift)
+        students = shift.student_set.order_by('uid')
+        listable_students = []
+        for student in students:
+            student_dict = {'pk' : student.pk,
+                            'uid' : student.uid,
+                            'full_name' : student.get_full_name(),
+                            'email' : student.user.email,
+                            'shift' : student.get_shift(current_course),}
+            if student.corrector is not None:
+                student_dict.update({'corrector' : student.corrector.user.last_name})
+            listable_students.append(student_dict)
+        return render(request, 'student/liststudent.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses, 
+                       'shift' : shift,
+                       'students': listable_students}, context_instance=RequestContext(request))
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+@login_required
 def list_student_deliveries(request, idcourse, idstudent):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
@@ -190,8 +235,11 @@ def list_student_deliveries(request, idcourse, idstudent):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def studentsearch(request):
+def studentsearch(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+
         form = StudentSearchForm()
         students = []
         if (request.method == 'POST'):
@@ -199,15 +247,24 @@ def studentsearch(request):
             data = form.data['data_search']
             students = Student.objects.filter(Q(uid__icontains = data) | Q(user__first_name__icontains = data) | 
                                                   Q(user__last_name__icontains = data))
-        return render(request,'student/studentsearch.html', {'query':data, 'students': students})
+        return render(request,'student/studentsearch.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses, 
+                       'query': data, 'students': students})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def studentdetail(request, idstudent):
+def studentdetail(request, idcourse, idstudent):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+
         student = Student.objects.get(pk=idstudent)
-        return render(request, 'student/detail.html', {'student':student}, context_instance=RequestContext(request))
+        return render(request, 'student/detail.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses, 
+                       'student':student}, context_instance=RequestContext(request))
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
     

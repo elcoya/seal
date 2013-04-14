@@ -21,13 +21,15 @@ urlpatterns += patterns('view.teacher.practice',
 urlpatterns += patterns('view.teacher.student',
     url(r'^students/?$', 'index'),
     url(r'^students/pendingdelivery/(?P<idcourse>\d+)/$', 'pendingdeliveries'),
-    url(r'^students/newstudent/(?P<idshift>\d+)$', 'newstudent'),
-    url(r'^students/editstudent/(?P<idshift>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
+    url(r'^students/newstudent/(?P<idcourse>\d+)/$', 'newstudent'),
+    url(r'^students/newstudent/(?P<idcourse>\d+)/(?P<idshift>\d+)$', 'newstudent'),
+    url(r'^students/editstudent/(?P<idcourse>\d+)/(?P<idshift>\d+)/(?P<idstudent>\d+)/$', 'editstudent'),
     url(r'^students/editstudent/(?P<idstudent>\d+)/$', 'edit_unenrolled_student'),
     url(r'^students/list/(?P<idcourse>\d+)/$', 'list_student'),
+    url(r'^students/listshift/(?P<idcourse>\d+)/(?P<idshift>\d+)/$', 'list_shift_students'),
     url(r'^students/listdeliveries/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'list_student_deliveries'),
-    url(r'^students/search/$', 'studentsearch'),
-    url(r'^students/detail/(?P<idstudent>\d+)/$', 'studentdetail'),
+    url(r'^students/search/(?P<idcourse>\d+)/$', 'studentsearch'),
+    url(r'^students/detail/(?P<idcourse>\d+)/(?P<idstudent>\d+)/$', 'studentdetail'),
 )
 
 urlpatterns += patterns('view.teacher.shift',
@@ -38,7 +40,8 @@ urlpatterns += patterns('view.teacher.shift',
 
 urlpatterns += patterns('view.teacher.course',
     url(r'^course/?$', 'index'),
-    url(r'^course/newcourse/?$', 'newcourse'),
+    url(r'^course/newcourse/$', 'newcourse'),
+    url(r'^course/newcourse/(?P<idcourse>\d+)$', 'newcourse'),
     url(r'^course/editcourse/(?P<idcourse>\d+)$', 'editcourse'),
     url(r'^course/detailcourse/(?P<idcourse>\d+)$', 'detailcourse'),
 )
@@ -52,8 +55,8 @@ urlpatterns += patterns('view.teacher.delivery',
 )
 
 urlpatterns += patterns('view.teacher.correction',
-    url(r'^correction/(?P<iddelivery>\d+)/(?P<previus>\d+)/$', 'index'),
-    url(r'^correction/edit/(?P<idcorrection>\d+)/(?P<previus>\d+)/$', 'editcorrection'),
+    url(r'^correction/(?P<idcourse>\d+)/(?P<iddelivery>\d+)/(?P<previous>\d+)/$', 'index'),
+    url(r'^correction/edit/(?P<idcourse>\d+)/(?P<idcorrection>\d+)/(?P<previous>\d+)/$', 'editcorrection'),
 )
 
 urlpatterns += patterns('view.teacher.suscription',
@@ -65,7 +68,7 @@ urlpatterns += patterns('view.teacher.suscription',
 
 urlpatterns += patterns('view.teacher.automatic_correction',
     #url(r'^runautomatic_correction', 'run_automatic_correction_subprocess'),
-    url(r'^automatic_correction/(?P<iddelivery>\d+)/$', 'details'),
+    url(r'^automatic_correction/(?P<idcourse>\d+)/(?P<iddelivery>\d+)/$', 'details'),
 )
 
 urlpatterns += patterns('view.teacher.export',

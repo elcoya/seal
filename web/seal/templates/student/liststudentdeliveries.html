@@ -2,8 +2,10 @@
 {% load i18n %}
 {% block content %}
 <div class="container-fluid" >
-	<div class="row" style="margin: auto; padding: 15px 0;">
-		{% trans "Deliveries of student "%}<b>{{ student.get_full_name}} ({{ student.uid }})</b>
+	<div class="row-fluid">
+		<div class="span12">
+			{% trans "Deliveries of student "%}<b>{{ student.get_full_name}} ({{ student.uid }})</b>
+		</div>
 	</div>
 	<table class="table table-striped">
 		<thead>
@@ -26,7 +28,12 @@
 				<td>{{ delivery_row.delivery.deliverDate }}</td>
 				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "Corrected" %}</span> {% else %} <span class="label label-warning">{% trans "Pending" %}</span> {% endif %} </td>
 				<td><span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span></td>
-				<td><a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a><a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}"></a><a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"></a><a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"></a></td>
+				<td>
+					<a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+					<a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+					<a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+					<a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}/1"></a>
+				</td>
 			</tr>
 			{% empty %}
 			<tr>

@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		{% block addl_styles %}
-		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	{% block addl_styles %}
+	<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+		<style type="text/css">
+		
+		  /* Sticky footer styles
+		  -------------------------------------------------- */
+		
+		  html,
+		  body {
+		    height: 100%;
+		    /* The html and body elements cannot have any padding or margin. */
+		  }
+		
+		  /* Wrapper for page content to push down footer */
+		  #wrap {
+		    min-height: 100%;
+		    height: auto !important;
+		    height: 100%;
+		    /* Negative indent footer by it's height */
+		    margin: 0 auto -60px;
+		  }
+		
+		  /* Set the fixed height of the footer here */
+		  #push,
+		  #footer {
+		    height: 60px;
+		  }
+		  #footer {
+		    background-color: #f5f5f5;
+		  }
+		
+		  /* Lastly, apply responsive CSS fixes as necessary */
+		  @media (max-width: 767px) {
+		    #footer {
+		      margin-left: -20px;
+		      margin-right: -20px;
+		      padding-left: 20px;
+		      padding-right: 20px;
+		    }
+		  }
+
+	      /* Custom page CSS
+	      -------------------------------------------------- */
+	      /* Not required for template or sticky footer method. */
+	
+	      #wrap > .container {
+	        padding-top: 60px;
+	      }
+	      .container .credit {
+	        margin: 20px 0;
+	      }
+	
+	      code {
+	        font-size: 80%;
+	      }
+			
+		</style>
+    	<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" />
-		<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
 		{% endblock %}
 		{% block addl_script %}
 		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
@@ -16,39 +70,50 @@
 		{% block head %}{% endblock %}
 	</head>
 	<body>
-		{% load i18n %}
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<span class="brand muted">{% trans 'brand' %}</span>
-					<ul class="nav">
-						<li class="divider-vertical"></li>
-						{% block nav_opts %}{% endblock %}
-					</ul>
-					<ul class="nav pull-right">
-						{% block action_opts %}{% endblock %}
-					</ul>
-				</div>
-			</div>
-		</div><!-- /.navbar -->
-		
-		<div class="container main-container">
-			<div class="masthead">
-				<div class="row">
-					<div class="span3">
+	    <div id="wrap">
+			{% load i18n %}
+			<div class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<span class="brand muted">{% trans 'brand' %}</span>
+						<ul class="nav">
+							<li class="divider-vertical"></li>
+							{% block nav_opts %}{% endblock %}
+						</ul>
+						<ul class="nav pull-right">
+							{% block action_opts %}{% endblock %}
+						</ul>
 					</div>
-					{% block welcome %}
-					{% endblock %}
 				</div>
-			</div>
-			{% block body %}{% endblock %}
-			<div id="footer" style="padding-top: 20px;">
-				<div class="container-fluid">
-					<p class="muted credit">
-						© FIUBA 2012 - ALGO3 <i>beta</i>
-				</div>
-			</div>
+			</div><!-- /.navbar -->
+			<div class="container main-container">
+				{% block body %}{% endblock %}
+			</div><!-- /container -->
+			<div id="push"></div>
 		</div>
-		<!-- /container -->
+	    <div id="footer">
+			<div class="container main-container">
+				<p class="muted credit">
+					{% trans 'brand' %} <i>beta</i> - © FIUBA 2012
+				</p>
+			</div>
+	    </div>
+		    
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-transition.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-alert.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-modal.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-scrollspy.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-tab.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-tooltip.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-popover.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-button.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-collapse.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-carousel.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-typeahead.js"></script>
+	    
 	</body>
 </html>

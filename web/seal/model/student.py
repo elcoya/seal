@@ -21,7 +21,7 @@ class Student(models.Model):
     """
     
     uid = models.CharField(unique=True, max_length = 32,verbose_name="Padron")
-    shifts = models.ManyToManyField(Shift, blank=True)
+    shifts = models.ManyToManyField(Shift, blank=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     corrector = models.ForeignKey(Teacher, null=True, blank=True)
     

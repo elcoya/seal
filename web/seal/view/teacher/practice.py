@@ -126,6 +126,9 @@ def script(request, idcourse , idpractice):
 @login_required
 def practicefilelist(request, idcourse, idpractice):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
         practice = Practice.objects.get(pk = idpractice)
         practiceFiles = practice.get_practice_file()
         if (request.method == 'POST'):
@@ -137,7 +140,10 @@ def practicefilelist(request, idcourse, idpractice):
                 return HttpResponseRedirect(PATHFILEOK % (str(idcourse), str(practice.pk)))
         else:
             form = PracticeFileForm()
-        return render(request, 'practice/uploadFile.html', {'form': form, 'idcourse':idcourse, 'namepractice':practice.uid, 'practiceFiles': practiceFiles})
+        return render(request, 'practice/uploadFile.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'idcourse':idcourse, 'namepractice':practice.uid, 'practiceFiles': practiceFiles})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 

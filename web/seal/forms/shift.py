@@ -4,4 +4,5 @@ from seal.model.shift import Shift
 class ShiftForm(ModelForm):
     class Meta:
         model = Shift
+        exclude = ('course',)
     

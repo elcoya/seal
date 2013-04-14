@@ -9,7 +9,7 @@
 			<ul>
 				{% for filepath in files_list %}
 					<li>
-						<a href="/teacher/delivery/browse/{{ delivery.pk }}/{{ filepath }}" >{{ filepath }}</a>
+						<a href="/teacher/delivery/browse/{{ current_course.pk }}/{{ delivery.pk }}/{{ filepath }}" >{{ filepath }}</a>
 					</li>
 				{% empty %}
 					<li>{% trans "No files where found in this delivery" %}</li>

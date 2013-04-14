@@ -996,3 +996,21 @@ msgstr "Pendientes de entrega"
 
 msgid "data_export_download_message"
 msgstr "Descargar la información correspondiente al curso seleccionado"
+
+msgid "empty_database_message"
+msgstr "Parece que eres nuevo aquí. Para empezar, crea un nuevo curso para que tus alumnos puedan inscribirse."
+
+msgid "no_courses"
+msgstr "No hay cursos"
+
+msgid "new_practice"
+msgstr "Nueva Práctica"
+
+msgid "new_shift"
+msgstr "Nuevo Turno"
+
+msgid "shift"
+msgstr "Turno"
+
+msgid "edit_course"
+msgstr "Editar Curso"

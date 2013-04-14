@@ -15,6 +15,7 @@ from seal.model.shift import Shift
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHOKNEWCOURSE = "/"
+PATH_DASHBOARD = "/teacher/%s"
 MAXPAGINATOR = 25
 
 @login_required
@@ -36,33 +37,47 @@ def index(request):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def newcourse(request):
+def newcourse(request, idcourse=None):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        if idcourse is not None:
+            current_course = courses.get(pk=idcourse)
+        else:
+            current_course = None
+        
         if (request.method == 'POST'):
             form = CourseForm(request.POST)
             if (form.is_valid()):
                 form.save()
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect(PATH_DASHBOARD % form.instance.pk)
         else:
             form = CourseForm()
-        return render(request, 'course/newcourse.html', {'form': form, })
+        return render(request, 'course/newcourse.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, })
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
 def editcourse(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
-        course = Course.objects.get(pk=idcourse)     
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        
+        course = current_course
         if (request.method == 'POST'):
             form = CourseForm(request.POST, instance=course)
             if (form.is_valid()):
                 form_edit = form.save(commit=False)
                 form_edit.save()
-                return HttpResponseRedirect(PATHOKNEWCOURSE)
+                return HttpResponseRedirect(PATH_DASHBOARD % course.pk)
         else:
             form = CourseForm(instance=course)
         return render(request, 'course/editcourse.html',
-                      {'form': form, 'course': course},
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'course': course},
                       context_instance=RequestContext(request))
     
     else:

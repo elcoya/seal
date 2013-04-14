@@ -1,12 +1,18 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-<form id='formeditcoruse' action='' method='post'>
-	{% csrf_token %}
-	<div><h4>{% blocktrans with course.name as coursename %}Course {{coursename}} edit{% endblocktrans %}</h4></div>
-	<table style="margin: 20px 0;">
-		{{ form.as_table }}
-		<tr><td colspan="2" style="text-align: right; "><button class="btn btn-primary" type='submit' >{% trans "Save" %}</button></td></tr>
-	</table>	
-</form>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<form id='formeditcoruse' action='' method='post'>
+				{% csrf_token %}
+				<div><h4>{% blocktrans with course.name as coursename %}Course {{coursename}} edit{% endblocktrans %}</h4></div>
+				<table style="margin: 20px 0;">
+					{{ form.as_table }}
+					<tr><td colspan="2" style="text-align: right; "><button class="btn btn-primary" type='submit' >{% trans "Save" %}</button></td></tr>
+				</table>	
+			</form>
+		</div>
+	</div>
+</div>
 {% endblock %}

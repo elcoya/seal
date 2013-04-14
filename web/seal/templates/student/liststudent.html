@@ -1,9 +1,16 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-
-	<div class="row" style="margin-top: 30px; margin-bottom: 10px; ">
-		<div class="span12">{% trans "Students in course: " %} <b>{{ current_course }}</b></div>
+<div class="container-fluid">
+	<div class="row-fluid margin-bottom">
+		<div class="span8">{% trans "Students in course: " %} <b>{{ current_course }}</b> 
+			{% if shift %}
+				{% trans "shift" %} <b>{{ shift }}</b>
+			{% endif %}
+		</div>
+		<div class="span4">
+			<a name="newstudent" href="/teacher/students/newstudent/{{ current_course.pk }}/{{ shift.pk }}" class="btn btn-primary pull-right">+ {% trans "New Student" %}</a>
+		</div>
 	</div>
 	<table class="table table-striped">
 		<thead>
@@ -31,21 +38,18 @@
 					{% endif %} 
 				</td>
 				<td>
-					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{student.pk}}"></a>
-					<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ student.shift.pk }}/{{student.pk}}"></a>
+					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{ current_course.pk }}/{{student.pk}}"></a>
+					<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ current_course.pk }}/{{ student.shift.pk }}/{{student.pk}}"></a>
 					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{ current_course.pk }}/{{student.pk}}"></a>	
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="5" style="text-align: center; ">{% trans "There are yet no Students" %}</td>
+				<td colspan="6" style="text-align: center; ">{% trans "There are yet no Students" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	<div class="row" style="margin-top: 20px; margin-bottom: 20px; ">
-		<div class="span8"><a name="newstudent" href="/teacher/students/newstudent/{{ shift.pk }}" class="btn btn-primary">+ {% trans "New Student" %}</a></div>
-		<div class="span4" style="text-align: right;"><a name="suscription" href="/teacher/suscription/list/{{ shift.pk }}" class="btn btn-info">{% trans "Suscription" %}</a></div>
-	</div>
-	<div><a href="/teacher/course/detailcourse/{{ shift.course.pk  }}">{% trans "Back" %}</a></div>
+	<div><a href="/teacher/{{ current_course.pk  }}">{% trans "Back" %}</a></div>
+</div>
 {% endblock %}

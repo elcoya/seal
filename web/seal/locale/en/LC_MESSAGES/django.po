@@ -864,3 +864,21 @@ msgstr "Pending of delivery"
 
 msgid "data_export_download_message"
 msgstr "Download exported information regarding the selected course"
+
+msgid "empty_database_message"
+msgstr "It seems that you are new arround here. To get started, create a course so that your students can suscribe."
+
+msgid "no_courses"
+msgstr "No courses"
+
+msgid "new_practice"
+msgstr "New Practice"
+
+msgid "new_shift"
+msgstr "New Shift"
+
+msgid "shift"
+msgstr "Shift"
+
+msgid "edit_course"
+msgstr "Edit Course"

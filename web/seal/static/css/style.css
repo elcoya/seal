@@ -38,12 +38,6 @@ ul {
 	margin: 4px;	
 }
 
-.container .box {
-	padding: 10px 0;
-	width: 96px;
-	border-radius: 10px;
-}
-
 h5.no-margin {
 	margin: 0;
 }
@@ -71,6 +65,10 @@ hr.thick {
 
 .space-before {
 	margin-top: 15px;
+}
+
+.margin-bottom {
+	margin-bottom: 20px;
 }
 
 .small-padding {

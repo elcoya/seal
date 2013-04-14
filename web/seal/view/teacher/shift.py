@@ -13,6 +13,8 @@ from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 
 PATHOKNEWCOURSE = "/teacher/course/detailcourse/%s"
 
+PATH_DASHBOARD = "/teacher/%s"
+
 @login_required
 def editshift(request, idshift):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
@@ -34,14 +36,20 @@ def editshift(request, idshift):
 def newshift(request, idcourse):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         course = Course.objects.get(pk=idcourse)
+        courses = Course.objects.all()
         if (request.method=='POST'):
-            form = ShiftForm(request.POST)
+            course = Course.objects.get(pk = idcourse)
+            shift = Shift(course = course)
+            form = ShiftForm(request.POST, instance = shift)
             if (form.is_valid()):
-                form.save()
-                return HttpResponseRedirect(PATHOKNEWCOURSE % course.id)
+                shift.save()
+                return HttpResponseRedirect(PATH_DASHBOARD % course.id)
         else:
             form = ShiftForm(initial={'course':course})
-        return render(request, 'shift/newshift.html', {'form': form, 'idcourse':idcourse})
+        return render(request, 'shift/newshift.html', 
+                      {'current_course': course,
+                       'courses': courses,
+                       'form': form, 'idcourse':idcourse})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
