@@ -83,7 +83,7 @@ def newstudent(request, idcourse, idshift=None):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def editstudent(request, idcourse, idshift, idstudent):
+def editstudent(request, idcourse, idstudent, idshift=None):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
         current_course = courses.get(pk=idcourse)

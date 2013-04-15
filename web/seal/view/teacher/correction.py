@@ -10,7 +10,7 @@ from seal.model.teacher import Teacher
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 from seal.model.course import Course
 
-PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s"
+PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s/%s"
 #PATHOK = "/teacher/delivery/list/%s"
 #SUBJECTEMAIL = "You have a correction to see on SEAL"
 #BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s. Coment: %s. Grade: %s"
@@ -29,7 +29,7 @@ def index(request, idcourse, iddelivery, previous):
         correction = Correction.objects.filter(delivery=delivery)
         corrector = ""
         if len(correction) != 0:
-            return HttpResponseRedirect(PATHREDIRECTINDEX % (str(correction[0].pk),str(previous)))
+            return HttpResponseRedirect(PATHREDIRECTINDEX % (current_course.pk, str(correction[0].pk), str(previous)))
         else:
             if (request.method == 'POST'):
                 correction = Correction(delivery=delivery)

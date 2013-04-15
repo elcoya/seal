@@ -10,6 +10,12 @@
 		</table>
 		<button class="btn btn-primary" type='submit'>{% trans "Save" %}</button>
 	</form>
-	<div><a href="/teacher/students/list/{{ idshift }}">{% trans "Back" %}</a></div>
+		<div>
+		{% if idshift %}
+			<a href="/teacher/students/listshift/{{ current_course.pk }}/{{ idshift }}">{% trans "Back" %}</a>
+		{% else %}
+			<a href="/teacher/students/list/{{ current_course.pk }}">{% trans "Back" %}</a>
+		{% endif %}
+	</div>
 </div>
 {% endblock %}
