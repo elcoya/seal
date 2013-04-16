@@ -15,6 +15,8 @@ PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s/%s"
 #SUBJECTEMAIL = "You have a correction to see on SEAL"
 #BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s. Coment: %s. Grade: %s"
 
+PATH_DASHBOARD = "/teacher/%s"
+
 SUBJECTEMAIL = "Tienes una correccion para ver en ALGO3"
 BODYEMAIL = "Tienes una correccion para ver en la entrega: %s de la practica: %s. Comentario: %s. Nota: %s"
 
@@ -41,14 +43,7 @@ def index(request, idcourse, iddelivery, previous):
                     form.save()
                     mail = Mail()
                     mail.save_mail(SUBJECTEMAIL, BODYEMAIL % (str(correction.delivery.pk), correction.delivery.practice.uid, form.data['publicComent'], form.data['grade']), correction.delivery.student.user.email)
-                    if (previous == str(1)):
-                        PATHOK = "/"
-                    elif (previous == str(3)):
-                        PATHOK = "/teacher/delivery/list/%s" % (str(correction.delivery.practice.pk))
-                    elif (previous == str(4)):
-                        shift = correction.delivery.student.shifts.filter(course=correction.delivery.practice.course)[0]
-                        PATHOK = "/teacher/students/listdeliveries/%s/%s/" % (str(correction.delivery.student.pk), shift.pk)
-                    return HttpResponseRedirect(PATHOK)
+                    return HttpResponseRedirect(PATH_DASHBOARD % current_course.pk)
     
             else:
                 form = CorrectionForm()
@@ -80,14 +75,7 @@ def editcorrection(request, idcourse, idcorrection, previous):
                                                           form.data['publicComent'], 
                                                           form.data['grade']), 
                                correction.delivery.student.user.email)
-                if (previous == str(1)):
-                    PATHOK = "/"
-                elif (previous == str(3)):
-                    PATHOK = "/teacher/delivery/list/%s" % (str(correction.delivery.practice.pk))
-                elif (previous == str(4)):
-                    shift = correction.delivery.student.shifts.filter(course=correction.delivery.practice.course)[0]
-                    PATHOK = "/teacher/students/listdeliveries/%s/%s/" % (str(correction.delivery.student.pk), shift.pk)
-                return HttpResponseRedirect(PATHOK)
+                return HttpResponseRedirect(PATH_DASHBOARD % current_course.pk)
     
         else:    
             form = CorrectionForm(instance=correction)

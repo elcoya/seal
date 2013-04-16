@@ -29,8 +29,8 @@
 				{% trans "no corrector" %}
 				{% endif %} </td>
 				<td>
-					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{student.pk}}"></a>
-					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{student.pk}}"></a>	
+					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{current_course.pk}}/{{student.pk}}"></a>
+					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{current_course.pk}}/{{student.pk}}"></a>	
 				</td>
 			</tr>
 			{% empty %}

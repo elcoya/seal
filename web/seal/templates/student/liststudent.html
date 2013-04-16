@@ -6,6 +6,10 @@
 		<div class="span8">{% trans "Students in course: " %} <b>{{ current_course }}</b> 
 			{% if shift %}
 				{% trans "shift" %} <b>{{ shift }}</b>
+				<span>&nbsp;</span>
+				<a name="edit-shift" title="{% trans 'Edit' %}" class="btn btn-small" href="/teacher/shifts/editshift/{{ current_course.pk }}/{{ shift.pk }}">
+					<span class="icon-edit"></span>
+				</a>
 			{% endif %}
 		</div>
 		<div class="span4">

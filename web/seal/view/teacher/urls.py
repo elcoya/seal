@@ -35,7 +35,7 @@ urlpatterns += patterns('view.teacher.student',
 
 urlpatterns += patterns('view.teacher.shift',
     url(r'^shifts/newshift/(?P<idcourse>\d+)/?$', 'newshift'),
-    url(r'^shifts/editshift/(?P<idshift>\d+)/?$', 'editshift'),
+    url(r'^shifts/editshift/(?P<idcourse>\d+)/(?P<idshift>\d+)/?$', 'editshift'),
     url(r'^shifts/deleteshift/(?P<idshift>\d+)/?$', 'deleteshift'),
 )
 

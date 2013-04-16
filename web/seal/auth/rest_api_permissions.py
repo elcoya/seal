@@ -15,8 +15,8 @@ class ApplicationKeyPermission(permissions.BasePermission):
     application_key = settings.DAEMON_KEY
     admin_permission = rest_framework.permissions.IsAdminUser()
     
-    def has_permission(self, request, view, obj):
-        has_admin_permissions = self.admin_permission.has_permission(request, view, obj)
+    def has_permission(self, request, view, obj=None):
+        has_admin_permissions = self.admin_permission.has_permission(request, view)
         if has_admin_permissions:
             return has_admin_permissions
         
