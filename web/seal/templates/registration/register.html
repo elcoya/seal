@@ -7,26 +7,15 @@
 <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
 
+
 {% block head %}
-<title>SEAL | Registarte</title>
+<title>{% trans 'brand' %} | Registarte</title>
 {% endblock %}
 
 {% block body %}
-<body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="/">ALGO3FIUBA</a>
-					<div class="nav-collapse collapse">
-						{% block nav %}{% endblock %}
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
-	<br>	
     <div class="container">
 		<form class="form-signin" style="max-width: 320px" action="" method="post" >
-			<h2 align="center" class="form-signin-heading">{% trans "Registrate on SEAL" %}</h2>
+			<h2 align="center" class="form-signin-heading">{% trans "registrate_on" %} {% trans 'brand' %}</h2>
 			{% csrf_token %}
 			{{ form|as_bootstrap  }}
 			<span class="validation_error">{{ captcha_response }}</span><script type="text/javascript" src="http://api.recaptcha.net/challenge?k={{captcha_publick}}"></script>
@@ -42,5 +31,4 @@
 			</div>
 		</form>
 	</div>
-</body>
 {% endblock %}

@@ -882,3 +882,6 @@ msgstr "Shift"
 
 msgid "edit_course"
 msgstr "Edit Course"
+
+msgid "registrate_on"
+msgstr "Registrate on"

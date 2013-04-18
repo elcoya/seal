@@ -152,11 +152,11 @@
 									<span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
 								</td>	
 								<td>
-									<a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
-							    	<a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ delivery_row.delivery.pk }}"></a>
-							    	<a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ delivery_row.delivery.pk }}"></a>
-							    	<a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ delivery_row.delivery.pk}}/1"></a>
-							    </td>	
+									<a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
+							    	<a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+							    	<a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+							    	<a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}/1"></a>
+							    </td>
 							</tr>
 							{% empty %}
 							<tr>

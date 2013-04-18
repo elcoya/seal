@@ -10,24 +10,13 @@ Main page to recovery password.
 <link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
 <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
+
 {% block head %}
-<title>SEAL | Recovery Password</title>
+<title>{% trans "brand" %} | Recovery Password</title>
 {% endblock %}
 
 {% block body %}
-<body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="/">ALGO3FIUBA</a>
-				<div class="nav-collapse collapse">
-					{% block nav %}{% endblock %}
-				</div><!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="content" >
+	<div class="container" >
 		<form method="post" class="form-signin">
 			<h2 align="center" class="form-signin-heading">{% trans "Recover Password" %}</h2>
 			{% csrf_token %}
@@ -40,5 +29,4 @@ Main page to recovery password.
 
 		</form>
 	</div>
-</body>
 {% endblock %}
