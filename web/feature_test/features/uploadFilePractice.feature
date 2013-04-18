@@ -6,8 +6,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And Teacher "teacher" exists with password "teacher"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And I log in as "teacher" "teacher"
-	 	 When I click the button "detail2012-1"
-	 	  And I click the button "uploadfileTP Intro"
+	 	 When I click the button "uploadfileTP Intro"
 	 	 Then I should see "There are yet no deliveries uploaded to this practice"
 
 	 Scenario: Upload file
@@ -16,8 +15,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And Teacher "teacher" exists with password "teacher"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And I log in as "teacher" "teacher"
-	 	 When I click the button "detail2012-1"
-	 	  And I click the button "uploadfileTP Intro"
+	 	 When I click the button "uploadfileTP Intro"
 	 	  And I fill the upload file form with name "enunciado"
 	 	  And I submit the form
 	 	 Then I should see "enunciado"
@@ -28,8 +26,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And Teacher "teacher" exists with password "teacher"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And I log in as "teacher" "teacher"
-	 	 When I click the button "detail2012-1"
-	 	  And I click the button "uploadfileTP Intro"
+	 	 When I click the button "uploadfileTP Intro"
 	 	  And I fill the upload file form with name "enunciado"
 	 	  And I submit the form
 	 	  And I click in the "Delete" link
@@ -42,8 +39,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And text file is bound to practice "TP Intro" with id "1"
 	 	  And I log in as "teacher" "teacher"
-	 	 When I click the button "detail2012-1"
-	 	  And I click the button "uploadfileTP Intro"
+	 	 When I click the button "uploadfileTP Intro"
 	 	 Then I should see "Edit"
 
 	Scenario: Not see the option edit when i upload a not text file
@@ -53,8 +49,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And not text file is bound to practice "TP Intro" with id "1"
 	 	  And I log in as "teacher" "teacher"
-	 	 When I click the button "detail2012-1"
-	 	  And I click the button "uploadfileTP Intro"
+	 	 When I click the button "uploadfileTP Intro"
 	 	 Then I should not see "Edit"
 	 	  And I should see "Non-editable"
 

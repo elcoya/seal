@@ -2,8 +2,8 @@ Feature: As a Teacher I should be able to see de automatic correction result
 
     Scenario: Upload a script for a practice
         Given Teacher "teacher" exists with password "teacher"
-          And I log in as "teacher" "teacher"
           And course "2012-1" exists
+          And I log in as "teacher" "teacher"
           And practice "TP_Intro" exists in course "2012-1" with deadline "2012-12-01"
           And I am at the upload script form for practice "TP_Intro" and course "2012-1"
          When I fill in the upload script form with the file "successfull_test_script.sh"
@@ -22,7 +22,7 @@ Feature: As a Teacher I should be able to see de automatic correction result
           And automatic_correction for all deliveries has stdout "this is the successfull bash script"
           And automatic_correction for all deliveries has exit_value "0"
           And I log in as "teacher" "teacher"
-         When I am in the list page of delivery from "TP Intro"
+         When I am in the list page of delivery from "TP Intro" of course "2012-1"
           And I click the button "autocorrection1"
          Then I should see "this is the successfull bash script"
           And I should see "Automatic check result: successfull"

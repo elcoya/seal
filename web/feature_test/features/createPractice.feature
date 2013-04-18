@@ -8,8 +8,7 @@ Feature: As a teacher I want to create a practice
 	    When I will the form with name "Practice_1"
 		 And Deadline "tomorrow" 
 	  	 And I submit the form
-	  	Then I should be in the practice list page
-		 And I should see "Practice_1"
+	  	Then I should see "Practice_1"
 
 	Scenario: Create practice with invalid deadline
 	   Given Teacher "teacher" exists with password "teacher"
