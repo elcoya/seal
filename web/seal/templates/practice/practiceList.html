@@ -7,9 +7,9 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>{% trans "Name Practice" %}</th>
+				<th>{% trans "Practice Name" %}</th>
 				<th>{% trans "Dead Line" %}</th>
-				<th>{% trans "Files" %}</th>
+				<!-- <th>{% trans "Files" %}</th> -->
 				<th>{% trans "Actions" %}</th>
 			</tr>
 		</thead>
@@ -18,12 +18,12 @@
 			<tr>
 				<td>{{ practice.uid }}</td>
 				<td>{{ practice.deadline }}</td>
-				<td><a href="/undergraduate/practice/practiceFile/{{ practice.pk}}">{% trans "Download" %}</a></td>
 				<td>
+					<a href="/undergraduate/practice/practiceFile/{{ practice.pk}}" title="{% trans 'Download' %}"><span class="icon-download-alt"></span>
 					{% if practice.isExpired %}
-						{% trans "Practice expired" %}
+						<span class="icon-minus-sign" title="{% trans 'Practice expired' %}"></span>
 					{% else %}
-						<a href="/undergraduate/delivery/upload/{{ practice.pk}}">{% trans "Make Delivery" %}</a>
+						<a href="/undergraduate/delivery/upload/{{ practice.pk}}" title="{% trans 'Make Delivery' %}"><span class="icon-circle-arrow-up"></span></a>
 					{% endif %}
 				</td>
 			</tr>

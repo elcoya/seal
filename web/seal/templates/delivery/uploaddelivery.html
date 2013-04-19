@@ -56,15 +56,23 @@
 				<td>
 					<a href="/undergraduate/correction/consult/{{ delivery.pk }}">
 						{% if delivery.correction_set.all %}
-							{% trans "corrected" %}
+							<span class="label label-success">{% trans "corrected" %}</span>
 						{% else %}
-							{% trans "uncorrected" %}
+							<span class="label label-important">{% trans "uncorrected" %}</span>
 						{% endif %}
 					</a>
 				</td>
 				<td>
 					<a href="/undergraduate/automatic_correction/{{ delivery.pk }}">
-						{{ delivery.get_automatic_correction.get_status }}
+						{% if delivery.get_automatic_correction.get_status == 'successfull' %}
+							<span class="label label-success">
+								{{ delivery.get_automatic_correction.get_status }}
+							</span>
+						{% elif delivery.get_automatic_correction.get_status == 'failed' %}
+							<span class="label label-important">{{ delivery.get_automatic_correction.get_status }}</span>
+						{% else %}
+							<span class="label label-warning">{{ delivery.get_automatic_correction.get_status }}</span>
+						{% endif %}
 					</a>
 				</td>
 			</tr>

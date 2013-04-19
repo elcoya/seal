@@ -15,7 +15,11 @@
 			{% for file in practiceFiles %}
 			<tr>
 				<td>{{ file.name }}</td>
-				<td><a href="/undergraduate/practice/download/{{ file.pk }}"> {% trans "Download" %} </a></td>
+				<td>
+					<a href="/undergraduate/practice/download/{{ file.pk }}" title="{% trans 'Download' %}">
+						<span class="icon-circle-arrow-down"></span>
+					</a>
+				</td>
 			</tr>
 			{% empty %}
 			<tr>

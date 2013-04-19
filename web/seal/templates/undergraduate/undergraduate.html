@@ -11,9 +11,8 @@
 {% block title_view %}{% trans "Student's view" %}{% endblock %}
 
 {% block nav_opts %}
-   	<li><a href="/">{% trans "Home" %}</a></li>
-   	<li class="divider-vertical"></li>
-    <li><a href="/undergraduate">{% trans "Courses" %}</a></li>
+   	<li><a href="/undergraduate/{{ current_course.pk }}" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
+    <!-- <li><a href="/undergraduate">{% trans "Courses" %}</a></li> -->
 {% endblock %}
 {% block action_opts %}
 	<li><div class="row-fluid">
@@ -27,11 +26,11 @@
 
 {% block body %}
 	{% if user.student_set.all %}
-		<div class="container">
+		<div class="container-fluid">
 	    	{% block content %}{% endblock %}
 		</div>
 	{% else %}
-		<div class="container" >
+		<div class="container-fluid" >
 	    	<p style="color: #A44; font-weight: bold; text-align: center; ">{% trans "You are not allowed in this section" %}</p>
 	    </div>
 	{% endif %}

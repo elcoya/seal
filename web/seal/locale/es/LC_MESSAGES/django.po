@@ -277,7 +277,7 @@ msgstr "Practicas"
 
 #: templates/course/detailcourse.html:12
 #: templates/practice/practiceList.html:10
-msgid "Name Practice"
+msgid "Practice Name"
 msgstr "Nombre de la Practica"
 
 #: templates/course/detailcourse.html:13
