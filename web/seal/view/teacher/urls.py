@@ -56,8 +56,8 @@ urlpatterns += patterns('view.teacher.delivery',
 )
 
 urlpatterns += patterns('view.teacher.correction',
-    url(r'^correction/(?P<idcourse>\d+)/(?P<iddelivery>\d+)/(?P<previous>\d+)/$', 'index'),
-    url(r'^correction/edit/(?P<idcourse>\d+)/(?P<idcorrection>\d+)/(?P<previous>\d+)/$', 'editcorrection'),
+    url(r'^correction/(?P<idcourse>\d+)/(?P<iddelivery>\d+)/$', 'index'),
+    url(r'^correction/edit/(?P<idcourse>\d+)/(?P<idcorrection>\d+)/$', 'editcorrection'),
 )
 
 urlpatterns += patterns('view.teacher.suscription',

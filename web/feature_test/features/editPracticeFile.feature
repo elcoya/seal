@@ -22,7 +22,7 @@ Feature: As a Teacher I should be able to edit text the files uploaded, bounded 
           And I should see "fourth line"
           And I should see "fifth line"
 
-    Scenario: 
+    Scenario: As a teacher I want to edit a text file of a practice
         Given Teacher "teacher" exists with password "teacher"
           And course "2013-1" exists
           And practice "TP Intro" exists in course "2013-1" with deadline "2013-04-01"

@@ -9,7 +9,7 @@ Feature: As a student I can regenerate de password
 	 	Given I am not logged in
 	 	  And Student "martin" exists with email "martin@foo.foo"
 	 	  And I am in the index page
-		 When I click in the "Recovery" link
+		 When I am in the recovery password page
 		  And I fill the recovery form with user "martin" and email "martin@foo.foo"
 		  And I submit the form
 		 Then I should see "Recovery completed successfully!"
@@ -18,7 +18,7 @@ Feature: As a student I can regenerate de password
 	 	Given I am not logged in
 	 	  And Student "martin" exists with email "martin@foo.foo"
 	 	  And I am in the index page
-		 When I click in the "Recovery" link
+		 When I am in the recovery password page
 		  And I fill the recovery form with user "martin" and email "mauro@foo.foo"
 		  And I submit the form
 		 Then I should see "User not exist with this email"
@@ -27,7 +27,7 @@ Feature: As a student I can regenerate de password
 	 	Given I am not logged in
 	 	  And Student "martin" exists with email "martin@foo.foo"
 	 	  And I am in the index page
-		 When I click in the "Recovery" link
+		 When I am in the recovery password page
 		  And I fill the recovery form with user "mauro" and email "martin@foo.foo"
 		  And I submit the form
 		 Then I should see "User not exist with this email"

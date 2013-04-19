@@ -10,7 +10,7 @@ from seal.model.teacher import Teacher
 from seal.view import HTTP_401_UNAUTHORIZED_RESPONSE
 from seal.model.course import Course
 
-PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s/%s"
+PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s"
 #PATHOK = "/teacher/delivery/list/%s"
 #SUBJECTEMAIL = "You have a correction to see on SEAL"
 #BODYEMAIL = "You have a correction to see in delivery: %s from practice: %s. Coment: %s. Grade: %s"
@@ -22,7 +22,7 @@ BODYEMAIL = "Tienes una correccion para ver en la entrega: %s de la practica: %s
 
 
 @login_required
-def index(request, idcourse, iddelivery, previous):
+def index(request, idcourse, iddelivery):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
         current_course = courses.get(pk=idcourse)
@@ -31,7 +31,7 @@ def index(request, idcourse, iddelivery, previous):
         correction = Correction.objects.filter(delivery=delivery)
         corrector = ""
         if len(correction) != 0:
-            return HttpResponseRedirect(PATHREDIRECTINDEX % (current_course.pk, str(correction[0].pk), str(previous)))
+            return HttpResponseRedirect(PATHREDIRECTINDEX % (current_course.pk, str(correction[0].pk)))
         else:
             if (request.method == 'POST'):
                 correction = Correction(delivery=delivery)
@@ -56,7 +56,7 @@ def index(request, idcourse, iddelivery, previous):
 
 
 @login_required
-def editcorrection(request, idcourse, idcorrection, previous):
+def editcorrection(request, idcourse, idcorrection):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         courses = Course.objects.all()
         current_course = courses.get(pk=idcourse)

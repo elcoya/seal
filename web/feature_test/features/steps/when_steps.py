@@ -45,8 +45,9 @@ def step(context, loginData):
 
 @when('I logout')
 def step(context):
-    a = context.browser.find_element_by_link_text('Logout')
-    a.click()
+    address = base_url + 'logout'
+    context.browser.get(address)
+
 
 @when('I enter in the course list')
 def step(context):
@@ -199,10 +200,11 @@ def step(context,practice):
     addres = base_url + 'undergraduate/delivery/upload/'+str(p.pk)
     context.browser.get(addres)
 
-@when('I am in the list page of delivery from "{practice}"')
-def step(context,practice):
+@when('I am in the list page of delivery from "{practice}" of course "{course}"')
+def step(context,practice,course):
     p = Practice.objects.get(uid=practice)
-    addres = base_url + 'teacher/delivery/list/'+str(p.pk)
+    c = Course.objects.get(name=course)
+    addres = base_url + 'teacher/delivery/list/'+str(c.pk)+'/'+str(p.pk)
     context.browser.get(addres)
 
 @when('I am in the correction delivery page of student "{student}" and practice "{practice}"')
@@ -210,7 +212,7 @@ def step(context,student,practice):
     s = Student.objects.get(uid=student)
     p = Practice.objects.get(uid=practice)
     d = Delivery.objects.get(student=s, practice=p)
-    addres = base_url + 'teacher/correction/'+str(d.pk)+'/3'
+    addres = base_url + 'teacher/correction/'+ str(p.course.pk) +'/'+str(d.pk)
     context.browser.get(addres)
 
 @when('I am at the explore delivery page for delivery "{id_delivery}"')
@@ -295,7 +297,7 @@ def step(context):
 @when(u'I am at the list files page for practice "{practice_name}"')
 def step(context, practice_name):
     practice = Practice.objects.get(uid=practice_name)
-    address = base_url + 'teacher/practices/practicefile/' + str(practice.pk) + "/" + str(practice.pk)
+    address = base_url + 'teacher/practices/practicefile/' + str(practice.course.pk) + "/" + str(practice.pk)
     context.browser.get(address)
 
 @when(u'I am at the edit text file page for practice "{practice_name}"')
@@ -326,3 +328,44 @@ def step(context, data):
     form = get_last_form_in_the_page(context)
     form.find_element_by_name('data_search').send_keys(data)   
     
+@when('I am in the page of student list of shift "{shift}" of course "{course}"')
+def stop(context, shift, course):
+    c = Course.objects.get(name=course)
+    s = Shift.objects.get(name=shift)
+    address = base_url + 'teacher/students/listshift/' + str(c.pk) + '/' + str(s.pk)
+    context.browser.get(address)
+    
+@when('I am in the page of new shift of course "{course}"')
+def stop(context, course):
+    c = Course.objects.get(name=course)
+    address = base_url + 'teacher/shifts/newshift/' + str(c.pk)
+    context.browser.get(address)
+    
+@when('I am in the page of edit shift "{shift}" of course "{course}"')
+def stop(context, shift, course):
+    c = Course.objects.get(name=course)
+    s = Shift.objects.get(name=shift)
+    address = base_url + 'teacher/shifts/editshift/' + str(c.pk) + '/' + str(s.pk) 
+    context.browser.get(address)
+        
+@when('I am in the page of delivery pending of course "{course}"')
+def stop(context, course):
+    c = Course.objects.get(name=course)
+    address = base_url + 'teacher/students/pendingdelivery/' + str(c.pk) 
+    context.browser.get(address)
+
+@when('I am in the edit page of course "{course}"')
+def stop(context, course):
+    c = Course.objects.get(name=course)
+    address = base_url + 'teacher/course/editcourse/' + str(c.pk) 
+    context.browser.get(address)
+
+@when('I am in the recovery password page')
+def stop(context):
+    address = base_url + 'recoverypass'
+    context.browser.get(address)
+
+@when('I am in the registration page')
+def stop(context):
+    address = base_url + 'registration'
+    context.browser.get(address)

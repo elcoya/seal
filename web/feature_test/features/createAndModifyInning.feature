@@ -4,8 +4,7 @@ Feature: As a teacher I want to create and modify shifts
 	 	Given Teacher "teacher" exists with password "teacher"
           And course "2012-1" exists
           And I log in as "teacher" "teacher" 
-         When I click the button "detail2012-1"		  
-          And I click the button "newshift"
+         When I am in the page of new shift of course "2012-1"
           And I fill the shift form with name "tarde" and description "horario"
           And I submit the form
 		 Then I should see "tarde"
@@ -15,8 +14,7 @@ Feature: As a teacher I want to create and modify shifts
           And course "2012-1" exists
           And a shift with name "tarde" and description "horario" in the course "2012-1"
           And I log in as "teacher" "teacher" 
-         When I click the button "detail2012-1"	
-          And I click the button "edittarde"
-          And I change "horario" for "description" in element whith id "id_description"
+         When I am in the page of edit shift "tarde" of course "2012-1"
+          And I change "tarde" for "noche" in element whith id "id_name"
           And I submit the form
-		 Then I should see "description"
+		 Then I should see "noche"

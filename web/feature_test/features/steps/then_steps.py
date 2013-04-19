@@ -51,6 +51,14 @@ def step(context, link_text):
         match = match or (link_text in link.get_attribute("href"))
     assert match
 
+@then('I should not see a link to "{link_text}"')
+def step(context, link_text):
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text not in link.get_attribute("href"))
+    assert match
+
 @then('I should see link to "{text}" in the list')
 def step(context, text):
     a = context.browser.find_element_by_link_text(text)

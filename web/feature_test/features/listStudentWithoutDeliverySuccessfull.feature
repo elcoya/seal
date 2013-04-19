@@ -2,8 +2,9 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 
 	Scenario: No student without delivery pending
 	 	Given Teacher "teacher" exists with password "teacher"
+          And course "2012-1" exists
           And I log in as "teacher" "teacher" 
-         When I click in the "Pending deliveries" link
+         When I am in the page of delivery pending of course "2012-1"
 		 Then I should see "There are no student with pending delivery"
 	
 	Scenario: List Student without delivery
@@ -14,7 +15,7 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And I log in as "teacher" "teacher"
- 		 When I click in the "Pending deliveries" link
+ 		 When I am in the page of delivery pending of course "2012-1"
 	 	 Then I should see "martin"	 
 	
 	Scenario: List Student with delivery and automatic correction state failed 
@@ -27,7 +28,7 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "failed"
 	 	  And I log in as "teacher" "teacher" 
-	 	 When I click in the "Pending deliveries" link
+	 	 When I am in the page of delivery pending of course "2012-1"
 	 	 Then I should see "martin"
     
     Scenario: No List Student with delivery and automatic correction statsu successfull 
@@ -40,7 +41,7 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "martin" with id "1"
 	 	  And the automatic correction of delivery with id "1" is "successfull"
 	 	  And I log in as "teacher" "teacher" 
-	 	 When I click in the "Pending deliveries" link
+	 	 When I am in the page of delivery pending of course "2012-1"
 	 	 Then I should see "There are no student with pending delivery"
 
     Scenario: List Student with delivery and automatic correction status fail and not list a student with automtaci correction status successfull 
@@ -57,8 +58,8 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 	 	  And a delivery exists for practice "TP Intro" and course "2012-1" from Student "anibal" with id "2"
 	 	  And the automatic correction of delivery with id "2" is "failed"
 	 	  And I log in as "teacher" "teacher" 
-	 	 When I click in the "Pending deliveries" link
-	 	 Then I should see "anibal"
+	 	 When I am in the page of delivery pending of course "2012-1"
+	     Then I should see "anibal"
 	 	  And I should not see "martin"
 	 	   
 	  

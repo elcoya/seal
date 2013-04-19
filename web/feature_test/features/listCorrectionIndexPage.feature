@@ -1,7 +1,8 @@
 Feature: As a teacher I want to see the correction list on the home page
 
 	Scenario: No correction
-	 	Given Teacher "teacher" exists with password "teacher"	
+	 	Given course "2012-1" exists  
+	 	  And Teacher "teacher" exists with password "teacher"	
 	 	  And there are no corrections
 	 	 When I log in as "teacher" "teacher"
 	 	 Then I should see "There are no corrections"
