@@ -6,6 +6,7 @@ import time
 import re
 from seal.model.course import Course
 from numpy.ma.testutils import assert_equal
+from seal.model.practice_file import PracticeFile
 
 base_url = 'http://localhost:8000/'
 
@@ -50,6 +51,27 @@ def step(context, link_text):
     for link in links:
         match = match or (link_text in link.get_attribute("href"))
     assert match
+
+@then('I should see a link to delivery with id "{iddelivery}" of course "{course}"')
+def step(context, iddelivery, course):
+    c = Course.objects.get(name=course)
+    link_text = "/teacher/delivery/explore/" + str(c.pk) + "/" + iddelivery
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text in link.get_attribute("href"))
+    assert match
+
+@then('I should see a link to file "{filename}" of the delivery id "{iddelivery}" of course "{course}"')
+def step(context, filename, iddelivery, course):
+    c = Course.objects.get(name=course)
+    link_text = "/teacher/delivery/browse/" + str(c.pk) + "/" + iddelivery +"/" + filename
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text in link.get_attribute("href"))
+    assert match
+
 
 @then('I should not see a link to "{link_text}"')
 def step(context, link_text):
@@ -140,4 +162,35 @@ def step(context, practice_uid, course_name, student_uid, status):
 @then("I wait")
 def step(context):
     time.sleep(5)
-    
+
+@then('I should see the link to edit file with id "{idfile}"')
+def step(context, idfile):
+    pf = PracticeFile.objects.get(pk=idfile)
+    c = pf.practice.course
+    link_text = "/teacher/practices/editfile/"+ str(c.pk) + "/" + str(pf.pk)
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text in link.get_attribute("href"))
+    assert match
+
+@then('I should not see the link to edit file with id "{idfile}"')
+def step(context, idfile):
+    pf = PracticeFile.objects.get(pk=idfile)
+    c = pf.practice.course
+    link_text = "/teacher/practices/editfile/"+ str(c.pk) + "/" + str(pf.pk)
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text not in link.get_attribute("href"))
+    assert match
+
+@then('I should not see the link to delivery of practice "{practice}"')
+def step(context, practice):        
+    p = Practice.objects.get(uid=practice)
+    link_text = "/undergraduate/delivery/upload/"+ str(p.pk)
+    links = context.browser.find_elements_by_tag_name('a')
+    match = False
+    for link in links:
+        match = match or (link_text not in link.get_attribute("href"))
+    assert match

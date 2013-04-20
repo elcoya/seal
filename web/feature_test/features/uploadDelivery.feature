@@ -19,7 +19,7 @@ Feature: As a student I want to upload a delivery
 	 	  And student "martin" exists in course "2012-1" and in shift "tarde"
 	 	  And practice "TP Intro" exists in course "2012-1" with blocker deadline "2012-12-01"
 	 	  And I log in as "martin" "martin"
-         Then I should see "Practice expired"
+         Then I should not see the link to delivery of practice "TP Intro"
 
  	Scenario: Redirect to list practice where the student access direct to the upload page of a expired practice
 	 	Given course "2012-1" exists 
@@ -29,4 +29,5 @@ Feature: As a student I want to upload a delivery
 	 	  And practice "TP Intro" exists in course "2012-1" with blocker deadline "2012-12-01"
 	 	  And I log in as "martin" "martin"
          When I am in the upload page of practice "TP Intro"
-   		 Then I should see "Practice expired"
+         Then I should not see the link to delivery of practice "TP Intro"
+

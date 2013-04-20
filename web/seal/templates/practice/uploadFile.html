@@ -31,9 +31,9 @@
 						<td>
 						<a href="/teacher/practices/downloadfile/{{ file.pk }}" title="{% trans 'Download' %}"><span class="icon-download-alt"></span>	
 					{% if file.isEditable %}
-						<a name="edit{{practice.uid}}" title="{% trans 'Edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editfile/{{ file.pk }}"></a>						
+						<a name="edit{{file.pk}}" title="{% trans 'Edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editfile/{{ current_course.pk }}/{{ file.pk }}"></a>						
 					{% endif %}
-						<a name="delete{{practice.uid}}" title="{% trans 'Delete' %}" class="icon-trash" href="/teacher/practices/deletefile/{{ file.pk }}"></a>		    	
+						<a name="delete{{file.name}}" title="{% trans 'Delete' %}" class="icon-trash" href="/teacher/practices/deletefile/{{ file.pk }}"></a>		    	
 						</td>
 					</tr>
 				{% empty %}

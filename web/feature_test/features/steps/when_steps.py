@@ -163,11 +163,10 @@ def step(context,course):
     addres = base_url + 'teacher/course/detailcourse/'+str(c.pk)
     context.browser.get(addres)
     
-@when('I am in the suscription list page of course "{course}" shift "{shift}"')
-def step(context,course, shift):
+@when('I am in the suscription list page of course "{course}"')
+def step(context,course):
     c = Course.objects.get(name=course)
-    i = Shift.objects.get(name=shift, course=c)
-    addres = base_url + 'teacher/suscription/list/'+str(i.pk)
+    addres = base_url + 'teacher/suscription/listsuscriptionpending/'+str(c.pk)
     context.browser.get(addres)
 
 @when('I fill in the registration form with user "{uid}"')
@@ -217,12 +216,14 @@ def step(context,student,practice):
 
 @when('I am at the explore delivery page for delivery "{id_delivery}"')
 def step(context, id_delivery):
-    address = base_url + 'teacher/delivery/explore/' + id_delivery
+    c = Delivery.objects.get(pk=id_delivery).practice.course
+    address = base_url + 'teacher/delivery/explore/' + str(c.pk) + '/' + id_delivery
     context.browser.get(address)
 
 @when(u'I am at the browse delivery page for delivery "{id_delivery}" browsing "{file_path}"')
 def step(context, id_delivery, file_path):
-    address = base_url + 'teacher/delivery/browse/' + id_delivery + "/" + file_path
+    c = Delivery.objects.get(pk=id_delivery).practice.course
+    address = base_url + 'teacher/delivery/browse/' + str(c.pk) + '/' + id_delivery + "/" + file_path
     context.browser.get(address)
 
 
@@ -368,4 +369,21 @@ def stop(context):
 @when('I am in the registration page')
 def stop(context):
     address = base_url + 'registration'
+    context.browser.get(address)
+
+@when('I am in the practice "{practice}" list file page')
+def stop(context, practice):
+    p = Practice.objects.get(uid=practice)
+    address = base_url + 'undergraduate/practice/practiceFile/' + str(p.pk)
+    context.browser.get(address)
+
+@when('I am in the suscription pending page of course "{course}"')
+def stop(context, course):
+    c = Course.objects.get(name=course)
+    address = base_url + 'teacher/suscription/listsuscriptionpending/' + str(c.pk) 
+    context.browser.get(address)
+
+@when('I am in the student suscription page')    
+def stop(context):
+    address = base_url + 'undergraduate/suscription/'
     context.browser.get(address)

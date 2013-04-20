@@ -170,8 +170,11 @@ def delete(request, idpracticefile):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
-def edit(request, idpracticefile):
+def edit(request, idcourse ,idpracticefile):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+             
         practicefile = PracticeFile.objects.get(pk=idpracticefile)
         file_path = practicefile.file.name # os.path.join(extraction_dir, file_to_browse)
         file_basename = os.path.basename(file_path)
@@ -188,7 +191,9 @@ def edit(request, idpracticefile):
                 file_content = content_file.read()
             form = EditPracticeFileForm(initial={'content': smart_str(file_content)})
         return render(request, 'practice/editPracticeFile.html',
-                      {'form': form, 'practicefile': practicefile, 'file_basename': file_basename, 'edited': edited})
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'form': form, 'practicefile': practicefile, 'file_basename': file_basename, 'edited': edited})
     else:
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
