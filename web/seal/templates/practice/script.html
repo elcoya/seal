@@ -11,7 +11,7 @@
 		</table>
 		<button class="btn btn-primary" type='submit' >{% trans "Save" %}</button>
 	</form>	
-	<div><a href="/teacher/{{ idcourse }}">{% trans "Back" %}</a></div>
+	<div><a class="btn btn-small" href="/teacher/{{ idcourse }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
 	{% if practice.script_set.all %}
 		<div style="padding: 20px 0 5px;"><h5>{% trans "Script content" %}</h5></div>
 		<div class="script-container" >

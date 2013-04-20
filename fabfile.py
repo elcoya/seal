@@ -267,10 +267,11 @@ def run_features_tests(context = None):
 
 
 # Coverage analysis
-def run_html_coverage_analysis(context = None):
+def run_html_coverage_analysis(host='localhost', port='8000', context = None):
     """Invokes the test coverage analysis and generates the reports"""
     set_pythonpath()
     with lcd("web"):
+        os.environ['REST_API_BASE_URL'] = "http://" + host + ":" + port
         local("coverage run seal/manage.py test model")
         local("coverage html")
 

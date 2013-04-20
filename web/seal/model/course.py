@@ -23,16 +23,6 @@ class Course(models.Model):
             count += shift.student_set.all().count()
         return count
     
-    def get_students(self, uid=None, name=None, email=None):
-        partial_query = self.student_set.all()
-        if(uid):
-            partial_query = partial_query.filter(uid=uid)
-        if(name):
-            partial_query = partial_query.filter(name=name)
-        if(email):
-            partial_query = partial_query.filter(email=email)
-        return partial_query
-    
     def get_student_count(self):
         shifts = self.shift_set.all()
         total = 0;

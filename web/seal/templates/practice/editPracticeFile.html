@@ -13,6 +13,6 @@
 		</table>
 		<button class="btn btn-primary" type='submit' >{% trans "Save" %}</button>
 	</form>
-	<div><a href="/teacher/practices/practicefile/{{ practicefile.practice.course.pk }}/{{ practicefile.practice.pk }}/">{% trans "Back" %}</a></div>
+	<div><a class="btn btn-small" href="/teacher/practices/practicefile/{{ practicefile.practice.course.pk }}/{{ practicefile.practice.pk }}/"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
 </div>
 {% endblock %}

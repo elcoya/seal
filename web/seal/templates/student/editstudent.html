@@ -12,9 +12,9 @@
 	</form>	
 	<div>
 		{% if idshift %}
-			<a href="/teacher/students/listshift/{{ current_course.pk }}/{{ idshift }}">{% trans "Back" %}</a>
+			<a class="btn btn-small" href="/teacher/students/listshift/{{ current_course.pk }}/{{ idshift }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
 		{% else %}
-			<a href="/teacher/students/list/{{ current_course.pk }}">{% trans "Back" %}</a>
+			<a class="btn btn-small" href="/teacher/students/list/{{ current_course.pk }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
 		{% endif %}
 	</div>
 </div>
