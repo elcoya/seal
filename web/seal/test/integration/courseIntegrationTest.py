@@ -2,6 +2,7 @@ from django.test import TestCase
 from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
+from seal.model.shift import Shift
 
 class CourseIntegrationTest(TestCase):
     def testCourseUniqueName(self):
@@ -33,4 +34,25 @@ class CourseIntegrationTest(TestCase):
         
         aCourse = Course.objects.get(name='2012-1C')
         self.assertFalse(assignment in aCourse.get_practices(), 'Set, not expected to contain LPC')
+    
+    
+    
+    def testCourseGetStudentCountReturnsStudentQueryset(self):
+        name = "2012-2C"
+        shift_name = 'lunes'
+        course = Course.objects.get_or_create(name = name)[0]
+        student = Student.objects.get_or_create(uid = '55555')[0]
+        shift = Shift.objects.get_or_create(name = shift_name, course = course)[0]
+        student.shifts.add(shift)
+        shift.save()
+        student.save()
+        
+        count = course.get_student_count()
+        self.assertTrue(count > 0)
+    
+    def testCourseGetStudentCountReturnsEmptyStudentQueryset(self):
+        name = "2012-2C"
+        course = Course.objects.get_or_create(name = name)[0]
+        count = course.get_student_count()
+        self.assertEqual(0, count)
     
