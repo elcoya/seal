@@ -16,7 +16,7 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div><a href="javascript:history.back()">{% trans "Back" %}</a></div>
+		<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
 		{% if file_content %}
 			<pre style="margin-top: 20px;">{{ file_content }}</pre>
 		{% endif %}

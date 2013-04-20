@@ -8,6 +8,6 @@
 		<div>{% trans "E-mail: "%}  <b>{{student.user.email}}</b></div>
 		<div>{% trans "Corrector: "%}  <b>{{student.corrector.get_full_name}}</b></div>
 		
-	<div style="margin-top: 20px"><a href="javascript:history.back()">{% trans "Back" %}</a></div>
+	<div style="margin-top: 20px"><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
 </div>
 {% endblock %}
