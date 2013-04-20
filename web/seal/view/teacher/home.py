@@ -27,7 +27,7 @@ def index(request, idcourse=None):
         teacher = Teacher.objects.get(user=request.user) 
         students = Student.objects.filter(corrector=teacher)
         for student in students:
-            deliveries = Delivery.objects.filter(student=student)
+            deliveries = Delivery.objects.filter(student=student, practice__course=current_course)
             for delivery in deliveries:
                 correction = Correction.objects.filter(delivery=delivery)
                 status = delivery.get_automatic_correction().get_status()

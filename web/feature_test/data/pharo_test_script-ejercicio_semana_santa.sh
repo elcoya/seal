@@ -8,8 +8,8 @@ pharo_image='/usr/local/lib/pharo/pharo-wk/pharo-2.0/pharo.image' #.bkup
 pharo_changes='/usr/local/lib/pharo/pharo-wk/pharo-2.0/pharo.changes' #.bkup
 
 # In order to be working with only one test script
-tema_file="HojaDeCalculo-run.st"
-tests_file="HojaDeCalculo-Tests.st"
+tema_file="tp1.st"
+tests_file="MaquinaDeCafe-Tests.st"
 
 
 # Setup a fresh pharo image before running the test, so it won't be modified between runs
@@ -23,36 +23,24 @@ echo $command
 $command
 
 # Relocate the delivered .st file to where it should be
-file="Algo3Tp1.st"
-file_test="Algo3Tp1-Tests.st"
+files_list=`ls | grep ^[0-9]\\\+.st$`
+delivery_file=`echo $files_list | cut -d" " -f1`
 
-if [ -f $file ]
-then
-    echo "Archivo de Algo3Tp1.st encontrado"
-else
-	echo "No se encontró el archivo Algo3Tp1.st"
-	exit 1
+if [ -z $delivery_file ]
+	then
+		echo "No se pudo encontrar el archivo de la entrega."
+		exit 1
 fi
 
-
-if [ -f $file ]
-then
-    echo "Archivo de Algo3Tp1-Test.st encontrado"
-else
-	echo "No se encontró el archivo Algo3Tp1-Test.st"
-	exit 1
-fi
-
-command="cp $file $pharo_image_dir"
+command="cp $delivery_file $pharo_image_dir"
 echo $command
 $command
 
-command="cp $file_test $pharo_image_dir"
-echo $command
-$command
+echo "st files found: $files_list"
+echo "file used: $delivery_file"
 
 # I build the command
-command="$pharo_path -vm-display-null $pharo_image $file $file_test $tests_file $tema_file"
+command="$pharo_path -vm-display-null $pharo_image $delivery_file $tests_file $tema_file"
 echo $command
 $command
 
@@ -60,7 +48,7 @@ $command
 exit_value=$?
 
 # Cleanup
-command="rm $pharo_image_dir$file $pharo_image_dir$file_test"
+command="rm $pharo_image_dir$delivery_file"
 echo $command
 $command
 

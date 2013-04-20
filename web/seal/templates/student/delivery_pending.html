@@ -6,11 +6,12 @@
 			<h4>{% trans "pending_deliveries" %}</h4>
 		</div>
 		{% for row in final_list %}
-		<div>
-			{% for content in row.data %}
-			<span style="text-decoration: underline;">{% trans "Practice" %} {{ content.practice.uid }}</span>
+		<div class="row-fluid">
+			<div class="span12">
+				<h5><u>{% trans "Practice" %} {{ row.practice.uid }}</u></h5>
+			</div>
 			<table class="table table-striped">
-				<thead style="text-align: center;">
+				<thead>
 					<tr>
 						<th>Uid</th>
 						<th>Name</th>
@@ -18,7 +19,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for student_shift in content.student_shift_list %}
+					{% for student_shift in row.student_shift_list %}
 					<tr>
 						<td>{{ student_shift.student.uid }}</td>
 						<td>{{ student_shift.student.get_full_name }}</td>
@@ -27,7 +28,6 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			{% endfor %}
 		</div>
 		<hr />
 		{% empty %}
