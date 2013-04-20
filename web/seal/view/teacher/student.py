@@ -136,25 +136,19 @@ def pendingdeliveries(request, idcourse):
         current_course = courses.get(pk=idcourse)
         
         final_list = []
-        #TAKE ALL COURSES ACTIVOS
         practices = current_course.get_practices()
-        #RECORRO TOAS LAS PRACITAS DEL CURSO
+        shifts = Shift.objects.filter(course=current_course)
+        #para cada Practice del curso...
         for practice in practices:
-            shifts = Shift.objects.filter(course=current_course)
             student_shift_list = []
-            #RECORRO TODOS LOS TURNOS DEL CURSO
+            #recorro los turnos de donde voy a sacar los alumnos
             for shift in shifts:
-                #TOMO LOS ESTUDIANTES DEL TURNO
                 students = shift.get_students()
+                #para cada alumno...
                 for student in students:
-                    #TODO LAS ENTREGAS DEL ESTUDIANTE PARA ESA PRACTICA
-                    deliveries = Delivery.objects.filter(student=student, practice=practice)
-                    appendStudent = True;
-                    #ME FIJO SI ALGUNA TIENE SUCCESSFULL, SI ES ASI NO LA ADJUNTO A LA LISTA
-                    for delivery in deliveries:
-                        if delivery.get_automatic_correction().get_status() == AutomaticCorrection.STATUS_STRINGS[1]:
-                            appendStudent = False;
-                    if (appendStudent):
+                    #cuento las entregas satisfactorias del estudiante para la Practice que estoy analizando.
+                    successfull_deliveries = Delivery.objects.filter(student=student, practice=practice, automaticcorrection__status = 1).count()
+                    if (successfull_deliveries==0):
                         student_shift_list.append({'student': student, 'shift':shift})
             if len(student_shift_list) > 0:
                 final_list.append({'practice': practice, 'student_shift_list':student_shift_list})            
