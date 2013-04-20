@@ -20,6 +20,7 @@
 				<tr>
 					<th>{% trans "Name" %}</th>
 					<th>{% trans "File" %}</th>
+					<th>{% trans "Actions" %}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,13 +28,13 @@
 					<tr>
 						<td>{{ file.name }}</td>
 						<td>{{ file.file }}</td>
-						<td><a href="/teacher/practices/downloadfile/{{ file.pk }}"> {% trans "Download" %} </a></td>
+						<td>
+						<a href="/teacher/practices/downloadfile/{{ file.pk }}" title="{% trans 'Download' %}"><span class="icon-download-alt"></span>	
 					{% if file.isEditable %}
-						<td><a href="/teacher/practices/editfile/{{ file.pk }}"> {% trans "Edit" %} </a></td>
-					{% else %}
-						<td> {% trans "Non-editable"  %}</td>
+						<a name="edit{{practice.uid}}" title="{% trans 'Edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editfile/{{ file.pk }}"></a>						
 					{% endif %}
-						<td><a href="/teacher/practices/deletefile/{{ file.pk }}"> {% trans "Delete" %} </a></td>
+						<a name="delete{{practice.uid}}" title="{% trans 'Delete' %}" class="icon-trash" href="/teacher/practices/deletefile/{{ file.pk }}"></a>		    	
+						</td>
 					</tr>
 				{% empty %}
 				<tr>
