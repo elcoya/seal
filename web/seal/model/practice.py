@@ -56,8 +56,10 @@ class Practice(models.Model):
         return self.delivery_set.filter(~Q(automaticcorrection__status = 1), practice = self).count()
 
     def get_students_pending_deliveries_count(self):
-        return Student.objects.exclude(delivery__practice = self).filter(shifts__course = self.course).count()
-
+        students = Student.objects.filter(shifts__course = self.course).count()
+        students_delivery_succesfull = Student.objects.filter(delivery__automaticcorrection__status = 1, delivery__practice = self).distinct().count()
+        return students - students_delivery_succesfull
+        
     # for the dashboard view
     def get_completion_percentage(self):
         deliveries_queryset = self.delivery_set.filter(automaticcorrection__status = 1, practice = self).all()
