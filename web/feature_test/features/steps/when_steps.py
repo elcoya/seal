@@ -305,7 +305,7 @@ def step(context, practice_name):
 def step(context, practice_name):
     practice = Practice.objects.get(uid=practice_name)
     practice_file = practice.get_practice_file()[0]
-    address = base_url + 'teacher/practices/editfile/' + str(practice_file.pk)
+    address = base_url + 'teacher/practices/editfile/' + str(practice.course.pk) + '/' +str(practice_file.pk)
     context.browser.get(address)
 
 @when(u'I edit the practice text file in the form')
