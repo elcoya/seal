@@ -1,0 +1,3 @@
+djangorestframework
+python-daemon
+django-bootstrap-toolkit
