@@ -1,20 +1,27 @@
 {% extends "base.html" %}
-{% load i18n admin_static %}
+{% load i18n %}
 {% block extrastyle %}
-{{ block.super }}
-	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/login.css" rel="stylesheet" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
-{% block bodyclass %}dashboard{% endblock %}
+
+
+{% block head %}
+<title> {% trans "brand" %} | {% trans "Change Password" %}</title>
+{% endblock %}
+
+{% block subtitle %} {% trans "changePassword" %}{% endblock %}
 {% block nav_opts %}
-<li>
-	<a href="/">{% trans "Home" %}</a>
-</li>
+<li><a href="/" title="{% trans 'home' %}"><span class="icon-home"></span></a></li>
 {% endblock %}
+
 {% block body %}
-<div>
+<div class="container">
 	{% csrf_token %}
-	<div align="center"><h4>{% trans "Change password successfully! Check your email to see the change info" %}</h4></div>
-	<footer>
-	</footer>
+	<div align="center"><h4>
+		<p>{% trans "fistLineMessageChangePasswordSuccessfull" %}</p>
+		<p>{% trans "secondLineMessageChangePasswordSuccessfull" %}</p>	
+	</h4></div>
 </div>
 {% endblock %}

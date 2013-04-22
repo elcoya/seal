@@ -6,15 +6,16 @@ Created on 06/12/2012
 from django import forms
 from django.forms.forms import Form
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 
-ERRORUIDVALIDATION = "User or password not exist"
-ERRORPASSWDNOTMATCH = "Passwords does not match"
+ERRORUIDVALIDATION = _("userPasswordNotExist")
+ERRORPASSWDNOTMATCH = _("passwordsNotMatch")
 
 class ChangePasswForm(Form):
-    uid = forms.CharField(max_length=32, label="Padron")
-    oldpasswd = forms.CharField(widget=forms.PasswordInput(render_value=True), label="Password Anterior")
-    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), label="Nuevo Password")
-    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), label="Repetir Nuevo Password")
+    uid = forms.CharField(max_length=32, label=_("uidChangePassword"))
+    oldpasswd = forms.CharField(widget=forms.PasswordInput(render_value=True), label=_("oldPassword"))
+    passwd = forms.CharField(widget=forms.PasswordInput(render_value=True), label=_("newPassword"))
+    passwd_again = forms.CharField(widget=forms.PasswordInput(render_value=True), label=_("repeatPassword"))
     
     def clean_uid(self):
         uid = self.cleaned_data['uid']

@@ -3,12 +3,12 @@
 {% block content %}
 <body>
 	<div style="width: 100%; text-align: left; margin: auto;">
-		<h4>{% trans "Suscription" %}</h4>
+		<h4>{% trans "suscription" %}</h4>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<td><h5>{% trans "Innigns" %}</h5></td>
+				<td><h5>{% trans "shift" %}</h5></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,21 +19,21 @@
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "There are yet no Shifts to suscribe" %}</td>
+				<td colspan="4" style="text-align: center; ">{% trans "noShiftsSuscribe" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	<div style="width: 100%; text-align: left; margin: auto;">
-		<h5>{% trans "List of old Suscription" %}</h5>
+		<h5>{% trans "listOldSuscription" %}</h5>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<td><b>{% trans "Inngin" %}</b></td>
-				<td><b>{% trans "Date of Suscription" %}</b></td>	
-				<td><b>{% trans "Date of Resolve" %}</b></td>	
-				<td><b>{% trans "State" %}</b></td>
+				<td><b>{% trans "shift" %}</b></td>
+				<td><b>{% trans "dateOfSuscription" %}</b></td>	
+				<td><b>{% trans "dateOfResolve" %}</b></td>	
+				<td><b>{% trans "state" %}</b></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,7 +46,7 @@
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "There are no old suscription" %}</td>
+				<td colspan="4" style="text-align: center; ">{% trans "noOldSuscription" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

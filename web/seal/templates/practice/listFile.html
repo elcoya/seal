@@ -2,13 +2,13 @@
 {% load i18n %}
 {% block content %}
 	<div class="row" style="margin: 20px 0;">
-		{% blocktrans %} Files of Practice <b>{{ practicename }}</b> {% endblocktrans %}
+		{% trans "filesOfPractice" %} <b>{{ practicename }}</b>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>{% trans "Name" %}</th>
-				<th>{% trans "Actions" %}</th>
+				<th>{% trans "name" %}</th>
+				<th>{% trans "actions" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,19 +16,19 @@
 			<tr>
 				<td>{{ file.name }}</td>
 				<td>
-					<a href="/undergraduate/practice/download/{{ file.pk }}" title="{% trans 'Download' %}">
+					<a href="/undergraduate/practice/download/{{ file.pk }}" title="{% trans 'download' %}">
 						<span class="icon-circle-arrow-down"></span>
 					</a>
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="2" style="text-align: center; ">{% trans "There are no files bounded to this practice" %}</td>
+				<td colspan="2" style="text-align: center; ">{% trans "noFilesBounded" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	<footer>
-		<a class="btn btn-small" href="/undergraduate/practice/list/{{idcourse}}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
+		<a class="btn btn-small" href="/undergraduate/practice/list/{{idcourse}}"><span class="icon-backward" title="{% trans 'back' %}"></span></a>
 	</footer>
 {% endblock %}

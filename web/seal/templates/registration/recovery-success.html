@@ -5,28 +5,16 @@
 <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
 
+{% block head %}
+<title>{% trans "brand" %} | {% trans "recoveryPassword" %}</title>
+{% endblock %}
+
 {% block body %}
-<body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="/">ALGO3FIUBA</a>
-				<div class="nav-collapse collapse">
-					{% block nav %}{% endblock %}
-				</div><!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-	<br>
+<div class="container">
 	<h3 align="center" class="form-signin-heading">
-	<p>
-		{% trans "Recovery completed successfully!" %}
-	</p>
-		<p>
-		{% trans "Check your email to see the recovery info" %}	
-	</p>
-	<p>
-		<a href="/">{% trans "Log me in" %}</a>
-	</p></h3>
-</body>
+	<p>{% trans "firstLineMessageRecoverySuccesfull" %}</p>
+	<p>{% trans "secondLineMessageRecoverySuccesfull" %}</p>
+	<p><a href="/">{% trans "logIn" %}</a></p>
+	</h3>
+</div>
 {% endblock %}

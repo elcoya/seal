@@ -5,23 +5,22 @@
 {% endcomment %}
 
 {% block head %}
-    <title>SEAL</title>
+    <title>{% trans 'brand' %}</title>
 {% endblock %}
 
-{% block title_view %}{% trans "Student's view" %}{% endblock %}
+{% block title_view %}{% trans "studentView" %}{% endblock %}
 
 {% block nav_opts %}
-   	<li><a href="/undergraduate/{{ current_course.pk }}" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
-    <!-- <li><a href="/undergraduate">{% trans "Courses" %}</a></li> -->
+   	<li><a href="/undergraduate/{{ current_course.pk }}" title="{% trans 'home' %}"><span class="icon-home"></span></a></li>
 {% endblock %}
 {% block action_opts %}
 	<li><div class="row-fluid">
 		<div class="span12 welcome">
-			{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}
+			{% trans "welcome" %} {{ user.first_name }} {{ user.last_name }}
 		</div>
 	</div></li>
-	<li><a name="changepassword" href="/changepassw/" title="{% trans 'Change Password' %}" ><span class="icon-lock"></span></a></li>
-	<li><a name="logout" href="/logout/" title="{% trans 'Logout' %}"><span class="icon-off" style="width: 24px; height: 24px;"></span></a></li>
+	<li><a name="changepassword" href="/changepassw/" title="{% trans 'changePassword' %}" ><span class="icon-lock"></span></a></li>
+	<li><a name="logout" href="/logout/" title="{% trans 'logOut' %}"><span class="icon-off" style="width: 24px; height: 24px;"></span></a></li>
 {% endblock %}
 
 {% block body %}
@@ -31,7 +30,7 @@
 		</div>
 	{% else %}
 		<div class="container-fluid" >
-	    	<p style="color: #A44; font-weight: bold; text-align: center; ">{% trans "You are not allowed in this section" %}</p>
+	    	<p style="color: #A44; font-weight: bold; text-align: center; ">{% trans "notAllowedSeccion" %}</p>
 	    </div>
 	{% endif %}
 {% endblock %}

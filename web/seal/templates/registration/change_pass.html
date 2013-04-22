@@ -14,25 +14,25 @@ Main page to recovery password.
 {% endblock %}
 
 {% block head %}
-<title>SEAL | Change Password</title>
+<title> {% trans "brand" %} | {% trans "Change Password" %}</title>
 {% endblock %}
 
-{% block subtitle %} {% trans "Change Password" %}{% endblock %}
+{% block subtitle %} {% trans "changePassword" %}{% endblock %}
 {% block nav_opts %}
-<li><a href="/" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
+<li><a href="/" title="{% trans 'home' %}"><span class="icon-home"></span></a></li>
 {% endblock %}
 
 {% block body %}
 <div class="content">
 	<div class="row">
 		<div class="span4 offset4">
-			<h3>{% trans "Change Password" %}</h3>
+			<h3>{% trans "changePassword" %}</h3>
 			<form method="post">
 				{% csrf_token %}
 				<table>
 					{{ form|as_bootstrap  }}
 				</table>
-				<button class="btn btn-primary" type="submit">{% trans 'Change' %}</button>
+				<button class="btn btn-primary" type="submit">{% trans 'change' %}</button>
 			</form>
 		</div>
 	</div>
