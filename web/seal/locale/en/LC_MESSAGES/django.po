@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-22 17:22-0500\n"
+"POT-Creation-Date: 2013-04-23 10:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,80 +19,73 @@ msgstr ""
 
 #: forms/changepass.py:11
 msgid "userPasswordNotExist"
-msgstr ""
+msgstr "User or password not exist"
 
 #: forms/changepass.py:12
-#, fuzzy
 msgid "passwordsNotMatch"
-msgstr "Password"
+msgstr "Passwords does not match"
 
 #: forms/changepass.py:15
 msgid "uidChangePassword"
-msgstr ""
+msgstr "Uid"
 
 #: forms/changepass.py:16
-#, fuzzy
 msgid "oldPassword"
-msgstr "Password"
+msgstr "Old Password"
 
 #: forms/changepass.py:17
-#, fuzzy
 msgid "newPassword"
-msgstr "Password"
+msgstr "New Password"
 
 #: forms/changepass.py:18 forms/registration.py:26
-#, fuzzy
 msgid "repeatPassword"
 msgstr "Repeat Password"
 
 #: forms/delivery.py:7
 msgid "errorOnlyZip"
-msgstr ""
+msgstr "Only zip is permited to upload!"
 
 #: forms/practice.py:7
-msgid "The deadline should be in the future"
-msgstr ""
+msgid "erroDeadlineFuture"
+msgstr "The deadline should be in the future"
 
 #: forms/practice.py:8
-msgid "Invalid date, date should be in format yyyy-mm-dd"
-msgstr ""
+msgid "erroInvalidFormatDate"
+msgstr "Invalid date, date should be in format yyyy-mm-dd"
 
 #: forms/practice.py:9
-msgid "Name cannot be blank"
-msgstr ""
+msgid "erroNameNotBlank"
+msgstr "Name cannot be blank"
 
 #: forms/recoverypass.py:12
 msgid "notExistUserEmail"
-msgstr ""
+msgstr "User not exist with this email"
 
 #: forms/recoverypass.py:15
 msgid "uidRecoveryPassword"
-msgstr ""
+msgstr "Uid"
 
 #: forms/registration.py:15
 msgid "uidNotAvaible"
-msgstr ""
+msgstr "Uid not avaible"
 
 #: forms/registration.py:16
-#, fuzzy
 msgid "passwordNotMatch"
-msgstr "Password"
+msgstr "Password not match"
 
 #: forms/registration.py:22 templates/practice/listFile.html:10
-#: templates/undergraduate/index.html:15
-#, fuzzy
+#: templates/student/delivery_pending.html:17 templates/student/detail.html:6
+#: templates/student/liststudent.html:23 templates/undergraduate/index.html:15
 msgid "name"
-msgstr "Names"
+msgstr "Name"
 
 #: forms/registration.py:23
-#, fuzzy
 msgid "lastName"
 msgstr "Last Name"
 
 #: forms/registration.py:24
-#, fuzzy
 msgid "uidRegistration"
-msgstr "Registrate on"
+msgstr "Uid"
 
 #: forms/registration.py:25 templates/registration/login.html:34
 msgid "password"
@@ -100,9 +93,10 @@ msgstr "Password"
 
 #: forms/registration.py:28
 msgid "emptyLabelRegistration"
-msgstr ""
+msgstr "Select Shift"
 
-#: forms/registration.py:28 templates/student/liststudent.html:8
+#: forms/registration.py:28 templates/student/delivery_pending.html:18
+#: templates/student/liststudent.html:8 templates/student/liststudent.html:25
 #: templates/suscription/suscription.html:11
 #: templates/suscription/suscription.html:33 templates/teacher/index.html:24
 msgid "shift"
@@ -110,11 +104,11 @@ msgstr "Shift"
 
 #: templates/404.html:11
 msgid "Error HTTP 404: File not Found"
-msgstr ""
+msgstr "Error HTTP 404: File not Found"
 
 #: templates/500.html:11
 msgid "Error HTTP 500: Internal server error"
-msgstr ""
+msgstr "Error HTTP 500: Internal server error"
 
 #: templates/base.html:78 templates/base.html.py:97
 #: templates/registration/change-success.html:11
@@ -125,6 +119,7 @@ msgstr ""
 #: templates/registration/register.html:12
 #: templates/registration/register.html:18
 #: templates/registration/registration-success.html:9
+#: templates/teacher/teacher.html:8
 #: templates/undergraduate/undergraduate.html:8
 msgid "brand"
 msgstr "SEAL"
@@ -177,7 +172,6 @@ msgid "You don't have permission to edit anything."
 msgstr ""
 
 #: templates/admin/index.html:55 templates/admin/list_teacher.html:35
-#: templates/teacher/teacher.html:11
 msgid "Teacher"
 msgstr ""
 
@@ -207,10 +201,7 @@ msgstr ""
 
 #: templates/admin/index.html:97 templates/course/detailcourse.html:15
 #: templates/course/detailcourse.html:50
-#: templates/delivery/listdelivery.html:17
-#: templates/practice/uploadFile.html:23 templates/student/liststudent.html:27
-#: templates/student/liststudentdeliveries.html:19
-#: templates/student/studentsearch.html:17 templates/teacher/index.html:135
+#: templates/student/studentsearch.html:17
 msgid "Actions"
 msgstr ""
 
@@ -244,12 +235,9 @@ msgstr ""
 
 #: templates/admin/list_teacher.html:39
 #: templates/delivery/deliverydetail.html:13
-#: templates/student/liststudent.html:22
 #: templates/student/studentsearch.html:13
 #: templates/suscription/listsuscription.html:22
 #: templates/suscription/listsuscription.html:62
-#: templates/suscription/listsuscriptionpending.html:30
-#: templates/suscription/listsuscriptionpending.html:77
 msgid "Uid"
 msgstr ""
 
@@ -270,117 +258,92 @@ msgid "There are yet no Teacher"
 msgstr ""
 
 #: templates/automatic_correction/details.html:9
-msgid "Automatic check result:"
-msgstr ""
+#: templates/automatic_correction/detailsundergraduate.html:9
+msgid "automaticCheckResult"
+msgstr "Automatic check result"
 
 #: templates/automatic_correction/details.html:21
-msgid "Autorun output"
-msgstr ""
+#: templates/automatic_correction/detailsundergraduate.html:21
+msgid "autorunOutput"
+msgstr "Autorun Output"
 
 #: templates/automatic_correction/details.html:21
-#: templates/correction/index.html:6 templates/delivery/browsedelivery.html:6
-#: templates/delivery/deliverydetail.html:17
+#: templates/automatic_correction/detailsundergraduate.html:21
+#: templates/correction/consult.html:8 templates/correction/index.html:6
+#: templates/delivery/browsedelivery.html:6
 #: templates/delivery/listdelivery.html:11
 #: templates/student/liststudentdeliveries.html:13
-#: templates/teacher/index.html:129
-msgid "Delivery"
-msgstr ""
+#: templates/teacher/index.html:137
+msgid "delivery"
+msgstr "Delivery"
 
 #: templates/automatic_correction/details.html:21
+#: templates/automatic_correction/detailsundergraduate.html:21
 #: templates/delivery/browsedelivery.html:6
 #: templates/delivery/listdelivery.html:13
 #: templates/student/delivery_pending.html:11
 #: templates/student/liststudentdeliveries.html:15
-#: templates/teacher/index.html:131
-msgid "Practice"
-msgstr ""
+#: templates/teacher/index.html:139
+msgid "practice"
+msgstr "Practice"
 
 #: templates/automatic_correction/details.html:29
-msgid "This automatic check is still pending"
-msgstr ""
-
-#: templates/automatic_correction/detailsundergraduate.html:9
-msgid "automaticCheckResult"
-msgstr ""
-
-#: templates/automatic_correction/detailsundergraduate.html:21
-msgid "autorunOutput"
-msgstr ""
-
-#: templates/automatic_correction/detailsundergraduate.html:21
-#: templates/correction/consult.html:8
-msgid "delivery"
-msgstr ""
-
-#: templates/automatic_correction/detailsundergraduate.html:21
-#, fuzzy
-msgid "practice"
-msgstr "New Practice"
-
 #: templates/automatic_correction/detailsundergraduate.html:29
 msgid "automaticCheckPending"
-msgstr ""
+msgstr "This automatic check is still pending"
 
+#: templates/automatic_correction/details.html:32
 #: templates/automatic_correction/detailsundergraduate.html:34
-#: templates/correction/consult.html:32
-#: templates/delivery/uploaddelivery.html:85
-#: templates/practice/listFile.html:32
+#: templates/correction/consult.html:32 templates/correction/index.html:19
+#: templates/delivery/browsedelivery.html:19
+#: templates/delivery/listdelivery.html:51
+#: templates/delivery/uploaddelivery.html:85 templates/export/choose.html:18
+#: templates/practice/editPracticeFile.html:16
+#: templates/practice/editpractice.html:13 templates/practice/listFile.html:32
+#: templates/practice/script.html:14 templates/practice/uploadFile.html:47
+#: templates/shift/editshift.html:12 templates/shift/newshift.html:12
+#: templates/student/detail.html:11 templates/student/editstudent.html:15
+#: templates/student/editstudent.html:17 templates/student/liststudent.html:61
+#: templates/student/liststudentdeliveries.html:54
+#: templates/student/new-student.html:15 templates/student/new-student.html:17
 msgid "back"
-msgstr ""
+msgstr "Back"
 
-#: templates/correction/consult.html:8
+#: templates/correction/consult.html:8 templates/correction/index.html:6
 msgid "correctionPractice"
-msgstr ""
+msgstr "Correction of practice"
 
 #: templates/correction/consult.html:13
 msgid "coment"
-msgstr ""
+msgstr "Coment"
 
 #: templates/correction/consult.html:14
 msgid "grade"
-msgstr ""
+msgstr "Grade"
 
 #: templates/correction/consult.html:25
 msgid "noCorrection"
-msgstr ""
-
-#: templates/correction/index.html:6
-msgid "Correction practice"
-msgstr ""
+msgstr "There is yet no Correction"
 
 #: templates/correction/index.html:6 templates/delivery/browsedelivery.html:6
-#: templates/delivery/listdelivery.html:12
-#: templates/student/liststudentdeliveries.html:14
-#: templates/teacher/index.html:130
-msgid "Student"
-msgstr ""
+#: templates/teacher/index.html:138
+msgid "student"
+msgstr "Student"
 
-#: templates/correction/index.html:9 templates/student/liststudent.html:26
-#: templates/student/studentsearch.html:16
-msgid "Corrector"
-msgstr ""
+#: templates/correction/index.html:9 templates/student/detail.html:9
+#: templates/student/liststudent.html:26
+msgid "corrector"
+msgstr "Corrector"
 
-#: templates/correction/index.html:16
-msgid "Submit"
-msgstr ""
-
-#: templates/correction/index.html:19
-#: templates/delivery/browsedelivery.html:19
-#: templates/delivery/deliverydetail.html:43
-#: templates/delivery/listdelivery.html:51 templates/export/choose.html:18
-#: templates/practice/editPracticeFile.html:16
-#: templates/practice/editpractice.html:13 templates/practice/script.html:14
-#: templates/practice/uploadFile.html:47
-#: templates/practice/uploadpractice.html:13 templates/shift/editshift.html:12
-#: templates/shift/newshift.html:12 templates/student/detail.html:11
-#: templates/student/editstudent.html:15 templates/student/editstudent.html:17
-#: templates/student/liststudent.html:61
-#: templates/student/liststudentdeliveries.html:54
-#: templates/student/new-student.html:15 templates/student/new-student.html:17
-#: templates/suscription/listsuscription.html:88
-#: templates/suscription/listsuscriptionpending.html:103
-msgid "Back"
-msgstr ""
+#: templates/correction/index.html:16 templates/course/editcourse.html:12
+#: templates/course/newcourse.html:12
+#: templates/practice/editPracticeFile.html:14
+#: templates/practice/editpractice.html:11 templates/practice/script.html:12
+#: templates/practice/uploadFile.html:12 templates/shift/editshift.html:10
+#: templates/shift/newshift.html:10 templates/student/editstudent.html:11
+#: templates/student/new-student.html:11
+msgid "save"
+msgstr "Save"
 
 #: templates/course/detailcourse.html:4
 #, python-format
@@ -392,9 +355,8 @@ msgid "Practices"
 msgstr ""
 
 #: templates/course/detailcourse.html:12
-#, fuzzy
 msgid "Name Practice"
-msgstr "New Practice"
+msgstr ""
 
 #: templates/course/detailcourse.html:13
 msgid "Dead Line"
@@ -405,31 +367,27 @@ msgid "Deliveries"
 msgstr ""
 
 #: templates/course/detailcourse.html:25 templates/course/detailcourse.html:61
-#: templates/practice/uploadFile.html:34 templates/student/liststudent.html:10
-#: templates/student/liststudent.html:47 templates/student/liststudent.html:49
-#: templates/teacher/index.html:69
 msgid "Edit"
 msgstr ""
 
-#: templates/course/detailcourse.html:26 templates/teacher/index.html:70
+#: templates/course/detailcourse.html:26
 msgid "Upload Files"
 msgstr ""
 
-#: templates/course/detailcourse.html:27 templates/student/liststudent.html:51
-#: templates/student/studentsearch.html:33 templates/teacher/index.html:71
+#: templates/course/detailcourse.html:27
+#: templates/student/studentsearch.html:33
 msgid "Deliveries List"
 msgstr ""
 
-#: templates/course/detailcourse.html:28 templates/teacher/index.html:72
+#: templates/course/detailcourse.html:28
 msgid "Upload Correction Script"
 msgstr ""
 
 #: templates/course/detailcourse.html:30 templates/course/detailcourse.html:64
-#: templates/practice/uploadFile.html:36 templates/teacher/index.html:74
 msgid "Delete"
 msgstr ""
 
-#: templates/course/detailcourse.html:35 templates/teacher/index.html:111
+#: templates/course/detailcourse.html:35
 msgid "There are yet no Practices"
 msgstr ""
 
@@ -442,8 +400,7 @@ msgstr ""
 msgid "Shifts"
 msgstr ""
 
-#: templates/course/detailcourse.html:47 templates/practice/uploadFile.html:21
-#: templates/student/liststudent.html:23
+#: templates/course/detailcourse.html:47
 #: templates/student/studentsearch.html:14
 msgid "Name"
 msgstr ""
@@ -457,32 +414,26 @@ msgid "Students"
 msgstr ""
 
 #: templates/course/detailcourse.html:62
-#, fuzzy
 msgid "Student List"
-msgstr "Students"
+msgstr ""
 
 #: templates/course/detailcourse.html:69
 msgid "There are yet no Shifts"
 msgstr ""
 
-#: templates/course/detailcourse.html:73 templates/shift/newshift.html:7
+#: templates/course/detailcourse.html:73
 msgid "New Shift"
 msgstr ""
 
 #: templates/course/editcourse.html:9
-#, python-format
-msgid "Course %(coursename)s edit"
-msgstr ""
+msgid "course"
+msgstr "Course"
 
-#: templates/course/editcourse.html:12 templates/course/newcourse.html:12
-#: templates/practice/editPracticeFile.html:14
-#: templates/practice/editpractice.html:11 templates/practice/script.html:12
-#: templates/practice/uploadFile.html:12
-#: templates/practice/uploadpractice.html:11 templates/shift/editshift.html:10
-#: templates/shift/newshift.html:10 templates/student/editstudent.html:11
-#: templates/student/new-student.html:11
-msgid "Save"
-msgstr ""
+#: templates/course/editcourse.html:9 templates/practice/uploadFile.html:34
+#: templates/student/liststudent.html:10 templates/student/liststudent.html:47
+#: templates/student/liststudent.html:49 templates/teacher/index.html:73
+msgid "edit"
+msgstr "Edit"
 
 #: templates/course/index.html:7
 msgid "Courses List"
@@ -512,14 +463,14 @@ msgstr ""
 msgid "last"
 msgstr ""
 
-#: templates/course/newcourse.html:5 templates/teacher/index.html:172
+#: templates/course/newcourse.html:5 templates/teacher/index.html:180
 #: templates/teacher/teacher.html:31
-msgid "New Course"
-msgstr ""
+msgid "newCourse"
+msgstr "New course"
 
 #: templates/delivery/browsedelivery.html:15
-msgid "No files where found in this delivery"
-msgstr ""
+msgid "noFilesFoundInDelivery"
+msgstr "No file found to show in the delivery"
 
 #: templates/delivery/deliverydetail.html:6
 #, python-format
@@ -529,140 +480,179 @@ msgstr ""
 #: templates/delivery/deliverydetail.html:14
 #: templates/suscription/listsuscription.html:23
 #: templates/suscription/listsuscription.html:63
-#: templates/suscription/listsuscriptionpending.html:31
-#: templates/suscription/listsuscriptionpending.html:78
 msgid "Student Uid"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:15
 #: templates/suscription/listsuscription.html:24
 #: templates/suscription/listsuscription.html:64
-#: templates/suscription/listsuscriptionpending.html:32
-#: templates/suscription/listsuscriptionpending.html:79
 msgid "Student Name"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:16
-#: templates/delivery/listdelivery.html:14
-#: templates/student/liststudentdeliveries.html:16
-#: templates/teacher/index.html:132
 msgid "Delivery Date"
 msgstr ""
 
+#: templates/delivery/deliverydetail.html:17
+msgid "Delivery"
+msgstr ""
+
 #: templates/delivery/deliverydetail.html:18
-#: templates/delivery/listdelivery.html:15
-#: templates/student/liststudentdeliveries.html:17
-#: templates/teacher/index.html:133
 msgid "Correction"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:19
-#: templates/delivery/listdelivery.html:16
-#: templates/delivery/listdelivery.html:39
-#: templates/student/liststudentdeliveries.html:18
-#: templates/student/liststudentdeliveries.html:41
-#: templates/teacher/index.html:134 templates/teacher/index.html.py:156
 msgid "Automatic Correction"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:20
-#: templates/delivery/listdelivery.html:40
-#: templates/student/liststudentdeliveries.html:42
-#: templates/teacher/index.html:157
 msgid "Navigate"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:29
-#: templates/delivery/listdelivery.html:38 templates/export/choose.html:15
-#: templates/practice/uploadFile.html:32
-#: templates/student/liststudentdeliveries.html:40
-#: templates/teacher/index.html:155
 msgid "Download"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:32
-#: templates/delivery/listdelivery.html:27
-#: templates/student/liststudentdeliveries.html:29
-#: templates/teacher/index.html:146
 msgid "Corrected"
 msgstr ""
 
 #: templates/delivery/deliverydetail.html:34
-#: templates/delivery/listdelivery.html:27
-#: templates/student/liststudentdeliveries.html:29
-#: templates/teacher/index.html:99 templates/teacher/index.html.py:148
 msgid "Pending"
 msgstr ""
 
+#: templates/delivery/deliverydetail.html:43
+#: templates/practice/uploadpractice.html:13
+#: templates/suscription/listsuscription.html:88
+msgid "Back"
+msgstr ""
+
 #: templates/delivery/listdelivery.html:6
-#, python-format
-msgid "Deliveries of practice <b>%(practice)s</b>"
-msgstr ""
+msgid "deliveriesPractice"
+msgstr "Deliveries of practice"
 
-#: templates/delivery/listdelivery.html:41
-#: templates/student/liststudentdeliveries.html:43
-#: templates/teacher/index.html:158
-msgid "Correct"
-msgstr ""
+#: templates/delivery/listdelivery.html:12
+#: templates/student/delivery_pending.html:16 templates/student/detail.html:7
+#: templates/student/liststudent.html:22
+#: templates/student/liststudentdeliveries.html:14
+msgid "uidStudent"
+msgstr "Uid student"
 
-#: templates/delivery/listdelivery.html:46
-msgid "There are yet no deliveries"
-msgstr ""
-
-#: templates/delivery/uploaddelivery.html:5
-msgid "uploadDeliveryForPractice"
-msgstr ""
-
-#: templates/delivery/uploaddelivery.html:33
-msgid "submit"
-msgstr ""
-
-#: templates/delivery/uploaddelivery.html:40
-msgid "deliveriesForPractice"
-msgstr ""
-
-#: templates/delivery/uploaddelivery.html:45
-#, fuzzy
-msgid "uidDelivery"
-msgstr "Pending of delivery"
-
+#: templates/delivery/listdelivery.html:14
 #: templates/delivery/uploaddelivery.html:46
+#: templates/student/liststudentdeliveries.html:16
+#: templates/teacher/index.html:140
 msgid "deliveryDate"
-msgstr ""
+msgstr "Delivery date"
 
-#: templates/delivery/uploaddelivery.html:47
-msgid "status"
-msgstr ""
+#: templates/delivery/listdelivery.html:15
+#: templates/student/liststudentdeliveries.html:17
+#: templates/teacher/index.html:141
+msgid "correction"
+msgstr "Correction"
 
+#: templates/delivery/listdelivery.html:16
+#: templates/delivery/listdelivery.html:39
 #: templates/delivery/uploaddelivery.html:48
+#: templates/student/liststudentdeliveries.html:18
+#: templates/student/liststudentdeliveries.html:41
+#: templates/teacher/index.html:142
 msgid "automaticCorrection"
-msgstr ""
+msgstr "Automatic Correction"
 
+#: templates/delivery/listdelivery.html:17 templates/practice/listFile.html:11
+#: templates/practice/practiceList.html:12
+#: templates/practice/uploadFile.html:23 templates/student/liststudent.html:27
+#: templates/student/liststudentdeliveries.html:19
+#: templates/teacher/index.html:143
+msgid "actions"
+msgstr "Actions"
+
+#: templates/delivery/listdelivery.html:27
 #: templates/delivery/uploaddelivery.html:59
+#: templates/student/liststudentdeliveries.html:29
+#: templates/teacher/index.html:153
 msgid "corrected"
-msgstr ""
+msgstr "Corrected"
 
-#: templates/delivery/uploaddelivery.html:61
-msgid "uncorrected"
-msgstr ""
+#: templates/delivery/listdelivery.html:27
+#: templates/delivery/listdelivery.html:34
+#: templates/delivery/uploaddelivery.html:72
+#: templates/student/liststudentdeliveries.html:29
+#: templates/student/liststudentdeliveries.html:36
+#: templates/teacher/index.html:103 templates/teacher/index.html.py:153
+#: templates/teacher/index.html:160
+msgid "pending"
+msgstr "Pending"
 
-#: templates/delivery/uploaddelivery.html:68 templates/teacher/index.html:91
+#: templates/delivery/listdelivery.html:30
+#: templates/delivery/uploaddelivery.html:68
+#: templates/student/liststudentdeliveries.html:32
+#: templates/teacher/index.html:95 templates/teacher/index.html.py:156
 msgid "successfull"
 msgstr "Successfull"
 
-#: templates/delivery/uploaddelivery.html:70 templates/teacher/index.html:95
+#: templates/delivery/listdelivery.html:32
+#: templates/delivery/uploaddelivery.html:70
+#: templates/student/liststudentdeliveries.html:34
+#: templates/teacher/index.html:99 templates/teacher/index.html.py:158
 msgid "failed"
 msgstr "Failed"
 
-#: templates/delivery/uploaddelivery.html:72
-msgid "pending"
-msgstr ""
+#: templates/delivery/listdelivery.html:38 templates/export/choose.html:15
+#: templates/practice/listFile.html:19 templates/practice/practiceList.html:21
+#: templates/practice/uploadFile.html:32
+#: templates/student/liststudentdeliveries.html:40
+#: templates/teacher/index.html:163
+msgid "download"
+msgstr "Download"
+
+#: templates/delivery/listdelivery.html:40
+#: templates/student/liststudentdeliveries.html:42
+#: templates/teacher/index.html:165
+msgid "navigate"
+msgstr "Navigate"
+
+#: templates/delivery/listdelivery.html:41
+#: templates/student/liststudentdeliveries.html:43
+#: templates/teacher/index.html:166
+msgid "correct"
+msgstr "Correct"
+
+#: templates/delivery/listdelivery.html:46
+#: templates/student/liststudentdeliveries.html:48
+msgid "noDeliveries"
+msgstr "There are yet no deliveries from this practice"
+
+#: templates/delivery/uploaddelivery.html:5
+msgid "uploadDeliveryForPractice"
+msgstr "Upload delivery for practice"
+
+#: templates/delivery/uploaddelivery.html:33
+msgid "submit"
+msgstr "Submit"
+
+#: templates/delivery/uploaddelivery.html:40
+msgid "deliveriesFromPractice"
+msgstr "Deliveries from practice"
+
+#: templates/delivery/uploaddelivery.html:45
+msgid "uidDelivery"
+msgstr "Id delivery"
+
+#: templates/delivery/uploaddelivery.html:47
+msgid "status"
+msgstr "Status"
+
+#: templates/delivery/uploaddelivery.html:61
+msgid "uncorrected"
+msgstr "Uncorrected"
 
 #: templates/delivery/uploaddelivery.html:79
 msgid "noDeliveriesPractice"
-msgstr ""
+msgstr "There are yet no deliveries from this practice"
 
-#: templates/export/choose.html:7 templates/teacher/teacher.html:40
+#: templates/export/choose.html:7
 msgid "data_export"
 msgstr "Data export"
 
@@ -670,13 +660,17 @@ msgstr "Data export"
 msgid "data_export_download_message"
 msgstr "Download exported information regarding the selected course"
 
+#: templates/practice/editPracticeFile.html:7
+msgid "editPracticeFile"
+msgstr "Edit practice file"
+
 #: templates/practice/editPracticeFile.html:9
-msgid "Edited successfully"
-msgstr ""
+msgid "editedSuccessfully"
+msgstr "Edited successfully"
 
 #: templates/practice/editpractice.html:8
-msgid "Edit Practice"
-msgstr ""
+msgid "editPractice"
+msgstr "Edit practice"
 
 #: templates/practice/index.html:8
 msgid "Practices List"
@@ -690,98 +684,97 @@ msgstr ""
 msgid "filesOfPractice"
 msgstr ""
 
-#: templates/practice/listFile.html:11 templates/practice/practiceList.html:12
-#, fuzzy
-msgid "actions"
-msgstr "Subscriptions"
-
-#: templates/practice/listFile.html:19 templates/practice/practiceList.html:21
-msgid "download"
-msgstr ""
-
 #: templates/practice/listFile.html:26
 msgid "noFilesBounded"
-msgstr ""
+msgstr "There are not file bounded to this practice"
 
 #: templates/practice/practiceList.html:5
-#, fuzzy
 msgid "practiceOfShift"
-msgstr "Practice Statistics"
+msgstr "Practice of shift"
 
 #: templates/practice/practiceList.html:10
-#, fuzzy
 msgid "practiceName"
-msgstr "Practice Statistics"
+msgstr "Practice name"
 
 #: templates/practice/practiceList.html:11
 msgid "deadLine"
-msgstr ""
+msgstr "Dead Line"
 
 #: templates/practice/practiceList.html:23
 msgid "practiceExpired"
-msgstr ""
+msgstr "Pratice Expired"
 
 #: templates/practice/practiceList.html:25
 msgid "makeDelivery"
-msgstr ""
+msgstr "Make Delivery"
 
 #: templates/practice/practiceList.html:31
 msgid "thereNoPractices"
-msgstr ""
+msgstr "There are yet no Practices"
 
 #: templates/practice/script.html:6
-msgid "Upload Script"
-msgstr ""
+msgid "uploadScript"
+msgstr "Upload Script"
 
 #: templates/practice/script.html:16
-msgid "Script content"
-msgstr ""
+msgid "scriptContent"
+msgstr "Script content"
 
 #: templates/practice/uploadFile.html:5
-#, python-format
-msgid "Upload File for practice <b>%(namepractice)s</b>"
-msgstr ""
+msgid "uploadFilePractice"
+msgstr "Upload file practice"
 
 #: templates/practice/uploadFile.html:16
-#, python-format
-msgid "List file practice <b>%(namepractice)s</b>"
-msgstr ""
+msgid "listFilePractice"
+msgstr "List practice file"
+
+#: templates/practice/uploadFile.html:21
+msgid "namePractice"
+msgstr "Practice name"
 
 #: templates/practice/uploadFile.html:22
-msgid "File"
-msgstr ""
+msgid "file"
+msgstr "File"
+
+#: templates/practice/uploadFile.html:36 templates/teacher/index.html:78
+msgid "delete"
+msgstr "Delete"
 
 #: templates/practice/uploadFile.html:41
-msgid "There are yet no deliveries uploaded to this practice"
+msgid "noFilePractice"
+msgstr "There are no files bounded to this practice"
+
+#: templates/practice/uploadpractice.html:11
+msgid "Save"
 msgstr ""
 
 #: templates/registration/change-success.html:11
 #: templates/registration/change_pass.html:17
-#: templates/teacher/teacher.html:65
 msgid "Change Password"
 msgstr ""
 
 #: templates/registration/change-success.html:14
 #: templates/registration/change_pass.html:20
 #: templates/registration/change_pass.html:29
+#: templates/teacher/teacher.html:65
 #: templates/undergraduate/undergraduate.html:22
-#, fuzzy
 msgid "changePassword"
-msgstr "Password"
+msgstr "Change Password"
 
 #: templates/registration/change-success.html:16
 #: templates/registration/change_pass.html:22
+#: templates/teacher/teacher.html:35
 #: templates/undergraduate/undergraduate.html:14
 msgid "home"
-msgstr ""
+msgstr "Home"
 
 #: templates/registration/change-success.html:23
 msgid "fistLineMessageChangePasswordSuccessfull"
-msgstr ""
+msgstr "Change password successfully!"
 
 #: templates/registration/change-success.html:24
 msgid "secondLineMessageChangePasswordSuccessfull"
-msgstr ""
+msgstr "Check your email to see the change info"
 
 #: templates/registration/change_lenguaje.html:33
 msgid "Select Lenguaje"
@@ -789,7 +782,7 @@ msgstr ""
 
 #: templates/registration/change_pass.html:35
 msgid "change"
-msgstr ""
+msgstr "Change"
 
 #: templates/registration/login.html:19
 msgid "Login SEAL"
@@ -797,111 +790,97 @@ msgstr ""
 
 #: templates/registration/login.html:23
 msgid "wrongCredentials"
-msgstr ""
+msgstr "The credentials are wrong"
 
 #: templates/registration/login.html:29
-#, fuzzy
 msgid "username"
-msgstr "Names"
+msgstr "Username"
 
 #: templates/registration/login.html:43
 #: templates/registration/recovery-success.html:17
 #: templates/registration/registration-success.html:17
 msgid "logIn"
-msgstr ""
+msgstr "Log In"
 
 #: templates/registration/login.html:50
-msgid "New to SEAL?"
-msgstr ""
+msgid "messageNewBrand"
+msgstr "New on SEAL?"
 
 #: templates/registration/login.html:50
-#, fuzzy
 msgid "registration"
 msgstr "Registrate on"
 
 #: templates/registration/login.html:55
-msgid "Forgot your Password?"
-msgstr ""
+msgid "messageForgotPassword"
+msgstr "Forgot your Password?"
 
 #: templates/registration/login.html:55
-#, fuzzy
 msgid "passwordRecovery"
-msgstr "Password"
+msgstr "Password Recovery"
 
 #: templates/registration/recovery-success.html:9
 #: templates/registration/recovery_pass.html:15
 #: templates/registration/recovery_pass.html:21
-#, fuzzy
 msgid "recoveryPassword"
-msgstr "Repeat Password"
+msgstr "Recovery Password"
 
 #: templates/registration/recovery-success.html:15
 msgid "firstLineMessageRecoverySuccesfull"
-msgstr ""
+msgstr "Recovery completed successfully!"
 
 #: templates/registration/recovery-success.html:16
 msgid "secondLineMessageRecoverySuccesfull"
-msgstr ""
+msgstr "Check your email to see the recovery info"
 
 #: templates/registration/recovery_pass.html:26
 msgid "recover"
-msgstr ""
+msgstr "Recover"
 
 #: templates/registration/register.html:12
 #: templates/registration/register.html:29
 #: templates/registration/registration-success.html:9
-#, fuzzy
 msgid "registrate"
-msgstr "Registrate on"
+msgstr "Registrate"
 
 #: templates/registration/register.html:18
-#, fuzzy
 msgid "registrateOn"
 msgstr "Registrate on"
 
 #: templates/registration/registration-success.html:15
 msgid "firstLineMessageRegistrationSuccesfull"
-msgstr ""
+msgstr "Registration completed successfully!"
 
 #: templates/registration/registration-success.html:16
 msgid "secondLineMessageRegistrationSuccesfull"
-msgstr ""
+msgstr "Check your email to see the registration info"
 
 #: templates/shift/editshift.html:7
-msgid "Edit Shift"
-msgstr ""
+msgid "editShift"
+msgstr "Edit shift"
+
+#: templates/shift/newshift.html:7 templates/teacher/index.html:32
+msgid "newShift"
+msgstr "New Shift"
 
 #: templates/student/delivery_pending.html:6 templates/teacher/teacher.html:39
-msgid "pending_deliveries"
+msgid "pendingDeliveries"
 msgstr "Pending deliveries"
 
 #: templates/student/delivery_pending.html:37
-msgid "There are no student with pending delivery"
-msgstr ""
+msgid "noStudentWithPendingDelivery"
+msgstr "Thera are not student whit pending deliveries"
 
 #: templates/student/detail.html:5
-msgid "Detail of Student "
-msgstr ""
+msgid "detailStudent"
+msgstr "Detail of student"
 
-#: templates/student/detail.html:6
-msgid "Name: "
-msgstr ""
-
-#: templates/student/detail.html:7
-msgid "Uid: "
-msgstr ""
-
-#: templates/student/detail.html:8
-msgid "E-mail: "
-msgstr ""
-
-#: templates/student/detail.html:9
-msgid "Corrector: "
-msgstr ""
+#: templates/student/detail.html:8 templates/student/liststudent.html:24
+msgid "email"
+msgstr "Email"
 
 #: templates/student/editstudent.html:5
-msgid "Edit Student"
-msgstr ""
+msgid "editStudent"
+msgstr "Edit student"
 
 #: templates/student/index.html:8
 msgid "Students List"
@@ -912,51 +891,51 @@ msgid "0 student"
 msgstr ""
 
 #: templates/student/liststudent.html:6
-msgid "Students in course: "
+msgid "studentsInCourse"
+msgstr "Students in course"
+
+#: templates/student/liststudent.html:16 templates/student/new-student.html:5
+msgid "newStudent"
+msgstr "New student"
+
+#: templates/student/liststudent.html:41
+msgid "noCorrector"
+msgstr "No corrector"
+
+#: templates/student/liststudent.html:45
+msgid "detail"
+msgstr "Detail"
+
+#: templates/student/liststudent.html:51 templates/teacher/index.html:75
+msgid "deliveriesList"
+msgstr "Delivery list"
+
+#: templates/student/liststudent.html:56
+msgid "noStudents"
+msgstr "There are no students in this course"
+
+#: templates/student/liststudentdeliveries.html:7
+msgid "deliveriesStudent"
+msgstr "Deliveries of student"
+
+#: templates/student/studentsearch.html:7
+msgid "Student Search"
 msgstr ""
 
-#: templates/student/liststudent.html:16
-msgid "New Student"
-msgstr ""
-
-#: templates/student/liststudent.html:24
 #: templates/student/studentsearch.html:15
 msgid "Email"
 msgstr ""
 
-#: templates/student/liststudent.html:25
-#, fuzzy
-msgid "Shift"
-msgstr "Shift"
+#: templates/student/studentsearch.html:16
+msgid "Corrector"
+msgstr ""
 
-#: templates/student/liststudent.html:41
 #: templates/student/studentsearch.html:29
 msgid "no corrector"
 msgstr ""
 
-#: templates/student/liststudent.html:45
 #: templates/student/studentsearch.html:32
 msgid "Detail"
-msgstr ""
-
-#: templates/student/liststudent.html:56
-msgid "There are yet no Students"
-msgstr ""
-
-#: templates/student/liststudentdeliveries.html:7
-msgid "Deliveries of student "
-msgstr ""
-
-#: templates/student/liststudentdeliveries.html:48
-msgid "There are yet no deliveries of this student"
-msgstr ""
-
-#: templates/student/new-student.html:5
-msgid "New student"
-msgstr ""
-
-#: templates/student/studentsearch.html:7
-msgid "Student Search"
 msgstr ""
 
 #: templates/student/studentsearch.html:38
@@ -969,193 +948,237 @@ msgstr ""
 
 #: templates/suscription/listsuscription.html:25
 #: templates/suscription/listsuscription.html:65
-#: templates/suscription/listsuscriptionpending.html:33
-#: templates/suscription/listsuscriptionpending.html:80
 msgid "Suscirption Date"
 msgstr ""
 
 #: templates/suscription/listsuscription.html:44
-#: templates/suscription/listsuscriptionpending.html:52
 msgid "There are yet no suscriptions awaiting confirmation"
 msgstr ""
 
 #: templates/suscription/listsuscription.html:51
-#: templates/suscription/listsuscriptionpending.html:59
 msgid "Reject"
 msgstr ""
 
 #: templates/suscription/listsuscription.html:52
-#: templates/suscription/listsuscriptionpending.html:60
 msgid "Accept"
 msgstr ""
 
 #: templates/suscription/listsuscription.html:57
-#: templates/suscription/listsuscriptionpending.html:72
 msgid "Suscription solver of course "
 msgstr ""
 
 #: templates/suscription/listsuscription.html:66
-#: templates/suscription/listsuscriptionpending.html:81
 msgid "Resolve Date"
 msgstr ""
 
 #: templates/suscription/listsuscription.html:67
-#: templates/suscription/listsuscriptionpending.html:82
 msgid "State"
 msgstr ""
 
 #: templates/suscription/listsuscription.html:82
-#: templates/suscription/listsuscriptionpending.html:97
 msgid "There are yet no suscriptions solve for this course"
 msgstr ""
 
 #: templates/suscription/listsuscriptionpending.html:15
-#, fuzzy
-msgid "Suscriptions"
+msgid "suscriptions"
 msgstr "Subscriptions"
 
 #: templates/suscription/listsuscriptionpending.html:25
-msgid "Pending Suscriptions for course"
-msgstr ""
+msgid "pendingSuscriptionsForCourse"
+msgstr "Pending subscriptions for course"
+
+#: templates/suscription/listsuscriptionpending.html:30
+#: templates/suscription/listsuscriptionpending.html:77
+msgid "uidSuscription"
+msgstr "Id subscriptions"
+
+#: templates/suscription/listsuscriptionpending.html:31
+#: templates/suscription/listsuscriptionpending.html:78
+msgid "studentUid"
+msgstr "Id students"
+
+#: templates/suscription/listsuscriptionpending.html:32
+#: templates/suscription/listsuscriptionpending.html:79
+msgid "studentName"
+msgstr "Student Name"
+
+#: templates/suscription/listsuscriptionpending.html:33
+#: templates/suscription/listsuscriptionpending.html:80
+msgid "suscirptionDate"
+msgstr "Subscription Date"
+
+#: templates/suscription/listsuscriptionpending.html:52
+msgid "noSuscriptionsAwaiting"
+msgstr "There are yet no suscriptions awaiting confirmation"
+
+#: templates/suscription/listsuscriptionpending.html:59
+msgid "reject"
+msgstr "Reject"
+
+#: templates/suscription/listsuscriptionpending.html:60
+msgid "accept"
+msgstr "Accept"
+
+#: templates/suscription/listsuscriptionpending.html:72
+msgid "suscriptionSolverOfCourse"
+msgstr "Subscriptions solve of course"
+
+#: templates/suscription/listsuscriptionpending.html:81
+msgid "resolveDate"
+msgstr "Resolve date"
+
+#: templates/suscription/listsuscriptionpending.html:82
+#: templates/suscription/suscription.html:36
+msgid "state"
+msgstr "State"
+
+#: templates/suscription/listsuscriptionpending.html:97
+msgid "noSuscriptionsSolve"
+msgstr "There are yet no suscriptions solve for this course"
 
 #: templates/suscription/suscription.html:6
 #: templates/undergraduate/index.html:26
-#, fuzzy
 msgid "suscription"
-msgstr "Subscriptions"
+msgstr "Subscription"
 
 #: templates/suscription/suscription.html:18
-msgid "Suscribe"
-msgstr ""
+msgid "suscribe"
+msgstr "Suscribe"
 
 #: templates/suscription/suscription.html:22
 msgid "noShiftsSuscribe"
-msgstr ""
+msgstr "There are yet no Shifts to suscribe"
 
 #: templates/suscription/suscription.html:28
-#, fuzzy
 msgid "listOldSuscription"
-msgstr "Subscriptions"
+msgstr "List of old Suscription"
 
 #: templates/suscription/suscription.html:34
-#, fuzzy
 msgid "dateOfSuscription"
-msgstr "Subscriptions"
+msgstr "Date subscription"
 
 #: templates/suscription/suscription.html:35
 msgid "dateOfResolve"
-msgstr ""
-
-#: templates/suscription/suscription.html:36
-msgid "state"
-msgstr ""
+msgstr "Date resolve"
 
 #: templates/suscription/suscription.html:49
-#, fuzzy
 msgid "noOldSuscription"
-msgstr "Subscriptions"
+msgstr "There are no old suscription"
 
 #: templates/teacher/index.html:13
 msgid "students"
 msgstr "Students"
 
-#: templates/teacher/index.html:32
-msgid "new_shift"
-msgstr "New Shift"
-
 #: templates/teacher/index.html:49
-msgid "new_practice"
+msgid "newPractice"
 msgstr "New Practice"
 
-#: templates/teacher/index.html:58
-msgid "practices_stats"
+#: templates/teacher/index.html:59
+msgid "practicesStats"
 msgstr "Practice Statistics"
 
-#: templates/teacher/index.html:87
-msgid "total_deliveries"
+#: templates/teacher/index.html:74
+msgid "uploadFiles"
+msgstr "Upload files"
+
+#: templates/teacher/index.html:76
+msgid "uploadCorrectionScript"
+msgstr "Upload correction script"
+
+#: templates/teacher/index.html:91
+msgid "totalDeliveries"
 msgstr "Total deliveries"
 
-#: templates/teacher/index.html:123
-msgid "List of my corrections"
-msgstr ""
+#: templates/teacher/index.html:116
+msgid "noPractices"
+msgstr "There are not practice"
 
-#: templates/teacher/index.html:163
-msgid "There are no corrections"
-msgstr ""
+#: templates/teacher/index.html:130
+msgid "listMyCorrections"
+msgstr "List of my corrections"
 
-#: templates/teacher/index.html:171
+#: templates/teacher/index.html:164
+msgid "uatomaticCorrection"
+msgstr "Automatic Correction"
+
+#: templates/teacher/index.html:170
+msgid "noCorrections"
+msgstr "There are no corrections"
+
+#: templates/teacher/index.html:178
 msgid "empty_database_message"
 msgstr ""
 "It seems that you are new arround here. To get started, create a course so "
 "that your students can suscribe."
 
+#: templates/teacher/teacher.html:11
+msgid "teacher"
+msgstr "Teacher"
+
 #: templates/teacher/teacher.html:20
 msgid "no_courses"
 msgstr "No courses"
 
-#: templates/teacher/teacher.html:35
-msgid "Home"
-msgstr ""
-
 #: templates/teacher/teacher.html:37
-msgid "edit_course"
-msgstr "Edit Course"
+msgid "editCourse"
+msgstr "Edit course"
 
 #: templates/teacher/teacher.html:38
 msgid "subscriptions"
 msgstr "Subscriptions"
 
+#: templates/teacher/teacher.html:40
+msgid "dataExport"
+msgstr "Data export"
+
+#: templates/teacher/teacher.html:51
+msgid "search"
+msgstr "Search"
+
 #: templates/teacher/teacher.html:62
-msgid "Welcome"
-msgstr ""
+#: templates/undergraduate/undergraduate.html:19
+msgid "welcome"
+msgstr "Welcome"
 
 #: templates/teacher/teacher.html:66
-msgid "Logout"
-msgstr ""
+#: templates/undergraduate/undergraduate.html:23
+msgid "logOut"
+msgstr "Log Out"
 
 #: templates/teacher/teacher.html:73
-msgid "You are not allowed in this section"
-msgstr ""
+#: templates/undergraduate/undergraduate.html:33
+msgid "notAllowedSeccion"
+msgstr "You are not allowed to be in that seccion"
 
 #: templates/undergraduate/index.html:7
 msgid "undergraduate"
-msgstr ""
+msgstr "Undergraduate"
 
 #: templates/undergraduate/index.html:11
-#, fuzzy
 msgid "courses"
-msgstr "No courses"
+msgstr "Courses"
 
 #: templates/undergraduate/index.html:11
-#, fuzzy
 msgid "shifts"
-msgstr "Shift"
+msgstr "Shifts"
 
 #: templates/undergraduate/index.html:22
 msgid "noShiftsToEnrolled"
-msgstr ""
+msgstr "There are yet no Shifts to suscribe"
 
 #: templates/undergraduate/index.html:26
-#, fuzzy
-msgid "subscriptionHere "
-msgstr "Subscriptions"
+msgid "subscriptionHere"
+msgstr "Subscrip Here"
 
 #: templates/undergraduate/undergraduate.html:11
-#, fuzzy
 msgid "studentView"
-msgstr "Students"
+msgstr "Students view"
 
-#: templates/undergraduate/undergraduate.html:19
-msgid "welcome"
-msgstr ""
+#~ msgid "uidStudnet"
+#~ msgstr "Uid student"
 
-#: templates/undergraduate/undergraduate.html:23
-msgid "logOut"
-msgstr ""
-
-#: templates/undergraduate/undergraduate.html:33
-msgid "notAllowedSeccion"
-msgstr ""
+#~ msgid "successull"
+#~ msgstr "Successfull"
 
 #~ msgid "empty_course_list"
 #~ msgstr "There are yet no courses"

@@ -39,6 +39,6 @@ Feature: As a Teacher I should be able to see de automatic correction result
           And automatic_correction for all deliveries has exit_value "0"
           And I log in as "student" "student"
          When I am in the delivery page of practice "TP Intro"
-          And I click in the "successfull" link
+          And I click in the "Successfull" link
          Then I should see "this is the successfull bash script"
           And I should see "Automatic check result: successfull"

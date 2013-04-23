@@ -5,10 +5,10 @@ This is the main template for all teacher pages.
 {% endcomment %}
 
 {% block head %}
-	<title>SEAL</title>
+	<title>{% trans "brand" %}</title>
 {% endblock %}
 
-{% block subtitle %}{% trans "Teacher" %}{% endblock %}
+{% block subtitle %}{% trans "teacher" %}{% endblock %}
 
 {% if user.teacher_set.all %}
 	{% block nav_opts %}
@@ -28,16 +28,16 @@ This is the main template for all teacher pages.
 						</li>
 					{% endfor %}
 					<li class="divider"></li>
-					<li><a tabindex="-1" href="/teacher/course/newcourse/{{ current_course.pk }}" ><span class="icon-plus-sign"></span> {% trans "New Course" %}</a></li>
+					<li><a tabindex="-1" href="/teacher/course/newcourse/{{ current_course.pk }}" ><span class="icon-plus-sign"></span> {% trans "newCourse" %}</a></li>
 			    </ul>
 		    </div>
 		</li>
-		<li><a href="/teacher/{{ current_course.pk }}" title="{% trans 'Home' %}"><span class="icon-home"></span></a></li>
+		<li><a href="/teacher/{{ current_course.pk }}" title="{% trans 'home' %}"><span class="icon-home"></span></a></li>
 		{% if current_course %}
-			<li><a name="edit{{ course.name }}" title="{% trans 'edit_course' %}" href="/teacher/course/editcourse/{{ current_course.pk }}"><span class="icon-edit" ></span></a></li>
+			<li><a name="edit{{ course.name }}" title="{% trans 'editCourse' %}" href="/teacher/course/editcourse/{{ current_course.pk }}"><span class="icon-edit" ></span></a></li>
 			<li><a href="/teacher/suscription/listsuscriptionpending/{{ current_course.pk }}" title="{% trans 'subscriptions' %}"><span class="icon-user"></span></a></li>
-			<li><a href="/teacher/students/pendingdelivery/{{ current_course.pk }}" title="{% trans 'pending_deliveries' %}"><span class="icon-warning-sign"></span></a></li>
-			<li><a href="/teacher/export/{{ current_course.pk }}" title="{% trans 'data_export' %}"><span class="icon-download"></span></a></li>
+			<li><a href="/teacher/students/pendingdelivery/{{ current_course.pk }}" title="{% trans 'pendingDeliveries' %}"><span class="icon-warning-sign"></span></a></li>
+			<li><a href="/teacher/export/{{ current_course.pk }}" title="{% trans 'dataExport' %}"><span class="icon-download"></span></a></li>
 		{% endif %}
 	{% endblock %}
 	{% block action_opts %}
@@ -48,7 +48,7 @@ This is the main template for all teacher pages.
 					<table>
 						<tr>
 							<td style="padding: 2px 0;" >
-								<input class="search-query" type="text" name="data_search" maxlength="100" placeholder="search" style="margin: 0; width: 150px;" value="{{ query }}" />
+								<input class="search-query" type="text" name="data_search" maxlength="100" placeholder="{% trans 'search' %}" style="margin: 0; width: 150px;" value="{{ query }}" />
 								<!-- this way we get a submittable form with no button --><input type="submit" style="display:none"/>
 							</td>
 						</tr>
@@ -59,17 +59,17 @@ This is the main template for all teacher pages.
 		<li class="divider-vertical"></li>
 		<li><div class="row-fluid">
 			<div class="span12 welcome">
-				{% trans "Welcome" %} {{ user.first_name }} {{ user.last_name }}
+				{% trans "welcome" %} {{ user.first_name }} {{ user.last_name }}
 			</div>
 		</div></li>
-		<li><a name="changepassword" href="/changepassw/" title="{% trans 'Change Password' %}" ><span class="icon-lock"></span></a></li>
-		<li><a name="logout" href="/logout/" title="{% trans 'Logout' %}"><span class="icon-off" style="width: 24px; height: 24px;"></span></a></li>
+		<li><a name="changepassword" href="/changepassw/" title="{% trans 'changePassword' %}" ><span class="icon-lock"></span></a></li>
+		<li><a name="logout" href="/logout/" title="{% trans 'logOut' %}"><span class="icon-off" style="width: 24px; height: 24px;"></span></a></li>
 	{% endblock %}
 	{% block body %}
 		{% block content %}{% endblock %}
 	{% endblock %}
 {% else %}
 	<div class="container" >
-		<p style="color: #A44; font-weight: bold; text-align: center;">{% trans "You are not allowed in this section" %}</p>
+		<p style="color: #A44; font-weight: bold; text-align: center;">{% trans "notAllowedSeccion" %}</p>
 	</div>
 {% endif %}

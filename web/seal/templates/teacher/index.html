@@ -3,176 +3,185 @@
 {% block title %}Teacher{% endblock %}
 {% block content %}
 
-    <div class="container-fluid space-before">
-	    <div class="row-fluid">
-	    	{% if current_course %}
-			    <div class="span3">
-			    	<div class="container-fluid">
-						<div class="row-fluid">
-							<div class="span12 btn side-btn" onclick="location='/teacher/students/list/{{ current_course.pk }}'">
-								<span>{% trans 'students' %}</span>
-								<hr class="thin" />
-								<span class="pull-right icon-user alignment-margin"></span><span class="pull-right pulled-margin"><b>{{ current_course.student_count }}</b></span> 
-							</div>
-						</div>
-						
-						<hr class="thick" />
-						
-						{% for shift in current_course.shift_set.all %}
-							<div class="row-fluid">
-								<div class="span12 btn side-btn" onclick="location='/teacher/students/listshift/{{ current_course.pk }}/{{ shift.pk }}'">
-									<span>{% trans 'shift' %} {{ shift.name }}</span>
-									<hr class="thin" />
-									<span class="pull-right icon-user alignment-margin"></span><span class="pull-right pulled-margin"><b>{{ shift.student_set.count }}</b></span> 
-								</div>
-							</div>
-						{% endfor %}
-						<div class="row-fluid">
-							<div class="span12 btn side-btn" onclick="location='/teacher/shifts/newshift/{{ current_course.pk }}'">
-								<span class="icon-plus"></span> <span>{% trans 'new_shift' %}</span> 
-							</div>
-						</div>
-						
-						<hr class="thick" />
-						
-						{% for practice in current_course.practice_set.all %}
-							<div class="row-fluid">
-								<div class="span12 btn side-btn" onclick="location='/teacher/delivery/list/{{ current_course.pk }}/{{ practice.pk }}'">
-									<span>{{ practice.uid }}</span>
-									<hr class="thin" />
-									<span class="pull-right icon-inbox alignment-margin"></span><span class="pull-right pulled-margin"><b>{{ practice.delivery_set.all.count }}</b></span> 
-								</div>
-							</div>
-						{% endfor %}
-						<div class="row-fluid">
-							<div class="span12 btn side-btn" onclick="location='/teacher/practices/newpractice/{{ current_course.pk }}'">
-								<span class="icon-plus"></span> <span>{% trans 'new_practice' %}</span> 
-							</div>
-						</div>
-						
+<div class="container-fluid space-before">
+	<div class="row-fluid">
+		{% if current_course %}
+		<div class="span3">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12 btn side-btn" onclick="location='/teacher/students/list/{{ current_course.pk }}'">
+						<span>{% trans 'students' %}</span>
+						<hr class="thin" />
+						<span class="pull-right icon-user alignment-margin"></span><span class="pull-right pulled-margin"><b>{{ current_course.student_count }}</b></span>
 					</div>
-			    </div>
-			    <div class="span9">
-			    	<div class="container-fluid">
-			    		<div class="row-fluid">
-			    			<div class="span12"><h4>{% trans "practices_stats" %}</h4></div>
-			    		</div>
-			    	</div>
-	
-					{% for practice in current_course.practice_set.all %}
-						<div class="row-fluid">
-							<div class="span12">
-								<div class="shaded-container">
-									<div class="row-fluid">
-										<div class="span10"><h5 class="no-margin">{{ practice.uid }}</h5></div>
-										<div class="span2">
-								    		<a name="edit{{practice.uid}}" title="{% trans 'Edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editpractice/{{ current_course.pk }}/{{ practice.pk }}"></a>
-								    		<a name="uploadfile{{practice.uid}}" title="{% trans 'Upload Files' %}" class="icon-upload" href="/teacher/practices/practicefile/{{ current_course.pk }}/{{ practice.pk }}"></a>
-								    		<a name="deliverylist{{practice.uid}}" title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/delivery/list/{{ current_course.pk }}/{{practice.pk}}"></a>
-								    		<a name="uploadscript{{practice.uid}}" title="{% trans 'Upload Correction Script' %}" class="icon-circle-arrow-up" href="/teacher/practices/script/{{ current_course.pk }}/{{ practice.pk }}"></a>
-								    		{% if practice.count_deliveries == 0 %}
-								    			<a name="delete{{practice.uid}}" title="{% trans 'Delete' %}" class="icon-trash" href="/teacher/practices/deletepractice/{{ practice.pk }}"></a>
-								    		{% endif %}
-										</div>
-									</div>
-									<hr class="margin-bottom" />
-									<div class="row-fluid narrow">
-								    	<span class="icon-user pull-left center-icon"></span>
-									    <div class="progress">
-											<div class="bar bar-success" style="width: {{ practice.get_completion_percentage }}%;"></div>
-										</div>
-									</div>
-									<div class="row-fluid">
-										<div class="span3 badge-info practice-stat">
-											<span class="">{% trans "total_deliveries" %}</span>
-											<span class="pull-right pulled-margin"><b>{{ practice.delivery_set.all.count }}</b></span> 
-										</div>
-										<div class="span3 badge-success practice-stat">
-											<span>{% trans "successfull" %}</span>
-											<span class="pull-right pulled-margin"><b>{{ practice.get_successfull_deliveries_count }}</b></span> 
-										</div>
-										<div class="span3 badge-warning practice-stat">
-											<span>{% trans "failed" %}</span>
-											<span class="pull-right pulled-margin"><b>{{ practice.get_failed_deliveries_count }}</b></span> 
-										</div>
-										<div class="span3 badge-inverse practice-stat">
-											<span>{% trans "Pending" %}</span>
-											<span class="pull-right pulled-margin"><b>{{ practice.get_students_pending_deliveries_count }}</b></span> 
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					{% empty %}
-						<div class="row-fluid">
-							<div class="span12">
-								<div class="shaded-container">
-									<div class="row-fluid">
-										<div class="span12"><h6 class="center">{% trans 'There are yet no Practices' %}</h6></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-	
-			    	<hr />
-			    	
-				    <!-- Owned corrections -->
-					<div class="container-fluid">
-			    		<div class="row-fluid">
-			    			<div class="span12"><h4>{% trans "List of my corrections" %}</h4></div>
-			    		</div>
-			    	</div>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>{% trans "Delivery" %}</th>
-								<th>{% trans "Student" %}</th>
-								<th>{% trans "Practice" %}</th>
-								<th>{% trans "Delivery Date" %}</th>
-								<th>{% trans "Correction" %}</th>
-								<th>{% trans "Automatic Correction" %}</th>
-								<th>{% trans "Actions" %}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for delivery_row in table_deliveries %}
-							<tr>
-								<td>{{ delivery_row.delivery.pk }}</td>
-								<td>{{ delivery_row.delivery.student.uid }}</td>
-								<td>{{ delivery_row.delivery.practice.uid }}</td>
-								<td>{{ delivery_row.delivery.deliverDate }}</td>
-								<td>{% if delivery_row.correction %}
-								   	<span class="label label-success">{% trans "Corrected" %}</span>
-								{% else %}
-									<span class="label label-warning">{% trans "Pending" %}</span>
-								{% endif %}
-								</td>
-								<td>
-									<span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
-								</td>	
-								<td>
-									<a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
-							    	<a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-							    	<a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-							    	<a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
-							    </td>
-							</tr>
-							{% empty %}
-							<tr>
-								<td colspan="8" style="text-align: center; ">{% trans "There are no corrections" %}</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-			    </div>
-			{% else %}
-				<div class="span12 text-center shaded-container">
-					<h5>{% trans 'empty_database_message' %}</h5>
-					<p><a class="btn btn-large" href="/teacher/course/newcourse" ><span class="icon-plus-sign"></span> {% trans "New Course" %}</a></p>
 				</div>
-			{% endif %}
-	    </div>
-    </div>
+
+				<hr class="thick" />
+
+				{% for shift in current_course.shift_set.all %}
+				<div class="row-fluid">
+					<div class="span12 btn side-btn" onclick="location='/teacher/students/listshift/{{ current_course.pk }}/{{ shift.pk }}'">
+						<span>{% trans 'shift' %} {{ shift.name }}</span>
+						<hr class="thin" />
+						<span class="pull-right icon-user alignment-margin"></span><span class="pull-right pulled-margin"><b>{{ shift.student_set.count }}</b></span>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="row-fluid">
+					<div class="span12 btn side-btn" onclick="location='/teacher/shifts/newshift/{{ current_course.pk }}'">
+						<span class="icon-plus"></span><span>{% trans 'newShift' %}</span>
+					</div>
+				</div>
+
+				<hr class="thick" />
+
+				{% for practice in current_course.practice_set.all %}
+				<div class="row-fluid">
+					<div class="span12 btn side-btn" onclick="location='/teacher/delivery/list/{{ current_course.pk }}/{{ practice.pk }}'">
+						<span>{{ practice.uid }}</span>
+						<hr class="thin" />
+						<span class="pull-right icon-inbox alignment-margin"></span><span class="pull-right pulled-margin"><b>{{ practice.delivery_set.all.count }}</b></span>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="row-fluid">
+					<div class="span12 btn side-btn" onclick="location='/teacher/practices/newpractice/{{ current_course.pk }}'">
+						<span class="icon-plus"></span><span>{% trans 'newPractice' %}</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="span9">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<h4>{% trans "practicesStats" %}</h4>
+					</div>
+				</div>
+			</div>
+
+			{% for practice in current_course.practice_set.all %}
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="shaded-container">
+						<div class="row-fluid">
+							<div class="span10">
+								<h5 class="no-margin">{{ practice.uid }}</h5>
+							</div>
+							<div class="span2">
+								<a name="edit{{practice.uid}}" title="{% trans 'edit' %}" class="icon-edit icon-grid" href="/teacher/practices/editpractice/{{ current_course.pk }}/{{ practice.pk }}"></a>
+								<a name="uploadfile{{practice.uid}}" title="{% trans 'uploadFiles' %}" class="icon-upload" href="/teacher/practices/practicefile/{{ current_course.pk }}/{{ practice.pk }}"></a>
+								<a name="deliverylist{{practice.uid}}" title="{% trans 'deliveriesList' %}" class="icon-inbox" href="/teacher/delivery/list/{{ current_course.pk }}/{{practice.pk}}"></a>
+								<a name="uploadscript{{practice.uid}}" title="{% trans 'uploadCorrectionScript' %}" class="icon-circle-arrow-up" href="/teacher/practices/script/{{ current_course.pk }}/{{ practice.pk }}"></a>
+								{% if practice.count_deliveries == 0 %}
+								<a name="delete{{practice.uid}}" title="{% trans 'delete' %}" class="icon-trash" href="/teacher/practices/deletepractice/{{ practice.pk }}"></a>
+								{% endif %}
+							</div>
+						</div>
+						<hr class="margin-bottom" />
+						<div class="row-fluid narrow">
+							<span class="icon-user pull-left center-icon"></span>
+							<div class="progress">
+								<div class="bar bar-success" style="width: {{ practice.get_completion_percentage }}%;"></div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span3 badge-info practice-stat">
+								<span class="">{% trans "totalDeliveries" %}</span>
+								<span class="pull-right pulled-margin"><b>{{ practice.delivery_set.all.count }}</b></span>
+							</div>
+							<div class="span3 badge-success practice-stat">
+								<span>{% trans "successfull" %}</span>
+								<span class="pull-right pulled-margin"><b>{{ practice.get_successfull_deliveries_count }}</b></span>
+							</div>
+							<div class="span3 badge-warning practice-stat">
+								<span>{% trans "failed" %}</span>
+								<span class="pull-right pulled-margin"><b>{{ practice.get_failed_deliveries_count }}</b></span>
+							</div>
+							<div class="span3 badge-inverse practice-stat">
+								<span>{% trans "pending" %}</span>
+								<span class="pull-right pulled-margin"><b>{{ practice.get_students_pending_deliveries_count }}</b></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% empty %}
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="shaded-container">
+						<div class="row-fluid">
+							<div class="span12">
+								<h6 class="center">{% trans 'noPractices' %}</h6>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+
+			<hr />
+
+			<!-- Owned corrections -->
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<h4>{% trans "listMyCorrections" %}</h4>
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>{% trans "delivery" %}</th>
+						<th>{% trans "student" %}</th>
+						<th>{% trans "practice" %}</th>
+						<th>{% trans "deliveryDate" %}</th>
+						<th>{% trans "correction" %}</th>
+						<th>{% trans "automaticCorrection" %}</th>
+						<th>{% trans "actions" %}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for delivery_row in table_deliveries %}
+					<tr>
+						<td>{{ delivery_row.delivery.pk }}</td>
+						<td>{{ delivery_row.delivery.student.uid }}</td>
+						<td>{{ delivery_row.delivery.practice.uid }}</td>
+						<td>{{ delivery_row.delivery.deliverDate }}</td>
+						<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
+						<td> 
+							{% if delivery_row.delivery.get_automatic_correction.get_status == 'successfull' %} 
+								<span class="label label-success">{% trans "successfull" %}</span> 
+							{% elif delivery.get_automatic_correction.get_status == 'failed' %} 
+								<span class="label label-important">{% trans "failed" %}</span> 
+							{% else %} 
+								<span class="label label-warning">{% trans "pending" %}</span> 
+							{% endif %} 	
+						</td>
+						<td><a title="{% trans 'download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+							<a title="{% trans 'uatomaticCorrection' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+							<a title="{% trans 'navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+							<a title="{% trans 'correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a></td>
+					</tr>
+					{% empty %}
+					<tr>
+						<td colspan="8" style="text-align: center; ">{% trans "noCorrections" %}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		{% else %}
+		<div class="span12 text-center shaded-container">
+			<h5>{% trans 'empty_database_message' %}</h5>
+			<p>
+				<a class="btn btn-large" href="/teacher/course/newcourse" ><span class="icon-plus-sign"></span> {% trans "newCourse" %}</a>
+			</p>
+		</div>
+		{% endif %}
+	</div>
+</div>
 
 {% endblock %}

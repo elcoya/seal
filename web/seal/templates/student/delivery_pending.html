@@ -3,19 +3,19 @@
 {% block content %}
 	<div class="container-fluid">
 		<div class="row-fluid" style="margin: auto;">
-			<h4>{% trans "pending_deliveries" %}</h4>
+			<h4>{% trans "pendingDeliveries" %}</h4>
 		</div>
 		{% for row in final_list %}
 		<div class="row-fluid">
 			<div class="span12">
-				<h5><u>{% trans "Practice" %} {{ row.practice.uid }}</u></h5>
+				<h5><u>{% trans "practice" %} {{ row.practice.uid }}</u></h5>
 			</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Uid</th>
-						<th>Name</th>
-						<th>Shift</th>
+						<th>{% trans "uidStudent" %}</th>
+						<th>{% trans "name" %}</th>
+						<th>{% trans "shift" %}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,7 +34,7 @@
 		<table class="table table-striped">
 			<tbody>
 				<tr>
-					<td style="text-align: center;">{% trans "There are no student with pending delivery" %}</td>
+					<td style="text-align: center;">{% trans "noStudentWithPendingDelivery" %}</td>
 				</tr>
 			</tbody>
 		</table>

@@ -3,18 +3,18 @@
 {% block content %}
 <div class="container-fluid" >
 	<div class="row-fluid" style="margin: 20px 0 10px;">
-		{% blocktrans with practice.uid as practice %}Deliveries of practice <b>{{ practice }}</b>{% endblocktrans %}
+		{% trans "deliveriesPractice" %} <b>{{ practice.uid }}</b>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>{% trans "Delivery" %}</th>
-				<th>{% trans "Student" %}</th>
-				<th>{% trans "Practice" %}</th>
-				<th>{% trans "Delivery Date" %}</th>
-				<th>{% trans "Correction" %}</th>
-				<th>{% trans "Automatic Correction" %}</th>
-				<th>{% trans "Actions" %}</th>
+				<th>{% trans "delivery" %}</th>
+				<th>{% trans "uidStudent" %}</th>
+				<th>{% trans "practice" %}</th>
+				<th>{% trans "deliveryDate" %}</th>
+				<th>{% trans "correction" %}</th>
+				<th>{% trans "automaticCorrection" %}</th>
+				<th>{% trans "actions" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,30 +24,30 @@
 				<td>{{ delivery_row.delivery.student.uid }}</td>
 				<td>{{ delivery_row.delivery.practice.uid }}</td>
 				<td>{{ delivery_row.delivery.deliverDate }}</td>
-				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "Corrected" %}</span> {% else %} <span class="label label-warning">{% trans "Pending" %}</span> {% endif %} </td>
+				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
 				<td>
 					{% if delivery_row.delivery.get_automatic_correction.get_status == 'successfull' %}
-						<span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+						<span class="label label-success">{% trans "successfull" %}</span>
 					{% elif delivery_row.delivery.get_automatic_correction.get_status == 'failed' %}
-						<span class="label label-important">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+						<span class="label label-important">{% trans "failed" %}</span>
 					{% else %}
-						<span class="label label-warning">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+						<span class="label label-warning">{% trans "pending" %}</span>
 					{% endif %}
 				</td>
 				<td>
-					<a name="download{{delivery_row.delivery.pk}}" title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
-					<a name="autocorrection{{delivery_row.delivery.pk}}" title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-					<a name="navigate{{delivery_row.delivery.pk}}" title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-					<a name="correct{{delivery_row.delivery.pk}}" title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
+					<a name="download{{delivery_row.delivery.pk}}" title="{% trans 'download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+					<a name="autocorrection{{delivery_row.delivery.pk}}" title="{% trans 'automaticCorrection' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+					<a name="navigate{{delivery_row.delivery.pk}}" title="{% trans 'navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+					<a name="correct{{delivery_row.delivery.pk}}" title="{% trans 'correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="8" style="text-align: center; ">{% trans "There are yet no deliveries" %}</td>
+				<td colspan="8" style="text-align: center; ">{% trans "noDeliveries" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
+	<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
 </div>
 {% endblock %}

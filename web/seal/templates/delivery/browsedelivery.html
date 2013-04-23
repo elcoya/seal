@@ -3,7 +3,7 @@
 {% block content %}
 	<div class="container-fluid" >
 		<div class="row-fluid" style="margin: 20px 0 20px;">
-			{% trans "Delivery" %} <b>{{ delivery.pk }}</b> {% trans "Practice" %} <b> {{ delivery.practice.uid }} </b> {% trans "Student" %}<b> {{ delivery.student.get_full_name }} ({{ delivery.student.uid }}) </b>
+			{% trans "delivery" %} <b>{{ delivery.pk }}</b> {% trans "practice" %} <b> {{ delivery.practice.uid }} </b> {% trans "student" %}<b> {{ delivery.student.get_full_name }} ({{ delivery.student.uid }}) </b>
 		</div>
 		<div>
 			<ul>
@@ -12,11 +12,11 @@
 						<a href="/teacher/delivery/browse/{{ current_course.pk }}/{{ delivery.pk }}/{{ filepath }}" >{{ filepath }}</a>
 					</li>
 				{% empty %}
-					<li>{% trans "No files where found in this delivery" %}</li>
+					<li>{% trans "noFilesFoundInDelivery" %}</li>
 				{% endfor %}
 			</ul>
 		</div>
-		<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
+		<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
 		{% if file_content %}
 			<pre style="margin-top: 20px;">{{ file_content }}</pre>
 		{% endif %}

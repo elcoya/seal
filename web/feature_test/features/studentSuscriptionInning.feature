@@ -3,7 +3,7 @@ Feature: As a student I want to aplicate to a course
 	Scenario: See the link to aplicate in de homte page of student
 	   Given student "martin" exists with password "martin"
 		 And I log in as "martin" "martin"
-		then I should see link to "Suscription" in the list
+		then I should see link to "Subscription" in the list
 	
 	Scenario: No course for suscribe
 	   Given student "martin" exists with password "martin"

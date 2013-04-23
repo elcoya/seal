@@ -4,9 +4,9 @@ from seal.model.practice import Practice
 from datetime import date
 from django import forms
 
-ERRORDATEFUTURE = _("The deadline should be in the future")
-ERRORDATEFORMAT = _("Invalid date, date should be in format yyyy-mm-dd")
-ERRORNAME = _("Name cannot be blank")
+ERRORDATEFUTURE = _("erroDeadlineFuture")
+ERRORDATEFORMAT = _("erroInvalidFormatDate")
+ERRORNAME = _("erroNameNotBlank")
 
 class PracticeForm(ModelForm):
     def __init__(self, *args, **kwargs):

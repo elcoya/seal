@@ -4,19 +4,19 @@
 <div class="container-fluid" >
 	<div class="row-fluid">
 		<div class="span12">
-			{% trans "Deliveries of student "%}<b>{{ student.get_full_name}} ({{ student.uid }})</b>
+			{% trans "deliveriesStudent" %}<b>{{ student.get_full_name}} ({{ student.uid }})</b>
 		</div>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>{% trans "Delivery" %}</th>
-				<th>{% trans "Student" %}</th>
-				<th>{% trans "Practice" %}</th>
-				<th>{% trans "Delivery Date" %}</th>
-				<th>{% trans "Correction" %}</th>
-				<th>{% trans "Automatic Correction" %}</th>
-				<th>{% trans "Actions" %}</th>
+				<th>{% trans "delivery" %}</th>
+				<th>{% trans "uidStudent" %}</th>
+				<th>{% trans "practice" %}</th>
+				<th>{% trans "deliveryDate" %}</th>
+				<th>{% trans "correction" %}</th>
+				<th>{% trans "automaticCorrection" %}</th>
+				<th>{% trans "actions" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,32 +26,32 @@
 				<td>{{ delivery_row.delivery.student.uid }}</td>
 				<td>{{ delivery_row.delivery.practice.uid }}</td>
 				<td>{{ delivery_row.delivery.deliverDate }}</td>
-				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "Corrected" %}</span> {% else %} <span class="label label-warning">{% trans "Pending" %}</span> {% endif %} </td>
+				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
 				<td>
 					{% if delivery_row.delivery.get_automatic_correction.get_status == 'successfull' %}
-						<span class="label label-success">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+						<span class="label label-success">{% trans "successfull" %}</span>
 					{% elif delivery_row.delivery.get_automatic_correction.get_status == 'failed' %}
-						<span class="label label-important">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+						<span class="label label-important">{% trans "failed" %}</span>
 					{% else %}
-						<span class="label label-warning">{{ delivery_row.delivery.get_automatic_correction.get_status }}</span>
+						<span class="label label-warning">{% trans "pending" %}</span>
 					{% endif %}
 				</td>
 				<td>
-					<a title="{% trans 'Download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
-					<a title="{% trans 'Automatic Correction' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-					<a title="{% trans 'Navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-					<a title="{% trans 'Correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
+					<a title="{% trans 'download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+					<a title="{% trans 'automaticCorrection' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+					<a title="{% trans 'navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
+					<a title="{% trans 'correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="7" style="text-align: center; ">{% trans "There are yet no deliveries of this student" %}</td>
+				<td colspan="7" style="text-align: center; ">{% trans "noDeliveries" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	<div>
-		<a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
+		<a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a>
 	</div>
 </div>
 {% endblock %}
