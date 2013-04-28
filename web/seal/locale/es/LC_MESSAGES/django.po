@@ -24,7 +24,7 @@ msgstr "El usuario y/o contraseña no existen"
 
 #: forms/changepass.py:12
 msgid "passwordsNotMatch"
-msgstr "Las Contraseñas no concuerdan"
+msgstr "Las contraseñas no concuerdan"
 
 #: forms/changepass.py:15
 msgid "uidChangePassword"
@@ -36,7 +36,7 @@ msgstr "Contraseña anterior"
 
 #: forms/changepass.py:17
 msgid "newPassword"
-msgstr "Nueva Contraseña"
+msgstr "Nueva contraseña"
 
 #: forms/changepass.py:18 forms/registration.py:26
 msgid "repeatPassword"
@@ -44,7 +44,7 @@ msgstr "Repetir contraseña"
 
 #: forms/delivery.py:7
 msgid "errorOnlyZip"
-msgstr "Solo de permite subir archivos zip!"
+msgstr "Solo se permite subir archivos .zip"
 
 #: forms/practice.py:7
 msgid "erroDeadlineFuture"
@@ -52,11 +52,11 @@ msgstr ""
 
 #: forms/practice.py:8
 msgid "erroInvalidFormatDate"
-msgstr ""
+msgstr "Fecha con formato no valido. La fecha debe ser aaaa-mm-dd"
 
 #: forms/practice.py:9
 msgid "erroNameNotBlank"
-msgstr ""
+msgstr "El nombre no puede ser blanco"
 
 #: forms/recoverypass.py:12
 msgid "notExistUserEmail"
@@ -72,7 +72,7 @@ msgstr "El padrón ya esta inscripto"
 
 #: forms/registration.py:16
 msgid "passwordNotMatch"
-msgstr "Las Contraseñas no concuerdan"
+msgstr "Las contraseñas no concuerdan"
 
 #: forms/registration.py:22 templates/practice/listFile.html:10
 #: templates/student/delivery_pending.html:17 templates/student/detail.html:6
@@ -192,7 +192,8 @@ msgstr "Mis Acciones"
 msgid "None available"
 msgstr "No habilitado"
 
-#: templates/admin/index.html:87
+#: templates/
+admin/index.html:87
 msgid "Unknown content"
 msgstr "Contenido Desconocido"
 

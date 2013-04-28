@@ -23,7 +23,7 @@ msgstr "User or password not exist"
 
 #: forms/changepass.py:12
 msgid "passwordsNotMatch"
-msgstr "Passwords does not match"
+msgstr "Passwords do not match"
 
 #: forms/changepass.py:15
 msgid "uidChangePassword"
@@ -35,23 +35,23 @@ msgstr "Old Password"
 
 #: forms/changepass.py:17
 msgid "newPassword"
-msgstr "New Password"
+msgstr "New password"
 
 #: forms/changepass.py:18 forms/registration.py:26
 msgid "repeatPassword"
-msgstr "Repeat Password"
+msgstr "Repeat password"
 
 #: forms/delivery.py:7
 msgid "errorOnlyZip"
-msgstr "Only zip is permited to upload!"
+msgstr "Only zip files are allowed to upload!"
 
 #: forms/practice.py:7
 msgid "erroDeadlineFuture"
-msgstr "The deadline should be in the future"
+msgstr "The deadline should be a date in the future"
 
 #: forms/practice.py:8
 msgid "erroInvalidFormatDate"
-msgstr "Invalid date, date should be in format yyyy-mm-dd"
+msgstr "Invalid date format, date should be in format yyyy-mm-dd"
 
 #: forms/practice.py:9
 msgid "erroNameNotBlank"
@@ -59,7 +59,7 @@ msgstr "Name cannot be blank"
 
 #: forms/recoverypass.py:12
 msgid "notExistUserEmail"
-msgstr "User not exist with this email"
+msgstr "There is no user associated with this email address"
 
 #: forms/recoverypass.py:15
 msgid "uidRecoveryPassword"
@@ -77,11 +77,11 @@ msgstr "Password not match"
 #: templates/student/delivery_pending.html:17 templates/student/detail.html:6
 #: templates/student/liststudent.html:23 templates/undergraduate/index.html:15
 msgid "name"
-msgstr "Name"
+msgstr "First name"
 
 #: forms/registration.py:23
 msgid "lastName"
-msgstr "Last Name"
+msgstr "Last name"
 
 #: forms/registration.py:24
 msgid "uidRegistration"
@@ -290,7 +290,7 @@ msgstr "Practice"
 #: templates/automatic_correction/details.html:29
 #: templates/automatic_correction/detailsundergraduate.html:29
 msgid "automaticCheckPending"
-msgstr "This automatic check is still pending"
+msgstr "The automatic correction is still pending"
 
 #: templates/automatic_correction/details.html:32
 #: templates/automatic_correction/detailsundergraduate.html:34
@@ -315,7 +315,7 @@ msgstr "Correction of practice"
 
 #: templates/correction/consult.html:13
 msgid "coment"
-msgstr "Coment"
+msgstr "Comment"
 
 #: templates/correction/consult.html:14
 msgid "grade"
@@ -323,7 +323,7 @@ msgstr "Grade"
 
 #: templates/correction/consult.html:25
 msgid "noCorrection"
-msgstr "There is yet no Correction"
+msgstr "There is correction yet"
 
 #: templates/correction/index.html:6 templates/delivery/browsedelivery.html:6
 #: templates/teacher/index.html:138
