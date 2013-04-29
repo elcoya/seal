@@ -1,3 +1,13 @@
+django==1.4.1
+MySQL-python
 djangorestframework
 python-daemon
 django-bootstrap-toolkit
+fabric
+behave
+selenium
+coverage
+pylint
+mock
+requests
+
