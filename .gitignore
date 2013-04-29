@@ -1,6 +1,7 @@
 *.class
 *.pyc
 *.pyo
+*.my
 .settings
 .coverage
 coverage_report
@@ -14,3 +15,4 @@ output.txt
 web/seal/seal.db
 web/seal/locale/en/LC_MESSAGES/django.mo
 web/seal/locale/es/LC_MESSAGES/django.mo
+seal_dev
