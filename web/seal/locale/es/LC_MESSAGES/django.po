@@ -193,7 +193,7 @@ msgid "None available"
 msgstr "No habilitado"
 
 #: templates/
-admin/index.html:87
+#: admin/index.html:87
 msgid "Unknown content"
 msgstr "Contenido Desconocido"
 

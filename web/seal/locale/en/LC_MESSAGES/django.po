@@ -46,15 +46,15 @@ msgid "errorOnlyZip"
 msgstr "Only zip files are allowed to upload!"
 
 #: forms/practice.py:7
-msgid "erroDeadlineFuture"
+msgid "errorDeadlineFuture"
 msgstr "The deadline should be a date in the future"
 
 #: forms/practice.py:8
-msgid "erroInvalidFormatDate"
+msgid "errorInvalidFormatDate"
 msgstr "Invalid date format, date should be in format yyyy-mm-dd"
 
 #: forms/practice.py:9
-msgid "erroNameNotBlank"
+msgid "errorNameNotBlank"
 msgstr "Name cannot be blank"
 
 #: forms/recoverypass.py:12

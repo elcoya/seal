@@ -9,6 +9,7 @@ import time
 from seal.utils import managepath
 from seal.model.shift import Shift
 from datetime import date
+import datetime
 
 pathproject = managepath.get_instance().get_web_path()
 filePath = pathproject + "feature_test/data/pdftest.pdf"
@@ -124,9 +125,9 @@ def stop(context, datetoput):
     form = get_last_form_in_the_page(context)
     dateform = datetoput
     if (dateform == "yesterday"):
-        dateform = str(date(date.today().year, date.today().month, date.today().day - 1))
+        dateform = str(datetime.date.today() + datetime.timedelta(days=-1))    
     if (dateform == "tomorrow"):
-        dateform = str(date(date.today().year, date.today().month, date.today().day + 1))
+        dateform = str(datetime.date.today() + datetime.timedelta(days=1))
     form.find_element_by_name('deadline').send_keys(dateform)
 
 @when('I fill the delivery form with default data')

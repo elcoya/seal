@@ -18,7 +18,7 @@ Feature: As a teacher I want to create a practice
 		When I will the form with name "Practice_1"
 		 And Deadline "yesterday"
 		 And I submit the form
-		Then I should see "The deadline should be in the future"
+		Then I should see "The deadline should be a date in the future"
 		
 	Scenario: Create practice with invalid date
 		Given Teacher "teacher" exists with password "teacher"
@@ -28,7 +28,7 @@ Feature: As a teacher I want to create a practice
 		 When I will the form with name "Practice_1"
 		  And Deadline "05-05-2000"
 		  And I submit the form
-		 Then I should see "Invalid date, date should be in format yyyy-mm-dd"
+		 Then I should see "Invalid date format, date should be in format yyyy-mm-dd"
 			
 	Scenario: Create practice with blank name
 		Given Teacher "teacher" exists with password "teacher"

@@ -3,10 +3,12 @@ from django.utils.translation import ugettext as _
 from seal.model.practice import Practice
 from datetime import date
 from django import forms
+from django.core.exceptions import ValidationError
+from seal.model.course import Course
 
-ERRORDATEFUTURE = _("erroDeadlineFuture")
-ERRORDATEFORMAT = _("erroInvalidFormatDate")
-ERRORNAME = _("erroNameNotBlank")
+ERRORDATEFUTURE = _("errorDeadlineFuture")
+ERRORDATEFORMAT = _("errorInvalidFormatDate")
+ERRORNAME = _("errorNameNotBlank")
 
 class PracticeForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -25,3 +27,11 @@ class PracticeForm(ModelForm):
             raise forms.ValidationError(ERRORDATEFUTURE)
         else:
             return deadline
+                
+    def validate_unique(self):
+        exclude = self._get_validation_exclusions()
+        exclude.remove('course') # allow checking against the missing attribute
+        try:
+            self.instance.validate_unique(exclude=exclude)
+        except ValidationError, e:
+            self._update_errors(e.message_dict)
