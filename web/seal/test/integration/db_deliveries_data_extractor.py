@@ -10,6 +10,7 @@ from seal.model.delivery import Delivery
 from seal.test.integration import utils
 from django.contrib.auth.models import User
 from seal.model.correction import Correction
+from django.contrib.admin.templatetags.admin_list import result_list
 
 class DbDeliveriesDataExtractorIntegrationTest(TestCase):
     
@@ -41,6 +42,8 @@ class DbDeliveriesDataExtractorIntegrationTest(TestCase):
     automatic_result_successfull = "aprobado"
     automatic_result_failed = "desaprobado"
     
+    shift = None
+    
     def setUp(self):
         utils.clean_up_database_tables()
         
@@ -50,7 +53,7 @@ class DbDeliveriesDataExtractorIntegrationTest(TestCase):
         teacher.user.save()
         
         self.course = utils.create_a_course(self.course_name)
-        shift = utils.create_a_shift(self.shift_name, self.course_name)
+        self.shift = utils.create_a_shift(self.shift_name, self.course_name)
         practice = utils.create_a_practice(self.course_name, self.practice_deadline, self.practice_filepath, self.practice_uid)
         
         student1 = utils.create_a_student(self.student_name_1, self.shift_name)
@@ -77,7 +80,7 @@ class DbDeliveriesDataExtractorIntegrationTest(TestCase):
         
         manual_correction = Correction()
         manual_correction.delivery = delivery_2_student_1
-        manual_correction.grade = 8
+        manual_correction.grade = 8.0
         manual_correction.corrector = teacher
         manual_correction.save()
     
@@ -88,8 +91,8 @@ class DbDeliveriesDataExtractorIntegrationTest(TestCase):
         
         result_list = db_deliveries_extractor.get_data()
         
-        first_entry = (self.practice_uid, self.student_name_1, self.student_first_name_1, self.student_last_name_1, self.automatic_result_successfull, 8)
-        second_entry = (self.practice_uid,self.student_name_2 , self.student_first_name_2, self.student_last_name_2, self.automatic_result_failed,None)
+        first_entry = (self.practice_uid, self.student_name_1, self.student_first_name_1, self.student_last_name_1, str(self.shift), self.automatic_result_successfull, 8)
+        second_entry = (self.practice_uid,self.student_name_2 , self.student_first_name_2, self.student_last_name_2, str(self.shift), self.automatic_result_failed, None)
         
         self.assertEquals(result_list[0], first_entry)
         self.assertEquals(result_list[1], second_entry)
