@@ -138,8 +138,8 @@
 						<th>{% trans "student" %}</th>
 						<th>{% trans "practice" %}</th>
 						<th>{% trans "deliveryDate" %}</th>
-						<th>{% trans "correction" %}</th>
 						<th>{% trans "automaticCorrection" %}</th>
+						<th>{% trans "correction" %}</th>
 						<th>{% trans "actions" %}</th>
 					</tr>
 				</thead>
@@ -149,8 +149,7 @@
 						<td>{{ delivery_row.delivery.pk }}</td>
 						<td>{{ delivery_row.delivery.student.uid }}</td>
 						<td>{{ delivery_row.delivery.practice.uid }}</td>
-						<td>{{ delivery_row.delivery.deliverDate }}</td>
-						<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
+						<td>{{ delivery_row.delivery.deliverDate }}</td>						
 						<td> 
 							{% if delivery_row.delivery.get_automatic_correction.get_status == 'successfull' %} 
 								<span class="label label-success">{% trans "successfull" %}</span> 
@@ -160,6 +159,7 @@
 								<span class="label label-warning">{% trans "pending" %}</span> 
 							{% endif %} 	
 						</td>
+             <td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
 						<td><a title="{% trans 'download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
 							<a title="{% trans 'uatomaticCorrection' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
 							<a title="{% trans 'navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
