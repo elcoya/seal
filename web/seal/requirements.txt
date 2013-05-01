@@ -1,13 +1,16 @@
+# runtime dependencies
 django==1.4.1
 MySQL-python
 djangorestframework
-python-daemon
 django-bootstrap-toolkit
+request
+
+# development dependencies
 fabric
 behave
 selenium
 coverage
 pylint
 mock
-requests
+psutil
 
