@@ -25,7 +25,7 @@
 					<td style="text-align: center; " >{{ delivery.pk }}</td>
 					<td style="text-align: center; ">{{ delivery.student.uid }}</td>
 					<td style="text-align: center; ">{{ delivery.student.user.first_name }} {{ delivery.student.user.last_name }}</td>
-					<td style="text-align: center; ">{{ delivery.deliverDate }}</td>
+					<td style="text-align: center; ">{{ delivery.full_date }}</td>
 					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %} </a></td>
 					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}/2">
 					{% if correction %}

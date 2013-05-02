@@ -52,7 +52,7 @@
 			{% for delivery in deliveries %}
 			<tr>
 				<td>{{ delivery.pk }}</td>
-				<td>{{ delivery.deliverDate }}</td>
+				<td>{{ delivery.full_date }}</td>
 				<td>
 					<a href="/undergraduate/correction/consult/{{ delivery.pk }}">
 						{% if delivery.correction_set.all %}

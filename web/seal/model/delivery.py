@@ -34,5 +34,8 @@ class Delivery(models.Model):
         else:
             return None
     
+    def full_date(self):
+        return self.deliverDate.strftime('%Y-%m-%d') + " " + self.deliverTime.strftime('%H:%M:%S')
+    
     class Meta:
         ordering = ('-deliverDate', '-deliverTime')

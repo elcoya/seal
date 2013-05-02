@@ -22,7 +22,7 @@ def listdelivery(request, idcourse, idpractice):
         
         practice = Practice.objects.get(pk=idpractice)
         table_deliveries = []
-        deliveries = Delivery.objects.filter(practice=practice).order_by('deliverDate')
+        deliveries = Delivery.objects.filter(practice=practice).order_by('deliverDate', 'deliverTime')
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)
             table_deliveries.append({'delivery': delivery, 'correction':correction})

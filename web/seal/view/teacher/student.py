@@ -213,7 +213,7 @@ def list_student_deliveries(request, idcourse, idstudent):
         current_course = courses.get(pk=idcourse)
 
         student = Student.objects.get(pk=idstudent)
-        deliveries = Delivery.objects.filter(student=student, practice__course=current_course).order_by('deliverDate')
+        deliveries = Delivery.objects.filter(student=student, practice__course=current_course).order_by('deliverDate', 'deliverTime')
         table_deliveries = []
         for delivery in deliveries:
             correction = Correction.objects.filter(delivery=delivery)

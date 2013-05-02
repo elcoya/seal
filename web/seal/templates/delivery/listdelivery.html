@@ -23,7 +23,7 @@
 				<td>{{ delivery_row.delivery.pk }}</td>
 				<td>{{ delivery_row.delivery.student.uid }}</td>
 				<td>{{ delivery_row.delivery.practice.uid }}</td>
-				<td>{{ delivery_row.delivery.deliverDate }}</td>
+				<td>{{ delivery_row.delivery.full_date }}</td>
 				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
 				<td>
 					{% if delivery_row.delivery.get_automatic_correction.get_status == 'successfull' %}
