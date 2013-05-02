@@ -3,28 +3,28 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row-fluid margin-bottom">
-		<div class="span8">{% trans "Students in course: " %} <b>{{ current_course }}</b> 
+		<div class="span8">{% trans "studentsInCourse" %}: <b>{{ current_course }}</b> 
 			{% if shift %}
 				{% trans "shift" %} <b>{{ shift }}</b>
 				<span>&nbsp;</span>
-				<a name="edit-shift" title="{% trans 'Edit' %}" class="btn btn-small" href="/teacher/shifts/editshift/{{ current_course.pk }}/{{ shift.pk }}">
+				<a name="edit-shift" title="{% trans 'edit' %}" class="btn btn-small" href="/teacher/shifts/editshift/{{ current_course.pk }}/{{ shift.pk }}">
 					<span class="icon-edit"></span>
 				</a>
 			{% endif %}
 		</div>
 		<div class="span4">
-			<a name="newstudent" href="/teacher/students/newstudent/{{ current_course.pk }}/{{ shift.pk }}" class="btn btn-primary pull-right">+ {% trans "New Student" %}</a>
+			<a name="newstudent" href="/teacher/students/newstudent/{{ current_course.pk }}/{{ shift.pk }}" class="btn btn-primary pull-right">+ {% trans "newStudent" %}</a>
 		</div>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>{% trans "Uid" %}</th>
-				<th>{% trans "Name" %}</th>
-				<th>{% trans "Email" %}</th>
-				<th>{% trans "Shift" %}</th>
-				<th>{% trans "Corrector" %}</th>
-				<th>{% trans "Actions" %}</th>
+				<th>{% trans "uidStudent" %}</th>
+				<th>{% trans "name" %}</th>
+				<th>{% trans "email" %}</th>
+				<th>{% trans "shift" %}</th>
+				<th>{% trans "corrector" %}</th>
+				<th>{% trans "actions" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,26 +38,26 @@
 					{% if student.corrector %}
 						{{ student.corrector }}
 					{% else %}
-						{% trans "no corrector" %}
+						{% trans "noCorrector" %}
 					{% endif %} 
 				</td>
 				<td>
-					<a name="detail{{student.uid}}" title="{% trans 'Detail' %}" class="icon-user" href="/teacher/students/detail/{{ current_course.pk }}/{{student.pk}}"></a>
+					<a name="detail{{student.uid}}" title="{% trans 'detail' %}" class="icon-user" href="/teacher/students/detail/{{ current_course.pk }}/{{student.pk}}"></a>
 					{% if shift %}
-						<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ current_course.pk }}/{{student.pk}}/{{ shift.pk }}"></a>
+						<a name="edit{{student.uid}}" title="{% trans 'edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ current_course.pk }}/{{student.pk}}/{{ shift.pk }}"></a>
 					{% else %}
-						<a name="edit{{student.uid}}" title="{% trans 'Edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ current_course.pk }}/{{student.pk}}"></a>
+						<a name="edit{{student.uid}}" title="{% trans 'edit' %}" class="icon-edit" href="/teacher/students/editstudent/{{ current_course.pk }}/{{student.pk}}"></a>
 					{% endif %}
-					<a title="{% trans 'Deliveries List' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{ current_course.pk }}/{{student.pk}}"></a>	
+					<a title="{% trans 'deliveriesList' %}" class="icon-inbox" href="/teacher/students/listdeliveries/{{ current_course.pk }}/{{student.pk}}"></a>	
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="6" style="text-align: center; ">{% trans "There are yet no Students" %}</td>
+				<td colspan="6" style="text-align: center; ">{% trans "noStudents" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	<div><a class="btn btn-small" href="/teacher/{{ current_course.pk  }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
+	<div><a class="btn btn-small" href="/teacher/{{ current_course.pk  }}"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
 </div>
 {% endblock %}

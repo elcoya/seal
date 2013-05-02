@@ -12,18 +12,18 @@ Main page to recovery password.
 {% endblock %}
 
 {% block head %}
-<title>{% trans "brand" %} | Recovery Password</title>
+<title>{% trans "brand" %} | {% trans "recoveryPassword" %}</title>
 {% endblock %}
 
 {% block body %}
 	<div class="container" >
 		<form method="post" class="form-signin">
-			<h2 align="center" class="form-signin-heading">{% trans "Recover Password" %}</h2>
+			<h2 align="center" class="form-signin-heading">{% trans "recoveryPassword" %}</h2>
 			{% csrf_token %}
 			{{ form|as_bootstrap }}
 			<div align="center">
 				<button  class="btn btn-large btn-primary" type="submit">
-					{% trans "Recover" %}
+					{% trans "recover" %}
 				</button>
 			</div>
 

@@ -3,17 +3,17 @@
 {% block content %}
 
 <div class="container-fluid">
-	<h4>{% trans "Upload Script" %}</h4>
+	<h4>{% trans "uploadScript" %}</h4>
 	<form id='formpracticescript' action='' method='post' enctype="multipart/form-data">
 		{% csrf_token %}
 		<table>
 			{{ form.as_table }}
 		</table>
-		<button class="btn btn-primary" type='submit' >{% trans "Save" %}</button>
+		<button class="btn btn-primary" type='submit' >{% trans "save" %}</button>
 	</form>	
-	<div><a class="btn btn-small" href="/teacher/{{ idcourse }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
+	<div><a class="btn btn-small" href="/teacher/{{ idcourse }}"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
 	{% if practice.script_set.all %}
-		<div style="padding: 20px 0 5px;"><h5>{% trans "Script content" %}</h5></div>
+		<div style="padding: 20px 0 5px;"><h5>{% trans "scriptContent" %}</h5></div>
 		<div class="script-container" >
 			<pre>{{ script_text }}</pre>
 		</div>

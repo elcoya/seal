@@ -2,8 +2,9 @@ from django.forms import ModelForm
 from django.forms import forms
 from seal.model import Delivery
 import os
+from django.utils.translation import ugettext as _
 
-ERRORTYPEPERMITED = "Only zip is permited to upload!"
+ERRORTYPEPERMITED = _("errorOnlyZip")
 TYPEZIP = "application/zip"
 TYPEXZIP = "application/x-zip-compressed"
 TYPEOCTETSTREAM = "application/octet-stream"

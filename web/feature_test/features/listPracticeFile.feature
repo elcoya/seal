@@ -7,7 +7,7 @@ Feature: As a student I want to see the practice file list
     	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
           And student "martin" exists in course "2012-1" and in shift "tarde"
           And I log in as "martin" "martin"
-    	 When I click in the "Download" link
+    	 When I am in the practice "TP Intro" list file page
     	 Then I should see "There are no files bounded to this practice"
     	 
    	Scenario: List file
@@ -19,7 +19,7 @@ Feature: As a student I want to see the practice file list
           And file "enunciado" existe in the practice "TP Intro" and course "2012-1"
           And file "tp1" existe in the practice "TP Intro" and course "2012-1" 
           And I log in as "martin" "martin"
-    	 When I click in the "Download" link
+    	 When I am in the practice "TP Intro" list file page
     	 Then I should see "enunciado"
     	  And I should see "tp1"
     	

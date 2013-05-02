@@ -1,13 +1,26 @@
-{% extends "teacher/teacher.html" %}
+{% extends "teacher/index.html" %}
 {% load i18n %}
 {% block content %}
-<div class="container">
-	<h4>{% trans "Detail of Student " %} {{ student.get_full_name }}({{student.uid}})</h4>
-		<div>{% trans "Name: "%}  <b>{{student.get_full_name}}</b></div>
-		<div>{% trans "Uid: "%}  <b>{{student.uid}}</b></div>
-		<div>{% trans "E-mail: "%}  <b>{{student.user.email}}</b></div>
-		<div>{% trans "Corrector: "%}  <b>{{student.corrector.get_full_name}}</b></div>
-		
-	<div style="margin-top: 20px"><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a></div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h4>{% trans "detailStudent" %} {{ student.get_full_name }} ({{student.uid}})</h4>
+		</div>
+	</div>
+	<div>
+		{% trans "name"%}: <b>{{student.get_full_name}}</b>
+	</div>
+	<div>
+		{% trans "uidStudent"%}: <b>{{student.uid}}</b>
+	</div>
+	<div>
+		{% trans "email"%}: <b>{{student.user.email}}</b>
+	</div>
+	<div>
+		{% trans "corrector"%}: <b>{{student.corrector.get_full_name}}</b>
+	</div>
+	<div>
+		<a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a>
+	</div>
 </div>
 {% endblock %}

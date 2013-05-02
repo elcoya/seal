@@ -2,15 +2,14 @@
 {% load i18n %}
 {% block content %}
 	<div class="row" style="margin: 20px 0;" >
-		{% blocktrans %} Practices of Shift <b>{{ shift }}</b> {% endblocktrans %}
+		{% trans "practiceOfShift" %} <b>{{ shift }}</b>
 	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>{% trans "Practice Name" %}</th>
-				<th>{% trans "Dead Line" %}</th>
-				<!-- <th>{% trans "Files" %}</th> -->
-				<th>{% trans "Actions" %}</th>
+				<th>{% trans "practiceName" %}</th>
+				<th>{% trans "deadLine" %}</th>
+				<th>{% trans "actions" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,17 +18,17 @@
 				<td>{{ practice.uid }}</td>
 				<td>{{ practice.deadline }}</td>
 				<td>
-					<a href="/undergraduate/practice/practiceFile/{{ practice.pk}}" title="{% trans 'Download' %}"><span class="icon-download-alt"></span>
+					<a href="/undergraduate/practice/practiceFile/{{ practice.pk}}" title="{% trans 'download' %}"><span class="icon-download-alt"></span>
 					{% if practice.isExpired %}
-						<span class="icon-minus-sign" title="{% trans 'Practice expired' %}"></span>
+						<span class="icon-minus-sign" title="{% trans 'practiceExpired' %}"></span>
 					{% else %}
-						<a href="/undergraduate/delivery/upload/{{ practice.pk}}" title="{% trans 'Make Delivery' %}"><span class="icon-circle-arrow-up"></span></a>
+						<a href="/undergraduate/delivery/upload/{{ practice.pk}}" title="{% trans 'makeDelivery' %}"><span class="icon-circle-arrow-up"></span></a>
 					{% endif %}
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "There are yet no Practices" %}</td>
+				<td colspan="4" style="text-align: center; ">{% trans "thereNoPractices" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

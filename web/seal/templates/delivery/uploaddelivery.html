@@ -1,8 +1,8 @@
-{% extends "undergraduate/undergraduate.html" %}
+{% extends "undergraduate/index.html" %}
 {% load i18n %}
 {% block content %}
 	<div class="row" style="margin: 20px 0;">
-		{% blocktrans %}Upload delivery for practice <b>{{namepractice}}</b>{% endblocktrans %}
+		{% trans "uploadDeliveryForPractice" %} <b>{{namepractice}}</b>
 	</div>
 	<form class="form-horizontal" method="post" enctype='multipart/form-data'>
 		{% csrf_token %}
@@ -30,22 +30,22 @@
 		            {% endif %}
 		        {% endfor %}
 	       	</div>
-	        <div class="span1"><button type="submit" style="padding: 2px 22px;">{% trans "Submit" %}</button></div>
+	        <div class="span1"><button type="submit" style="padding: 2px 22px;">{% trans "submit" %}</button></div>
         </div>
 	</form>
 	
 	<hr />
 	
 	<div class="row" style="margin: 20px 0 10px;">
-		{% blocktrans %}Deliveries for practice <b>{{namepractice}}</b>{% endblocktrans %}
+		{% trans "deliveriesFromPractice" %} <b>{{namepractice}}</b>
 	</div>
 	<table class="table table-striped">
 		<thead style="text-align: center; ">
 			<tr>
-				<th>{% trans "Uid" %}</th>
-				<th>{% trans "Delivery Date" %}</th>
-				<th>{% trans "Status" %}</th>
-				<th>{% trans "Automatic Correction" %}</th>
+				<th>{% trans "uidDelivery" %}</th>
+				<th>{% trans "deliveryDate" %}</th>
+				<th>{% trans "status" %}</th>
+				<th>{% trans "automaticCorrection" %}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -65,25 +65,23 @@
 				<td>
 					<a href="/undergraduate/automatic_correction/{{ delivery.pk }}">
 						{% if delivery.get_automatic_correction.get_status == 'successfull' %}
-							<span class="label label-success">
-								{{ delivery.get_automatic_correction.get_status }}
-							</span>
+							<span class="label label-success">{% trans "successfull" %}</span>
 						{% elif delivery.get_automatic_correction.get_status == 'failed' %}
-							<span class="label label-important">{{ delivery.get_automatic_correction.get_status }}</span>
+							<span class="label label-important">{% trans "failed" %}</span>
 						{% else %}
-							<span class="label label-warning">{{ delivery.get_automatic_correction.get_status }}</span>
+							<span class="label label-warning">{% trans "pending" %}</span>
 						{% endif %}
 					</a>
 				</td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "There are yet no deliveries from this practice" %}</td>
+				<td colspan="4" style="text-align: center; ">{% trans "noDeliveriesPractice" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	<footer>
-		<a class="btn btn-small" href="/undergraduate/practice/list/{{idcourse}}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
+		<a class="btn btn-small" href="/undergraduate/practice/list/{{idcourse}}"><span class="icon-backward" title="{% trans 'back' %}"></span></a>
 	</footer>
 {% endblock %}

@@ -12,7 +12,7 @@
 	<div class="container-fluid" >
 		<div class="row-fluid" style="margin: auto;">
 			<div class="span12">
-				<h4>{% trans "Suscriptions" %}</h4>
+				<h4>{% trans "suscriptions" %}</h4>
 			</div>
 		</div>
 
@@ -22,15 +22,15 @@
 				<form method="post" action="">
 				{% csrf_token %}
 					<div style="padding-bottom: 10px;">
-						{% trans "Pending Suscriptions for course" %}  <b>{{ current_course }}</b>
+						{% trans "pendingSuscriptionsForCourse" %}  <b>{{ current_course }}</b>
 					</div>
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>{% trans "Uid" %}</th>
-								<th>{% trans "Student Uid" %}</th>
-								<th>{% trans "Student Name" %}</th>
-								<th>{% trans "Suscirption Date" %}</th>
+								<th>{% trans "uidSuscription" %}</th>
+								<th>{% trans "studentUid" %}</th>
+								<th>{% trans "studentName" %}</th>
+								<th>{% trans "suscirptionDate" %}</th>
 								<th>
 									<input name="checkall" type="checkbox" onclick="checkAll(this)"/>
 								</th>
@@ -49,15 +49,15 @@
 							</tr>
 							{% empty %}
 							<tr>
-								<td colspan="5" style="text-align: center; ">{% trans "There are yet no suscriptions awaiting confirmation" %}</td>
+								<td colspan="5" style="text-align: center; ">{% trans "noSuscriptionsAwaiting" %}</td>
 							</tr>
 							{% endfor %}
 						</tbody>
 					</table>
 					<div class="row-fluid">
 						<div class="span3 offset9" style="text-align: right; ">
-							<button name="Reject" class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{ current_course.pk }}/';this.form.submit();" >{% trans 'Reject' %}</button> 
-							<button name="Accept" class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{ current_course.pk }}/';this.form.submit();" >{% trans 'Accept' %}</button>
+							<button name="Reject" class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{ current_course.pk }}/';this.form.submit();" >{% trans 'reject' %}</button> 
+							<button name="Accept" class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{ current_course.pk }}/';this.form.submit();" >{% trans 'accept' %}</button>
 						</div>
 					</div>
 				</form>
@@ -69,17 +69,17 @@
 		
 		<!-- Solved Suscriptions -->
 		<div style="padding-bottom: 10px;">
-			{% trans "Suscription solver of course "%}<b>{{ shift }}</b> 
+			{% trans "suscriptionSolverOfCourse"%}<b> {{ current_course }}</b> 
 		</div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>{% trans "Uid" %}</th>
-					<th>{% trans "Student Uid" %}</th>
-					<th>{% trans "Student Name" %}</th>
-					<th>{% trans "Suscirption Date" %}</th>
-					<th>{% trans "Resolve Date" %}</th>
-					<th>{% trans "State" %}</th>
+					<th>{% trans "uidSuscription" %}</th>
+					<th>{% trans "studentUid" %}</th>
+					<th>{% trans "studentName" %}</th>
+					<th>{% trans "suscirptionDate" %}</th>
+					<th>{% trans "resolveDate" %}</th>
+					<th>{% trans "state" %}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -94,12 +94,10 @@
 				</tr>
 				{% empty %}
 				<tr>
-					<td colspan="6" style="text-align: center; ">{% trans "There are yet no suscriptions solve for this course" %}</td>
+					<td colspan="6" style="text-align: center; ">{% trans "noSuscriptionsSolve" %}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
-		<a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
-
 {% endblock %}

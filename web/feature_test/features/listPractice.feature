@@ -13,7 +13,8 @@ Feature: As a user I want to see the practice list
           And practice "TP 1" exists in course "2012-1" with deadline "2012-12-02"
           And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
           And I log in as "teacher" "teacher"
-         Then I should see "TP Intro" before "TP 1"
+         Then I should see "TP Intro"
+          And I should see "TP 1"
          
     Scenario: List Delivery of Practices from home student
         Given Student "martin" exists with password "martin"

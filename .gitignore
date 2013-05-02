@@ -5,6 +5,7 @@
 .coverage
 coverage_report
 pylint_report
+seal_dev
 workspace/delivery_files
 workspace/practice_files
 workspace/automatic_correction_scripts

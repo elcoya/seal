@@ -9,6 +9,7 @@ import time
 from seal.utils import managepath
 from seal.model.shift import Shift
 from datetime import date
+import datetime
 
 pathproject = managepath.get_instance().get_web_path()
 filePath = pathproject + "feature_test/data/pdftest.pdf"
@@ -124,9 +125,9 @@ def stop(context, datetoput):
     form = get_last_form_in_the_page(context)
     dateform = datetoput
     if (dateform == "yesterday"):
-        dateform = str(date(date.today().year, date.today().month, date.today().day - 1))
+        dateform = str(datetime.date.today() + datetime.timedelta(days=-1))    
     if (dateform == "tomorrow"):
-        dateform = str(date(date.today().year, date.today().month, date.today().day + 1))
+        dateform = str(datetime.date.today() + datetime.timedelta(days=1))
     form.find_element_by_name('deadline').send_keys(dateform)
 
 @when('I fill the delivery form with default data')
@@ -163,11 +164,10 @@ def step(context,course):
     addres = base_url + 'teacher/course/detailcourse/'+str(c.pk)
     context.browser.get(addres)
     
-@when('I am in the suscription list page of course "{course}" shift "{shift}"')
-def step(context,course, shift):
+@when('I am in the suscription list page of course "{course}"')
+def step(context,course):
     c = Course.objects.get(name=course)
-    i = Shift.objects.get(name=shift, course=c)
-    addres = base_url + 'teacher/suscription/list/'+str(i.pk)
+    addres = base_url + 'teacher/suscription/listsuscriptionpending/'+str(c.pk)
     context.browser.get(addres)
 
 @when('I fill in the registration form with user "{uid}"')
@@ -217,12 +217,14 @@ def step(context,student,practice):
 
 @when('I am at the explore delivery page for delivery "{id_delivery}"')
 def step(context, id_delivery):
-    address = base_url + 'teacher/delivery/explore/' + id_delivery
+    c = Delivery.objects.get(pk=id_delivery).practice.course
+    address = base_url + 'teacher/delivery/explore/' + str(c.pk) + '/' + id_delivery
     context.browser.get(address)
 
 @when(u'I am at the browse delivery page for delivery "{id_delivery}" browsing "{file_path}"')
 def step(context, id_delivery, file_path):
-    address = base_url + 'teacher/delivery/browse/' + id_delivery + "/" + file_path
+    c = Delivery.objects.get(pk=id_delivery).practice.course
+    address = base_url + 'teacher/delivery/browse/' + str(c.pk) + '/' + id_delivery + "/" + file_path
     context.browser.get(address)
 
 
@@ -304,7 +306,7 @@ def step(context, practice_name):
 def step(context, practice_name):
     practice = Practice.objects.get(uid=practice_name)
     practice_file = practice.get_practice_file()[0]
-    address = base_url + 'teacher/practices/editfile/' + str(practice_file.pk)
+    address = base_url + 'teacher/practices/editfile/' + str(practice.course.pk) + '/' +str(practice_file.pk)
     context.browser.get(address)
 
 @when(u'I edit the practice text file in the form')
@@ -368,4 +370,21 @@ def stop(context):
 @when('I am in the registration page')
 def stop(context):
     address = base_url + 'registration'
+    context.browser.get(address)
+
+@when('I am in the practice "{practice}" list file page')
+def stop(context, practice):
+    p = Practice.objects.get(uid=practice)
+    address = base_url + 'undergraduate/practice/practiceFile/' + str(p.pk)
+    context.browser.get(address)
+
+@when('I am in the suscription pending page of course "{course}"')
+def stop(context, course):
+    c = Course.objects.get(name=course)
+    address = base_url + 'teacher/suscription/listsuscriptionpending/' + str(c.pk) 
+    context.browser.get(address)
+
+@when('I am in the student suscription page')    
+def stop(context):
+    address = base_url + 'undergraduate/suscription/'
     context.browser.get(address)

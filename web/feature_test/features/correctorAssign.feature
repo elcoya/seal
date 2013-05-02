@@ -47,6 +47,6 @@ Feature: As a teacher I want to assing a correction of another teacher
 		  And I select the corrector "teacher"
 		  And I submit the form
 		  And I am in the index page
-		 Then I should see "successfull" 
+		 Then I should see "Successfull" 
 		  And I should not see "failed"
 		  And I should not see "pending"

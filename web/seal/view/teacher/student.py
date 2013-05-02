@@ -25,6 +25,7 @@ PATHOK = "/teacher/students/list/%s"
 PATH_COURSE_LIST = "/teacher/students/list/%s/"
 PATH_SHIFT_LIST = "/teacher/students/listshift/%s/%s/"
 PATHOKENROLED = "/teacher/students/"
+PATHDETAIL = "/teacher/students/detail/%s/%s/"
 MAXPAGINATOR = 10
 
 SUBJECTMAILCREATE = "Creacion de usuario en ALGO3"
@@ -69,10 +70,9 @@ def newstudent(request, idcourse, idshift=None):
                 
                 mail = Mail()
                 mail.save_mail(SUBJECTMAILCREATE, BODYMAILCREATE % (user.username, form.data['passwd']), user.email)
-                if idshift is None:
-                    return HttpResponseRedirect(PATH_COURSE_LIST % idcourse)
-                else:
-                    return HttpResponseRedirect(PATH_SHIFT_LIST % (idcourse, idshift))
+                
+                student = Student.objects.get(uid=user.username)
+                return HttpResponseRedirect(PATHDETAIL % (idcourse, student.pk))
         else:
             form = StudentForm(initial={'shifts': [idshift]})
         return render(request, 'student/new-student.html', 
@@ -101,10 +101,7 @@ def editstudent(request, idcourse, idstudent, idshift=None):
                 student.user.last_name = form.data['last_name']
                 student.user.save()
                 form.save()
-                if idshift is None:
-                    return HttpResponseRedirect(PATH_COURSE_LIST % idcourse)
-                else:
-                    return HttpResponseRedirect(PATH_SHIFT_LIST % (idcourse, idshift))
+                return HttpResponseRedirect(PATHDETAIL % (idcourse, student.pk))
         else:
             form = StudentForm(instance=student, initial={'email': student.user.email, 'first_name': student.user.first_name, 'last_name': student.user.last_name})
         return render(request, 'student/editstudent.html', 

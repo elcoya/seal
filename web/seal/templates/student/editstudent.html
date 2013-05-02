@@ -1,21 +1,17 @@
-{% extends "teacher/teacher.html" %}
+{% extends "teacher/index.html" %}
 {% load i18n %}
 {% block content %}
 <div class="container">
-	<h4>{% trans "Edit Student" %}</h4>
+	<h4>{% trans "editStudent" %}</h4>
 	<form id='formeditstudent' action='' method='post'>
 		{% csrf_token %}
 		<table>
 			{{ form.as_table }}
 		</table>
-		<button class="btn btn-primary" type='submit' >{% trans "Save" %}</button>
+		<button class="btn btn-primary" type='submit' >{% trans "save" %}</button>
 	</form>	
 	<div>
-		{% if idshift %}
-			<a class="btn btn-small" href="/teacher/students/listshift/{{ current_course.pk }}/{{ idshift }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
-		{% else %}
-			<a class="btn btn-small" href="/teacher/students/list/{{ current_course.pk }}"><span class="icon-backward" title="{% trans 'Back' %}"></span></a>
-		{% endif %}
+		<a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a>
 	</div>
 </div>
 {% endblock %}

@@ -4,25 +4,25 @@
 	Main page of the Undergraduate's portal.
 {% endcomment %}
 
-{% block title %}Undergraduate{% endblock %}
+{% block title %}{% trans "undergraduate" %}{% endblock %}
 {% block content %}
 <div class="container-fluid">
 	<div class="row-fluid">
-		<h4>{% trans "Courses - Shifts" %}</h4>
+		<h4>{% trans "courses" %} - {% trans "shifts" %}</h4>
 	</div>
 
 	<table class="table table-striped">
-		<thead><tr><th>{% trans "Name" %}</th></tr></thead>
+		<thead><tr><th>{% trans "name" %}</th></tr></thead>
 		<tbody>
 		{% for shift in shifts %}
 		    <tr>
 		    	<td><a href="/undergraduate/practice/list/{{shift.course.pk}}">{{ shift }}</a></td>
 		    </tr>
 		{% empty %}
-		    <tr><td>{% trans "There are yet no shifts in which you are enrolled" %}</td></tr>
+		    <tr><td>{% trans "noShiftsToEnrolled" %}</td></tr>
 		{% endfor %}
 		</tbody>
 	</table>
-	<div style="clear: none; alignment-adjust: central;"><h5>{% trans "Subscription on a new course here " %}<a href="/undergraduate/suscription/" >{% trans "Suscription" %}</a></h5></div> 
+	<div style="clear: none; alignment-adjust: central;"><h5>{% trans "subscriptionHere" %} <a href="/undergraduate/suscription/" >{% trans "suscription" %}</a></h5></div> 
 </div>
 {% endblock %}
