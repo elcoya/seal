@@ -20,4 +20,4 @@ Feature: As a student I want to see my deliveries
 		  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-02"
 		  And I log in as "martin" "martin"	
 		 when I am in the delivery page of practice "TP Intro"
-    	 Then I should see "Nov. 2, 2012" before "Nov. 1, 2012" 
+    	 Then I should see "2012-11-02" before "2012-11-01" 
