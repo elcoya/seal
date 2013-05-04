@@ -322,6 +322,7 @@ def runtravis():
 def start():
     print("[fabric] Compiling Messages.")
     compile_messages()
+    print("[fabric] Launching web server at Django default port (8000).")
     set_pythonpath()
     server_process = Popen(["nohup", "python", "web/seal/manage.py", "runserver", "--noreload"], stdout = open("output.txt", 'w+', 0), env=os.environ)
     local("echo " + str(server_process.pid) + " > /tmp/seal_server.pid")
