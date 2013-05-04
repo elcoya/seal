@@ -320,7 +320,6 @@ def runtravis():
 
 
 def start():
-    print("[fabric] launching server instance.")
     print("[fabric] Compiling Messages.")
     compile_messages()
     set_pythonpath()
