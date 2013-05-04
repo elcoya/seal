@@ -49,6 +49,8 @@ urlpatterns += patterns('view.teacher.course',
 
 urlpatterns += patterns('view.teacher.delivery',
     url(r'^delivery/list/(?P<idcourse>\d+)/(?P<idpractice>\d+)/$', 'listdelivery'),
+    url(r'^delivery/list/(?P<idcourse>\d+)/(?P<idpractice>\d+)/(?P<idstudent>\d+)/$', 'listbystudent'),
+    url(r'^courses/(?P<idcourse>\d+)/practices/(?P<idpractice>\d+)/students/(?P<idstudent>\d+)/deliveries/$', 'listbystudent'),
     url(r'^delivery/download/(?P<iddelivery>\d+)/$', 'download'),
     url(r'^delivery/browse/(?P<idcourse>\d+)/(?P<iddelivery>\d+)/(?P<file_to_browse>[\w\-\./]+)/$', 'browse'),
     url(r'^delivery/explore/(?P<idcourse>\d+)/(?P<iddelivery>\d+)/$', 'explore'),

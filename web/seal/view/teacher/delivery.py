@@ -34,6 +34,28 @@ def listdelivery(request, idcourse, idpractice):
         return HTTP_401_UNAUTHORIZED_RESPONSE
 
 @login_required
+def listbystudent(request, idcourse, idpractice, idstudent):
+    if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
+        courses = Course.objects.all()
+        current_course = courses.get(pk=idcourse)
+        student = Student.objects.get(pk=idstudent)
+        practice = Practice.objects.get(pk=idpractice)
+        table_deliveries = []
+        deliveries = Delivery.objects.filter(practice=practice,student__pk=idstudent)
+        for delivery in deliveries:
+            correction = Correction.objects.filter(delivery=delivery)
+            table_deliveries.append({'delivery': delivery, 'correction':correction})
+        return render(request, 'delivery/listdeliveryperstudentperpractice.html', 
+                      {'current_course' : current_course,
+                       'courses' : courses,
+                       'student' : student,
+                       'table_deliveries': table_deliveries , 'practice': practice,})
+    else:
+        return HTTP_401_UNAUTHORIZED_RESPONSE
+
+
+
+@login_required
 def download(request, iddelivery):
     if(len(request.user.teacher_set.all()) > 0): # if an authenticated user "accidentally" access this section, he doesn't get an exception
         delivery = Delivery.objects.get(pk=iddelivery)
