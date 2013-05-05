@@ -20,4 +20,4 @@ Feature: As a teacher I want to see the delivery lists of one practice
           And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-01"
 		  And exist delivery of "TP Intro" from student "martin" whit dalivery date "2012-11-02"		
 		 When I am in the list page of delivery from "TP Intro" of course "2012-1"
-         Then I should see "Nov. 1, 2012" before "Nov. 2, 2012"  
+         Then I should see "2012-11-01" before "2012-11-02"  

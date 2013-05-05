@@ -22,5 +22,5 @@ Feature: As a User I can change de password
 		 When I click the button "changepassword"
 		  And I fill the change password form with user "martin", oldpass "martin", newpass "not", newpassagin "match"
 		  And I submit the form
-		 Then I should see "Passwords does not match"
+		 Then I should see "Passwords do not match"
 		 

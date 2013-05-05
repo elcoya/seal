@@ -21,7 +21,7 @@ Feature: As a student I can regenerate de password
 		 When I am in the recovery password page
 		  And I fill the recovery form with user "martin" and email "mauro@foo.foo"
 		  And I submit the form
-		 Then I should see "User not exist with this email"
+		 Then I should see "There is no user associated with this email address"
 	
 	Scenario: Recovery Fail because diferent username
 	 	Given I am not logged in
@@ -30,5 +30,5 @@ Feature: As a student I can regenerate de password
 		 When I am in the recovery password page
 		  And I fill the recovery form with user "mauro" and email "martin@foo.foo"
 		  And I submit the form
-		 Then I should see "User not exist with this email"
+		 Then I should see "There is no user associated with this email address"
 			

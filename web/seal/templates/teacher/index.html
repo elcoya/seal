@@ -131,47 +131,42 @@
 					</div>
 				</div>
 			</div>
+      <div>{% trans 'totalRowCount'%}: {{table_deliveries|length}}   </div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>{% trans "delivery" %}</th>
-						<th>{% trans "student" %}</th>
-						<th>{% trans "practice" %}</th>
+						<th>{% trans "uid" %}</th>
+						<th>{% trans "lastName" %}</th>
+						<th>{% trans "firstName" %}</th>
+						<th>{% trans "assignment" %}</th>
 						<th>{% trans "deliveryDate" %}</th>
-						<th>{% trans "automaticCorrection" %}</th>
-						<th>{% trans "correction" %}</th>
+						<th>{% trans "tests" %}</th>
+						<th>{% trans "grade" %}</th>
 						<th>{% trans "actions" %}</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for delivery_row in table_deliveries %}
 					<tr>
-						<td>{{ delivery_row.delivery.pk }}</td>
 						<td>{{ delivery_row.delivery.student.uid }}</td>
+						<td>{{ delivery_row.delivery.student.last_name }}</td>
+						<td>{{ delivery_row.delivery.student.first_name }}</td>
 						<td>{{ delivery_row.delivery.practice.uid }}</td>
-						<td>{{ delivery_row.delivery.full_date }}</td>						
+						<td>{{ delivery_row.delivery.deliverDate|date:"Y-m-d" }},{{ delivery_row.delivery.deliverTime|time:"H:i" }}</td>						
 						<td> 
 							{% if delivery_row.delivery.get_automatic_correction.get_status == 'successfull' %} 
-								<span class="label label-success">{% trans "successfull" %}</span> 
+								<span class="label label-success">{% trans "passed" %}</span> 
 							{% elif delivery.get_automatic_correction.get_status == 'failed' %} 
 								<span class="label label-important">{% trans "failed" %}</span> 
 							{% else %} 
 								<span class="label label-warning">{% trans "pending" %}</span> 
 							{% endif %} 	
 						</td>
-			            <td>
-			            	{% if delivery_row.correction %}
-			            		<span class="label label-success">{% trans "corrected" %}</span>
-			            	{% else %}
-			            		<span class="label label-warning">{% trans "pending" %}</span>
-			            	{% endif %}
-			            </td>
-						<td>
-							<a title="{% trans 'download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
+             <td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>
+						<td><a title="{% trans 'download' %}" class="icon-download" href="/teacher/delivery/download/{{ delivery_row.delivery.pk}}"></a>
 							<a title="{% trans 'uatomaticCorrection' %}" class="icon-certificate" href="/teacher/automatic_correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
 							<a title="{% trans 'navigate' %}" class="icon-folder-open" href="/teacher/delivery/explore/{{ current_course.pk }}/{{ delivery_row.delivery.pk }}"></a>
-							<a title="{% trans 'correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a>
-						</td>
+							<a title="{% trans 'correct' %}" class="icon-pencil" href="/teacher/correction/{{ current_course.pk }}/{{ delivery_row.delivery.pk}}"></a></td>
 					</tr>
 					{% empty %}
 					<tr>
