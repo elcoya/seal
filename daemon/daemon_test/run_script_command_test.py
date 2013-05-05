@@ -6,7 +6,7 @@ import os
 
 class TestRunScriptCommand(TestCase):
 
-    script_file_path = "/tmp/"
+    script_file_path = "tmp/"
     script_file_name = "successfull_test_script.sh"
     
     def setUp(self):
