@@ -3,6 +3,7 @@
 *.pyo
 .settings
 .coverage
+*.my
 coverage_report
 pylint_report
 seal_dev

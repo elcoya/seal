@@ -18,10 +18,10 @@ Main page to recovery password.
 {% block body %}
 	<div class="container" >
 		<form method="post" class="form-signin">
-			<h2 align="center" class="form-signin-heading">{% trans "recoveryPassword" %}</h2>
+			<h2 class="form-signin-heading">{% trans "recoveryPassword" %}</h2>
 			{% csrf_token %}
 			{{ form|as_bootstrap }}
-			<div align="center">
+			<div>
 				<button  class="btn btn-large btn-primary" type="submit">
 					{% trans "recover" %}
 				</button>

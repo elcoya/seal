@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block content %}
 	<div class="container-fluid" >
-		<div class="row-fluid" style="margin: 20px 0 20px;">
+		<div class="row-fluid">
 			{% trans "delivery" %} <b>{{ delivery.pk }}</b> {% trans "practice" %} <b> {{ delivery.practice.uid }} </b> {% trans "student" %}<b> {{ delivery.student.get_full_name }} ({{ delivery.student.uid }}) </b>
 		</div>
 		<div>
@@ -18,7 +18,7 @@
 		</div>
 		<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
 		{% if file_content %}
-			<pre style="margin-top: 20px;">{{ file_content }}</pre>
+			<pre>{{ file_content }}</pre>
 		{% endif %}
 	</div>
 {% endblock %}

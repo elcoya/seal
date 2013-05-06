@@ -14,8 +14,8 @@
 
 {% block body %}
     <div class="container">
-		<form class="form-signin" style="max-width: 320px" action="" method="post" >
-			<h2 align="center" class="form-signin-heading">{% trans "registrateOn" %} {% trans 'brand' %}</h2>
+		<form class="form-signin" action="" method="post" >
+			<h2 class="form-signin-heading">{% trans "registrateOn" %} {% trans 'brand' %}</h2>
 			{% csrf_token %}
 			{{ form|as_bootstrap  }}
 			<span class="validation_error">{{ captcha_response }}</span><script type="text/javascript" src="http://api.recaptcha.net/challenge?k={{captcha_publick}}"></script>
@@ -24,7 +24,7 @@
 				<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
 			</noscript>
 			<br>
-			<div align="center">
+			<div>
 				<button  class="btn btn-large btn-primary" type="submit">
 					{% trans "registrate" %}
 				</button>

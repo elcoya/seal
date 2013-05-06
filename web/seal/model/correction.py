@@ -8,15 +8,14 @@ class Correction(models.Model):
     
     It is the grade granted by the Teacher to the Student and a comment giving
     feedback for the Delivery made by the latter.
-    
     """
     
-    publicComent = models.TextField(max_length=2000, verbose_name="Comentario Public")
-    privateComent = models.TextField(max_length=2000, verbose_name="Comentario Privado")
+    publicComent = models.TextField(max_length=2000)
+    privateComent = models.TextField(max_length=2000)
     grade = models.FloatField(verbose_name="Nota")
     delivery = models.ForeignKey(Delivery)
     corrector = models.ForeignKey(Teacher)
     
     def __str__(self):
         """Stringify the Correction"""
-        return ("Grade: " + str(self.grade) + " - Public Coment: " + self.publicComent)
+        return ("Grade: " + str(self.grade) + " - Public Comment: " + self.publicComent)

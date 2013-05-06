@@ -2,12 +2,12 @@
 {% load i18n %}
 {% block content %}
 <div class="container-fluid">
-	<div class="row-fluid" style="margin: auto;">
+	<div class="row-fluid">
 		{% trans "correctionPractice" %} <b>{{delivery.practice.uid}}</b> - {% trans "delivery" %} <b>{{delivery.pk}}</b> - {% trans "student" %} <b>{{delivery.student.get_full_name}} ({{delivery.student.uid}})</b>
 	</div>
-	<div class="row-fluid" style="margin: 15px 0 10px;">
+	<div class="row-fluid">
 		{% trans "corrector" %} - <b>{{corrector}}</b>
-	</div>
+	</div>fuck
 	<form id='formcorrect' action='' method='post'>
 		{% csrf_token %}
 		<table>

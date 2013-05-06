@@ -1,7 +1,7 @@
 {% extends "undergraduate/index.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="row" style="margin: 20px 0;" >
+	<div class="row">
 		{% trans "practiceOfShift" %} <b>{{ shift }}</b>
 	</div>
 	<table class="table table-striped">
@@ -28,7 +28,7 @@
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "thereNoPractices" %}</td>
+				<td colspan="4">{% trans "thereNoPractices" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

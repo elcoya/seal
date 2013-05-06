@@ -1,14 +1,14 @@
 {% extends "teacher/teacher.html" %}
 {% load i18n %}
 {% block content %}
-	<div style="width: 100%; margin: auto; padding: 15px 0; clear: both;" >
-		<div style="clear: none; width: 50%; float: left;">
+	<div>
+		<div>
 			{% blocktrans with delivery.practice.uid as practice %}Detail of delivery from practice {{ practice }}{% endblocktrans %}
 			<br>
 			<br>
 		</div>
-		<table style="width: 100%;">
-			<thead style="text-align: center; ">
+		<table>
+			<thead>
 				<tr>
 					<td>{% trans "Uid" %}</td>
 					<td>{% trans "Student Uid" %}</td>
@@ -22,20 +22,20 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td style="text-align: center; " >{{ delivery.pk }}</td>
-					<td style="text-align: center; ">{{ delivery.student.uid }}</td>
-					<td style="text-align: center; ">{{ delivery.student.user.first_name }} {{ delivery.student.user.last_name }}</td>
-					<td style="text-align: center; ">{{ delivery.full_date }}</td>
-					<td style="text-align: center; "><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %} </a></td>
-					<td style="text-align: center; "><a href="/teacher/correction/{{ delivery.pk}}/2">
+					<td>{{ delivery.pk }}</td>
+					<td>{{ delivery.student.uid }}</td>
+					<td>{{ delivery.student.user.first_name }} {{ delivery.student.user.last_name }}</td>
+					<td>{{ delivery.full_date }}</td>
+					<td><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %} </a></td>
+					<td><a href="/teacher/correction/{{ delivery.pk}}/2">
 					{% if correction %}
 					{% trans "Corrected" %}
 					{% else %}
 					{% trans "Pending" %}
 					{% endif %} 
 					</a></td>
-					<td style="text-align: center; "><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>
-					<td style="text-align: center; "><a href="/teacher/delivery/explore/{{ delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
+					<td><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>
+					<td><a href="/teacher/delivery/explore/{{ delivery.pk }}"><img src="{{ STATIC_URL }}img/folder-icon.png" /></a></td>
 				</tr>
 			</tbody>
 		</table>
