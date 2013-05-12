@@ -1,12 +1,12 @@
 {% extends "teacher/teacher.html" %}	
 {% load i18n %}
 {% block content %}
-	<div style="width: 800px; text-align: left; margin: auto;">
+	<div>
 		<div>
-			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
-				<div style="clear: none; width: 50%; float: left;">{% trans "Courses List" %}</div>
+			<div>
+				<div>{% trans "Courses List" %}</div>
 			</div>
-				<table style="width: 100%;">
+				<table>
 					<tbody>
 					{% for course in courses %}
 					    <tr><td>{{ course.name }}</td></tr>
@@ -15,7 +15,7 @@
 					{% endfor %}
 					</tbody>
 					{% if courses|length > 0 %}
-						<tfoot style="text-align: center;"><tr>
+						<tfoot><tr>
 						    <td class="step-links">
 						    		<a href="?page=1">{% trans "first" %}</a>
 						        {% if courses.has_previous %}

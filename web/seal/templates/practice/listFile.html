@@ -1,7 +1,7 @@
 {% extends "undergraduate/index.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="row" style="margin: 20px 0;">
+	<div class="row">
 		{% trans "filesOfPractice" %} <b>{{ practicename }}</b>
 	</div>
 	<table class="table table-striped">
@@ -23,7 +23,7 @@
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="2" style="text-align: center; ">{% trans "noFilesBounded" %}</td>
+				<td colspan="2">{% trans "noFilesBounded" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

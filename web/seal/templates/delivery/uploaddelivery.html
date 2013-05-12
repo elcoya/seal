@@ -1,7 +1,7 @@
 {% extends "undergraduate/index.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="row" style="margin: 20px 0;">
+	<div class="row">
 		{% trans "uploadDeliveryForPractice" %} <b>{{namepractice}}</b>
 	</div>
 	<form class="form-horizontal" method="post" enctype='multipart/form-data'>
@@ -20,8 +20,8 @@
 		                </div>
 		            {% else %}
 		                <div class="span0 control-group">
-		                    <label class="control-label" style="width: 140px;">{{ form.file.label }}</label> 
-		                    <div class="controls" style="margin-left: 150px;">{{ form.file }}
+		                    <label class="control-label">{{ form.file.label }}</label> 
+		                    <div class="controls">{{ form.file }}
 		                        {% if form.file.help_text %}
 		                            <p class="help-inline"><small>{{ form.file.help_text }}</small></p>
 		                        {% endif %}
@@ -36,7 +36,7 @@
 	
 	<hr />
 	
-	<div class="row" style="margin: 20px 0 10px;">
+	<div class="row">
 		{% trans "deliveriesFromPractice" %} <b>{{namepractice}}</b>
 	</div>
 	<table class="table table-striped">
@@ -76,7 +76,7 @@
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "noDeliveriesPractice" %}</td>
+				<td colspan="4">{% trans "noDeliveriesPractice" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

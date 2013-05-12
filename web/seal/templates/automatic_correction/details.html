@@ -5,7 +5,7 @@
 {% if automatic_correction.status %}
 	<div>
 		<div>
-			<div class="row" style="margin: 0 0 10px;">
+			<div class="row">
 				<p>{% trans "automaticCheckResult" %}:
 					<span style="font-weight: bold; color: 
 					{% if automatic_correction.status > 0 %}
@@ -18,7 +18,7 @@
 					</span>
 				</p>
 			</div>
-			<div style="padding: 10px 0 5px;">{% trans "autorunOutput" %} - {% trans 'delivery' %} <b>{{ automatic_correction.delivery.pk }}</b> - {% trans 'practice' %} <b>{{ automatic_correction.delivery.practice.uid }}</b></div>
+			<div>{% trans "autorunOutput" %} - {% trans 'delivery' %} <b>{{ automatic_correction.delivery.pk }}</b> - {% trans 'practice' %} <b>{{ automatic_correction.delivery.practice.uid }}</b></div>
 			<div class="output-container" >
 				<pre class="output-container" >{{ automatic_correction.captured_stdout }}</pre>
 			</div>

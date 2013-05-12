@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block content %}
 <body>
-	<div style="width: 100%; text-align: left; margin: auto;">
+	<div>
 		<h4>{% trans "suscription" %}</h4>
 	</div>
 	<table class="table table-striped">
@@ -14,17 +14,17 @@
 		<tbody>
 			{% for shift in shifts %}
 			<tr>
-				<td style="text-align: center; " >{{ shift }}</td>
-				<td style="text-align: center; "><a href="/undergraduate/suscription/suscribe/{{ shift.pk}}">{% trans "suscribe" %}</a></td>
+				<td>{{ shift }}</td>
+				<td><a href="/undergraduate/suscription/suscribe/{{ shift.pk}}">{% trans "suscribe" %}</a></td>
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "noShiftsSuscribe" %}</td>
+				<td colspan="4">{% trans "noShiftsSuscribe" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	<div style="width: 100%; text-align: left; margin: auto;">
+	<div>
 		<h5>{% trans "listOldSuscription" %}</h5>
 	</div>
 	<table class="table table-striped">
@@ -46,7 +46,7 @@
 			</tr>
 			{% empty %}
 			<tr>
-				<td colspan="4" style="text-align: center; ">{% trans "noOldSuscription" %}</td>
+				<td colspan="4">{% trans "noOldSuscription" %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

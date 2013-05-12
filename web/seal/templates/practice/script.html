@@ -13,7 +13,7 @@
 	</form>	
 	<div><a class="btn btn-small" href="/teacher/{{ idcourse }}"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
 	{% if practice.script_set.all %}
-		<div style="padding: 20px 0 5px;"><h5>{% trans "scriptContent" %}</h5></div>
+		<div><h5>{% trans "scriptContent" %}</h5></div>
 		<div class="script-container" >
 			<pre>{{ script_text }}</pre>
 		</div>

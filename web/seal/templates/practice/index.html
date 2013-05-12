@@ -2,12 +2,12 @@
 {% load i18n %}
 {% block content %}
 <body>
-	<div style="width: 800px; text-align: left; margin: auto;">
+	<div>
 		<div>
-			<div style="border-bottom: thin solid black; margin-bottom: 5px; clear: both; height: 16px; padding: 5px 0px;">
-				<div style="clear: none; width: 50%; float: left;">{% trans "Practices List" %}</div>
+			<div>
+				<div>{% trans "Practices List" %}</div>
 			</div>
-				<table style="width: 100%;">
+				<table>
 					<tbody>
 					{% for practice in practices %}
 					    <tr><td>{{ practice.uid }}</td></tr>
@@ -16,7 +16,7 @@
 					{% endfor %}
 					</tbody>
 					{% if practices|length > 0 %}
-						<tfoot style="text-align: center;"><tr>
+						<tfoot><tr>
 						    <td class="pagination">
 						    		<a href="?page=1">{% trans "first" %}</a>
 						        {% if practices.has_previous %}

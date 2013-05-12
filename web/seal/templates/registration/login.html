@@ -19,7 +19,7 @@ Main page to authenticate users.
 		<h2 class="form-signin-heading">{% trans "Login SEAL" %}</h2>
 		{% csrf_token %}
 		{% if form.errors %}
-		<p    style="color: red" class="error" >
+		<p class="error" >
 			{% trans "wrongCredentials" %}
 		</p>
 		{% endif %}

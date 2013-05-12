@@ -1,7 +1,7 @@
 {% extends "teacher/index.html" %}
 {% load i18n %}
 {% block content %}
-	<div class="row" style="margin: 20px 0;" >
+	<div class="row">
 		{% trans "uploadFilePractice" %} <b>{{ namepractice }}</b>
 	</div>
 	<form id='formuploadfile' action='' method='post' enctype='multipart/form-data'>
@@ -12,7 +12,7 @@
 		<button class="btn btn-primary" type='submit' >{% trans "save" %}</button>
 	</form>
 		
-	<div class="row" style="margin: 20px 0;" >
+	<div class="row">
 		{% trans "listFilePractice" %} <b>{{ namepractice }}</b>
 	</div>
 		<table class="table table-striped">
@@ -38,7 +38,7 @@
 					</tr>
 				{% empty %}
 				<tr>
-					<td colspan="5" style="text-align: center; ">{% trans "noFilePractice" %}</td>
+					<td colspan="5">{% trans "noFilePractice" %}</td>
 				</tr>
 				{% endfor %}
 			</tbody>

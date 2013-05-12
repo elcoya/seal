@@ -13,7 +13,7 @@
 	<form method="post" action="">
 		{% csrf_token %}
 		<div class="container" >
-			<div style="padding-bottom: 10px;">
+			<div>
 				{% trans "Pending Suscription of shift  " %}<b>{{ shift }}</b>
 			</div>
 			<table class="table table-striped">
@@ -41,19 +41,19 @@
 					</tr>
 					{% empty %}
 					<tr>
-						<td colspan="5" style="text-align: center; ">{% trans "There are yet no suscriptions awaiting confirmation" %}</td>
+						<td colspan="5">{% trans "There are yet no suscriptions awaiting confirmation" %}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 			<div class="row">
-				<div class="span3 offset9" style="text-align: right; ">
+				<div class="span3 offset9">
 					<button name="Reject" class="btn" onclick="this.form.action='/teacher/suscription/rejectGroup/{{shift.id}}/';this.form.submit();" >{% trans 'Reject' %}</button> 
 					<button name="Accept" class="btn" onclick="this.form.action='/teacher/suscription/acceptGroup/{{shift.id}}/';this.form.submit();" >{% trans 'Accept' %}</button>
 				</div>
 			</div>
 			<hr />
-			<div style="padding-bottom: 10px;">
+			<div>
 				{% trans "Suscription solver of course "%}<b>{{ shift }}</b> 
 			</div>
 			<table class="table table-striped">
@@ -79,7 +79,7 @@
 					</tr>
 					{% empty %}
 					<tr>
-						<td colspan="6" style="text-align: center; ">{% trans "There are yet no suscriptions solve for this course" %}</td>
+						<td colspan="6">{% trans "There are yet no suscriptions solve for this course" %}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
