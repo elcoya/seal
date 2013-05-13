@@ -323,7 +323,7 @@ msgstr "Grade"
 
 #: templates/correction/consult.html:25
 msgid "noCorrection"
-msgstr "There is correction yet"
+msgstr "There are no corrections"
 
 #: templates/correction/index.html:6 templates/delivery/browsedelivery.html:6
 #: templates/teacher/index.html:138
@@ -650,7 +650,7 @@ msgstr "Uncorrected"
 
 #: templates/delivery/uploaddelivery.html:79
 msgid "noDeliveriesPractice"
-msgstr "There are yet no deliveries from this practice"
+msgstr "There are yet no deliveries for this practice"
 
 #: templates/export/choose.html:7
 msgid "data_export"
@@ -686,7 +686,7 @@ msgstr ""
 
 #: templates/practice/listFile.html:26
 msgid "noFilesBounded"
-msgstr "There are not file bounded to this practice"
+msgstr "There are no files bounded to this practice"
 
 #: templates/practice/practiceList.html:5
 msgid "practiceOfShift"
@@ -868,7 +868,7 @@ msgstr "Pending deliveries"
 
 #: templates/student/delivery_pending.html:37
 msgid "noStudentWithPendingDelivery"
-msgstr "Thera are not student whit pending deliveries"
+msgstr "There are no students whit pending deliveries"
 
 #: templates/student/detail.html:5
 msgid "detailStudent"
@@ -1047,7 +1047,7 @@ msgstr "Suscribe"
 
 #: templates/suscription/suscription.html:22
 msgid "noShiftsSuscribe"
-msgstr "There are yet no Shifts to suscribe"
+msgstr "There are yet no Shifts to suscribe to"
 
 #: templates/suscription/suscription.html:28
 msgid "listOldSuscription"
@@ -1091,7 +1091,7 @@ msgstr "Total deliveries"
 
 #: templates/teacher/index.html:116
 msgid "noPractices"
-msgstr "There are not practice"
+msgstr "There are no practices"
 
 #: templates/teacher/index.html:130
 msgid "listMyCorrections"
@@ -1163,8 +1163,8 @@ msgid "shifts"
 msgstr "Shifts"
 
 #: templates/undergraduate/index.html:22
-msgid "noShiftsToEnrolled"
-msgstr "There are yet no Shifts to suscribe"
+msgid "noShiftsToEnroll"
+msgstr "There are yet no Shifts to suscribe to"
 
 #: templates/undergraduate/index.html:26
 msgid "subscriptionHere"

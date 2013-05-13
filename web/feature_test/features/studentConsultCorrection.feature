@@ -11,7 +11,8 @@ Feature: As a student I want to see my corrections
 	 	  And there are no corrections
 	 	  And I log in as "martin" "martin"
 	 	 When I am in the correction consult page of delivery from student "martin" and practice "TP Intro"
-	 	 Then I should see "There is yet no Correction"
+	 	  And I wait
+	 	 Then I should see "There are no corrections"
 	 	 
 
 	Scenario: Student only see a public coment and grade of correction

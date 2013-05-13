@@ -6,7 +6,8 @@ Feature: As a student I want to see de courses where i am enrolled and the pract
  		  And a shift with name "tarde" and description "horario" in the course "2012-1"
  		  And student "martin" exists without course
           And I log in as "martin" "martin"
- 		 Then I should see "There are yet no shifts in which you are enrolled"
+          And I wait
+ 		 Then I should see "There are yet no Shifts to suscribe to"
  
 	Scenario: Enrolled in two courses, order by newest course
 		Given Student "martin" exists with password "martin"

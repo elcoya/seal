@@ -1166,7 +1166,7 @@ msgid "shifts"
 msgstr "Turnos"
 
 #: templates/undergraduate/index.html:22
-msgid "noShiftsToEnrolled"
+msgid "noShiftsToEnroll"
 msgstr "No hay turnos para inscribirse"
 
 #: templates/undergraduate/index.html:26

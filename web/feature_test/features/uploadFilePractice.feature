@@ -7,7 +7,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And practice "TP Intro" exists in course "2012-1" with deadline "2012-12-01"
 	 	  And I log in as "teacher" "teacher"
 	 	 When I click the button "uploadfileTP Intro"
-	 	 Then I should see "There are yet no deliveries uploaded to this practice"
+	 	 Then I should see "There are no files bounded to this practice"
 
 	 Scenario: Upload file
 		Given course "2012-1" exists 
@@ -30,7 +30,7 @@ Feature: As a teacher I want to manage several practice files
 	 	  And I fill the upload file form with name "enunciado"
 	 	  And I submit the form
 	 	  And I click the button "deleteenunciado"
-	 	 Then I should see "There are yet no deliveries uploaded to this practice"
+	 	 Then I should see "There are no files bounded to this practice"
 	
 	Scenario: See the option edit when i upload a text file
 		Given course "2012-1" exists 

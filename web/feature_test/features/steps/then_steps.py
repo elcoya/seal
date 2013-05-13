@@ -108,9 +108,6 @@ def step(context, text):
 @then('I should see "{text}"')
 def step(context, text):
     body = context.browser.find_element_by_tag_name('body')
-    if("susccessfull" in text):
-        with open("/tmp/behave.out", "a") as f:
-            f.write(body.text + "\n")
     assert text in body.text
 
 @then('I enter in the page with this title "{text}"')

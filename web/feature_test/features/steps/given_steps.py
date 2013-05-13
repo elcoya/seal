@@ -433,3 +433,7 @@ def step(context, practice_name, practice_file_id):
     practice_file.save()
 
 
+
+@given("I wait")
+def step(context):
+    time.sleep(5)

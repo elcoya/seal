@@ -5,7 +5,7 @@ Feature: As a user I want to see the practice list
           And there are no practices
     	  And course "2012-1" exists
           And I log in as "teacher" "teacher"
-         Then I should see "There are yet no Practices"
+         Then I should see "There are no practices"
          
     Scenario: Practices in course 2012-1 order by Dead Line
         Given Teacher "teacher" exists with password "teacher"

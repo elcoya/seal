@@ -5,7 +5,7 @@ Feature: As a teacher I want to see the list of the student without delivery suc
           And course "2012-1" exists
           And I log in as "teacher" "teacher" 
          When I am in the page of delivery pending of course "2012-1"
-		 Then I should see "There are no student with pending delivery"
+		 Then I should see "There are no students whit pending deliveries"
 	
 	Scenario: List Student without delivery
 		Given Student "martin" exists with email "martin@foo.foo"
@@ -42,7 +42,7 @@ Feature: As a teacher I want to see the list of the student without delivery suc
 	 	  And the automatic correction of delivery with id "1" is "successfull"
 	 	  And I log in as "teacher" "teacher" 
 	 	 When I am in the page of delivery pending of course "2012-1"
-	 	 Then I should see "There are no student with pending delivery"
+	 	 Then I should see "There are no students whit pending deliveries"
 
     Scenario: List Student with delivery and automatic correction status fail and not list a student with automtaci correction status successfull 
 		Given Student "martin" exists with email "martin@foo.foo"

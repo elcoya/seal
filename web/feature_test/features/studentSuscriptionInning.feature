@@ -11,7 +11,7 @@ Feature: As a student I want to aplicate to a course
 	     And there are no shifts
 		 And I log in as "martin" "martin"
 	    When I am in the student suscription page
-        Then I should see "There are yet no Shifts to suscribe"  	 
+        Then I should see "There are yet no Shifts to suscribe to"  	 
 	
 	Scenario: See the list of course to suscribe
 	   Given student "martin" exists with password "martin"
@@ -92,7 +92,7 @@ Feature: As a student I want to aplicate to a course
 		 And existe suscrition of student "martin" for course "2012-1" shift "tarde" with suscription date "2012-11-01" and state "Pending"
 		 And I log in as "martin" "martin"
 		When I am in the student suscription page
-		Then I should see "There are yet no Shifts to suscribe"     
+		Then I should see "There are yet no Shifts to suscribe to"     
     
     Scenario: Student enroled in the only course, no courses to sucribe  
        Given student "martin" exists with password "martin"
@@ -103,4 +103,4 @@ Feature: As a student I want to aplicate to a course
 		 And student "martin" exists in course "2012-1" and in shift "tarde"
 		 And I log in as "martin" "martin" 
 		When I am in the student suscription page
-		Then I should see "There are yet no Shifts to suscribe" 
+		Then I should see "There are yet no Shifts to suscribe to" 

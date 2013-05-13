@@ -7,7 +7,7 @@ Feature: As a user I want to see the student list
           And there are no student in course "2012-1" shift "tarde" 
           And I log in as "teacher" "teacher"
          When I am in the page of student list of shift "tarde" of course "2012-1"
-         Then I should see "There are yet no Students"
+         Then I should see "There are no students in this course"
     
 	Scenario: Student in course 2012-1 order by name
         Given Teacher "teacher" exists with password "teacher"
