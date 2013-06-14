@@ -24,4 +24,4 @@ Feature: As a user I want to see the practice list
           And I log in as "martin" "martin"
     	  And student "martin" exists in course "2012-1" and in shift "tarde"
     	 when I am in the delivery page of practice "TP Intro"
-    	 Then I should see "There are yet no deliveries from this practice"
+    	 Then I should see "There are yet no deliveries for this practice"
