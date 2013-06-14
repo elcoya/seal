@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^recoverypass/?$', home.recovery_pass),
     url(r'^changelenguaje/?$', home.change_lenguaje),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^forbidden/$', home.forbidden)
 )
 
 urlpatterns += patterns('',

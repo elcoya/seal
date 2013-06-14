@@ -163,3 +163,7 @@ def random_pass_generate():
 def change_lenguaje(request):
     return render(request,'registration/change_lenguaje.html')
     
+def forbidden(request):
+    return render(request,'401.html')
+
+

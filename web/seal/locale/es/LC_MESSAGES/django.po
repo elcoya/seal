@@ -1281,3 +1281,8 @@ msgstr "Vista del estudiante"
 
 #~ msgid "You are not allowed in this section"
 #~ msgstr "No esta permitido que acceda a esta seccion"
+
+#
+msgid "unauthorized_section"
+msgstr "No está autorizado para navegar esta sección"
+

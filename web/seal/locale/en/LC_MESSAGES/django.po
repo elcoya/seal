@@ -1196,3 +1196,8 @@ msgstr "Students view"
 # unused
 #~ msgid "failed_deliveries"
 #~ msgstr "Failed deliveries"
+
+#
+msgid "unauthorized_section"
+msgstr "You are not authorized to view this section"
+

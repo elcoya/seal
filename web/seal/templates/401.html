@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n admin_static %}
+{% block extrastyle %}
+{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
+{% endblock %}
+{% block bodyclass %}dashboard{% endblock %}
+{% block body %}
+<div>
+	{% csrf_token %}
+	<div align="center"><h4>{% trans "Error HTTP 401: Unauthorized" %}</h4></div>
+	<div align="center"><h4>{% trans "unauthorized_section" %}</h4></div>
+	<div><a class="btn btn-small" href="javascript:history.back()"><span class="icon-backward" title="{% trans 'back' %}"></span></a></div>
+	<footer>
+	</footer>
+</div>
+{% endblock %}
