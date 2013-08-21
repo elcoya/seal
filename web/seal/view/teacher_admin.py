@@ -7,8 +7,8 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from seal.model.mail import Mail
 
-SUBJECTMAILCREATE = "Creacion de usuario en ALGO3"
-BODYMAILCREATE = "Se creo un usuario en ALGO3 para ti. Tu informacion de ingreso es Padron: %s y Password: %s"
+SUBJECTMAILCREATE = "Creacion de usuario en Jarvis"
+BODYMAILCREATE = "Se creo un usuario en Jarvis para ti. Ya puedes acceder al sistema con tu login: '%s'/'%s'"
 
 @permission_required('my_custom_perm')
 def listteacher(request):

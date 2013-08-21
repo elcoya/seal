@@ -17,7 +17,7 @@ PATHREDIRECTINDEX = "/teacher/correction/edit/%s/%s"
 
 PATH_DASHBOARD = "/teacher/%s"
 
-SUBJECTEMAIL = "Tienes una correccion para ver en ALGO3"
+SUBJECTEMAIL = "Tienes una correccion para ver en Jarvis"
 BODYEMAIL = "Tienes una correccion para ver en la entrega: %s de la practica: %s. Comentario: %s. Nota: %s"
 
 

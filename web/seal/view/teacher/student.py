@@ -26,8 +26,8 @@ PATHOKENROLED = "/teacher/students/"
 PATHDETAIL = "/teacher/students/detail/%s/%s/"
 MAXPAGINATOR = 10
 
-SUBJECTMAILCREATE = "Creacion de usuario en ALGO3"
-BODYMAILCREATE = "Se creo un usuario en ALGO3 para ti. Tu informacion de ingreso es Padron: %s y Password: %s"
+SUBJECTMAILCREATE = "Creacion de usuario en Jarvis"
+BODYMAILCREATE = "Se creo un usuario en Jarvis para ti. Tu informacion de ingreso es Padron: %s y Password: %s"
 
 
 @login_required

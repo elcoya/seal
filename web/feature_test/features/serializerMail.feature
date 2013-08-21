@@ -16,7 +16,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 	 	  And I logout
 	 	  And I log in as "seal" "seal"
 	 	  And I click in the "Mails to send Serializer" link
-	 	 Then I should see "Tienes una correccion para ver en ALGO3"
+	 	 Then I should see "Tienes una correccion para ver en Jarvis"
 	 	  
      Scenario: Recovery password and see the page of serializer of mail pending to send from the recovery
 		Given Student "martin" exists with email "martin@foo.foo"
@@ -27,7 +27,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 		  And I am in the index page
   	      And I log in as "seal" "seal"
 	 	  And I click in the "Mails to send Serializer" link
-	 	 Then I should see "Recupero de password de ALGO3"
+	 	 Then I should see "Recupero de password de Jarvis"
 	 
 	 Scenario: Change password and see the page of serializer of mail pending to send from the change
 		Given Student "martin" exists with password "martin"
@@ -39,7 +39,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 		  And I logout
   	      And I log in as "seal" "seal"
 	 	  And I click in the "Mails to send Serializer" link
-	 	 Then I should see "Cambio de password en ALGO3"
+	 	 Then I should see "Cambio de password en Jarvis"
 	 	  
 	 Scenario: Create a student and see the page of serializer of mail pending to send from the creation
 		Given Teacher "teacher" exists with password "teacher"
@@ -55,7 +55,7 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 		  And I logout
   	      And I log in as "seal" "seal"
 	 	  And I click in the "Mails to send Serializer" link
-	 	 Then I should see "Creacion de usuario en ALGO3"
+	 	 Then I should see "Creacion de usuario en Jarvis"
 
 	 Scenario: Create a teacher and see the page of serializer of mail pending to send from the creation
 		 When I log in as "seal" "seal"
@@ -65,6 +65,6 @@ Feature: As a user I want to see a serializer of the list of mail pending to sen
 	  	  And I submit the form
 		  And I am in the index page
 	 	  And I click in the "Mails to send Serializer" link
-	 	 Then I should see "Creacion de usuario en ALGO3"
+	 	 Then I should see "Creacion de usuario en Jarvis"
 	 	  
 

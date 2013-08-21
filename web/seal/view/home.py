@@ -37,14 +37,14 @@ ERRORCAPTCHA = "You Must Be a Robot"
 #SUBJECTMAILCHANGE = "Change SEAL password Successful"
 #BODYMAILCHANGE = "You have requested a password change for SEAL. Your new login information is username: %s and new password: %s"
 
-SUBJECTMAIL = "Registracion en ALGO3 realizada con exito"
-BODYMAIL = "Te registraste en ALGO3 con estos datos - Padron: %s and Password: %s"
+SUBJECTMAIL = "Registracion en Jarvis realizada exitosamente"
+BODYMAIL = "Bienvenido a Jarvis! Te registaste exitosamente en el sistema. Ya puedes acceder con el usuario '%s'. El password ingresado no se envia por cuestiones de seguridad."
 
-SUBJECTMAILRECOVERY = "Recupero de password de ALGO3"
-BODYMAILRECOVERY = "Has pedido un recupero de password en ALGO3. Tu nueva informacion de ingreso es Padron: %s y Password: %s"
+SUBJECTMAILRECOVERY = "Recupero de password en Jarvis"
+BODYMAILRECOVERY = "Has pedido un recupero de password en Jarvis. Aquí están tus nuevos datos de acceso: '%s'/'%s'."
 
-SUBJECTMAILCHANGE = "Cambio de password en ALGO3"
-BODYMAILCHANGE = "Has cambiado la password en ALGO3. Tu informacion de ingreso es Padron: %s y Password: %s"
+SUBJECTMAILCHANGE = "Cambio de password en Jarvis"
+BODYMAILCHANGE = "Has cambiado el password en Jarvis. Ya puedes acceder con el usuario '%s'. El password ingresado no se envia por cuestiones de seguridad."
 
 
 @login_required
@@ -105,7 +105,7 @@ def register(request):
                     student.save()
                 
                 mail = Mail()
-                mail.save_mail(SUBJECTMAIL, BODYMAIL % (user.username, form.data['passwd']), user.email)
+                mail.save_mail(SUBJECTMAIL, BODYMAIL % (user.username), user.email)
                 return render(request, 'registration/registration-success.html', context_instance=RequestContext(request))
         else:
             return render_to_response('registration/register.html',
@@ -149,7 +149,7 @@ def change_password(request):
             user.set_password(form.data['passwd'])
             user.save()
             mail = Mail()
-            mail.save_mail(SUBJECTMAILCHANGE, BODYMAILCHANGE % (user.username, form.data['passwd']), user.email)
+            mail.save_mail(SUBJECTMAILCHANGE, BODYMAILCHANGE % (user.username), user.email)
             return render(request, 'registration/change-success.html', context_instance=RequestContext(request))
     else:
         form = ChangePasswForm()

@@ -788,7 +788,7 @@ msgstr "Cambiar"
 
 #: templates/registration/login.html:19
 msgid "Login SEAL"
-msgstr "Algo3Fiuba"
+msgstr "Jarvis Fiuba"
 
 #: templates/registration/login.html:23
 msgid "wrongCredentials"
@@ -1232,7 +1232,7 @@ msgstr "Vista del estudiante"
 #~ msgstr "No hay entregas subidas para estar practica"
 
 #~ msgid "New to SEAL?"
-#~ msgstr "¿Nuevo en Algo3?"
+#~ msgstr "¿Nuevo en Jarvis?"
 
 #~ msgid "Name: "
 #~ msgstr "Nombre: "
