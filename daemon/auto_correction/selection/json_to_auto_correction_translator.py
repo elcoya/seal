@@ -41,13 +41,4 @@ class JSONToAutoCorrectionTranslator():
             automatic_correction_list.append(automatic_correction);
         return automatic_correction_list
 
-    def resolve_file_path(self, filepath):
-        if(Managepath.is_smart_file_routing_enabled()):
-            
-        else if ():
-            
-        else:
-            
-    
-    
     
