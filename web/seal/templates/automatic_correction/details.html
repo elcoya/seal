@@ -20,7 +20,7 @@
 			</div>
 			<div>{% trans "autorunOutput" %} - {% trans 'delivery' %} <b>{{ automatic_correction.delivery.pk }}</b> - {% trans 'practice' %} <b>{{ automatic_correction.delivery.practice.uid }}</b></div>
 			<div class="output-container" >
-				<pre class="output-container" >{{ automatic_correction.captured_stdout }}</pre>
+				<pre class="output-container" >{{ automatic_correction.get_smart_captured_stdout }}</pre>
 			</div>
 		</div>
 	</div>

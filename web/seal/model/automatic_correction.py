@@ -44,6 +44,9 @@ class AutomaticCorrection(models.Model):
         else:
             return None
     
+    def get_smart_captured_stdout(self):
+        return smart_str(self.captured_stdout)
+    
     def user_mail(self):
         return self.delivery.student.user.email
     
