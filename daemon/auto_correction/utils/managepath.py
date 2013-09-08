@@ -6,7 +6,7 @@ Created on 30/01/2013
 import os
 from auto_correction import settings
 from auto_correction.utils.file_path_resolver import SmartFilePathResolver,\
-    HardSettingFilePathResolver, PlainFileResolver, FilePathResolver
+    HardSettingFilePathResolver, FilePathResolver
 
 class Managepath(object):
     
