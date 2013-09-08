@@ -1,6 +1,7 @@
 from django.db import models
 from seal.model.practice import Practice
 from seal.utils import managepath
+from django.utils.encoding import smart_str
 
 class Script(models.Model):
     """
@@ -14,4 +15,4 @@ class Script(models.Model):
     file = models.FileField(upload_to=managepath.get_instance().get_script_path(), max_length=128)
 
     def __str__(self):
-        return str(self.practice)
+        return smart_str(self.practice)

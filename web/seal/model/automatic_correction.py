@@ -1,5 +1,6 @@
 from django.db import models
 from seal.model.delivery import Delivery
+from django.utils.encoding import smart_str
 
 class AutomaticCorrection(models.Model):
     """
@@ -31,7 +32,7 @@ class AutomaticCorrection(models.Model):
             status_string = AutomaticCorrection.STATUS_STRINGS[self.status]
         except:
             status_string = AutomaticCorrection.STATUS_UNKNOWN
-        return status_string
+        return smart_str(status_string)
     
     def get_delivery_file(self):
         return self.delivery.file.path

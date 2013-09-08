@@ -1,6 +1,7 @@
 from django.db import models
 from seal.model import Student
 from seal.model.shift import Shift
+from django.utils.encoding import smart_str
 
 class Suscription(models.Model):
     """
@@ -20,4 +21,4 @@ class Suscription(models.Model):
     
     def __str__(self):
         """Stringify the Suscription"""
-        return (str(self.pk))
+        return (smart_str(self.pk))

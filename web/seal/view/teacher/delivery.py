@@ -11,6 +11,7 @@ from seal.model.correction import Correction
 import shutil
 from seal.model.course import Course
 from seal.view.teacher import user_is_teacher
+from django.utils.encoding import smart_str
 
 TYPEZIP = "application/zip"
 
@@ -66,9 +67,9 @@ def walk_directory(files_list, path, relative_path):
     (path, directories, filenames) = tuples[0]
     for filename in filenames:
         if(relative_path is None):
-            files_list.append(filename)
+            files_list.append(smart_str(filename))
         else:
-            files_list.append(os.path.join(relative_path, filename))
+            files_list.append(smart_str(os.path.join(relative_path, filename)))
     for directory in directories:
         if(relative_path is None):
             walk_directory(files_list, os.path.join(path, directory), directory)
@@ -99,7 +100,7 @@ def browse(request, idcourse, iddelivery, file_to_browse=None):
     return render(request, 'delivery/browsedelivery.html', 
                   {'current_course' : current_course,
                    'courses' : courses,
-                   'delivery': delivery, 'files_list': files_list, 'file_content': file_content})
+                   'delivery': delivery, 'files_list': files_list, 'file_content': smart_str(file_content)})
 
 @login_required
 @user_passes_test(user_is_teacher, login_url='/forbidden/')

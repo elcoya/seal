@@ -10,6 +10,7 @@ from django.db.models import Q
 from seal.model.course import Course
 from seal.model.student import Student
 from seal.model.practice import Practice
+from django.utils.encoding import smart_str
 
 class DbDeliveriesExtractor:
     
@@ -40,7 +41,7 @@ class DbDeliveriesExtractor:
             entity_id = (delivery.practice.uid, delivery.student.uid)
             if entity_id not in entity_set:
                 result.append((delivery.practice.uid, delivery.student.uid, delivery.student.user.first_name, delivery.student.user.last_name,
-                               str(delivery.student.get_shift(delivery.practice.course)),
+                               smart_str(delivery.student.get_shift(delivery.practice.course)),
                                DbDeliveriesExtractor.STATUS_TRANSLATION_DICTIONARY[delivery.get_automatic_correction().status],
                                grade))
                 entity_set.append(entity_id)
@@ -57,7 +58,7 @@ class DbDeliveriesExtractor:
             entity_id = (delivery.practice.uid, delivery.student.uid)
             if entity_id not in entity_set:
                 result.append((delivery.practice.uid, delivery.student.uid, delivery.student.user.first_name, delivery.student.user.last_name, 
-                               str(delivery.student.get_shift(delivery.practice.course)),
+                               smart_str(delivery.student.get_shift(delivery.practice.course)),
                                DbDeliveriesExtractor.STATUS_TRANSLATION_DICTIONARY[delivery.get_automatic_correction().status],
                                grade))
                 entity_set.append(entity_id)
@@ -71,7 +72,7 @@ class DbDeliveriesExtractor:
                 entity_id = (practice.uid, student.uid)
                 if entity_id not in entity_set:
                     result.append((practice.uid, student.uid, student.user.first_name, student.user.last_name, 
-                                   str(delivery.student.get_shift(delivery.practice.course)),
+                                   str(student.get_shift(practice.course)),
                                    DbDeliveriesExtractor.PENDING_STATUS, None))
                     entity_set.append(entity_id)
         

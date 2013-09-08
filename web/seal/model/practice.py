@@ -3,6 +3,7 @@ from seal.model.course import Course
 from datetime import date
 from seal.model.student import Student
 from django.db.models import Q
+from django.utils.encoding import smart_str
 
 class Practice(models.Model):
     """Assignment.
@@ -25,7 +26,7 @@ class Practice(models.Model):
     
     def __str__(self):
         """Stringify the Practice or assignment"""
-        return (str(self.uid))
+        return (smart_str(self.uid))
     
     def get_script(self):
         if (not self.script_set.all()):
