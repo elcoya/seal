@@ -70,7 +70,7 @@ class DbDeliveriesDataExtractorUnitTest(TestCase):
                           str(delivery_mock.student.get_shift()), 
                           "aprobado", delivery_mock.get_correction.return_value.grade)
         second_expected = (practice_mock.uid, student_mock.uid, student_mock.user.first_name, student_mock.user.last_name,
-                           str(delivery_mock.student.get_shift()), 
+                           str(student_mock.get_shift()), 
                            "pendiente", None)
         expected_value = [first_expected, second_expected,]
         self.assertEquals(result_value, expected_value)
