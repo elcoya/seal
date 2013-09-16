@@ -26,8 +26,10 @@
 						<span class="label label-success">{% trans "successfull" %}</span>
 					{% elif delivery_row.delivery.get_automatic_correction.get_status == 'failed' %}
 						<span class="label label-important">{% trans "failed" %}</span>
-					{% else %}
+					{% elif delivery_row.delivery.get_automatic_correction.get_status == 'pending' %}
 						<span class="label label-warning">{% trans "pending" %}</span>
+					{% else %}
+						<span class="label label-important">{% trans "unknown" %}</span>
 					{% endif %}
 				</td>
 				<td>{% if delivery_row.correction %} <span class="label label-success">{% trans "corrected" %}</span> {% else %} <span class="label label-warning">{% trans "pending" %}</span> {% endif %} </td>

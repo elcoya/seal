@@ -521,6 +521,10 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
+
+msgid "Unknown"
+msgstr ""
+
 #: templates/delivery/deliverydetail.html:43
 #: templates/practice/uploadpractice.html:13
 #: templates/suscription/listsuscription.html:88
@@ -584,6 +588,9 @@ msgstr "Corrected"
 #: templates/teacher/index.html:160
 msgid "pending"
 msgstr "Pending"
+
+msgid "unknown"
+msgstr "Unknown"
 
 #: templates/delivery/listdelivery.html:30
 #: templates/delivery/uploaddelivery.html:68

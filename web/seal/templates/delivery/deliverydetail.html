@@ -29,9 +29,9 @@
 					<td><a href="/teacher/delivery/download/{{ delivery.pk}}">{% trans "Download" %} </a></td>
 					<td><a href="/teacher/correction/{{ delivery.pk}}/2">
 					{% if correction %}
-					{% trans "Corrected" %}
+						{% trans "Corrected" %}
 					{% else %}
-					{% trans "Pending" %}
+						{% trans "Pending" %}
 					{% endif %} 
 					</a></td>
 					<td><a href="/teacher/automatic_correction/{{ delivery.pk }}">{{ delivery.get_automatic_correction.get_status }}</a></td>

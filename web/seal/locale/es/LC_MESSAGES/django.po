@@ -587,6 +587,9 @@ msgstr "Corregido"
 msgid "pending"
 msgstr "Pendiente"
 
+msgid "unknown"
+msgstr "Desconocido"
+
 #: templates/delivery/listdelivery.html:30
 #: templates/delivery/uploaddelivery.html:68
 #: templates/student/liststudentdeliveries.html:32

@@ -50,7 +50,7 @@ class AutomaticCorrectionRunner():
                 script_result = self.run_script_command.execute()
             except Exception, e:
                 script_result = ScriptResult()
-                script_result.captured_stdout = "An error has occurred when running the automatic correction process. Error information: " + str(e)
+                script_result.captured_stdout = "An error has occurred while running the automatic correction process. Error information: " + str(e)
                 script_result.exit_value = 2
                 
             script_result.automatic_correction = pending_automatic_correction
