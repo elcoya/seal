@@ -31,8 +31,8 @@ SCRIPT_FILE_PATH = WORKSPACE_PATH + "automatic_correction_scripts/"
 ###############################################################################
 
 #user and password for database create
-USER="seal"
-PASSWORD="$3alSEAL"
+USER="jarvis"
+PASSWORD="jarvis"
 
 DATABASES = {
     'default': {
@@ -42,7 +42,7 @@ DATABASES = {
         #########################################
         
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'seal',                     # Or path to database file if using sqlite3.
+        'NAME': 'jarvis',                     # Or path to database file if using sqlite3.
         'USER': USER,                      # Not used with sqlite3.
         'PASSWORD': PASSWORD,                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.

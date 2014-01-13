@@ -223,13 +223,14 @@ def prepare_db(context = None):
     """
     print("[fabric] preparing database.")
     print("Sincronizing DB...")
-    cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = "seal")
+    database = "jarvis"
+    cmd = get_mysql_bash_cmd(sql_sentence = "SHOW TABLES;", database = database)
     output = local(cmd + " -N ", capture=True)
     if (output != ""):
         mysql_cmd = "SET foreign_key_checks = 0; "
         mysql_cmd += "DROP TABLE IF EXISTS " + ",".join(output.splitlines()) +" CASCADE; "
         mysql_cmd += "SET foreign_key_checks = 1;"
-        cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = "seal")
+        cmd = get_mysql_bash_cmd(sql_sentence = mysql_cmd, database = database)
         local(cmd)
     with lcd("web"):
         local("python seal/manage.py syncdb --noinput")
