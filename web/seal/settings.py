@@ -1,5 +1,5 @@
-# Django settings for seal project.
 # -*- coding: utf-8 -*-
+# Django settings for seal project.
 
 #FOR APACHE###
 #DEBUG = False

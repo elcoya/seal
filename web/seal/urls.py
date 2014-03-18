@@ -1,3 +1,5 @@
+# -*- coding=utf-8 -*-
+
 from django.conf.urls.defaults import patterns, include, url
 from rest_framework.urlpatterns import format_suffix_patterns
 from seal.view import serializer, teacher_admin

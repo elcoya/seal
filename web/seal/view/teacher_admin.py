@@ -1,3 +1,5 @@
+# -*- coding=utf-8 -*-
+
 from django.contrib.auth.decorators import permission_required
 from seal.forms.teacher import TeacherForm, TeacherModifForm
 from seal.model.teacher import Teacher

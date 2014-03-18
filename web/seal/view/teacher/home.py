@@ -1,3 +1,5 @@
+# -*- coding=utf-8 -*-
+
 from seal.model.course import Course
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
