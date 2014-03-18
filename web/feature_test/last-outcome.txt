@@ -1,0 +1,12 @@
+Failing scenarios:
+  features/editPracticeFile.feature:3  As a teacher I must see a link to edit files uploaded to the practice when are text files
+  features/listFromStudentHome.feature:3  No Course Enrolled
+  features/recoveryPassword.feature:8  Recovery succesfull
+  features/serializerMail.feature:21  Recovery password and see the page of serializer of mail pending to send from the recovery
+  features/studentListDelivery.feature:3  List Delivery of Practices from home student when there are not delivery
+  features/teacherSuscriptionInning.feature:25  Accept suscription
+
+33 features passed, 6 failed, 0 skipped
+96 scenarios passed, 6 failed, 0 skipped
+909 steps passed, 6 failed, 1 skipped, 0 undefined
+Took 7m11.218s

@@ -1,8 +1,11 @@
+# -*- coding=utf-8 -*-
+
 '''
 Created on 26/10/2012
 
 @author: anibal
 '''
+
 from seal.recaptcha.client import captcha
 from seal.model.student import Student
 from seal.model.teacher import Teacher
