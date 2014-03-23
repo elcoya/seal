@@ -27,6 +27,7 @@ REST_BASE_URL = os.environ['REST_API_BASE_URL']
 DAEMON_KEY = 'seal-daemon-authentication-key'
 ################################################################################
 
-
+CORRECTION_ENABLED = False
+MAIL_ENABLED = False
 
 

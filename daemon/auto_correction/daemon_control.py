@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 from daemon.runner import DaemonRunner
 
-from seal import settings #your project settings file
+import settings #your project settings file
 import argparse
 from auto_correction.log.logger_manager import LoggerManager
 from mail_service.administrator_mail import AdministratorMail
@@ -11,7 +11,7 @@ from mail_service.administrator_mail import AdministratorMail
 from auto_correction.automatic_correction_runner import AutomaticCorrectionRunner
 class LoopRunner():
     
-    LOOP_INTERVAL = 65
+    LOOP_INTERVAL = 300
     
     def __init__(self):
         logger_manager = LoggerManager()
@@ -24,6 +24,9 @@ class LoopRunner():
         self.pidfile_timeout = 5
         self.automatic_correction_runner = AutomaticCorrectionRunner()
         self.administrator_mail = AdministratorMail()
+        
+        self.correction_enabled = settings.CORRECTION_ENABLED
+        self.mail_enabled = settings.MAIL_ENABLED
     
     def stall_loop(self, start_timestamp, finish_timestamp):
         delta = finish_timestamp - start_timestamp
@@ -44,18 +47,24 @@ class LoopRunner():
         while True:
             start_timestamp = datetime.today()
             
-            try:
-                result = self.automatic_correction_runner.run()
-                self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
-                              result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
-                              result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
-            except:
-                self.log.exception("The automatic correction process failed. Have in mind that is required that the web service must be online.")
+            if(self.correction_enabled):
+                try:
+                    result = self.automatic_correction_runner.run()
+                    self.log.info("Automatic correction process completed.\nResult summary: \n\tsuccessfull: %d\n\tfailed: %d", 
+                                  result[AutomaticCorrectionRunner.SUCCESSFULL_RESULTS_KEY],
+                                  result[AutomaticCorrectionRunner.FAILED_RESULTS_KEY])
+                except:
+                    self.log.exception("The automatic correction process failed. Have in mind that is required that the web service must be online.")
+            else:
+                self.log.info("Automatic correction process is disabled.")
             
-            try:
-                self.administrator_mail.send_mails()
-            except:
-                self.log.exception("The mail sending process failed. Have in mind that is required that the web service must be online.")
+            if(self.mail_enabled):
+                try:
+                    self.administrator_mail.send_mails()
+                except:
+                    self.log.exception("The mail sending process failed. Have in mind that is required that the web service must be online.")
+            else:
+                self.log.info("Mail sending process is disabled.")
             
             finish_timestamp = datetime.today()
             self.stall_loop(start_timestamp, finish_timestamp)
