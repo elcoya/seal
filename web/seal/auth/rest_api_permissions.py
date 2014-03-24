@@ -6,7 +6,6 @@
 from rest_framework import permissions
 from seal import settings
 import rest_framework
-from __future__ import print_function
 
 class ApplicationKeyPermission(permissions.BasePermission):
     """
