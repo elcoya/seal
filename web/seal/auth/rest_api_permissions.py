@@ -22,9 +22,6 @@ class ApplicationKeyPermission(permissions.BasePermission):
             return has_admin_permissions
         
         try:
-            filepath = settings.WORKSPACE_PATH + "debug.log"
-            with f=open(filepath, 'w'):
-                print(request.META["HTTP_KEY"], file=f)
             key = request.META["HTTP_KEY"]
             return key == self.application_key
         except:
