@@ -49,11 +49,12 @@ class AutomaticCorrectionRunner():
             
             try:
                 self.setup_enviroment.run(pending_automatic_correction, AutomaticCorrectionRunner.TMP_DIR)
-                self.log.info("Walking tmp directory...")
+                
+                self.log.debug("Walking tmp directory...")
                 files_list = []
                 walk_directory(files_list, AutomaticCorrectionRunner.TMP_DIR, "")
                 for item in files_list:
-                    self.log.info(" - " + item)
+                    self.log.debug(" - " + item)
                 
                 self.run_script_command.set_script(os.path.join(AutomaticCorrectionRunner.TMP_DIR, os.path.basename(pending_automatic_correction.script)))
                 script_result = self.run_script_command.execute()

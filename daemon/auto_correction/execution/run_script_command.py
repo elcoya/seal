@@ -41,8 +41,10 @@ class RunScriptCommand():
         self.log.debug("script dir : %s", automatic_correction_tmp_dir)
         
         os.chdir(automatic_correction_tmp_dir)
+        self.log.debug("directory changed successfully to: " + os.getcwd())
         process = subprocess.Popen([self.script], shell=False, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
         os.chdir(current_dir)
+        self.log.debug("directory changed successfully, back to: " + os.getcwd())
         # fin FIXME!!!
         
         
