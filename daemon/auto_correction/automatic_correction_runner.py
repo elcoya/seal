@@ -8,6 +8,8 @@ from auto_correction.publication.publish_results_visitor_mail import PublishResu
 import os
 from auto_correction.settings import REST_BASE_URL
 from auto_correction.result.script_result import ScriptResult
+from auto_correction.utils.dir_utils import walk_directory
+from auto_correction.log.logger_manager import LoggerManager
 
 HTTP_SERIALIZER = REST_BASE_URL + '/automaticcorrectionserializer/'
 SERIALIZER_AUTH_USER = 'seal'
@@ -33,6 +35,7 @@ class AutomaticCorrectionRunner():
         self.run_script_command = RunScriptCommand()
         self.publish_result_visitors = (PublishResultsVisitorWeb(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS), 
                                         PublishResultsVisitorMail(SERIALIZER_AUTH_USER, SERIALIZER_AUTH_PASS),)
+        self.log = LoggerManager().get_new_logger("outer process")
     
     def clean_up_tmp_dir(self):
         shutil.rmtree(AutomaticCorrectionRunner.TMP_DIR, ignore_errors=True)
@@ -46,6 +49,12 @@ class AutomaticCorrectionRunner():
             
             try:
                 self.setup_enviroment.run(pending_automatic_correction, AutomaticCorrectionRunner.TMP_DIR)
+                self.log.info("Walking tmp directory...")
+                files_list = []
+                walk_directory(files_list, AutomaticCorrectionRunner.TMP_DIR, "")
+                for item in files_list:
+                    self.log.info(" - " + item)
+                
                 self.run_script_command.set_script(os.path.join(AutomaticCorrectionRunner.TMP_DIR, os.path.basename(pending_automatic_correction.script)))
                 script_result = self.run_script_command.execute()
             except Exception, e:

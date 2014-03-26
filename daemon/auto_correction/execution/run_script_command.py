@@ -32,7 +32,7 @@ class RunScriptCommand():
             raise IllegalStateException(reason="In order to execute the script, you must set it first.")
         # now we may call the script
         self.log.debug("launching correction process...")
-        
+        self.log.debug("script-path: " + self.script)
         # FIXME: this is plain shit. We should try to use 'with'
         automatic_correction_tmp_dir = os.path.dirname(self.script) # managepath.get_instance().get_automatic_correction_tmp_dir()
         current_dir = os.getcwd()
